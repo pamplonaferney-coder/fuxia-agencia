@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FUXIA — Automatización con IA para negocios en Medellín</title>
+
+  <meta name="description" content="Tu negocio funcionando solo, sin que estés presente. Landing pages, CRMs y automatizaciones hechas en Medellín en menos de una semana." />
+  <meta property="og:title" content="FUXIA — Automatización con IA para negocios en Medellín" />
+  <meta property="og:description" content="Tu negocio funcionando solo, sin que estés presente. Landing pages, CRMs y automatizaciones hechas en Medellín en menos de una semana." />
+  <meta property="og:image" content="https://fuxia-landing.vercel.app/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:alt" content="FUXIA — Automatización con actitud · Hablemos por WhatsApp" />
+  <meta property="og:url" content="https://fuxia-landing.vercel.app" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FUXIA — Automatización con IA para negocios en Medellín" />
+  <meta name="twitter:description" content="Tu negocio funcionando solo, sin que estés presente." />
+  <meta name="twitter:image" content="https://fuxia-landing.vercel.app/og-image.jpg" />
+  <meta property="og:locale" content="es_CO" />
+  <meta name="theme-color" content="#050508" />
+
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <!-- Structured Data: SEO local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "FUXIA",
+    "description": "Automatización con IA para negocios: landing pages, CRMs y flujos automáticos en Medellín.",
+    "url": "https://fuxia-landing.vercel.app",
+    "logo": "https://fuxia-landing.vercel.app/logo.png",
+    "image": "https://fuxia-landing.vercel.app/og-image.jpg",
+    "telephone": "+573005370203",
+    "priceRange": "$$",
+    "areaServed": { "@type": "City", "name": "Medellín" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Medellín",
+      "addressRegion": "Antioquia",
+      "addressCountry": "CO"
+    },
+    "sameAs": ["https://instagram.com/fuxia_oficial"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Paquetes FUXIA",
+      "itemListElement": [
+        { "@type": "Offer", "name": "Starter", "price": "1500000", "priceCurrency": "COP" },
+        { "@type": "Offer", "name": "Profesional", "price": "3500000", "priceCurrency": "COP" },
+        { "@type": "Offer", "name": "Fundacional", "price": "6500000", "priceCurrency": "COP" },
+        { "@type": "Offer", "name": "Links Pro", "price": "250000", "priceCurrency": "COP" },
+        { "@type": "Offer", "name": "Posicionamiento Google Maps", "price": "300000", "priceCurrency": "COP" },
+        { "@type": "Offer", "name": "Combo Presencia (Links + Maps)", "price": "550000", "priceCurrency": "COP" },
+        { "@type": "Offer", "name": "Mantenimiento Mensual", "price": "700000", "priceCurrency": "COP" }
+      ]
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="modulepreload" href="./js/three.module.min.js" />
+  <link rel="modulepreload" href="./js/wolf.js" />
+  <script type="importmap">
+    { "imports": { "three": "./js/three.module.min.js" } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" /></noscript>
+
+  <style>
+    /* ── PALETA ── */
+    :root {
+      --fuxia: #CC00FF;
+      --fuxia-dim: #a000cc;
+      --fuxia-glow: rgba(204, 0, 255, 0.25);
+      --negro: #050508;
+      --negro-card: #0d0d12;
+      --blanco: #ffffff;
+      --gris: #B3B3C6;
+      --morado-deep: #1a0030;
+      --azul-glow: #4a00ff;
+      --vidrio: rgba(204, 0, 255, 0.05);
+      --vidrio-borde: rgba(204, 0, 255, 0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    #paquetes, #portafolio, #faq, #contacto { scroll-margin-top: 80px; }
+
+    body {
+      background: linear-gradient(135deg, #0a0420 0%, #050508 50%, #1a0030 100%);
+      color: var(--blanco);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ── AURORAS DE FONDO ── */
+    .aurora-layer {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; will-change: transform;
+    }
+    .aurora {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+    }
+    .aurora-1 {
+      top: -200px; left: -200px;
+      background: radial-gradient(circle, var(--fuxia) 0%, transparent 70%);
+      animation: aurora-float-1 20s ease-in-out infinite;
+    }
+    .aurora-2 {
+      bottom: -200px; right: -200px;
+      background: radial-gradient(circle, var(--azul-glow) 0%, transparent 70%);
+      animation: aurora-float-2 25s ease-in-out infinite;
+    }
+    @keyframes aurora-float-1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(120px, 80px) scale(1.15); }
+    }
+    @keyframes aurora-float-2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(-150px, -100px) scale(1.2); }
+    }
+
+    /* ── LOADER ── */
+    #loader {
+      position: fixed; inset: 0;
+      background: var(--negro);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; color: var(--gris);
+      letter-spacing: 0.3em; margin-top: 1.25rem;
+      text-transform: uppercase;
+    }
+    .loader-bar { width: 200px; height: 2px; background: #1a1a22; margin-top: 2.5rem; border-radius: 2px; overflow: hidden; }
+    .loader-bar-fill { height: 100%; width: 0%; background: var(--fuxia); box-shadow: 0 0 10px var(--fuxia); animation: load-fill 0.8s cubic-bezier(0.4,0,0.2,1) forwards; }
+    @keyframes load-fill { 0%{width:0%} 60%{width:80%} 100%{width:100%} }
+    @keyframes pulse-glow { 0%,100%{filter:drop-shadow(0 0 20px rgba(204,0,255,0.5))} 50%{filter:drop-shadow(0 0 50px rgba(204,0,255,0.9))} }
+
+    main { opacity: 1; position: relative; z-index: 1; }
+
+    /* ── NAV TOP ── */
+    .nav-top {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; gap: 2rem;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(5,5,8,0.85), transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo img { height: 36px; width: auto; border-radius: 9px; filter: drop-shadow(0 0 10px rgba(204,0,255,0.4)); }
+    .nav-logo span {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      letter-spacing: 0.08em; font-size: 0.95rem;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.12em;
+      color: var(--gris); text-decoration: none;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--fuxia); }
+    .nav-progress-wrap {
+      flex: 1; height: 2px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 2px; overflow: hidden;
+      max-width: 360px; margin: 0 1rem;
+    }
+    .nav-progress-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--fuxia), var(--azul-glow));
+      box-shadow: 0 0 8px var(--fuxia);
+      transition: width 0.05s linear;
+    }
+    .nav-wpp-mini {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--fuxia); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.8rem; padding: 0.5rem 1rem;
+      border-radius: 4px; text-decoration: none;
+      box-shadow: 0 0 20px var(--fuxia-glow);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .nav-wpp-mini:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(204,0,255,0.5); }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wpp-float {
+      position: fixed; bottom: 1.75rem; right: 1.75rem;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--fuxia);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 25px rgba(204,0,255,0.5);
+      z-index: 500; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: float-pulse 3s ease-in-out infinite;
+    }
+    .wpp-float:hover { transform: scale(1.1); box-shadow: 0 0 40px rgba(204,0,255,0.8); }
+    @keyframes float-pulse {
+      0%,100% { box-shadow: 0 0 25px rgba(204,0,255,0.5); }
+      50%     { box-shadow: 0 0 40px rgba(204,0,255,0.8); }
+    }
+
+    .skip-link {
+      position: absolute; left: -9999px; top: 0;
+      background: var(--fuxia); color: #fff;
+      padding: 0.6rem 1rem; z-index: 10000;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+    }
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    /* ── ESTRUCTURA VERTICAL ── */
+    .horizontal-wrapper {
+      position: relative;
+    }
+    .horizontal-sticky {
+      position: static;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+    .slides-track {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .slide {
+      width: 100%;
+      min-height: 100vh;
+      padding: 6rem 4rem 3rem;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-content {
+      width: 100%;
+    }
+
+    /* ── CARDS GLASS ── */
+    .glass {
+      background: var(--vidrio);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--vidrio-borde);
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(204,0,255,0.08);
+    }
+    .glass-strong {
+      background: rgba(204,0,255,0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--fuxia);
+      border-radius: 12px;
+      box-shadow: 0 0 80px rgba(204,0,255,0.25);
+    }
+
+    .scroll-hint {
+      position: absolute; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.3em;
+      color: var(--gris); text-transform: uppercase;
+      animation: bounce-down 2s ease-in-out infinite;
+    }
+    @keyframes bounce-down {
+      0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
+      50%      { transform: translate(-50%, 8px); opacity: 1; }
+    }
+
+    /* ── SLIDE HERO ── */
+    .slide-hero {
+      align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .slide-hero .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.35em;
+      color: var(--fuxia); text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .slide-hero .hero-title {
+      font-size: clamp(2rem, 7vw, 4.75rem);
+      font-weight: 800; line-height: 1.08;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+      padding-bottom: 0.06em;
+      width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto;
+    }
+    /* hero-title: palabra completa, sin cortes */
+    .slide-hero .hero-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.75rem, 2vw, 0.9rem);
+      color: var(--gris); letter-spacing: 0.2em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .slide-hero .hero-desc {
+      max-width: 580px; font-size: 1.05rem;
+      line-height: 1.75; color: #ccccdd; margin-bottom: 1.5rem;
+      margin-left: auto; margin-right: auto;
+    }
+    .slide-hero .hero-desc strong { color: var(--blanco); }
+    .urgencia {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 1px solid rgba(204,0,255,0.4);
+      background: rgba(204,0,255,0.08);
+      border-radius: 30px; padding: 0.45rem 1.1rem;
+      margin-bottom: 1.75rem;
+    }
+    .urgencia-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--fuxia);
+      box-shadow: 0 0 8px var(--fuxia);
+      animation: blink 1.2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .urgencia-txt { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; }
+    .urgencia-txt b { color: var(--fuxia); font-weight: 700; }
+
+    .btn-wpp {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: var(--fuxia); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1rem; letter-spacing: 0.05em;
+      padding: 1rem 2.25rem; border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      box-shadow: 0 0 30px var(--fuxia-glow);
+    }
+    .btn-wpp:hover { background: #dd22ff; box-shadow: 0 0 50px rgba(204,0,255,0.5); transform: translateY(-2px); }
+    .btn-wpp.giant {
+      font-size: 1.3rem; padding: 1.5rem 3.5rem;
+      box-shadow: 0 0 60px rgba(204,0,255,0.5);
+    }
+
+    /* ── SLIDE QUÉ ES ── */
+    .slide-que-es { align-items: stretch; }
+    .slide-2-grid {
+      display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 4rem; align-items: center; height: 100%;
+      max-width: 1400px; margin: 0 auto;
+    }
+    .slide-2-left h2 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;
+      padding-bottom: 0.06em;
+    }
+    .slide-2-left h2 span { color: var(--fuxia); display: block; }
+    .slide-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.35em;
+      color: var(--fuxia); text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .desc-grid-2 {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .desc-card {
+      padding: 1.75rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .desc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 50px rgba(204,0,255,0.18);
+    }
+    .desc-icon { margin-bottom: 0.85rem; color: var(--fuxia); }
+    .desc-icon svg { width: 26px; height: 26px; }
+    .desc-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .desc-card p { font-size: 0.85rem; color: #aaaabb; line-height: 1.6; }
+
+    /* ── SLIDE PROCESO ── */
+    .slide-proceso { align-items: center; }
+    .slide-proceso-inner { max-width: 1300px; margin: 0 auto; width: 100%; }
+    .slide-proceso h2 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800; line-height: 1.1; margin-bottom: 4rem;
+      letter-spacing: -0.02em; text-align: center;
+      padding-bottom: 0.06em;
+    }
+    .slide-proceso h2 span { color: var(--fuxia); }
+    .pasos-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem; position: relative;
+    }
+    .pasos-row::before {
+      content: ''; position: absolute;
+      top: 36px; left: 8%; right: 8%; height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--fuxia) 20%, var(--fuxia) 80%, transparent 100%);
+      opacity: 0.4;
+    }
+    .paso-card { padding: 2rem; position: relative; }
+    .paso-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 3rem; font-weight: 700; line-height: 1;
+      color: var(--fuxia); text-shadow: 0 0 20px var(--fuxia-glow);
+      margin-bottom: 1rem;
+    }
+    .paso-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .paso-desc { font-size: 0.9rem; color: #aaaabb; line-height: 1.7; }
+
+    /* ── SLIDE PAQUETES (3 juntos en PC) ── */
+    .slide-paquetes-all { align-items: center; justify-content: center; padding: 5rem 2rem 3rem; }
+    .paquetes-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem; max-width: 1300px; width: 100%; margin: 0 auto;
+    }
+    .paquetes-grid.duo {
+      grid-template-columns: 1fr 1fr;
+      max-width: 880px; margin: 1.25rem auto 0;
+    }
+    .combo-strip {
+      max-width: 880px; margin: 1.25rem auto 0;
+      padding: 1.1rem 1.5rem; text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.06em;
+      color: #ccccdd;
+    }
+    .combo-strip b { color: var(--fuxia); }
+    .paquete-card {
+      width: 100%; max-width: none;
+      padding: 2.25rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+      position: relative;
+    }
+    .paquete-card.destacado::before {
+      content: '★ MÁS ELEGIDO';
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--fuxia); color: #fff;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.25em; padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      box-shadow: 0 0 20px var(--fuxia-glow);
+    }
+    .paquete-nombre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.3em;
+      color: var(--fuxia); text-transform: uppercase;
+    }
+    .paquete-titulo { font-size: 1.8rem; font-weight: 800; line-height: 1.1; }
+    .paquete-precio-row { display: flex; flex-direction: column; gap: 0.3rem; }
+    .paquete-precio-old {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; color: var(--gris);
+      text-decoration: line-through;
+    }
+    .paquete-precio {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem; font-weight: 700; color: var(--fuxia);
+      line-height: 1; font-variant-numeric: tabular-nums;
+    }
+    .paquete-precio span { font-size: 0.85rem; color: var(--gris); font-weight: 400; }
+    .paquete-entrega {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; color: #ccccdd; letter-spacing: 0.08em;
+      padding-bottom: 1rem; border-bottom: 1px solid rgba(204,0,255,0.15);
+    }
+    .paquete-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .paquete-features li {
+      font-size: 0.95rem; color: #ccccdd;
+      display: flex; align-items: flex-start; gap: 0.7rem;
+    }
+    .paquete-features li::before {
+      content: '✓'; color: var(--fuxia); flex-shrink: 0;
+      font-size: 0.9rem; font-weight: 700; margin-top: 1px;
+    }
+    /* ── TOGGLE IVA (estilo pricing) ── */
+    .billing-toggle { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1.75rem; }
+    .billing-switch { width: 48px; height: 26px; border-radius: 20px; border: 1px solid var(--fuxia); background: transparent; cursor: pointer; position: relative; transition: background 0.25s; padding: 0; flex-shrink: 0; }
+    .billing-switch .knob { position: absolute; top: 2px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--gris); transition: left 0.25s, background 0.25s; }
+    .billing-switch[aria-checked="true"] { background: rgba(204,0,255,0.25); }
+    .billing-switch[aria-checked="true"] .knob { left: 23px; background: var(--fuxia); box-shadow: 0 0 10px var(--fuxia-glow); }
+    .billing-label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--gris); }
+    .billing-label b { color: var(--fuxia); }
+    .paquete-cta {
+      display: block; text-align: center;
+      background: transparent; border: 1px solid var(--fuxia);
+      color: var(--fuxia); font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em;
+      padding: 0.9rem 1rem; border-radius: 4px; text-decoration: none;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-top: auto;
+    }
+    .paquete-cta:hover { background: var(--fuxia); color: #fff; box-shadow: 0 0 25px var(--fuxia-glow); }
+    .paquete-card.destacado .paquete-cta { background: var(--fuxia); color: #fff; }
+    .paquete-card.destacado .paquete-cta:hover { background: #dd22ff; box-shadow: 0 0 35px rgba(204,0,255,0.5); }
+
+    /* ── SLIDE 5: MANT + TESTIMONIOS ── */
+    .slide-mant { align-items: center; }
+    .slide-7-grid {
+      display: grid; grid-template-columns: minmax(0, 520px);
+      gap: 3rem; align-items: center; justify-content: center;
+      max-width: 1300px; margin: 0 auto;
+    }
+
+    /* ── SLIDE 6: CTA FINAL ── */
+    .slide-cta {
+      align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .slide-cta-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.35em;
+      color: var(--fuxia); text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .slide-cta h2 {
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 800; line-height: 1.08;
+      letter-spacing: -0.02em; margin-bottom: 2.5rem;
+      padding-bottom: 0.06em;
+    }
+    .slide-cta h2 span { color: var(--fuxia); display: block; }
+    .slide-cta-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem; letter-spacing: 0.2em;
+      color: var(--gris); text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── ZONA VERTICAL ── */
+    .vertical-zone {
+      position: relative; z-index: 1;
+      padding: 4rem 1.5rem 0;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .vertical-section { padding: 4rem 0; }
+    .v-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.3em;
+      color: var(--fuxia); text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .v-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; line-height: 1.12; margin-bottom: 2.5rem;
+      padding-bottom: 0.06em;
+    }
+    .v-title span { color: var(--fuxia); display: block; }
+
+    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .faq-item {
+      background: var(--vidrio);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--vidrio-borde);
+      border-radius: 8px; overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .faq-item.open { border-color: var(--fuxia); box-shadow: 0 0 30px rgba(204,0,255,0.15); }
+    .faq-q {
+      width: 100%; background: none; border: none; color: var(--blanco);
+      font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+      text-align: left; padding: 1.5rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; gap: 1rem;
+    }
+    .faq-q:hover { color: var(--fuxia); }
+    .faq-icon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.2rem; color: var(--fuxia);
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; padding: 0 2rem; }
+    .faq-item.open .faq-a { max-height: 800px; padding: 0 2rem 1.5rem; }
+    .faq-a p { font-size: 0.95rem; color: #ccccdd; line-height: 1.7; }
+
+    .form-section {
+      background: var(--vidrio);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--vidrio-borde);
+      border-radius: 12px; padding: 3rem;
+      box-shadow: 0 0 40px rgba(204,0,255,0.08);
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.2em; color: var(--gris); text-transform: uppercase;
+    }
+    .form-field input, .form-field select {
+      background: rgba(0,0,0,0.4); border: 1px solid rgba(204,0,255,0.25);
+      color: var(--blanco); font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; padding: 0.85rem 1rem;
+      border-radius: 4px; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-field input:focus, .form-field select:focus {
+      border-color: var(--fuxia); box-shadow: 0 0 0 3px rgba(204,0,255,0.15);
+    }
+    .form-field select option { background: #0d0d12; }
+    .btn-form {
+      width: 100%; padding: 1rem; background: var(--fuxia);
+      color: #fff; font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1rem; letter-spacing: 0.05em;
+      border: none; border-radius: 4px; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 30px var(--fuxia-glow); margin-top: 0.5rem;
+    }
+    .btn-form:hover { background: #dd22ff; transform: translateY(-2px); box-shadow: 0 0 50px rgba(204,0,255,0.5); }
+
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .blog-card {
+      background: var(--vidrio); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--vidrio-borde);
+      border-radius: 8px; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      text-decoration: none; color: var(--blanco);
+      display: flex; flex-direction: column;
+    }
+    .blog-card:hover { border-color: var(--fuxia); transform: translateY(-3px); box-shadow: 0 0 30px rgba(204,0,255,0.15); }
+    .blog-card-img {
+      height: 160px;
+      background: linear-gradient(135deg, rgba(204,0,255,0.1) 0%, rgba(74,0,255,0.15) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      color: var(--fuxia);
+    }
+    .blog-card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .blog-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--fuxia);
+    }
+    .blog-card h3 { font-size: 1rem; font-weight: 700; line-height: 1.4; }
+    .blog-card p { font-size: 0.85rem; color: var(--gris); line-height: 1.6; flex: 1; }
+    .blog-card-footer {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      color: var(--gris); margin-top: 1rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(204,0,255,0.1);
+      padding: 2.5rem 1.5rem;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+      max-width: 1100px; margin: 4rem auto 0;
+    }
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; color: var(--gris); letter-spacing: 0.1em;
+    }
+    .footer-ig {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; color: var(--gris);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-ig:hover { color: var(--fuxia); }
+
+    /* ── POPUP SALIDA ── */
+    #popup-overlay {
+      position: fixed; inset: 0; background: rgba(5,5,8,0.85);
+      backdrop-filter: blur(6px); z-index: 9998;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.4s, visibility 0.4s;
+    }
+    #popup-overlay.show { opacity: 1; visibility: visible; }
+    .popup-box {
+      background: rgba(13,13,18,0.95); border: 1px solid rgba(204,0,255,0.5);
+      border-radius: 12px; padding: 3rem 2.5rem;
+      max-width: 480px; width: 90%; text-align: center;
+      position: relative;
+      box-shadow: 0 0 60px rgba(204,0,255,0.3);
+      animation: popup-in 0.4s ease;
+    }
+    @keyframes popup-in { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
+    .popup-close {
+      position: absolute; top: 1rem; right: 1.25rem;
+      background: none; border: none; color: var(--gris);
+      font-size: 1.4rem; cursor: pointer; transition: color 0.2s;
+    }
+    .popup-close:hover { color: var(--blanco); }
+    .popup-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fuxia); border: 1px solid var(--fuxia);
+      padding: 0.3rem 0.8rem; border-radius: 30px; margin-bottom: 1.25rem;
+    }
+    .popup-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; line-height: 1.2; }
+    .popup-title span { color: var(--fuxia); }
+    .popup-sub { color: var(--gris); font-size: 0.9rem; line-height: 1.6; margin-bottom: 2rem; }
+    .popup-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--fuxia); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.95rem; padding: 0.9rem 2rem;
+      border-radius: 4px; text-decoration: none;
+      box-shadow: 0 0 30px var(--fuxia-glow);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .popup-btn:hover { background: #dd22ff; transform: translateY(-2px); }
+    .popup-skip {
+      display: block; margin-top: 1rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      color: var(--gris); cursor: pointer; letter-spacing: 0.1em;
+      background: none; border: none;
+    }
+    .popup-skip:hover { color: var(--blanco); }
+
+    /* ── MOBILE: COLAPSAR A VERTICAL ── */
+    @media (max-width: 1023px) {
+      body.is-mobile .horizontal-wrapper { height: auto; }
+      body.is-mobile .horizontal-sticky { position: static; height: auto; overflow: visible; }
+      body.is-mobile .slides-track {
+        flex-direction: column; width: 100%; height: auto; transform: none !important;
+      }
+      body.is-mobile .slide {
+        flex: 0 0 auto; width: 100%; height: auto; min-height: auto;
+        padding: 5rem 1.25rem 4rem; overflow-x: hidden;
+      }
+      body.is-mobile .slide-content { opacity: 1; transform: none; width: 100%; }
+      body.is-mobile .slide-2-grid,
+      body.is-mobile .slide-7-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem; width: 100%; max-width: 100%;
+      }
+      body.is-mobile .desc-grid-2 { grid-template-columns: 1fr 1fr; }
+      body.is-mobile .pasos-row { grid-template-columns: 1fr; gap: 1.5rem; }
+      body.is-mobile .pasos-row::before { display: none; }
+      body.is-mobile .nav-progress-wrap { display: none; }
+      body.is-mobile .nav-links { display: none; }
+      body.is-mobile .scroll-hint { display: none; }
+      body.is-mobile .aurora { width: 350px; height: 350px; opacity: 0.18; }
+      body.is-mobile .aurora-1, body.is-mobile .aurora-2 { animation: none !important; }
+      body.is-mobile .glass, body.is-mobile .glass-strong { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(13,13,18,0.96); }
+      body.is-mobile .paquetes-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      body.is-mobile .paquete-card { padding: 1.75rem; }
+    }
+    @media (max-width: 480px) {
+      body.is-mobile .desc-grid-2 { grid-template-columns: 1fr; }
+      body.is-mobile .slide { padding: 4.5rem 1rem 3rem; }
+    }
+
+    /* ── PORTAFOLIO ── */
+    .portfolio-section { padding: 120px 24px 80px; background: #050508; }
+    .portfolio-container { max-width: 1180px; margin: 0 auto; }
+    .portfolio-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; color: #CC00FF; margin-bottom: 16px; }
+    .portfolio-title { font-size: clamp(36px, 5vw, 56px); font-weight: 800; letter-spacing: -1px; color: #F0EFE8; margin-bottom: 12px; }
+    .portfolio-title .accent { color: #CC00FF; }
+    .portfolio-sub { font-size: 16px; color: #888899; margin-bottom: 56px; max-width: 600px; }
+    .portfolio-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: #CC00FF; text-transform: uppercase; margin-bottom: 10px; }
+    /* ── CARRUSEL CIRCULAR PORTAFOLIO ── */
+    .pf-carousel { display: grid; gap: 2.5rem; align-items: center; }
+    .pf-stage { position: relative; width: 100%; height: 260px; perspective: 1000px; }
+    .pf-slide { position: absolute; inset: 0; border-radius: 14px; overflow: hidden; border: 0.5px solid rgba(204,0,255,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5); background: #0d0d12; cursor: pointer; }
+    .pf-slide:focus-visible { outline: 2px solid var(--fuxia); outline-offset: 3px; }
+    .pf-slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .pf-name { font-size: 26px; font-weight: 800; color: #F0EFE8; margin: 10px 0 4px; letter-spacing: -0.3px; }
+    .pf-quote { font-size: 15px; color: #ccccdd; line-height: 1.7; min-height: 3.2em; }
+    .pf-quote .w { display: inline-block; }
+    .pf-link { display: inline-block; margin-top: 14px; color: var(--fuxia); font-weight: 700; font-size: 0.95rem; text-decoration: none; }
+    .pf-link:hover { text-decoration: underline; }
+    .pf-nav { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+    .pf-arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--fuxia); background: transparent; color: var(--fuxia); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.25s, color 0.25s, transform 0.15s; }
+    .pf-arrow:hover { background: var(--fuxia); color: #fff; transform: translateY(-2px); }
+    .pf-arrow svg { width: 18px; height: 18px; }
+    .pf-dots { display: flex; gap: 8px; margin-left: 4px; }
+    .pf-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.18); border: none; padding: 0; cursor: pointer; }
+    .pf-dot.on { background: var(--fuxia); box-shadow: 0 0 8px var(--fuxia-glow); }
+    @media (min-width: 900px) { .pf-carousel { grid-template-columns: 1.15fr 1fr; } .pf-stage { height: 340px; } }
+    /* ── FIX OVERFLOW MOBILE ── */
+    @media (max-width: 1023px) {
+      html, body { overflow-x: hidden; }
+
+      /* Slides — reducir padding horizontal en móvil */
+      .slide { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+
+      /* Mantenimiento */
+      .slide-mant { overflow: hidden; }
+      .slide-7-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem; width: 100%; max-width: 100%;
+      }
+      .slide-7-grid > * { min-width: 0; max-width: 100%; box-sizing: border-box; }
+
+      /* Paquetes */
+      .paquete-card { box-sizing: border-box; min-width: 0; max-width: 100%; }
+      .paquete-titulo { font-size: 1.35rem; }
+      .paquete-precio { font-size: 1.4rem !important; }
+      .paquete-precio-old { font-size: 0.72rem; }
+
+      /* Portafolio */
+      .portfolio-section { padding: 60px 16px 48px !important; overflow: hidden; }
+      .portfolio-container { max-width: 100%; overflow: hidden; }
+      .portfolio-title { font-size: clamp(26px, 7vw, 56px) !important; letter-spacing: -0.5px; }
+      .portfolio-sub { max-width: 100%; font-size: 14px; margin-bottom: 32px; }
+
+      /* Títulos de slides */
+      .slide-hero .hero-title { font-size: clamp(1.6rem, 7vw, 2.25rem) !important; }
+      .slide-2-left h2 { font-size: clamp(1.6rem, 7vw, 2.5rem) !important; }
+      .slide-proceso h2 { font-size: clamp(1.6rem, 7vw, 2.5rem) !important; }
+      .slide-cta h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; }
+      .v-title { font-size: clamp(1.6rem, 5.5vw, 2rem) !important; }
+
+      /* Formulario contacto */
+      .vertical-zone { padding-left: 1.25rem !important; padding-right: 1.25rem !important; overflow: hidden; box-sizing: border-box; }
+      .form-section { padding: 1.5rem 1.25rem !important; box-sizing: border-box; overflow: hidden; }
+      .form-grid { grid-template-columns: 1fr !important; }
+      .form-grid > * { min-width: 0; }
+      .form-field.full { grid-column: 1 !important; }
+      .form-field input, .form-field select { width: 100%; max-width: 100%; box-sizing: border-box; }
+      .btn-form { width: 100%; box-sizing: border-box; }
+
+      /* Footer */
+      footer { max-width: 100%; box-sizing: border-box; }
+    }
+    @media (max-width: 480px) {
+      .paquete-precio { font-size: 1.25rem !important; }
+      .form-section { padding: 1.25rem 1rem !important; }
+      .vertical-zone { padding-left: 1rem !important; padding-right: 1rem !important; }
+      footer { padding: 2rem 1rem; }
+    }
+
+    /* ── TILT 3D + SPOTLIGHT ── */
+    .tilt { position: relative; }
+    .tilt::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      pointer-events: none; z-index: 2;
+      background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%), rgba(204,0,255,0.16), transparent 60%);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .tilt:hover::after { opacity: 1; }
+
+    /* ── REVEAL AL HACER SCROLL ── */
+    body.reveal-on .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+      will-change: opacity, transform;
+    }
+    body.reveal-on .reveal.in { opacity: 1; transform: none; }
+
+    /* ── FONDO SPLINE 3D HERO ── */
+    .spline-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .spline-bg canvas { width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 0.9s ease; }
+    .spline-veil { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 25%, rgba(5,5,8,0.55) 72%, rgba(5,5,8,0.92) 100%), linear-gradient(to bottom, rgba(5,5,8,0.4), rgba(5,5,8,0.1) 40%, rgba(5,5,8,0.65)); }
+    .hero-spot { position: absolute; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(204,0,255,0.16), transparent 70%); filter: blur(10px); opacity: 0; transition: opacity 0.3s; transform: translate(-50%, -50%); left: 50%; top: 40%; }
+    .slide-hero .slide-content { position: relative; z-index: 1; }
+    @media (max-width: 899px) {
+      .pf-stage { height: auto; min-height: 0; }
+      .pf-slide { display: none; position: relative; inset: auto; transform: none !important; }
+      .pf-slide.on { display: block; opacity: 1 !important; }
+      .pf-slide.on img { height: auto; }
+    }
+
+    /* ── TÍTULOS MANUSCRITOS (handwriting) ── */
+    .hw-svg { overflow: visible; }
+    /* ── TOGGLE TEMA NAV ── */
+    .theme-toggle { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: var(--blanco); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color 0.2s, transform 0.15s; }
+    .theme-toggle:hover { border-color: var(--fuxia); transform: translateY(-1px); }
+    .theme-toggle svg { width: 18px; height: 18px; }
+    /* ── MODO CLARO ── */
+    body.light { --blanco: #16161d; --gris: #5b5b70; --negro: #f5f2ea; --negro-card: #ffffff; background: linear-gradient(135deg, #f3edfb 0%, #f5f2ea 55%, #eadcf7 100%); color: var(--blanco); }
+    body.light .nav-top { background: linear-gradient(to bottom, rgba(245,242,234,0.9), transparent); }
+    body.light .aurora { opacity: 0.22; }
+    body.light .hero-desc { color: #4a4a58; }
+    body.light .desc-card p, body.light .paso-desc, body.light .faq-a p, body.light .pf-quote { color: #4a4a58; }
+    body.light .paquete-entrega, body.light .paquete-features li { color: #4a4a58; }
+    body.light .form-field input, body.light .form-field select { background: rgba(255,255,255,0.85); }
+    body.light .form-field select option { background: #ffffff; }
+    body.light .portfolio-section { background: #f5f2ea; }
+    body.light .portfolio-title, body.light .pf-name { color: #16161d; }
+    body.light .portfolio-sub { color: #5b5b70; }
+    body.light .pf-slide { box-shadow: 0 20px 50px rgba(20,10,40,0.15); }
+    body.light .glass { box-shadow: 0 10px 30px rgba(20,10,40,0.06); }
+    body.light .popup-box { background: rgba(255,255,255,0.97); }
+    body.light #loader { background: #f5f2ea; }
+    body.light .loader-bar { background: #e2ddf0; }
+    body.light #form-error { color: #c2185b; }
+    body.light .pf-dots .pf-dot { background: rgba(20,20,30,0.22); }
+    body.light .theme-toggle { border-color: rgba(22,22,29,0.25); }
+    body.light .spline-veil { background: radial-gradient(ellipse at center, rgba(245,242,234,0.05) 25%, rgba(245,242,234,0.55) 72%, rgba(245,242,234,0.95) 100%), linear-gradient(to bottom, rgba(245,242,234,0.5), rgba(245,242,234,0.1) 40%, rgba(245,242,234,0.7)); }
+    @media (prefers-reduced-motion: reduce) {
+      .aurora, .urgencia-dot, .wpp-float, .scroll-hint { animation: none !important; }
+      .slide-content, .reveal { opacity: 1 !important; transform: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── COOKIES + FOOTER LEGAL ── */
+    #cookie-banner {
+      position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 10002;
+      background: rgba(13,13,18,0.98); border: 2px solid var(--fuxia);
+      border-radius: 12px; padding: 1.1rem 1.25rem;
+      box-shadow: 0 10px 50px rgba(204,0,255,0.35);
+      display: none; gap: 0.9rem; align-items: center;
+      max-width: 720px; margin: 0 auto;
+    }
+    #cookie-banner.show { display: flex; animation: ck-in 0.35s ease; }
+    @keyframes ck-in { from { transform: translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+    #cookie-banner p { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--gris); line-height:1.6; flex:1; }
+    #cookie-banner p strong { color:#fff; }
+    #cookie-banner p a { color:var(--fuxia); }
+    #cookie-banner .ck-btns { display:flex; gap:0.5rem; flex-shrink:0; }
+    #cookie-banner button { font-family:'JetBrains Mono',monospace; font-size:0.7rem; padding:0.7rem 1.1rem; border-radius:4px; cursor:pointer; font-weight:700; }
+    #ck-accept { background:var(--fuxia); color:#fff; border:1px solid var(--fuxia); }
+    #ck-accept:hover { background:#dd22ff; }
+    #ck-reject { background:transparent; color:var(--gris); border:1px solid rgba(255,255,255,0.3); }
+    #ck-reject:hover { color:#fff; border-color:#fff; }
+    #ck-float {
+      position: fixed; left: 1rem; bottom: 1rem; z-index: 10001;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(13,13,18,0.95); border: 1px solid var(--fuxia);
+      color: #fff; font-size: 20px; cursor: pointer; display: none;
+      align-items: center; justify-content: center;
+      box-shadow: 0 0 20px rgba(204,0,255,0.4);
+    }
+    #ck-float.show { display: flex; }
+    body.light #cookie-banner { background:rgba(255,255,255,0.98); }
+    body.light #cookie-banner p strong { color:#16161d; }
+    .footer-legal { max-width:1100px; margin:4rem auto 0; border-top:1px solid rgba(204,0,255,0.1); padding:2.5rem 1.5rem 1.5rem; }
+    .footer-legal-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .footer-links { display:flex; gap:1rem; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; font-size:0.65rem; }
+    .footer-links a, .footer-links button { color:var(--gris); text-decoration:underline; background:none; border:none; cursor:pointer; font-size:inherit; font-family:inherit; padding:0; }
+    .footer-links a:hover, .footer-links button:hover { color:var(--fuxia); }
+    .footer-note { margin-top:1rem; font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--gris); line-height:1.8; opacity:0.85; }
+    @media (max-width:600px){ #cookie-banner{ flex-direction:column; align-items:stretch; text-align:left; } #cookie-banner .ck-btns{ width:100%; } #cookie-banner .ck-btns button{ flex:1; } }
+  </style>
+<!-- Meta Pixel Code (consentido: solo carga si aceptas cookies) -->
+<script>
+window.FUXIA_PIXEL_ID = '1632121441954497';
+window.FuxiaPixelLoad = function () {
+  if (window.fbq) return;
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', window.FUXIA_PIXEL_ID);
+  fbq('track', 'PageView');
+};
+try {
+  if (localStorage.getItem('fuxia_cookie_consent') === 'accepted') window.FuxiaPixelLoad();
+} catch (e) {}
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+  <!-- AURORAS -->
+  <div class="aurora-layer" aria-hidden="true">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+  </div>
+
+  <!-- SKIP LINK -->
+  <a class="skip-link" href="#contacto">Saltar al formulario</a>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <img src="logo.png" alt="FUXIA — automatización con actitud" width="160" height="160" fetchpriority="high" style="height:160px;width:auto;border-radius:32px;animation:pulse-glow 2s ease-in-out infinite;" />
+    <div class="loader-sub">automatización con actitud</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- POPUP SALIDA -->
+  <div id="popup-overlay">
+    <div class="popup-box">
+      <button class="popup-close" id="popup-close" aria-label="Cerrar">×</button>
+      <div class="popup-badge">// oferta limitada</div>
+      <h2 class="popup-title">¿Te vas sin<br /><span>automatizar nada</span>?</h2>
+      <p class="popup-sub">De los 3 cupos de este mes, queda <b>1 a precio especial</b>. Una llamada de 15 minutos puede cambiar cómo funciona tu negocio.</p>
+      <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20vi%20la%20oferta%20especial%20y%20quiero%20saber%20m%C3%A1s%20%28popup%29"
+         class="popup-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quiero ese cupo
+      </a>
+      <button class="popup-skip" id="popup-skip">Ahora no, gracias</button>
+    </div>
+  </div>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20servicios%20%28flotante%29"
+     class="wpp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- NAV TOP -->
+  <div class="nav-top">
+    <div class="nav-logo">
+      <img src="logo.png" alt="FUXIA — logo" width="40" height="36" />
+      <span>FUXIA</span>
+    </div>
+    <nav class="nav-links" aria-label="Secciones">
+      <a href="#paquetes">Paquetes</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-progress-wrap"><div class="nav-progress-fill" id="progress-fill"></div></div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar a modo claro">
+      <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20quiero%20automatizar%20%28menu%29"
+       class="nav-wpp-mini" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+  </div>
+
+  <main id="main">
+
+    <!-- ZONA HORIZONTAL -->
+    <div class="horizontal-wrapper" id="horizontal-wrapper">
+      <div class="horizontal-sticky">
+        <div class="slides-track" id="slides-track">
+
+          <!-- SLIDE 1: HERO -->
+          <section class="slide slide-hero" data-slide="1">
+            <div class="spline-bg" aria-hidden="true">
+              <canvas id="wolf-hero"></canvas>
+              <div class="spline-veil"></div>
+              <div class="hero-spot" id="hero-spot"></div>
+            </div>
+            <div class="slide-content">
+              <div class="hero-eyebrow">// sistema activo</div>
+              <h1 class="hero-title" data-hw>automatización</h1>
+              <p class="hero-sub">con actitud · desde Medellín</p>
+              <p class="hero-desc">
+                Tu negocio no debería depender de que estés despierto.<br />
+                <strong>Hacemos que funcione solo.</strong>
+              </p>
+              <div class="urgencia">
+                <div class="urgencia-dot"></div>
+                <span class="urgencia-txt">Solo quedan <b>3 cupos</b> disponibles este mes — <b>1</b> a precio especial</span>
+              </div>
+              <div>
+                <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20servicios%20%28hero%29"
+                   class="btn-wpp" target="_blank" rel="noopener noreferrer">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  Hablemos por WhatsApp
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- SLIDE 2: QUÉ ES -->
+          <section class="slide slide-que-es" data-slide="2">
+            <div class="slide-content slide-2-grid">
+              <div class="slide-2-left">
+                <div class="slide-label">// qué es fuxia</div>
+                <h2 data-hw>El back-end <span>de tu negocio</span></h2>
+              </div>
+              <div class="desc-grid-2">
+                <div class="desc-card glass">
+                  <div class="desc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+                  <h3>Rápido de verdad</h3>
+                  <p>Entre 3 días y 4 semanas. Sin promesas vacías, sin fechas que se corren.</p>
+                </div>
+                <div class="desc-card glass">
+                  <div class="desc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M8 4h8"/><path d="M9 17h6"/></svg></div>
+                  <h3>Automatizado, no improvisado</h3>
+                  <p>Cada flujo tiene una lógica clara: menos trabajo manual, más plata entrando.</p>
+                </div>
+                <div class="desc-card glass">
+                  <div class="desc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                  <h3>Sin tecnicismos</h3>
+                  <p>Tú describes el problema en tus palabras. Nosotros lo resolvemos.</p>
+                </div>
+                <div class="desc-card glass">
+                  <div class="desc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                  <h3>Cara a cara desde Medellín</h3>
+                  <p>Una persona real con nombre, que responde y entrega.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- PORTAFOLIO (antes del proceso) -->
+          <section id="portafolio" class="portfolio-section">
+            <div class="portfolio-container">
+              <div class="portfolio-label">// trabajos reales</div>
+              <h2 class="portfolio-title" data-hw>Lo que <span class="accent">construimos</span></h2>
+              <p class="portfolio-sub">Cinco proyectos en producción. Cada uno con su problema, su stack y su entrega.</p>
+              <div class="pf-carousel" id="pf-carousel" role="region" aria-label="Portafolio de proyectos">
+                <div class="pf-stage" id="pf-stage" aria-live="polite"></div>
+                <div class="pf-content">
+                  <div class="portfolio-tag" id="pf-tag"></div>
+                  <h3 class="pf-name" id="pf-name"></h3>
+                  <p class="pf-quote" id="pf-quote"></p>
+                  <a class="pf-link" id="pf-link" target="_blank" rel="noopener noreferrer">Ver proyecto ↗</a>
+                  <div class="pf-nav">
+                    <button class="pf-arrow" id="pf-prev" aria-label="Proyecto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+                    <button class="pf-arrow" id="pf-next" aria-label="Proyecto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                    <div class="pf-dots" id="pf-dots"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- PROCESO -->
+          <section class="slide slide-proceso" data-slide="3">
+            <div class="slide-content slide-proceso-inner">
+              <div class="slide-label" style="text-align:center">// el proceso</div>
+              <h2 data-hw>Tres pasos. <span>Sin rodeos.</span></h2>
+              <div class="pasos-row">
+                <div class="paso-card glass">
+                  <div class="paso-num">01</div>
+                  <h3 class="paso-title">Llamada de 15 min</h3>
+                  <p class="paso-desc">Nos contás qué problema querés resolver. Sin formularios largos, sin decks de 40 páginas.</p>
+                </div>
+                <div class="paso-card glass">
+                  <div class="paso-num">02</div>
+                  <h3 class="paso-title">Propuesta en 24h</h3>
+                  <p class="paso-desc">Te enviamos qué vamos a hacer, cuánto cuesta y cuándo está listo. Sin sorpresas.</p>
+                </div>
+                <div class="paso-card glass">
+                  <div class="paso-num">03</div>
+                  <h3 class="paso-title">Entrega y listo</h3>
+                  <p class="paso-desc">Te entregamos funcionando y quedamos disponibles si algo falla.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SLIDE 4: PAQUETES (los 3 juntos) -->
+          <section id="paquetes" class="slide slide-paquetes-all" data-slide="4">
+            <div class="slide-content">
+              <div class="slide-label" style="text-align:center;margin-bottom:1.5rem">// elige tu paquete</div>
+              <div class="billing-toggle">
+                <button class="billing-switch" id="iva-switch" role="switch" aria-checked="false" aria-label="Quitar el IVA del 19% de los precios"><span class="knob"></span></button>
+                <span class="billing-label" id="billing-label">Precios con IVA · activar para ver <b>sin IVA</b></span>
+              </div>
+              <div class="paquetes-grid">
+
+                <div class="paquete-card glass">
+                  <div class="paquete-nombre">// starter</div>
+                  <div class="paquete-titulo">Starter</div>
+                  <div class="paquete-precio-row">
+                    <div class="paquete-precio-old">antes $2.100.000</div>
+                    <div class="paquete-precio">$1.500.000 <span>COP</span></div>
+                  </div>
+                  <div class="paquete-entrega">Entrega: 7 días</div>
+                  <ul class="paquete-features">
+                    <li>1 landing page (V0 o Framer)</li>
+                    <li>1 formulario conectado a tu correo</li>
+                    <li>Configuración de dominio propio</li>
+                    <li>Botón flotante de WhatsApp</li>
+                    <li>SEO básico (title, meta, Open Graph)</li>
+                  </ul>
+                  <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20me%20interesa%20el%20Paquete%20Starter%20%28web-starter%29"
+                     class="paquete-cta" target="_blank" rel="noopener noreferrer">Quiero este →</a>
+                </div>
+
+                <div class="paquete-card glass-strong destacado">
+                  <div class="paquete-nombre">// profesional</div>
+                  <div class="paquete-titulo">Profesional</div>
+                  <div class="paquete-precio-row">
+                    <div class="paquete-precio-old">antes $4.900.000</div>
+                    <div class="paquete-precio">$3.500.000 <span>COP</span></div>
+                  </div>
+                  <div class="paquete-entrega">Entrega: 14 días</div>
+                  <ul class="paquete-features">
+                    <li>Landing page + copy profesional</li>
+                    <li>WhatsApp con respuestas automáticas</li>
+                    <li>Sistema de agendamiento</li>
+                    <li>30 días de soporte</li>
+                  </ul>
+                  <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20me%20interesa%20el%20Paquete%20Profesional%20%28web-profesional%29"
+                     class="paquete-cta" target="_blank" rel="noopener noreferrer">Quiero este →</a>
+                </div>
+
+                <div class="paquete-card glass">
+                  <div class="paquete-nombre">// fundacional</div>
+                  <div class="paquete-titulo">Fundacional</div>
+                  <div class="paquete-precio-row">
+                    <div class="paquete-precio-old">antes $9.100.000</div>
+                    <div class="paquete-precio">$6.500.000 <span>COP</span></div>
+                  </div>
+                  <div class="paquete-entrega">Entrega: 21 días</div>
+                  <ul class="paquete-features">
+                    <li>Todo lo del paquete profesional</li>
+                    <li>Dashboard Looker Studio o Power BI</li>
+                    <li>Chatbot con IA (Claude / ChatGPT)</li>
+                    <li>60 días de soporte</li>
+                  </ul>
+                  <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20me%20interesa%20el%20Paquete%20Fundacional%20%28web-fundacional%29"
+                     class="paquete-cta" target="_blank" rel="noopener noreferrer">Quiero este →</a>
+                </div>
+
+              </div>
+              <div class="paquetes-grid duo">
+
+                <div class="paquete-card glass">
+                  <div class="paquete-nombre">// links pro</div>
+                  <div class="paquete-titulo">Links Pro</div>
+                  <div class="paquete-precio-row">
+                    <div class="paquete-precio-old">antes $350.000</div>
+                    <div class="paquete-precio">$250.000 <span>COP</span></div>
+                  </div>
+                  <div class="paquete-entrega">Pago único · Entrega: 7 a 15 días</div>
+                  <ul class="paquete-features">
+                    <li>Página de links con tu marca</li>
+                    <li>QR para tu local + dominio propio</li>
+                    <li>Tagueo con eventos por botón</li>
+                    <li>Botones WhatsApp con mensaje pre-redactado</li>
+                    <li>15 días de soporte</li>
+                  </ul>
+                  <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20me%20interesa%20Links%20Pro%20%28web-linkspro%29"
+                     class="paquete-cta" target="_blank" rel="noopener noreferrer">Quiero este →</a>
+                </div>
+
+                <div class="paquete-card glass">
+                  <div class="paquete-nombre">// google maps</div>
+                  <div class="paquete-titulo">Posicionamiento Maps</div>
+                  <div class="paquete-precio-row">
+                    <div class="paquete-precio-old">antes $420.000</div>
+                    <div class="paquete-precio">$300.000 <span>COP</span></div>
+                  </div>
+                  <div class="paquete-entrega">Pago único · Entrega: 7 a 15 días</div>
+                  <ul class="paquete-features">
+                    <li>Perfil de empresa optimizado (categoría, servicios, fotos)</li>
+                    <li>Sistema de reseñas: enlace directo + respuestas al 100%</li>
+                    <li>Datos NAP consistentes (nombre, dirección, teléfono)</li>
+                    <li>Pin, horarios y atributos verificados</li>
+                    <li>15 días de soporte</li>
+                  </ul>
+                  <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20me%20interesa%20el%20Posicionamiento%20en%20Google%20Maps%20%28web-maps%29"
+                     class="paquete-cta" target="_blank" rel="noopener noreferrer">Quiero este →</a>
+                </div>
+
+              </div>
+              <div class="combo-strip glass">Llévalos juntos: <b>Combo Presencia (Links Pro + Maps) — $550.000</b> · <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20me%20interesa%20el%20Combo%20Presencia%20%28web-combo%29" target="_blank" rel="noopener noreferrer" style="color:var(--fuxia);font-weight:700;">Lo quiero →</a></div>
+            </div>
+          </section>
+
+          <!-- SLIDE 5: MANTENIMIENTO -->
+          <section class="slide slide-mant" data-slide="5">
+            <div class="slide-content slide-7-grid">
+              <div class="paquete-card glass">
+                <div class="paquete-nombre">// recurrente</div>
+                <div class="paquete-titulo">Mantenimiento Mensual</div>
+                <div class="paquete-precio-row">
+                  <div class="paquete-precio-old">antes $980.000/mes</div>
+                  <div class="paquete-precio">$700.000 <span>COP/mes</span></div>
+                </div>
+                <div class="paquete-entrega">Disponible después del primer proyecto</div>
+                <ul class="paquete-features">
+                  <li>Optimizaciones continuas</li>
+                  <li>Ajustes y mejoras</li>
+                  <li>Métricas mensuales</li>
+                </ul>
+                <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20me%20interesa%20el%20Mantenimiento%20Mensual%20%28web-mantenimiento%29"
+                   class="paquete-cta" target="_blank" rel="noopener noreferrer">Preguntar →</a>
+                </div>
+            </div>
+          </section>
+
+          <!-- SLIDE 6: CTA FINAL -->
+          <section class="slide slide-cta" data-slide="6">
+            <div class="slide-content">
+              <div class="slide-cta-eyebrow">// ejecutado en una semana</div>
+              <h2 data-hw>¿Listo para <span>recuperar tu tiempo</span>?</h2>
+              <p class="slide-cta-sub">Construido en Medellín · con la cara de quien lo arma</p>
+              <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20quiero%20automatizar%20mi%20negocio%20%28cta-final%29"
+                 class="btn-wpp giant" target="_blank" rel="noopener noreferrer">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Hablemos por WhatsApp
+              </a>
+              <p style="margin-top:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;color:var(--gris);">Garantía de 20 días — o te devolvemos el 100%</p>
+            </div>
+            <div class="scroll-hint">↓ scroll para ver más</div>
+          </section>
+
+        </div><!-- /slides-track -->
+      </div><!-- /horizontal-sticky -->
+    </div><!-- /horizontal-wrapper -->
+
+    <!-- ZONA VERTICAL -->
+    <div class="vertical-zone">
+
+      <!-- PARA QUIÉN ES -->
+      <section class="vertical-section">
+        <div class="v-label">// ¿para quién es esto?</div>
+        <h2 class="v-title" data-hw>Cualquier negocio <span>con procesos repetitivos</span></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-top:0.5rem">
+          <div class="glass" style="padding:1.5rem;text-align:center">
+            <div style="margin-bottom:0.5rem;color:var(--fuxia)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
+            <div style="font-weight:700;font-size:0.9rem">Clínicas</div>
+            <div style="font-size:0.78rem;color:var(--gris);margin-top:0.3rem">Odontología, médicos, psicólogos</div>
+          </div>
+          <div class="glass" style="padding:1.5rem;text-align:center">
+            <div style="margin-bottom:0.5rem;color:var(--fuxia)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+            <div style="font-weight:700;font-size:0.9rem">Inmobiliarias</div>
+            <div style="font-size:0.78rem;color:var(--gris);margin-top:0.3rem">Seguimiento de leads automático</div>
+          </div>
+          <div class="glass" style="padding:1.5rem;text-align:center">
+            <div style="margin-bottom:0.5rem;color:var(--fuxia)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+            <div style="font-weight:700;font-size:0.9rem">Agencias</div>
+            <div style="font-size:0.78rem;color:var(--gris);margin-top:0.3rem">Marketing, diseño, publicidad</div>
+          </div>
+          <div class="glass" style="padding:1.5rem;text-align:center">
+            <div style="margin-bottom:0.5rem;color:var(--fuxia)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+            <div style="font-weight:700;font-size:0.9rem">Abogados</div>
+            <div style="font-size:0.78rem;color:var(--gris);margin-top:0.3rem">Consultas, agendas, documentos</div>
+          </div>
+          <div class="glass" style="padding:1.5rem;text-align:center">
+            <div style="margin-bottom:0.5rem;color:var(--fuxia)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></div>
+            <div style="font-weight:700;font-size:0.9rem">Restaurantes</div>
+            <div style="font-size:0.78rem;color:var(--gris);margin-top:0.3rem">Reservas, pedidos, fidelización</div>
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--gris)">Si tienes clientes y procesos que se repiten — te automatizamos.</p>
+      </section>
+
+      <section class="vertical-section" id="faq">
+        <div class="v-label">// preguntas frecuentes</div>
+        <h2 class="v-title" data-hw>Lo que siempre <span>nos preguntan</span></h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" type="button">¿Cuánto tiempo tarda en estar listo? <span class="faq-icon">+</span></button>
+            <div class="faq-a"><p>Depende del servicio: el agendamiento puede estar en 2–3 días, una landing en una semana y el pack completo en 3–4 semanas. Siempre te damos una fecha y la cumplimos.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">¿Necesito saber de tecnología? <span class="faq-icon">+</span></button>
+            <div class="faq-a"><p>Para nada. Tú describes el problema en tus palabras y nosotros lo resolvemos. Si tienes dudas en el proceso, te explicamos en lenguaje normal.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">¿Funciona para cualquier tipo de negocio? <span class="faq-icon">+</span></button>
+            <div class="faq-a"><p>Sí. Hemos trabajado con tiendas, consultoras, servicios de salud, agencias y más. Si tienes clientes y procesos repetitivos, hay algo que podemos automatizar.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">¿Qué pasa si algo falla después de entregado? <span class="faq-icon">+</span></button>
+            <div class="faq-a"><p>Incluimos soporte post-entrega. No desaparecemos. Si algo no funciona como debe, lo resolvemos.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">¿Y si no quedo satisfecho con el resultado? <span class="faq-icon">+</span></button>
+            <div class="faq-a"><p>Si en los primeros 20 días no estás conforme con lo que entregamos, te devolvemos el 100% de tu dinero. Sin letra pequeña, sin excusas. Nuestro trabajo vale cuando a vos te funciona.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">¿Puedo empezar con algo pequeño? <span class="faq-icon">+</span></button>
+            <div class="faq-a"><p>Claro. Muchos clientes arrancan con el agendamiento o la automatización de mensajes, ven los resultados y luego escalan.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">¿Links Pro reemplaza mi Linktree? <span class="faq-icon">+</span></button>
+            <div class="faq-a"><p>Sí. Es tu propia página de links con tu marca, tu dominio y sin mensualidad: el Pro de Linktree cuesta $26.000/mes ($312.000 al año). Links Pro es un solo pago de $250.000 e incluye QR para tu local, tagueo y botones de WhatsApp con mensaje pre-redactado.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">¿Cómo funciona el posicionamiento en Google Maps? <span class="faq-icon">+</span></button>
+            <div class="faq-a"><p>Optimizamos tu perfil de empresa (categoría, servicios, fotos, horarios), montamos tu sistema de reseñas con enlace directo y dejamos tus datos idénticos en todas partes. Ojo honesto: Google no vende posiciones; trabajamos los factores que sí controlás (ficha + reseñas = 52% del Map Pack). En 7 a 15 días queda listo.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vertical-section" id="contacto">
+      <div class="v-label">// cuéntanos tu caso</div>
+      <h2 class="v-title" data-hw>¿Qué quieres <span>automatizar?</span></h2>
+      <p style="margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--gris);">También puedes escribirnos por <a href="https://instagram.com/fuxia_oficial" target="_blank" rel="noopener noreferrer" style="color:var(--fuxia);text-decoration:none;">@fuxia_oficial</a> en Instagram</p>
+      <div class="form-section">
+          <form id="contact-form">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="f-nombre">Tu nombre</label>
+                <input type="text" id="f-nombre" placeholder="¿Cómo te llamas?" required minlength="2" maxlength="60" autocomplete="name" />
+              </div>
+              <div class="form-field">
+                <label for="f-negocio">Tu negocio</label>
+                <input type="text" id="f-negocio" placeholder="¿A qué te dedicas?" required minlength="2" maxlength="80" autocomplete="organization" />
+              </div>
+              <input type="text" id="f-empresa2" name="empresa" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
+              <div class="form-field full">
+                <label for="f-servicio">¿Qué servicio te interesa?</label>
+                <select id="f-servicio" required>
+                  <option value="" disabled selected>Selecciona un paquete</option>
+                  <option>Paquete Starter — $1.500.000</option>
+                  <option>Paquete Profesional — $3.500.000</option>
+                  <option>Paquete Fundacional — $6.500.000</option>
+                  <option>Links Pro — $250.000 (pago único)</option>
+                  <option>Posicionamiento Google Maps — $300.000 (pago único)</option>
+                  <option>Combo Presencia (Links + Maps) — $550.000</option>
+                  <option>Mantenimiento Mensual — $700.000/mes</option>
+                  <option>No sé aún, quiero asesoría</option>
+                </select>
+              </div>
+            </div>
+            <p id="form-error" role="alert" hidden style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#ff7ab8;margin:0 0 0.7rem;"></p>
+            <label style="display:flex;align-items:flex-start;gap:0.6rem;margin:0.25rem 0 0.85rem;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--gris);line-height:1.5;cursor:pointer;">
+              <input type="checkbox" id="f-consent" required style="margin-top:2px;accent-color:var(--fuxia);flex-shrink:0;" />
+              <span>Autorizo el tratamiento de mis datos personales conforme a la <a href="politica-datos.html" target="_blank" rel="noopener noreferrer" style="color:var(--fuxia);text-decoration:underline;">Política de Tratamiento de Datos</a> (Ley 1581 de 2012).</span>
+            </label>
+            <button type="submit" class="btn-form">Enviar por WhatsApp →</button>
+            <p style="margin-top:0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--gris);line-height:1.6;">Al enviar se abrirá WhatsApp con tu mensaje. Tus datos también se guardan como lead para darte seguimiento.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="vertical-section">
+        <div class="v-label">// aprende · aplica</div>
+        <h2 class="v-title" data-hw>Casos y <span>aprendizajes</span></h2>
+        <div class="blog-grid">
+          <a href="blog/como-automatizar-leads.html" class="blog-card">
+            <div class="blog-card-img"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+            <div class="blog-card-body">
+              <span class="blog-tag">// automatización</span>
+              <h3>Cómo dejé de responder 200 mensajes al día sin perder un solo lead</h3>
+              <p>El flujo exacto que armamos para que un negocio de servicios nunca más pierda un cliente por no contestar a tiempo.</p>
+              <div class="blog-card-footer">5 min de lectura</div>
+            </div>
+          </a>
+          <a href="blog/landing-que-convierte.html" class="blog-card">
+            <div class="blog-card-img"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+            <div class="blog-card-body">
+              <span class="blog-tag">// landing pages</span>
+              <h3>Por qué tu landing page no convierte (y no es el diseño)</h3>
+              <p>El 80% de las landings fallan por lo mismo: no tienen una propuesta de valor clara en los primeros 5 segundos.</p>
+              <div class="blog-card-footer">4 min de lectura</div>
+            </div>
+          </a>
+          <a href="blog/crm-sin-complicaciones.html" class="blog-card">
+            <div class="blog-card-img"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M8 4h8"/><path d="M9 17h6"/></svg></div>
+            <div class="blog-card-body">
+              <span class="blog-tag">// crm</span>
+              <h3>Un CRM no tiene que ser complicado ni caro</h3>
+              <p>Cómo armamos sistemas de seguimiento de clientes que cualquier persona puede manejar, sin cursos ni manuales.</p>
+              <div class="blog-card-footer">6 min de lectura</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <footer class="footer-legal">
+        <div class="footer-legal-top">
+          <img src="logo.png" alt="FUXIA — logo" width="36" height="36" loading="lazy" style="height:36px;width:auto;border-radius:9px;opacity:0.85;" />
+          <div class="footer-copy">© 2026 FUXIA · Medellín, Colombia · automatización con actitud</div>
+          <a href="https://instagram.com/fuxia_oficial" target="_blank" rel="noopener noreferrer" class="footer-ig" aria-label="Instagram">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            @fuxia_oficial
+          </a>
+        </div>
+        <div class="footer-links" style="margin-top:1rem;">
+          <a href="politica-datos.html">Tratamiento de datos</a>
+          <a href="politica-cookies.html">Política de cookies</a>
+          <a href="terminos.html">Términos y condiciones</a>
+          <button type="button" id="ck-prefs">Configurar cookies</button>
+        </div>
+        <p class="footer-note">Responsable: FUXIA · Medellín · WA +57 300 537 0203 · Ley 1581 de 2012 (Habeas Data) · Puedes conocer, actualizar, rectificar y suprimir tus datos cuando quieras. Pixel de Meta: solo se activa si aceptas cookies. Reclamaciones: SIC www.sic.gov.co · Para ver el banner de nuevo usa “Configurar cookies” o abre la web con ?cookies</p>
+      </footer>
+
+    </div><!-- /vertical-zone -->
+
+  </main>
+
+  <script>
+    // ── DETECTAR MOBILE ──
+    const mqDesktop = window.matchMedia('(min-width: 1024px)');
+    function applyMobileClass() {
+      document.body.classList.toggle('is-mobile', !mqDesktop.matches);
+    }
+    applyMobileClass();
+    mqDesktop.addEventListener('change', () => {
+      applyMobileClass();
+    });
+
+    // ── LOADER ──
+    function hideLoader() {
+      document.getElementById('loader').classList.add('hidden');
+    }
+    // Loader no bloqueante: fuera en cuanto el DOM está listo (máx 1.2s)
+    let loaderHidden = false;
+    function hideLoaderSafe() {
+      if (loaderHidden) return;
+      loaderHidden = true;
+      hideLoader();
+    }
+    const loaderTimer = setTimeout(hideLoaderSafe, 1200);
+    document.addEventListener('DOMContentLoaded', () => {
+      clearTimeout(loaderTimer);
+      setTimeout(hideLoaderSafe, 400);
+    });
+    window.addEventListener('load', hideLoaderSafe);
+
+    // ── BARRA DE PROGRESO (scroll de toda la página, con throttle rAF) ──
+    const progressFill = document.getElementById('progress-fill');
+    let progressQueued = false;
+    function updateProgressBar() {
+      progressQueued = false;
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(1, scrollTop / docHeight) : 0;
+      if (progressFill) progressFill.style.width = (progress * 100) + '%';
+    }
+    function queueProgressBar() {
+      if (!progressQueued) { progressQueued = true; requestAnimationFrame(updateProgressBar); }
+    }
+    window.addEventListener('scroll', queueProgressBar, { passive: true });
+    window.addEventListener('resize', queueProgressBar);
+    updateProgressBar();
+
+    // ── FAQ ──
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          const q = i.querySelector('.faq-q');
+          if (q) q.setAttribute('aria-expanded', 'false');
+          const a = i.querySelector('.faq-a');
+          if (a) a.style.maxHeight = '';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          const ans = item.querySelector('.faq-a');
+          if (ans) ans.style.maxHeight = ans.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // ── FORMULARIO (con failsafe anti-pérdida de lead) ──
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (document.getElementById('f-empresa2').value) return false;
+      const nombre   = document.getElementById('f-nombre').value.trim().slice(0, 60);
+      const negocio  = document.getElementById('f-negocio').value.trim().slice(0, 80);
+      const servicio = document.getElementById('f-servicio').value;
+      const errBox   = document.getElementById('form-error');
+      function formError(t) { if (errBox) { errBox.textContent = t; errBox.hidden = false; } return false; }
+      if (errBox) errBox.hidden = true;
+      if (nombre.length < 2) return formError('Escribí tu nombre (mínimo 2 letras).');
+      if (negocio.length < 2) return formError('Contanos tu negocio en 2+ letras.');
+      if (!servicio) return formError('Elegí un paquete o pedí asesoría.');
+      try { if (window.fbq && localStorage.getItem('fuxia_cookie_consent') === 'accepted') { fbq('track', 'Lead'); } } catch (e) {}
+      const msg = `Hola FUXIA! Soy ${nombre}, tengo un negocio de ${negocio} y me interesa: ${servicio}. (web-contacto)`;
+      const waUrl = 'https://wa.me/573005370203?text=' + encodeURIComponent(msg);
+      // Guardar el lead para que gracias.html pueda reabrir WhatsApp con el mensaje exacto
+      try {
+        localStorage.setItem('fuxia_lead', JSON.stringify({ nombre, negocio, servicio, msg, ts: Date.now() }));
+      } catch (err) {}
+      // Captura server-side: notifica el lead aunque el usuario no abra WhatsApp
+      try {
+        fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, negocio, servicio }),
+          keepalive: true
+        }).catch(function () {});
+      } catch (err) {}
+      // Intentar abrir WhatsApp en pestaña nueva
+      const win = window.open(waUrl, '_blank');
+      if (win) {
+        window.location.href = 'gracias.html';        // se abrió → página de gracias
+      } else {
+        window.location.href = waUrl;                  // popup bloqueado → no perdemos el lead
+      }
+    });
+
+    // ── PIXEL: Contact en cada clic a WhatsApp (con origen del CTA como content_name) ──
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest ? e.target.closest('a[href*="wa.me"]') : null;
+      if (!a || !window.fbq) return;
+      try { if (localStorage.getItem('fuxia_cookie_consent') !== 'accepted') return; } catch (err) { return; }
+      let origin = 'sin-marcador';
+      try {
+        const m = decodeURIComponent(a.href).match(/\(([^)]+)\)/);
+        if (m) origin = m[1];
+      } catch (err) {}
+      fbq('track', 'Contact', { content_name: origin });
+    });
+
+    // ── REVEAL AL HACER SCROLL ──
+    (function initReveal() {
+      const allowMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!allowMotion) return; // sin movimiento → todo visible (CSS lo respeta)
+      const sel = '.desc-card, .paso-card, .paquete-card, .faq-item, '
+                + '.form-section, .pf-carousel, .blog-card, .portfolio-title, '
+                + '.portfolio-sub, .vertical-section .v-title, .vertical-section .glass';
+      const els = document.querySelectorAll(sel);
+      if (!els.length) return;
+      document.body.classList.add('reveal-on');
+      els.forEach(el => {
+        el.classList.add('reveal');
+        const sibs = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
+        const i = sibs.indexOf(el);
+        if (i > 0) el.style.transitionDelay = Math.min(i * 0.07, 0.35) + 's';
+      });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(el => io.observe(el));
+    })();
+
+    // ── POPUP SALIDA (con memoria 7 días + disparo por scroll en móvil) ──
+    (function initPopup() {
+      const overlay = document.getElementById('popup-overlay');
+      if (!overlay) return;
+      const KEY = 'fuxia_popup_seen';
+      const WEEK = 7 * 86400000;
+      let last = 0;
+      try { last = parseInt(localStorage.getItem(KEY) || '0', 10); } catch (e) {}
+      if (Date.now() - last < WEEK) return; // ya se mostró en los últimos 7 días
+
+      let shown = false, ready = false;
+      setTimeout(() => { ready = true; }, 30000); // mínimo 30s en página
+
+      function show() {
+        if (shown || !ready) return;
+        shown = true;
+        overlay.classList.add('show');
+        try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
+        const c = document.getElementById('popup-close');
+        if (c) c.focus();
+      }
+      // exit-intent (desktop)
+      document.addEventListener('mouseleave', (e) => { if (e.clientY <= 0) show(); });
+      // scroll-depth: cuando llega al 80% de la página (cubre móvil sin exit-intent)
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement;
+        const pct = (window.scrollY + window.innerHeight) / h.scrollHeight;
+        if (pct >= 0.8) show();
+      }, { passive: true });
+
+      function closePopup() { overlay.classList.remove('show'); }
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePopup(); });
+      document.getElementById('popup-close').addEventListener('click', closePopup);
+      document.getElementById('popup-skip').addEventListener('click', closePopup);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+    })();
+
+    // ── 3D TÁCTIL: parallax auroras + tilt en tarjetas + botones magnéticos ──
+    (function init3D() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Parallax de las auroras (todos los dispositivos)
+      const layer = document.querySelector('.aurora-layer');
+      if (layer) {
+        let mx = 0, my = 0, sy = 0, raf = null;
+        function apply() {
+          const scroll = Math.min(sy * 0.04, 100);
+          layer.style.transform = 'translate3d(' + (mx * 24).toFixed(1) + 'px,' + (my * 24 + scroll).toFixed(1) + 'px,0)';
+          raf = null;
+        }
+        function schedule() { if (!raf) raf = requestAnimationFrame(apply); }
+        window.addEventListener('pointermove', (e) => {
+          mx = e.clientX / window.innerWidth - 0.5;
+          my = e.clientY / window.innerHeight - 0.5;
+          schedule();
+        }, { passive: true });
+        window.addEventListener('scroll', () => { sy = window.scrollY; schedule(); }, { passive: true });
+      }
+
+      // Lo siguiente solo en escritorio con cursor preciso
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+      // Tilt 3D + spotlight en tarjetas
+      const cards = document.querySelectorAll('.desc-card, .paso-card, .paquete-card, .blog-card, .vertical-section .glass');
+      cards.forEach((card) => {
+        card.classList.add('tilt');
+        let r = null;
+        card.addEventListener('pointerenter', () => {
+          r = card.getBoundingClientRect();
+          card.style.transition = 'transform 0.06s linear, box-shadow 0.3s ease';
+        });
+        card.addEventListener('pointermove', (e) => {
+          if (!r) r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          card.style.setProperty('--mx', (px * 100) + '%');
+          card.style.setProperty('--my', (py * 100) + '%');
+          const rx = (0.5 - py) * 7;
+          const ry = (px - 0.5) * 7;
+          card.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.transition = 'transform 0.5s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s ease';
+          card.style.transform = '';
+        });
+      });
+
+      // Botones magnéticos
+      document.querySelectorAll('.btn-wpp, .nav-wpp-mini, .btn-form, .popup-btn').forEach((btn) => {
+        btn.addEventListener('pointermove', (e) => {
+          const b = btn.getBoundingClientRect();
+          const x = e.clientX - (b.left + b.width / 2);
+          const y = e.clientY - (b.top + b.height / 2);
+          btn.style.transform = 'translate(' + (x * 0.18).toFixed(1) + 'px,' + (y * 0.3).toFixed(1) + 'px)';
+        });
+        btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+      });
+    })();
+  </script>
+  <script>
+    // ── TÍTULOS MANUSCRITOS (handwriting: trazo SVG letra por letra, con fallback a texto) ──
+    (function initHandwriting() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!document.querySelector('[data-hw]')) return;
+      var OT_URL = 'https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js';
+      var FONT_URL = '/fonts/handwriting.ttf';
+      var EM = 100, PAD = 12, STROKE = 3, NS = 'http://www.w3.org/2000/svg';
+      var otPromise = null, fontPromise = null;
+      function loadOT() {
+        if (window.opentype) return Promise.resolve(window.opentype);
+        if (!otPromise) {
+          otPromise = new Promise(function (resolve, reject) {
+            var s = document.createElement('script');
+            s.src = OT_URL; s.async = true;
+            s.onload = function () { window.opentype ? resolve(window.opentype) : reject(new Error('ot')); };
+            s.onerror = function () { reject(new Error('ot')); };
+            document.head.appendChild(s);
+          });
+        }
+        return otPromise;
+      }
+      function loadFont() {
+        if (!fontPromise) {
+          fontPromise = loadOT().then(function (lib) {
+            return fetch(FONT_URL).then(function (r) {
+              if (!r.ok) throw new Error('font');
+              return r.arrayBuffer();
+            }).then(function (b) { return lib.parse(b); });
+          });
+        }
+        return fontPromise;
+      }
+      function runsOf(el) {
+        var runs = [];
+        var base = getComputedStyle(el).color;
+        Array.prototype.forEach.call(el.childNodes, function (n) {
+          if (n.nodeType === 3) {
+            var t = n.textContent.replace(/\s+/g, ' ').trim();
+            if (t) runs.push({ text: t, color: base, block: false });
+          } else if (n.nodeType === 1) {
+            var t2 = n.textContent.replace(/\s+/g, ' ').trim();
+            if (t2) runs.push({ text: t2, color: getComputedStyle(n).color, block: getComputedStyle(n).display === 'block' });
+          }
+        });
+        return runs;
+      }
+      function buildRun(font, fs, run) {
+        var p, box, full, contours;
+        try {
+          p = font.getPath(run.text, 0, EM, EM);
+          box = p.getBoundingBox();
+          full = p.toPathData(2);
+          contours = full.split(/(?=M)/).filter(function (d) { return d.trim().length > 1; });
+        } catch (e) { return null; }
+        if (!contours.length || !(box.x2 > box.x1)) return null;
+        var x = box.x1 - PAD, y = box.y1 - PAD;
+        var w = box.x2 - box.x1 + PAD * 2, h = box.y2 - box.y1 + PAD * 2;
+        var chars = run.text.replace(/\s/g, '').length;
+        var duration = Math.min(2.4, Math.max(0.9, chars * 0.09));
+        var delay = 0.05;
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('viewBox', x + ' ' + y + ' ' + w + ' ' + h);
+        svg.setAttribute('role', 'img');
+        svg.setAttribute('aria-label', run.text);
+        svg.setAttribute('class', 'hw-svg');
+        svg.style.color = run.color;
+        svg.style.height = (h / EM * fs) + 'px';
+        svg.style.width = (w / EM * fs) + 'px';
+        svg.style.display = run.block ? 'block' : 'inline-block';
+        var fill = document.createElementNS(NS, 'path');
+        fill.setAttribute('d', full);
+        fill.setAttribute('fill', 'currentColor');
+        fill.setAttribute('stroke', 'none');
+        fill.style.opacity = '0';
+        svg.appendChild(fill);
+        var paths = contours.map(function (d) {
+          var pa = document.createElementNS(NS, 'path');
+          pa.setAttribute('d', d);
+          pa.setAttribute('fill', 'none');
+          pa.setAttribute('stroke', 'currentColor');
+          pa.setAttribute('stroke-width', STROKE);
+          pa.setAttribute('stroke-linecap', 'round');
+          pa.setAttribute('stroke-linejoin', 'round');
+          svg.appendChild(pa);
+          return pa;
+        });
+        var lens = paths.map(function (pa) { try { return pa.getTotalLength(); } catch (e) { return 0; } });
+        paths.forEach(function (pa, i) {
+          var L = lens[i] || 1;
+          pa.style.strokeDasharray = String(L);
+          pa.style.strokeDashoffset = String(L);
+        });
+        requestAnimationFrame(function () { requestAnimationFrame(function () {
+          var count = Math.max(1, paths.length);
+          paths.forEach(function (pa, i) {
+            var each = (duration / count) * 2.4;
+            var start = delay + (i / count) * duration;
+            pa.style.transition = 'stroke-dashoffset ' + each.toFixed(3) + 's ease-out ' + start.toFixed(3) + 's';
+            pa.style.strokeDashoffset = '0';
+          });
+          fill.style.transition = 'opacity 0.45s ease-out ' + (delay + duration * 0.72).toFixed(3) + 's';
+          fill.style.opacity = '1';
+        }); });
+        return svg;
+      }
+      function animate(el) {
+        if (el.dataset.hwDone) return;
+        el.dataset.hwDone = '1';
+        if (!el.dataset.hwSrc) { try { el.dataset.hwSrc = el.innerHTML; } catch (e) {} }
+        loadFont().then(function (font) {
+          var fs = parseFloat(getComputedStyle(el).fontSize) || 16;
+          var runs = runsOf(el);
+          if (!runs.length) return;
+          var frag = document.createDocumentFragment(), ok = false;
+          runs.forEach(function (r) {
+            var svg = buildRun(font, fs, r);
+            if (svg) { frag.appendChild(svg); ok = true; }
+            else frag.appendChild(document.createTextNode(r.text));
+          });
+          if (ok) { el.textContent = ''; el.appendChild(frag); }
+        }).catch(function () { /* fuente falla → texto original intacto */ });
+      }
+      loadFont().catch(function () {});
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); animate(e.target); } });
+      }, { threshold: 0.3 });
+      // La fuente se precarga en idle para no competir con el LCP
+      function armHw() { document.querySelectorAll('[data-hw]').forEach(function (el) { io.observe(el); }); }
+      if ("requestIdleCallback" in window) requestAnimationFrame(function () { requestIdleCallback(armHw, { timeout: 2500 }); });
+      else setTimeout(armHw, 1200);
+      // Barrido de auto-reparación: convierte lo que el observer haya pasado por alto
+      // y recompone parciales (texto suelto + svg) restaurando el original
+      function sweepHw() {
+        document.querySelectorAll('[data-hw]').forEach(function (el) {
+          var hasSvg = !!el.querySelector('svg.hw-svg');
+          var hasText = Array.prototype.some.call(el.childNodes, function (n) {
+            return n.nodeType === 3 && n.textContent.replace(/\s+/g, ' ').trim().length > 2;
+          });
+          if ((!hasSvg || (hasSvg && hasText)) && el.dataset.hwSrc) {
+            try { el.innerHTML = el.dataset.hwSrc; } catch (e) {}
+            try { delete el.dataset.hwDone; } catch (e) {}
+            animate(el);
+          } else if (!hasSvg) {
+            try { delete el.dataset.hwDone; } catch (e) {}
+            animate(el);
+          }
+        });
+      }
+      if (document.readyState === 'complete') setTimeout(sweepHw, 2500);
+      else window.addEventListener('load', function () { setTimeout(sweepHw, 2500); });
+    })();
+  </script>
+  <script>
+    // ── CARRUSEL CIRCULAR PORTAFOLIO (3 visibles, autoplay, teclado, dots) ──
+    (function initPfCarousel() {
+      var DATA = [
+        { tag: "SaaS · IA", name: "IMPULSA", quote: "Plataforma de validación de negocios con 4 agentes de IA en paralelo.", href: "https://impulsa-six.vercel.app", img: "/portfolio/impulsa.png", alt: "Impulsa — Validación de negocios con IA multiagente" },
+        { tag: "Plataforma · Premium", name: "CÓDIGO ALFA", quote: "Entrenamiento con IA, podcast premium y analizador de mensajes reales.", href: "https://codigoalfa.app/", img: "/portfolio/codigo-alfa.png", alt: "Código Alfa — Plataforma de entrenamiento con IA" },
+        { tag: "Landing · Gastronomía", name: "KATOBO", quote: "Landing page para pastelería artesanal y café de especialidad.", href: "https://katobo-bakery.vercel.app/", img: "/portfolio/katobo.png", alt: "KATOBO — Landing para pastelería artesanal y café de especialidad" },
+        { tag: "App · Educación", name: "BUTTERFLY HOUSE", quote: "App de registro científico para mariposario escolar real.", href: "https://mariposario-bh.vercel.app/", img: "/portfolio/butterflyhouse.png", alt: "Butterfly House — App de registro científico para mariposario escolar" },
+        { tag: "Landing · E-commerce", name: "DB DIGITAL", quote: "Catálogo comercial con cotización por WhatsApp para celulares en Envigado.", href: "https://db-digital.lovable.app", img: "/portfolio/db-digital.png", alt: "DB Digital — Catálogo de celulares en Envigado" }
+      ];
+      var stage = document.getElementById("pf-stage");
+      if (!stage) return;
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var n = DATA.length, i = 0, timer = null;
+      var tagEl = document.getElementById("pf-tag");
+      var nameEl = document.getElementById("pf-name");
+      var quoteEl = document.getElementById("pf-quote");
+      var linkEl = document.getElementById("pf-link");
+      var dotsEl = document.getElementById("pf-dots");
+      var slides = DATA.map(function (d, k) {
+        var s = document.createElement("div");
+        s.className = "pf-slide";
+        s.setAttribute("role", "link");
+        s.setAttribute("tabindex", "0");
+        s.setAttribute("title", "Abrir " + d.name);
+        s.setAttribute("aria-label", "Abrir proyecto " + d.name);
+        var im = document.createElement("img");
+        im.src = d.img; im.alt = d.alt; im.loading = "lazy"; im.decoding = "async";
+        im.width = 960; im.height = 600;
+        im.draggable = false;
+        s.appendChild(im);
+        function openProj() { window.open(d.href, "_blank", "noopener"); }
+        s.addEventListener("click", openProj);
+        s.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProj(); }
+        });
+        stage.appendChild(s);
+        var dot = document.createElement("button");
+        dot.className = "pf-dot";
+        dot.setAttribute("aria-label", "Ir a " + d.name);
+        dot.addEventListener("click", function () { i = k; paint(); restart(); });
+        dotsEl.appendChild(dot);
+        return s;
+      });
+      var dots = Array.prototype.slice.call(dotsEl.children);
+      function gap() {
+        var w = stage.offsetWidth || 600;
+        return Math.min(86, Math.max(44, w * 0.09));
+      }
+      function paint() {
+        var g = gap(), up = Math.round(g * 0.55);
+        var trans = reduce ? "none" : "transform 0.8s cubic-bezier(.4,2,.3,1), opacity 0.8s ease";
+        slides.forEach(function (s, k) {
+          var isA = k === i;
+          var isL = (i - 1 + n) % n === k;
+          var isR = (i + 1) % n === k;
+          s.style.transition = trans;
+          s.classList.toggle("on", isA);
+          s.style.zIndex = isA ? 3 : (isL || isR ? 2 : 1);
+          s.style.opacity = (isA || isL || isR) ? 1 : 0;
+          s.style.pointerEvents = (isA || isL || isR) ? "auto" : "none";
+          if (isA) s.style.transform = "translateX(0) translateY(0) scale(1)";
+          else if (isL) s.style.transform = "translateX(-" + g + "px) translateY(-" + up + "px) scale(0.85)";
+          else if (isR) s.style.transform = "translateX(" + g + "px) translateY(-" + up + "px) scale(0.85)";
+          else s.style.transform = "translateX(0) scale(0.7)";
+        });
+        var d = DATA[i];
+        tagEl.textContent = d.tag;
+        nameEl.textContent = d.name;
+        linkEl.href = d.href;
+        quoteEl.textContent = "";
+        var shownWords = false;
+        function showWords() {
+          if (shownWords) return;
+          shownWords = true;
+          Array.prototype.forEach.call(quoteEl.children, function (sp) {
+            sp.style.filter = "blur(0px)";
+            sp.style.opacity = "1";
+          });
+        }
+        d.quote.split(" ").forEach(function (w, k2) {
+          var sp = document.createElement("span");
+          sp.className = "w";
+          sp.textContent = w;
+          quoteEl.appendChild(sp);
+          quoteEl.appendChild(document.createTextNode(" "));
+          if (!reduce) {
+            sp.style.filter = "blur(10px)";
+            sp.style.opacity = "0";
+            sp.style.transition = "filter 0.22s ease-out " + (0.025 * k2).toFixed(3) + "s, opacity 0.22s ease-out " + (0.025 * k2).toFixed(3) + "s";
+          }
+        });
+        if (!reduce) {
+          requestAnimationFrame(function () { requestAnimationFrame(showWords); });
+          setTimeout(showWords, 150);
+        }
+        dots.forEach(function (dt, k) { dt.classList.toggle("on", k === i); });
+      }
+      function restart() {
+        if (timer) clearInterval(timer);
+        if (!reduce) timer = setInterval(function () { i = (i + 1) % n; paint(); }, 5000);
+      }
+      document.getElementById("pf-prev").addEventListener("click", function () { i = (i - 1 + n) % n; paint(); restart(); });
+      document.getElementById("pf-next").addEventListener("click", function () { i = (i + 1) % n; paint(); restart(); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+        var r = document.getElementById("pf-carousel").getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        if (e.key === "ArrowLeft") { i = (i - 1 + n) % n; paint(); restart(); }
+        if (e.key === "ArrowRight") { i = (i + 1) % n; paint(); restart(); }
+      });
+      var car = document.getElementById("pf-carousel");
+      car.addEventListener("mouseenter", function () { if (timer) clearInterval(timer); });
+      car.addEventListener("mouseleave", restart);
+      var rzT = null;
+      window.addEventListener("resize", function () {
+        if (rzT) clearTimeout(rzT);
+        rzT = setTimeout(paint, 150);
+      });
+      paint();
+      restart();
+    })();
+  </script>
+  <script>
+    // ── PRECIOS: count-up al ver + toggle IVA 19% + confetti ──
+    (function initBilling() {
+      var sw = document.getElementById("iva-switch");
+      if (!sw) return;
+      var animId = null;
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function fmt(n) { return "$" + Math.round(n).toLocaleString("es-CO"); }
+      function digits(s) { var m = String(s).replace(/[^\d]/g, ""); return m ? parseInt(m, 10) : 0; }
+      var prices = Array.prototype.map.call(document.querySelectorAll(".paquete-precio"), function (el) {
+        return { el: el, base: digits(el.textContent), cur: 0 };
+      });
+      var olds = Array.prototype.map.call(document.querySelectorAll(".paquete-precio-old"), function (el) {
+        return { el: el, base: digits(el.textContent), cur: 0 };
+      });
+      function paint(list, isOld) {
+        list.forEach(function (p) {
+          if (isOld) p.el.textContent = "antes " + fmt(p.cur);
+          else if (p.el.firstChild) p.el.firstChild.textContent = fmt(p.cur) + " ";
+          else p.el.textContent = fmt(p.cur);
+        });
+      }
+      function animateTo(mult, dur, fromZero) {
+        if (animId) cancelAnimationFrame(animId);
+        var pFrom = prices.map(function (p) { return fromZero ? 0 : p.cur; });
+        var oFrom = olds.map(function (o) { return fromZero ? 0 : o.cur; });
+        var pTo = prices.map(function (p) { return p.base * mult; });
+        var oTo = olds.map(function (o) { return o.base * mult; });
+        if (reduce) {
+          prices.forEach(function (p, i) { p.cur = pTo[i]; });
+          olds.forEach(function (o, i) { o.cur = oTo[i]; });
+          paint(prices, false); paint(olds, true);
+          animId = null;
+          return;
+        }
+        var t0 = null;
+        function frame(t) {
+          if (!t0) t0 = t;
+          var k = Math.min(1, (t - t0) / dur);
+          var e = 1 - Math.pow(1 - k, 3);
+          prices.forEach(function (p, i) { p.cur = pFrom[i] + (pTo[i] - pFrom[i]) * e; });
+          olds.forEach(function (o, i) { o.cur = oFrom[i] + (oTo[i] - oFrom[i]) * e; });
+          paint(prices, false); paint(olds, true);
+          if (k < 1) animId = requestAnimationFrame(frame);
+          else {
+            prices.forEach(function (p, i) { p.cur = pTo[i]; });
+            olds.forEach(function (o, i) { o.cur = oTo[i]; });
+            paint(prices, false); paint(olds, true);
+            animId = null;
+          }
+        }
+        animId = requestAnimationFrame(frame);
+      }
+      // count-up inicial al ver la sección
+      var sec = document.getElementById("paquetes");
+      var started = false;
+      function start() {
+        if (started) return;
+        started = true;
+        animateTo(sw.getAttribute("aria-checked") === "true" ? 1 : 1.19, 900, true);
+      }
+      if ("IntersectionObserver" in window && sec) {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { start(); io.disconnect(); } });
+        }, { threshold: 0.25 });
+        io.observe(sec);
+      } else start();
+      // confetti fuxia mínimo (sin dependencias)
+      function confetti(x, y) {
+        if (reduce) return;
+        var c = document.createElement("canvas");
+        c.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:9999;";
+        document.body.appendChild(c);
+        c.width = window.innerWidth; c.height = window.innerHeight;
+        var ctx = c.getContext("2d");
+        var cols = ["#CC00FF", "#ffffff", "#E08CFF", "#F5C842"];
+        var ps = [];
+        for (var k = 0; k < 60; k++) {
+          ps.push({ x: x, y: y, vx: (Math.random() - 0.5) * 11, vy: Math.random() * -9 - 2, s: Math.random() * 5 + 3, c: cols[k % cols.length], l: 1 });
+        }
+        var t0 = null;
+        function tick(t) {
+          if (!t0) t0 = t;
+          var k = (t - t0) / 1300;
+          ctx.clearRect(0, 0, c.width, c.height);
+          if (k >= 1) { c.remove(); return; }
+          ps.forEach(function (p) {
+            p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.l = 1 - k;
+            ctx.globalAlpha = Math.max(0, p.l);
+            ctx.fillStyle = p.c;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.s * (1 - k * 0.5), 0, 6.283);
+            ctx.fill();
+          });
+          ctx.globalAlpha = 1;
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      sw.addEventListener("click", function () {
+        var on = sw.getAttribute("aria-checked") !== "true";
+        sw.setAttribute("aria-checked", String(on));
+        var lbl = document.getElementById("billing-label");
+        if (lbl) lbl.innerHTML = on ? "Precios sin IVA · activar para ver <b>con IVA</b>" : "Precios con IVA · activar para ver <b>sin IVA</b>";
+        animateTo(on ? 1 : 1.19, 500, false);
+        if (on) {
+          var r = sw.getBoundingClientRect();
+          confetti(r.left + r.width / 2, r.top + r.height / 2);
+        }
+      });
+    })();
+  </script>
+  <script type="module">
+    // ── LOBO ROBOT PROPIO (Three.js, sin marcas; arranca en idle) ──
+    (function initWolfHero() {
+      var canvas = document.getElementById("wolf-hero");
+      if (!canvas) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (!window.WebGLRenderingContext) {
+        var bg0 = document.querySelector(".spline-bg");
+        if (bg0) bg0.style.display = "none";
+        return;
+      }
+      function start() {
+        import("./js/wolf.js").then(function (m) {
+          if (!document.body.contains(canvas)) return;
+          try {
+            if (m.initWolf(canvas)) window.__splineOk = true;
+            else if (window.console) console.warn("[fuxia] robot: sin WebGL");
+          } catch (e) {
+            if (window.console) console.warn("[fuxia] robot:", e && e.message);
+            var bg = document.querySelector(".spline-bg");
+            if (bg) bg.style.display = "none";
+          }
+        }).catch(function (err) {
+          if (window.console) console.warn("[fuxia] robot:", err && err.message);
+          var bg2 = document.querySelector(".spline-bg");
+          if (bg2) bg2.style.display = "none";
+        });
+      }
+      // Arranque inmediato (el módulo ya corre con el DOM listo; el preload trae three).
+      // Antes esperaba al load + 800ms y el load lo frenaban las imágenes.
+      start();
+      setTimeout(function () {
+        if (!window.__splineOk && window.console) console.warn("[fuxia] robot: aún sin modelo");
+      }, 6000);
+    })();
+    // ── SPOTLIGHT QUE SIGUE EL MOUSE EN HERO ──
+    (function initHeroSpot() {
+      var hero = document.querySelector(".slide-hero");
+      var spot = document.getElementById("hero-spot");
+      if (!hero || !spot) return;
+      if (window.matchMedia("(hover: none)").matches) return;
+      hero.addEventListener("pointermove", function (e) {
+        var r = hero.getBoundingClientRect();
+        spot.style.left = (e.clientX - r.left) + "px";
+        spot.style.top = (e.clientY - r.top) + "px";
+        spot.style.opacity = "1";
+      });
+      hero.addEventListener("pointerleave", function () { spot.style.opacity = "0"; });
+    })();
+  </script>
+  <script>
+    // ── TEMA CLARO / OSCURO ──
+    (function initTheme() {
+      var btn = document.getElementById("theme-toggle");
+      if (!btn) return;
+      var sun = document.getElementById("theme-icon-sun");
+      var moon = document.getElementById("theme-icon-moon");
+      function apply(light) {
+        document.body.classList.toggle("light", light);
+        btn.setAttribute("aria-label", light ? "Cambiar a modo oscuro" : "Cambiar a modo claro");
+        if (sun) sun.style.display = light ? "none" : "block";
+        if (moon) moon.style.display = light ? "block" : "none";
+        // Los títulos manuscritos usan currentColor: adaptar el blanco según tema
+        document.querySelectorAll("svg.hw-svg").forEach(function (svg) {
+          var cur = (svg.style.color || "").replace(/\s+/g, "");
+          var isWhite = /255,255,255/.test(cur) || cur === "#fff" || cur === "#ffffff" || cur === "white";
+          var isInk = cur === "rgb(22,22,29)" || cur === "#16161d";
+          if (light && isWhite) svg.style.color = "#16161d";
+          else if (!light && isInk) svg.style.color = "#ffffff";
+        });
+        try { localStorage.setItem("fuxia_theme", light ? "light" : "dark"); } catch (e) {}
+      }
+      var saved = null;
+      try { saved = localStorage.getItem("fuxia_theme"); } catch (e) {}
+      apply(saved === "light");
+      btn.addEventListener("click", function () {
+        apply(!document.body.classList.contains("light"));
+      });
+    })();
+  </script>
+  <!-- ── COOKIES: banner + consentimiento ── -->
+  <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+    <p><strong>🍪 Cookies + Pixel de Meta.</strong> Usamos cookies necesarias para que el sitio funcione. El <strong>Pixel de Meta (Facebook)</strong> para medir visitas y clics a WhatsApp <strong>solo se activa si aceptas</strong>. Ver <a href="politica-cookies.html">Política de cookies</a> y <a href="politica-datos.html">Tratamiento de datos</a>.<br /><span id="ck-state" style="opacity:0.8;"></span></p>
+    <div class="ck-btns">
+      <button id="ck-accept" type="button">Aceptar todo</button>
+      <button id="ck-reject" type="button">Solo necesarias</button>
+    </div>
+  </div>
+  <button id="ck-float" type="button" aria-label="Configurar cookies" title="Configurar cookies">🍪</button>
+  <script>
+    (function initCookies() {
+      var KEY = 'fuxia_cookie_consent';
+      var banner = document.getElementById('cookie-banner');
+      var floatBtn = document.getElementById('ck-float');
+      var stateEl = document.getElementById('ck-state');
+      function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+      function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+      function paintState() {
+        var v = get();
+        if (stateEl) stateEl.textContent = v === 'accepted' ? 'Estado: aceptadas (Pixel ACTIVO).' : v === 'rejected' ? 'Estado: solo necesarias (Pixel BLOQUEADO).' : 'Estado: sin decidir.';
+        if (floatBtn) floatBtn.classList.toggle('show', !!v && banner && !banner.classList.contains('show'));
+      }
+      function showBanner() { if (banner) banner.classList.add('show'); if (floatBtn) floatBtn.classList.remove('show'); }
+      function hideBanner() { if (banner) banner.classList.remove('show'); paintState(); }
+      function accept() { set('accepted'); hideBanner(); if (window.FuxiaPixelLoad) window.FuxiaPixelLoad(); }
+      function reject() { set('rejected'); hideBanner(); }
+      // Mostrar con delay para que no lo tape el loader; forzar con ?cookies o #cookies
+      var force = /[?#&]cookies/.test(location.search + location.hash);
+      setTimeout(function () { if (!get() || force) showBanner(); else paintState(); }, 900);
+      var a = document.getElementById('ck-accept');
+      var r = document.getElementById('ck-reject');
+      var p = document.getElementById('ck-prefs');
+      if (a) a.addEventListener('click', accept);
+      if (r) r.addEventListener('click', reject);
+      if (p) p.addEventListener('click', showBanner);
+      if (floatBtn) floatBtn.addEventListener('click', showBanner);
+      paintState();
+      window.FuxiaCookies = { accept: accept, reject: reject, open: showBanner };
+    })();
+  </script>
+
+</body>
+</html>

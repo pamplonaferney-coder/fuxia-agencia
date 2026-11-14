@@ -1,0 +1,18 @@
+{
+  "name": "fuxia-agencia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FUXIA — Agencia de Automatización. Pipeline de calidad: ESLint + escaneo de secretos + SonarCloud.",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "secrets": "node scripts/secrets-scan.mjs",
+    "check": "npm run lint && npm run secrets"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "globals": "^17.14.0"
+  }
+}

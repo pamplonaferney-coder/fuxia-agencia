@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>FUXIA × FERNEY · 60 días</title>
+<!-- Meta Pixel Code (consentido: solo carga si aceptas cookies) -->
+<script>
+window.FUXIA_PIXEL_ID = '1632121441954497';
+window.FuxiaPixelLoad = function () {
+  if (window.fbq) return;
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', window.FUXIA_PIXEL_ID);
+  fbq('track', 'PageView');
+};
+try { if (localStorage.getItem('fuxia_cookie_consent') === 'accepted') window.FuxiaPixelLoad(); } catch (e) {}
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #070707; color: #F0EFE8; font-family: system-ui, -apple-system, sans-serif; padding: 20px 16px 60px; line-height: 1.6; }
+  h1 { font-size: 24px; color: #E040FB; margin-bottom: 4px; }
+  .sub { font-size: 13px; color: #888880; margin-bottom: 20px; }
+  h2 { font-size: 16px; color: #E040FB; margin: 24px 0 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .card { background: #101010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+  details summary { cursor: pointer; list-style: none; font-size: 15px; }
+  details summary::-webkit-details-marker { display: none; }
+  details.day summary:before { content: "+ "; color: #E040FB; font-weight: 700; }
+  details.day[open] summary:before { content: "– "; }
+  details.doc summary { font-size: 13px; color: #E040FB; padding: 10px 0; }
+  details.doc summary:before { content: "📄 "; }
+  pre { font-family: ui-monospace, monospace; font-size: 12.5px; line-height: 1.7; white-space: pre-wrap; word-break: break-word; color: #F0EFE8; padding: 6px 0 10px; }
+  .tag { font-size: 11px; color: #888880; }
+  .tasks { margin-top: 8px; }
+  label.chk { display: flex; gap: 12px; align-items: flex-start; padding: 10px 2px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14.5px; cursor: pointer; }
+  label.chk input { width: 22px; height: 22px; margin-top: 2px; accent-color: #E040FB; flex-shrink: 0; }
+  label.chk.done span { text-decoration: line-through; color: #555550; }
+  .tip { margin-top: 10px; padding: 10px 12px; background: #181818; border-left: 2px solid #E040FB; border-radius: 4px; font-size: 13px; }
+  .tip b { color: #E040FB; font-size: 11px; margin-right: 6px; }
+  .kpi { font-size: 12px; color: #F5C842; margin-top: 10px; }
+  .small { font-size: 13px; color: #888880; }
+  #prog { position: sticky; top: 0; background: #070707; padding: 12px 0; border-bottom: 1px solid rgba(224,64,251,0.25); margin: -4px 0 12px; font-size: 14px; z-index: 5; }
+  #progbar { height: 6px; background: #1a1a1a; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+  #progbar > div { height: 100%; background: #E040FB; width: 0%; }
+  footer { margin-top: 28px; padding: 18px 4px 10px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; color: #888880; line-height: 2; }
+  footer a { color: #E040FB; }
+  #cookie-banner { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 10002; background: #131313; border: 2px solid #E040FB; border-radius: 12px; padding: 14px; display: none; font-size: 12px; color: #aaa; line-height: 1.6; box-shadow: 0 10px 40px rgba(224,64,251,0.35); }
+  #cookie-banner.show { display: block; }
+  #cookie-banner a { color: #E040FB; }
+  #cookie-banner .ck-btns { display: flex; gap: 8px; margin-top: 10px; }
+  #cookie-banner button { flex: 1; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 13px; }
+  #ck-accept { background: #E040FB; color: #fff; border: 1px solid #E040FB; }
+  #ck-reject { background: transparent; color: #aaa; border: 1px solid rgba(255,255,255,0.3); }
+  #ck-float { position: fixed; left: 12px; bottom: 12px; z-index: 10001; width: 44px; height: 44px; border-radius: 50%; background: #131313; border: 1px solid #E040FB; color: #fff; font-size: 20px; cursor: pointer; display: none; align-items: center; justify-content: center; }
+  #ck-float.show { display: flex; }
+</style>
+</head>
+<body>
+<div id="prog"><b id="pct">0%</b> completado · FUXIA × FERNEY 60d<div id="progbar"><div></div></div></div>
+<h1>FUXIA × FERNEY · 60 días</h1>
+<div class="sub">Setup 14-20 sept · Día 1: 21 sept · Día 60: 19 nov · Techo $500k</div>
+
+<h2>🗓️ Calendario (tocá para abrir)</h2>
+<h2>Setup</h2>
+<details class="card day"><summary><b>Setup D-7</b> · WhatsApp Business de Fuxia <span class="tag">lun 14 sep · setup</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="0"><span>Descargar WA Business y crear cuenta Fuxia</span></label>
+<label class="chk"><input type="checkbox" data-k="0"><span>Perfil: foto logo, horario, ubicación Medellín, catálogo con 5 ofertas (3 paquetes + Links Pro + Maps)</span></label>
+<label class="chk"><input type="checkbox" data-k="0"><span>Bienvenida + mensaje de ausencia automáticos</span></label>
+<label class="chk"><input type="checkbox" data-k="0"><span>Probar wa.me/573005370203 con mensaje precargado</span></label></div>
+<div class="tip"><b>TIP</b> La velocidad de respuesta ES el producto que vendés.</div>
+
+<div class="kpi">▸ KPI: WA operativo con bienvenida + catálogo</div>
+</details>
+<details class="card day"><summary><b>Setup D-6</b> · Tagueo + medición <span class="tag">mar 15 sep · setup</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="1"><span>Pedir/instalar ID de tagueo en la landing</span></label><label class="chk"><input type="checkbox" data-k="1"><span>Verificar con Meta Pixel Helper: ViewContent, Contact, Lead</span></label>
+<label class="chk"><input type="checkbox" data-k="1"><span>Probar formulario: debe llegar aviso a Telegram (/api/lead)</span></label>
+<label class="chk"><input type="checkbox" data-k="1"><span>Confirmar UTMs por CTA (hero, paquetes, popup)</span></label></div>
+<div class="tip"><b>TIP</b> Sin medición, la pauta es adivinanza.</div>
+
+<div class="kpi">▸ KPI: Eventos disparando</div>
+</details>
+<details class="card day"><summary><b>Setup D-5</b> · Lead magnet <span class="tag">mié 16 sep · setup</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="2"><span>PDF '5 procesos que podés automatizar esta semana'</span></label>
+<label class="chk"><input type="checkbox" data-k="2"><span>Subirlo con URL pública + link en bio</span></label>
+<label class="chk"><input type="checkbox" data-k="2"><span>Caption de lanzamiento en historias</span></label>
+<label class="chk"><input type="checkbox" data-k="2"><span>Conectar descarga a captura (DM o email)</span></label></div>
+<div class="tip"><b>TIP</b> 1 problema, 1 promesa, 2 páginas.</div>
+
+<div class="kpi">▸ KPI: Magnet descargable</div>
+</details>
+<details class="card day"><summary><b>Setup D-4</b> · Bios que venden <span class="tag">jue 17 sep · setup</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="3"><span>Bio @ferneypamplona: propuesta + prueba + CTA WA</span></label>
+<label class="chk"><input type="checkbox" data-k="3"><span>Bio @fuxia_oficial igual + highlights (casos, precios, WA)</span></label>
+<label class="chk"><input type="checkbox" data-k="3"><span>Links actualizados en ambas</span></label>
+<label class="chk"><input type="checkbox" data-k="3"><span>Foto perfil nítida en ambas</span></label></div>
+<div class="tip"><b>TIP</b> 3 segundos: qué, para quién, cómo contactar.</div>
+
+<div class="kpi">▸ KPI: Bios listas</div>
+</details>
+<details class="card day"><summary><b>Setup D-3</b> · Reactivar fríos + grabar A <span class="tag">vie 18 sep · setup</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="4"><span>Enviar 15 mensajes reactivación (plantilla WA)</span></label>
+<label class="chk"><input type="checkbox" data-k="4"><span>Grabar Creativo A: reel demo del bot (guion completo)</span></label>
+<label class="chk"><input type="checkbox" data-k="4"><span>Subtítulos quemados + música sin copyright</span></label></div>
+<div class="tip"><b>TIP</b> Pantalla real, sin cortes: lo real vende.</div>
+<details class="doc"><summary>Creativo A — Reel demo del bot (25-30s)</summary><pre>9:16 · Orgánico día 18 + anuncio en todas las campañas.
+[0-3s] Notificación WA entrante. Texto: "Un cliente escribe a las 11 PM."
+[3-8s] Split dueño dormido / cliente esperando. Voz: "Esto pasa todos los días en Medellín."
+[8-20s] SCREEN RECORDING REAL sin cortes: cliente pregunta → bot responde → agenda → link de pago. Texto: "Respuesta instantánea. 24/7."
+[20-25s] Ferney a cámara con celular: "Esto se monta en 1 semana."
+[25-30s] Logo + "DM o comenta DEMO".
+Reglas: pantalla real, subtítulos quemados, música sin copyright vol 20%.</pre></details>
+<div class="kpi">▸ KPI: 15 mensajes + CR-A listo</div>
+</details>
+<details class="card day"><summary><b>Setup D-2</b> · Casos + diseñar B <span class="tag">sáb 19 sep · setup</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="5"><span>Empaquetar KATOBO (fotos, 8h/semana) y DB (3 leads)</span></label>
+<label class="chk"><input type="checkbox" data-k="5"><span>Diseñar Creativo B: carrusel 6 slides en Canva</span></label>
+<label class="chk"><input type="checkbox" data-k="5"><span>Revisar paleta #0A0A0C/#F2EFE9/#E040FB</span></label></div>
+<div class="tip"><b>TIP</b> Un dato por slide.</div>
+<details class="doc"><summary>Creativo B — Carrusel de casos (6 slides 1080x1350)</summary><pre>Orgánico días 2 y 4 + anuncio. Paleta: fondo #0A0A0C, texto #F2EFE9, acento #E040FB.
+S1 Portada: "2 negocios. 2 casos reales."
+S2 KATOBO antes: pedidos por WA y DM mezclados, todo a cuaderno.
+S3 KATOBO después: bot contesta 70% · pedidos a panel · 8h/semana recuperadas.
+S4 DB antes: web solo portafolio, sin captación.
+S5 DB después: formulario a WA · respuesta &lt;30s · 3 leads calificados mes 1.
+S6 Cierre: "Tu negocio puede ser el siguiente. Diagnóstico gratis. Link en bio."
+
+CAPTION DÍA 2:
+2 casos reales de Medellín. KATOBO: 8h/semana. DB: 3 leads mes 1. No es magia, es automatización.
+Comentá CASO o escribime por DM. 📍 Medellín · @fuxia_oficial</pre></details>
+<div class="kpi">▸ KPI: Carrusel B listo</div>
+</details>
+<details class="card day"><summary><b>Setup D-1</b> · BM + pago + grabar C <span class="tag">dom 20 sep · setup</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="6"><span>Business Manager + método de pago activo</span></label>
+<label class="chk"><input type="checkbox" data-k="6"><span>Vincular página FB + cuenta WA</span></label>
+<label class="chk"><input type="checkbox" data-k="6"><span>Grabar Creativo C: reel proceso</span></label>
+<label class="chk"><input type="checkbox" data-k="6"><span>Pasar checklist de lanzamiento</span></label></div>
+<div class="tip"><b>TIP</b> Nada se publica hoy.</div>
+<details class="doc"><summary>Creativo C — Reel proceso Fuxia (30-40s)</summary><pre>9:16 · Orgánico día 16 + anuncio.
+[0-3s] "Así trabajamos en Fuxia."
+[3-10s] PASO 1 Diagnóstico gratis 15 min: qué te quita tiempo, qué se automatiza y qué no.
+[10-18s] PASO 2 Propuesta 1 página en 48h, precio fijo, sin letra chica.
+[18-28s] PASO 3 Implementación 1-2 semanas, aprobás cada paso.
+[28-35s] PASO 4 Soporte: si algo falla nos enteramos los dos.
+[35-40s] "Diagnóstico gratis. Escribime y arrancamos."
+A cámara siempre, fondo limpio, pantallas sin datos sensibles, subtítulos quemados.
+
+CAPTION DÍA 16:
+1. Diagnóstico gratis (15 min) 2. Propuesta 1 página (48h) 3. Implementación (1-2 sem) 4. Soporte.
+Sin contratos 12 meses. Sin letra chica. Sin cobrar por hora. DM. 📍 Medellín · @fuxia_oficial</pre></details>
+<details class="doc"><summary>Checklist lanzamiento (día 16)</summary><pre>[ ] WA Business Fuxia funcionando + link wa.me probado
+[ ] Tagueo disparando eventos en la landing
+[ ] Retargeting con 100+ personas (si no, esperar 2 días)
+[ ] 3 creativos subidos (A, B, C) + textos del documento
+[ ] Página FB vinculada + método de pago activo
+[ ] $10.000/día definidos, campaña en Borrador
+Todo ✅ → PUBLICAR.</pre></details>
+<div class="kpi">▸ KPI: Todo en borrador + CR-C listo</div>
+</details>
+<h2>F1 · Cimientos</h2>
+<details class="card day"><summary><b>Día 1</b> · Día 1 — Reel Ferney <span class="tag">lun 21 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="7"><span>Publicar reel día 1 (12:00-14:00) + historias</span></label>
+<label class="chk"><input type="checkbox" data-k="7"><span>Enviar 3 DMs con el magnet</span></label>
+<label class="chk"><input type="checkbox" data-k="7"><span>Responder TODO &lt;2h</span></label></div>
+<div class="tip"><b>TIP</b> El tinto lo pones vos.</div>
+<details class="doc"><summary>Guion reel Día 1 — Ferney</summary><pre>IG @ferneypamplona · 35-40s · 9:16 · Publicar lun 12:00-14:00
+
+[0-3s] HOOK — a cámara con tinto en mano. Texto: "Paré un mes. Esto aprendí."
+[3-12s] EL POR QUÉ — "Publicaba todos los días. Funcionó a medias: seguidores, no clientes."
+[12-22s] LA LECCIÓN — pantalla pipeline vacío. "Seguidores ✓ Clientes ✗. Contenido con objetivo: confianza primero, venta después."
+[22-32s] LO QUE VIENE — "Retomo Fuxia: diagnóstico gratis primero. Sin presión."
+[32-38s] CIERRE — "Negocio en Medellín: escribime. El diagnóstico es gratis. El tinto lo pongo yo."
+[38-40s] OUTRO — Logo FUXIA.
+
+Grabación: 8-10 AM luz frontal, tinto en mano, mirar AL LENTE, subtítulos quemados, música tendencia vol 20%.
+
+CAPTION:
+Paré un mes. Esto es lo que aprendí:
+Publicar todos los días sin sistema = seguidores, no clientes.
+Retomo Fuxia: diagnóstico gratis primero, propuesta después. Sin presión, sin letra chica.
+Negocio en Medellín: escribime por DM. El tinto lo pongo yo ☕
+📍 Medellín · @fuxia_oficial
+#automatizacion #ia #pymes #medellin #fuxia #emprendimiento #inteligenciaartificial
+
+STORIES (30 min después): 1) screenshot reel "te costó escribir", 2) selfie + sticker link WA, 3) "5 cupos diagnóstico" + caja de preguntas.</pre></details>
+<div class="kpi">▸ KPI: Reel vivo + 3 DMs</div>
+</details>
+<details class="card day"><summary><b>Día 2</b> · Día 2 — Carrusel casos <span class="tag">mar 22 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="8"><span>Publicar carrusel B + caption día 2</span></label>
+<label class="chk"><input type="checkbox" data-k="8"><span>Enviar 3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="8"><span>Historias anunciando el carrusel</span></label></div>
+
+<details class="doc"><summary>Creativo B — Carrusel de casos (6 slides 1080x1350)</summary><pre>Orgánico días 2 y 4 + anuncio. Paleta: fondo #0A0A0C, texto #F2EFE9, acento #E040FB.
+S1 Portada: "2 negocios. 2 casos reales."
+S2 KATOBO antes: pedidos por WA y DM mezclados, todo a cuaderno.
+S3 KATOBO después: bot contesta 70% · pedidos a panel · 8h/semana recuperadas.
+S4 DB antes: web solo portafolio, sin captación.
+S5 DB después: formulario a WA · respuesta &lt;30s · 3 leads calificados mes 1.
+S6 Cierre: "Tu negocio puede ser el siguiente. Diagnóstico gratis. Link en bio."
+
+CAPTION DÍA 2:
+2 casos reales de Medellín. KATOBO: 8h/semana. DB: 3 leads mes 1. No es magia, es automatización.
+Comentá CASO o escribime por DM. 📍 Medellín · @fuxia_oficial</pre></details>
+<div class="kpi">▸ KPI: Carrusel vivo</div>
+</details>
+<details class="card day"><summary><b>Día 3</b> · Día 3 — Detrás de cámara <span class="tag">mié 23 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="9"><span>Historia setup + encuesta</span></label>
+<label class="chk"><input type="checkbox" data-k="9"><span>3 DMs magnet</span></label>
+<label class="chk"><input type="checkbox" data-k="9"><span>Comentar 5 cuentas aliadas</span></label></div>
+
+
+<div class="kpi">▸ KPI: Alcance orgánico</div>
+</details>
+<details class="card day"><summary><b>Día 4</b> · Día 4 — Rotar formato <span class="tag">jue 24 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="10"><span>Reel o carrusel del banco</span></label>
+<label class="chk"><input type="checkbox" data-k="10"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="10"><span>Registrar leads en Notion</span></label></div>
+
+
+<div class="kpi">▸ KPI: Pipeline al día</div>
+</details>
+<details class="card day"><summary><b>Día 5</b> · Día 5 — Encuesta + follow-up <span class="tag">vie 25 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="11"><span>Historia encuesta nicho</span></label>
+<label class="chk"><input type="checkbox" data-k="11"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="11"><span>Follow-up a los del día 1</span></label></div>
+
+
+<div class="kpi">▸ KPI: Follow-ups hechos</div>
+</details>
+<details class="card day"><summary><b>Día 6</b> · Día 6 — Banco <span class="tag">sáb 26 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="12"><span>Grabar 2 crudos</span></label>
+<label class="chk"><input type="checkbox" data-k="12"><span>2 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="12"><span>Editar 1 para mañana</span></label></div>
+
+
+<div class="kpi">▸ KPI: Banco +2</div>
+</details>
+<details class="card day"><summary><b>Día 7</b> · Día 7 — Revisión S1 <span class="tag">dom 27 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="13"><span>Contar: leads / conversaciones / llamadas</span></label>
+<label class="chk"><input type="checkbox" data-k="13"><span>Anotar qué pieza rindió</span></label>
+<label class="chk"><input type="checkbox" data-k="13"><span>Planear semana 2</span></label></div>
+
+
+<div class="kpi">▸ KPI: Informe S1</div>
+</details>
+<details class="card day"><summary><b>Día 8</b> · Día 8 — Reel 3 procesos <span class="tag">lun 28 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="14"><span>Reel '3 tareas a mano' (base anuncio 2A)</span></label>
+<label class="chk"><input type="checkbox" data-k="14"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="14"><span>Historias</span></label></div>
+
+
+<div class="kpi">▸ KPI: Reel vivo</div>
+</details>
+<details class="card day"><summary><b>Día 9</b> · Día 9 — Caso DB <span class="tag">mar 29 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="15"><span>Carrusel/post caso DB</span></label>
+<label class="chk"><input type="checkbox" data-k="15"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="15"><span>Calificar leads (plantilla WA)</span></label></div>
+
+
+<div class="kpi">▸ KPI: Leads calificados</div>
+</details>
+<details class="card day"><summary><b>Día 10</b> · Día 10 — Historias + DMs <span class="tag">mié 30 sep · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="16"><span>Historias cotidianas + link</span></label>
+<label class="chk"><input type="checkbox" data-k="16"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="16"><span>Agendar llamadas que salgan</span></label></div>
+
+
+<div class="kpi">▸ KPI: Calls en agenda</div>
+</details>
+<details class="card day"><summary><b>Día 11</b> · Día 11 — Reel + follow-ups <span class="tag">jue 1 oct · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="17"><span>Reel del banco</span></label>
+<label class="chk"><input type="checkbox" data-k="17"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="17"><span>Follow-up días 2-4</span></label></div>
+
+
+<div class="kpi">▸ KPI: 2da vuelta lista</div>
+</details>
+<details class="card day"><summary><b>Día 12</b> · Día 12 — Historias <span class="tag">vie 2 oct · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="18"><span>Historias + caja de preguntas</span></label>
+<label class="chk"><input type="checkbox" data-k="18"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="18"><span>Responder todo</span></label></div>
+
+
+<div class="kpi">▸ KPI: Engagement</div>
+</details>
+<details class="card day"><summary><b>Día 13</b> · Día 13 — Banco <span class="tag">sáb 3 oct · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="19"><span>Grabar 2 crudos</span></label>
+<label class="chk"><input type="checkbox" data-k="19"><span>2 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="19"><span>Revisar magnet: ¿descargas?</span></label></div>
+
+
+<div class="kpi">▸ KPI: Banco +2</div>
+</details>
+<details class="card day"><summary><b>Día 14</b> · Día 14 — Revisión 2 sem <span class="tag">dom 4 oct · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="20"><span>Totales 14 días vs meta F1 (20/5/1)</span></label>
+<label class="chk"><input type="checkbox" data-k="20"><span>Ajustar hooks flojos</span></label>
+<label class="chk"><input type="checkbox" data-k="20"><span>Descanso</span></label></div>
+
+
+<div class="kpi">▸ KPI: Informe 14d</div>
+</details>
+<details class="card day"><summary><b>Día 15</b> · Día 15 — Pre-lanzamiento C1 <span class="tag">lun 5 oct · orgánico</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="21"><span>Pasar checklist lanzamiento completo</span></label>
+<label class="chk"><input type="checkbox" data-k="21"><span>Verificar retargeting ≥100 personas (si no, esperar)</span></label>
+<label class="chk"><input type="checkbox" data-k="21"><span>Dejar C1 en BORRADOR (no publicar)</span></label>
+<label class="chk"><input type="checkbox" data-k="21"><span>Avisar en historias: 'mañana arranca pauta'</span></label></div>
+<div class="tip"><b>TIP</b> Si el público es chico, esperar 2 días.</div>
+<details class="doc"><summary>Checklist lanzamiento (día 16)</summary><pre>[ ] WA Business Fuxia funcionando + link wa.me probado
+[ ] Tagueo disparando eventos en la landing
+[ ] Retargeting con 100+ personas (si no, esperar 2 días)
+[ ] 3 creativos subidos (A, B, C) + textos del documento
+[ ] Página FB vinculada + método de pago activo
+[ ] $10.000/día definidos, campaña en Borrador
+Todo ✅ → PUBLICAR.</pre></details>
+<details class="doc"><summary>Plantillas copy-paste Ads Manager</summary><pre>CAMPAÑA: Interacción · FUXIA | [Retargeting/Frío] | WhatsApp · $10.000/día · Mensajes → WhatsApp.
+RETARGETING: Medellín +25km, 25-50, todos. O: web 30d + IG Fuxia 30d + IG Ferney 30d + video 50% 30d.
+FRÍO: igual geo/edad. O: PyME, Emprendimiento, WA Business, Marketing digital, Publi en línea. Excluir retargeting.
+COPIES (texto/titular/descripción/botón):
+1A "Mientras dormís, el bot contesta…" / Tu WhatsApp se responde solo / Diagnóstico gratis · Medellín / Enviar mensaje
+1B "2 negocios, 2 resultados…" / Casos reales de automatización / Diagnóstico gratis · Medellín / Enviar mensaje
+1C "Diagnóstico, propuesta, 1-2 semanas…" / Diagnóstico gratis en 15 minutos / Automatización e IA · Medellín / Enviar mensaje
+2A "3 tareas a mano…" / Automatizá lo repetitivo / Diagnóstico gratis · Medellín / Enviar mensaje
+2B "Web que vende sola…" / Webs que venden solas / Ejemplos reales · Medellín / Enviar mensaje
+2C "5 cupos fundador…" / 5 cupos · Precio fundador / Diagnóstico sin costo / Enviar mensaje
+URL base: https://wa.me/573005370203</pre></details>
+<div class="kpi">▸ KPI: C1 lista para publicar</div>
+</details>
+<h2>F2 · Tracción</h2>
+<details class="card day"><summary><b>Día 16</b> · Día 16 — PUBLICAR C1 + reel proceso <span class="tag">mar 6 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="22"><span>Publicar Campaña 1 (paso a paso)</span></label>
+<label class="chk"><input type="checkbox" data-k="22"><span>Publicar reel proceso C + caption día 16</span></label>
+<label class="chk"><input type="checkbox" data-k="22"><span>Responder &lt;1h todo</span></label></div>
+<div class="tip"><b>TIP</b> Desde hoy: NO TOCAR 6 días.</div>
+<details class="doc"><summary>Campaña 1 — Retargeting (d16-30, $150k)</summary><pre>Ads Manager → Crear → Objetivo Interacción → "FUXIA | Retargeting | D16-30 | WhatsApp". Sin Advantage+ presupuesto, sin A/B.
+CONJUNTO "Caliente | WhatsApp": Conversión Mensajes → WhatsApp. $10.000/día. Medellín +25km, 25-50, todos.
+Públicos combinados (O): visitantes web 30d + interactuaron IG Fuxia 30d + interactuaron IG Ferney 30d + vieron 50%+ reels 30d.
+Ubicaciones Advantage+. 3 ANUNCIOS:
+1A Demo bot (reel A): "Mientras dormís, el bot contesta. Real, sin edición." Titular: Tu WhatsApp se responde solo.
+1B Casos (carrusel B): "2 negocios, 2 resultados. ¿El siguiente?" Titular: Casos reales.
+1C Proceso (reel C): "Diagnóstico, propuesta, 1-2 semanas, soporte." Titular: Diagnóstico gratis 15 min.
+Botón: Enviar mensaje. URL: https://wa.me/573005370203?text=Hola,%20quiero%20info
+D16-21 NO TOCAR (responder &lt;1h, anotar). D21: comparar costo/conversación, ganador +30%, pausar 2.</pre></details>
+<details class="doc"><summary>Creativo C — Reel proceso Fuxia (30-40s)</summary><pre>9:16 · Orgánico día 16 + anuncio.
+[0-3s] "Así trabajamos en Fuxia."
+[3-10s] PASO 1 Diagnóstico gratis 15 min: qué te quita tiempo, qué se automatiza y qué no.
+[10-18s] PASO 2 Propuesta 1 página en 48h, precio fijo, sin letra chica.
+[18-28s] PASO 3 Implementación 1-2 semanas, aprobás cada paso.
+[28-35s] PASO 4 Soporte: si algo falla nos enteramos los dos.
+[35-40s] "Diagnóstico gratis. Escribime y arrancamos."
+A cámara siempre, fondo limpio, pantallas sin datos sensibles, subtítulos quemados.
+
+CAPTION DÍA 16:
+1. Diagnóstico gratis (15 min) 2. Propuesta 1 página (48h) 3. Implementación (1-2 sem) 4. Soporte.
+Sin contratos 12 meses. Sin letra chica. Sin cobrar por hora. DM. 📍 Medellín · @fuxia_oficial</pre></details>
+<div class="kpi">▸ KPI: C1 activa</div>
+</details>
+<details class="card day"><summary><b>Día 17</b> · Día 17 — Observar <span class="tag">mié 7 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="23"><span>Solo revisar rechazos</span></label>
+<label class="chk"><input type="checkbox" data-k="23"><span>Orgánico normal + 3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="23"><span>Anotar leads</span></label></div>
+
+
+<div class="kpi">▸ KPI: 0 rechazos</div>
+</details>
+<details class="card day"><summary><b>Día 18</b> · Día 18 — Reel demo orgánico <span class="tag">jue 8 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="24"><span>Publicar reel demo bot + caption (comenta DEMO)</span></label>
+<label class="chk"><input type="checkbox" data-k="24"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="24"><span>Responder DEMOs al instante</span></label></div>
+
+<details class="doc"><summary>Creativo A — Reel demo del bot (25-30s)</summary><pre>9:16 · Orgánico día 18 + anuncio en todas las campañas.
+[0-3s] Notificación WA entrante. Texto: "Un cliente escribe a las 11 PM."
+[3-8s] Split dueño dormido / cliente esperando. Voz: "Esto pasa todos los días en Medellín."
+[8-20s] SCREEN RECORDING REAL sin cortes: cliente pregunta → bot responde → agenda → link de pago. Texto: "Respuesta instantánea. 24/7."
+[20-25s] Ferney a cámara con celular: "Esto se monta en 1 semana."
+[25-30s] Logo + "DM o comenta DEMO".
+Reglas: pantalla real, subtítulos quemados, música sin copyright vol 20%.</pre></details>
+<div class="kpi">▸ KPI: Comentarios DEMO</div>
+</details>
+<details class="card day"><summary><b>Día 19</b> · Día 19 — Sostener <span class="tag">vie 9 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="25"><span>Orgánico + 3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="25"><span>Calificar chats con plantilla</span></label>
+<label class="chk"><input type="checkbox" data-k="25"><span>Agendar llamadas</span></label></div>
+
+
+<div class="kpi">▸ KPI: Calls agendadas</div>
+</details>
+<details class="card day"><summary><b>Día 20</b> · Día 20 — Sostener <span class="tag">sáb 10 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="26"><span>Orgánico + 3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="26"><span>Follow-up propuestas</span></label>
+<label class="chk"><input type="checkbox" data-k="26"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Pipeline vivo</div>
+</details>
+<details class="card day"><summary><b>Día 21</b> · Día 21 — OPTIMIZACIÓN C1 <span class="tag">dom 11 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="27"><span>Comparar costo/conversación A vs B vs C</span></label>
+<label class="chk"><input type="checkbox" data-k="27"><span>Ganador +30%, pausar 2 perdedores</span></label>
+<label class="chk"><input type="checkbox" data-k="27"><span>Anotar ángulo ganador (demo/caso/proceso)</span></label></div>
+<div class="tip"><b>TIP</b> El dato manda, no el gusto.</div>
+<details class="doc"><summary>Campaña 1 — Retargeting (d16-30, $150k)</summary><pre>Ads Manager → Crear → Objetivo Interacción → "FUXIA | Retargeting | D16-30 | WhatsApp". Sin Advantage+ presupuesto, sin A/B.
+CONJUNTO "Caliente | WhatsApp": Conversión Mensajes → WhatsApp. $10.000/día. Medellín +25km, 25-50, todos.
+Públicos combinados (O): visitantes web 30d + interactuaron IG Fuxia 30d + interactuaron IG Ferney 30d + vieron 50%+ reels 30d.
+Ubicaciones Advantage+. 3 ANUNCIOS:
+1A Demo bot (reel A): "Mientras dormís, el bot contesta. Real, sin edición." Titular: Tu WhatsApp se responde solo.
+1B Casos (carrusel B): "2 negocios, 2 resultados. ¿El siguiente?" Titular: Casos reales.
+1C Proceso (reel C): "Diagnóstico, propuesta, 1-2 semanas, soporte." Titular: Diagnóstico gratis 15 min.
+Botón: Enviar mensaje. URL: https://wa.me/573005370203?text=Hola,%20quiero%20info
+D16-21 NO TOCAR (responder &lt;1h, anotar). D21: comparar costo/conversación, ganador +30%, pausar 2.</pre></details>
+<div class="kpi">▸ KPI: C1 optimizada</div>
+</details>
+<details class="card day"><summary><b>Día 22</b> · Día 22 — Réplica <span class="tag">lun 12 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="28"><span>Variación del ángulo ganador (mismo hook, otro inicio)</span></label>
+<label class="chk"><input type="checkbox" data-k="28"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="28"><span>Llamadas</span></label></div>
+
+
+<div class="kpi">▸ KPI: Variación lista</div>
+</details>
+<details class="card day"><summary><b>Día 23</b> · Día 23 — Sostener <span class="tag">mar 13 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="29"><span>Orgánico + 3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="29"><span>Propuestas pendientes</span></label>
+<label class="chk"><input type="checkbox" data-k="29"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: 2 propuestas (meta F2)</div>
+</details>
+<details class="card day"><summary><b>Día 24</b> · Día 24 — Sostener <span class="tag">mié 14 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="30"><span>Orgánico + historias</span></label>
+<label class="chk"><input type="checkbox" data-k="30"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="30"><span>Revisar CPL acumulado</span></label></div>
+
+
+<div class="kpi">▸ KPI: CPL controlado</div>
+</details>
+<details class="card day"><summary><b>Día 25</b> · Día 25 — Empuje <span class="tag">jue 15 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="31"><span>Historia 'quedan X cupos' (solo real)</span></label>
+<label class="chk"><input type="checkbox" data-k="31"><span>Follow-ups</span></label>
+<label class="chk"><input type="checkbox" data-k="31"><span>Llamadas</span></label></div>
+
+
+<div class="kpi">▸ KPI: Urgencia real</div>
+</details>
+<details class="card day"><summary><b>Día 26</b> · Día 26 — Banco <span class="tag">vie 16 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="32"><span>Grabar 2 crudos</span></label>
+<label class="chk"><input type="checkbox" data-k="32"><span>2 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="32"><span>Descanso parcial</span></label></div>
+
+
+<div class="kpi">▸ KPI: Banco</div>
+</details>
+<details class="card day"><summary><b>Día 27</b> · Día 27 — Informe <span class="tag">sáb 17 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="33"><span>Gastado/leads/calls/propuestas F2</span></label>
+<label class="chk"><input type="checkbox" data-k="33"><span>Comparar vs meta (50/15/5/2)</span></label>
+<label class="chk"><input type="checkbox" data-k="33"><span>Ajustar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Informe F2</div>
+</details>
+<details class="card day"><summary><b>Día 28</b> · Día 28 — Transición <span class="tag">dom 18 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="34"><span>Preparar C2 en borrador</span></label>
+<label class="chk"><input type="checkbox" data-k="34"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="34"><span>Descanso</span></label></div>
+
+
+<div class="kpi">▸ KPI: C2 en borrador</div>
+</details>
+<details class="card day"><summary><b>Día 29</b> · Día 29 — Revisión <span class="tag">lun 19 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="35"><span>Cerrar números F2</span></label>
+<label class="chk"><input type="checkbox" data-k="35"><span>Lecciones</span></label>
+<label class="chk"><input type="checkbox" data-k="35"><span>Anunciar C2</span></label></div>
+
+
+<div class="kpi">▸ KPI: F2 cerrada</div>
+</details>
+<details class="card day"><summary><b>Día 30</b> · Día 30 — Cierre F2 <span class="tag">mar 20 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="36"><span>Post balance público</span></label>
+<label class="chk"><input type="checkbox" data-k="36"><span>Agradecer</span></label>
+<label class="chk"><input type="checkbox" data-k="36"><span>Preparar d31</span></label></div>
+
+
+<div class="kpi">▸ KPI: Balance público</div>
+</details>
+<h2>F3 · Conversión</h2>
+<details class="card day"><summary><b>Día 31</b> · Día 31 — PUBLICAR C2 <span class="tag">mié 21 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="37"><span>Publicar Campaña 2 frío (paso a paso)</span></label>
+<label class="chk"><input type="checkbox" data-k="37"><span>Orgánico educativo</span></label>
+<label class="chk"><input type="checkbox" data-k="37"><span>Responder &lt;1h</span></label></div>
+<div class="tip"><b>TIP</b> Frío cuesta más: normal.</div>
+<details class="doc"><summary>Campaña 2 — Frío controlado (d31-45, $150k)</summary><pre>Misma estructura. "FUXIA | Frío | D31-45 | WhatsApp". $10.000/día.
+PÚBLICO: Medellín +25km 25-50. Intereses (O): PyME, Emprendimiento, WhatsApp Business, Marketing digital, Publicidad en línea.
+EXCLUIR: retargeting + seguidores.
+ANUNCIOS (mismos creativos, textos educativos):
+2A "3 tareas a mano que la IA hace en segundos. ¿Cuál te quita más tiempo?" Titular: Automatizá lo repetitivo.
+2B "Web que vende sola (caso DB)." Titular: Webs que venden solas.
+2C "5 cupos fundador, precio congelado." Titular: 5 cupos · Precio fundador.
+D31-36 NO TOCAR. D37: pausar 2 peores; ganador +30% SOLO si CPA &lt; $10.000; si todo &gt; $15.000 pausar C2 y reforzar C1.
+D45 DECISIÓN: ¿escalar ganadora +20%? ¿cambiar creativos? ¿pausar y esperar mes 2?</pre></details>
+<details class="doc"><summary>Plantillas copy-paste Ads Manager</summary><pre>CAMPAÑA: Interacción · FUXIA | [Retargeting/Frío] | WhatsApp · $10.000/día · Mensajes → WhatsApp.
+RETARGETING: Medellín +25km, 25-50, todos. O: web 30d + IG Fuxia 30d + IG Ferney 30d + video 50% 30d.
+FRÍO: igual geo/edad. O: PyME, Emprendimiento, WA Business, Marketing digital, Publi en línea. Excluir retargeting.
+COPIES (texto/titular/descripción/botón):
+1A "Mientras dormís, el bot contesta…" / Tu WhatsApp se responde solo / Diagnóstico gratis · Medellín / Enviar mensaje
+1B "2 negocios, 2 resultados…" / Casos reales de automatización / Diagnóstico gratis · Medellín / Enviar mensaje
+1C "Diagnóstico, propuesta, 1-2 semanas…" / Diagnóstico gratis en 15 minutos / Automatización e IA · Medellín / Enviar mensaje
+2A "3 tareas a mano…" / Automatizá lo repetitivo / Diagnóstico gratis · Medellín / Enviar mensaje
+2B "Web que vende sola…" / Webs que venden solas / Ejemplos reales · Medellín / Enviar mensaje
+2C "5 cupos fundador…" / 5 cupos · Precio fundador / Diagnóstico sin costo / Enviar mensaje
+URL base: https://wa.me/573005370203</pre></details>
+<div class="kpi">▸ KPI: C2 activa</div>
+</details>
+<details class="card day"><summary><b>Día 32</b> · Día 32-36 — No tocar <span class="tag">jue 22 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="38"><span>NO tocar C2</span></label>
+<label class="chk"><input type="checkbox" data-k="38"><span>Orgánico + 3 DMs/día</span></label>
+<label class="chk"><input type="checkbox" data-k="38"><span>Anotar leads y calidad</span></label></div>
+
+
+<div class="kpi">▸ KPI: Aprendizaje C2</div>
+</details>
+<details class="card day"><summary><b>Día 33</b> · Día 33 — Sostener <span class="tag">vie 23 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="39"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="39"><span>Llamadas y propuestas</span></label>
+<label class="chk"><input type="checkbox" data-k="39"><span>Follow-ups</span></label></div>
+
+
+<div class="kpi">▸ KPI: Propuestas</div>
+</details>
+<details class="card day"><summary><b>Día 34</b> · Día 34 — Sostener <span class="tag">sáb 24 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="40"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="40"><span>3 DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="40"><span>Calificar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Pipeline</div>
+</details>
+<details class="card day"><summary><b>Día 35</b> · Día 35 — Sostener <span class="tag">dom 25 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="41"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="41"><span>Historias cupos</span></label>
+<label class="chk"><input type="checkbox" data-k="41"><span>Llamadas</span></label></div>
+
+
+<div class="kpi">▸ KPI: Calls</div>
+</details>
+<details class="card day"><summary><b>Día 36</b> · Día 36 — Pre-corte <span class="tag">lun 26 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="42"><span>Revisar CPA provisorio C2</span></label>
+<label class="chk"><input type="checkbox" data-k="42"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="42"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: CPA provisorio</div>
+</details>
+<details class="card day"><summary><b>Día 37</b> · Día 37 — OPTIMIZACIÓN C2 <span class="tag">mar 27 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="43"><span>Pausar 2 peores</span></label>
+<label class="chk"><input type="checkbox" data-k="43"><span>Ganador +30% SOLO si CPA &lt; $10.000</span></label>
+<label class="chk"><input type="checkbox" data-k="43"><span>Si todo &gt; $15.000: pausar C2 y reforzar C1</span></label></div>
+
+<details class="doc"><summary>Campaña 2 — Frío controlado (d31-45, $150k)</summary><pre>Misma estructura. "FUXIA | Frío | D31-45 | WhatsApp". $10.000/día.
+PÚBLICO: Medellín +25km 25-50. Intereses (O): PyME, Emprendimiento, WhatsApp Business, Marketing digital, Publicidad en línea.
+EXCLUIR: retargeting + seguidores.
+ANUNCIOS (mismos creativos, textos educativos):
+2A "3 tareas a mano que la IA hace en segundos. ¿Cuál te quita más tiempo?" Titular: Automatizá lo repetitivo.
+2B "Web que vende sola (caso DB)." Titular: Webs que venden solas.
+2C "5 cupos fundador, precio congelado." Titular: 5 cupos · Precio fundador.
+D31-36 NO TOCAR. D37: pausar 2 peores; ganador +30% SOLO si CPA &lt; $10.000; si todo &gt; $15.000 pausar C2 y reforzar C1.
+D45 DECISIÓN: ¿escalar ganadora +20%? ¿cambiar creativos? ¿pausar y esperar mes 2?</pre></details>
+<div class="kpi">▸ KPI: C2 optimizada</div>
+</details>
+<details class="card day"><summary><b>Día 38</b> · Día 38 — Cierre <span class="tag">mié 28 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="44"><span>Empujar propuestas abiertas</span></label>
+<label class="chk"><input type="checkbox" data-k="44"><span>Follow-ups</span></label>
+<label class="chk"><input type="checkbox" data-k="44"><span>Llamadas</span></label></div>
+
+
+<div class="kpi">▸ KPI: Cierres en curso</div>
+</details>
+<details class="card day"><summary><b>Día 39</b> · Día 39 — Cierre <span class="tag">jue 29 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="45"><span>Orgánico + escasez real</span></label>
+<label class="chk"><input type="checkbox" data-k="45"><span>Cerrar</span></label>
+<label class="chk"><input type="checkbox" data-k="45"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: 1-2 cierres</div>
+</details>
+<details class="card day"><summary><b>Día 40</b> · Día 40 — Sostener <span class="tag">vie 30 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="46"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="46"><span>Onboarding cliente nuevo</span></label>
+<label class="chk"><input type="checkbox" data-k="46"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Entrega inicia</div>
+</details>
+<details class="card day"><summary><b>Día 41</b> · Día 41 — Sostener <span class="tag">sáb 31 oct · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="47"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="47"><span>Propuestas</span></label>
+<label class="chk"><input type="checkbox" data-k="47"><span>Banco 2 crudos</span></label></div>
+
+
+<div class="kpi">▸ KPI: Banco</div>
+</details>
+<details class="card day"><summary><b>Día 42</b> · Día 42 — Informe <span class="tag">dom 1 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="48"><span>Números F3 vs meta (80/25/8/4/1-2)</span></label>
+<label class="chk"><input type="checkbox" data-k="48"><span>Qué campaña ganó y por qué</span></label>
+<label class="chk"><input type="checkbox" data-k="48"><span>Ajustar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Informe F3</div>
+</details>
+<details class="card day"><summary><b>Día 43</b> · Día 43 — Transición <span class="tag">lun 2 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="49"><span>Planificar escala F4</span></label>
+<label class="chk"><input type="checkbox" data-k="49"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="49"><span>Descanso</span></label></div>
+
+
+<div class="kpi">▸ KPI: Plan F4</div>
+</details>
+<details class="card day"><summary><b>Día 44</b> · Día 44 — Pre-cierre <span class="tag">mar 3 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="50"><span>Follow-ups finales F3</span></label>
+<label class="chk"><input type="checkbox" data-k="50"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="50"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Pipeline limpio</div>
+</details>
+<details class="card day"><summary><b>Día 45</b> · Día 45 — DECISIÓN FINAL <span class="tag">mié 4 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="51"><span>¿Escalar ganadora +20%? ¿Cambiar creativos? ¿Pausar y esperar?</span></label>
+<label class="chk"><input type="checkbox" data-k="51"><span>Decidir con datos, anotar</span></label>
+<label class="chk"><input type="checkbox" data-k="51"><span>Comunicar plan</span></label></div>
+<div class="tip"><b>TIP</b> Sin dato no hay decisión.</div>
+<details class="doc"><summary>Campaña 2 — Frío controlado (d31-45, $150k)</summary><pre>Misma estructura. "FUXIA | Frío | D31-45 | WhatsApp". $10.000/día.
+PÚBLICO: Medellín +25km 25-50. Intereses (O): PyME, Emprendimiento, WhatsApp Business, Marketing digital, Publicidad en línea.
+EXCLUIR: retargeting + seguidores.
+ANUNCIOS (mismos creativos, textos educativos):
+2A "3 tareas a mano que la IA hace en segundos. ¿Cuál te quita más tiempo?" Titular: Automatizá lo repetitivo.
+2B "Web que vende sola (caso DB)." Titular: Webs que venden solas.
+2C "5 cupos fundador, precio congelado." Titular: 5 cupos · Precio fundador.
+D31-36 NO TOCAR. D37: pausar 2 peores; ganador +30% SOLO si CPA &lt; $10.000; si todo &gt; $15.000 pausar C2 y reforzar C1.
+D45 DECISIÓN: ¿escalar ganadora +20%? ¿cambiar creativos? ¿pausar y esperar mes 2?</pre></details>
+<div class="kpi">▸ KPI: Decisión tomada</div>
+</details>
+<h2>F4 · Escalar</h2>
+<details class="card day"><summary><b>Día 46</b> · Día 46 — Escalar <span class="tag">jue 5 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="52"><span>Aplicar decisión d45 (+20% ganadora)</span></label>
+<label class="chk"><input type="checkbox" data-k="52"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="52"><span>Entregas clientes</span></label></div>
+
+
+<div class="kpi">▸ KPI: Escala ON</div>
+</details>
+<details class="card day"><summary><b>Día 47</b> · Día 47 — Sostener <span class="tag">vie 6 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="53"><span>Vigilar CPL (no romper lo que anda)</span></label>
+<label class="chk"><input type="checkbox" data-k="53"><span>Orgánico + DMs</span></label>
+<label class="chk"><input type="checkbox" data-k="53"><span>Llamadas</span></label></div>
+
+
+<div class="kpi">▸ KPI: CPL estable</div>
+</details>
+<details class="card day"><summary><b>Día 48</b> · Día 48 — Documentar 1 <span class="tag">sáb 7 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="54"><span>Escribir playbook: setup y F1</span></label>
+<label class="chk"><input type="checkbox" data-k="54"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="54"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Playbook 1/3</div>
+</details>
+<details class="card day"><summary><b>Día 49</b> · Día 49 — Documentar 2 <span class="tag">dom 8 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="55"><span>Playbook: campañas y optimización</span></label>
+<label class="chk"><input type="checkbox" data-k="55"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="55"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Playbook 2/3</div>
+</details>
+<details class="card day"><summary><b>Día 50</b> · Día 50 — Punto medio <span class="tag">lun 9 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="56"><span>Revisar metas F4 (2-3 cierres)</span></label>
+<label class="chk"><input type="checkbox" data-k="56"><span>Ajustar budget si hace falta</span></label>
+<label class="chk"><input type="checkbox" data-k="56"><span>Orgánico</span></label></div>
+
+
+<div class="kpi">▸ KPI: Mitad F4</div>
+</details>
+<details class="card day"><summary><b>Día 51</b> · Día 51 — Cierres <span class="tag">mar 10 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="57"><span>Empujar cierres pendientes</span></label>
+<label class="chk"><input type="checkbox" data-k="57"><span>Follow-ups</span></label>
+<label class="chk"><input type="checkbox" data-k="57"><span>Orgánico</span></label></div>
+
+
+<div class="kpi">▸ KPI: Cierres</div>
+</details>
+<details class="card day"><summary><b>Día 52</b> · Día 52 — Cierres <span class="tag">mié 11 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="58"><span>Llamadas de cierre</span></label>
+<label class="chk"><input type="checkbox" data-k="58"><span>Propuestas finales</span></label>
+<label class="chk"><input type="checkbox" data-k="58"><span>Orgánico</span></label></div>
+
+
+<div class="kpi">▸ KPI: Firmas</div>
+</details>
+<details class="card day"><summary><b>Día 53</b> · Día 53 — Documentar 3 <span class="tag">jue 12 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="59"><span>Playbook: cierres y entrega</span></label>
+<label class="chk"><input type="checkbox" data-k="59"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="59"><span>Anotar</span></label></div>
+
+
+<div class="kpi">▸ KPI: Playbook 3/3</div>
+</details>
+<details class="card day"><summary><b>Día 54</b> · Día 54 — Sostener <span class="tag">vie 13 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="60"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="60"><span>Entregas</span></label>
+<label class="chk"><input type="checkbox" data-k="60"><span>Banco mes siguiente</span></label></div>
+
+
+<div class="kpi">▸ KPI: Banco</div>
+</details>
+<details class="card day"><summary><b>Día 55</b> · Día 55 — Sostener <span class="tag">sáb 14 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="61"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="61"><span>Llamadas</span></label>
+<label class="chk"><input type="checkbox" data-k="61"><span>Revisar CPL</span></label></div>
+
+
+<div class="kpi">▸ KPI: Control</div>
+</details>
+<details class="card day"><summary><b>Día 56</b> · Día 56 — Pre-cierre <span class="tag">dom 15 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="62"><span>Follow-ups</span></label>
+<label class="chk"><input type="checkbox" data-k="62"><span>Orgánico</span></label>
+<label class="chk"><input type="checkbox" data-k="62"><span>Orden Notion</span></label></div>
+
+
+<div class="kpi">▸ KPI: Orden</div>
+</details>
+<details class="card day"><summary><b>Día 57</b> · Día 57 — Informe <span class="tag">lun 16 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="63"><span>Números 60 días completos</span></label>
+<label class="chk"><input type="checkbox" data-k="63"><span>CAC real final</span></label>
+<label class="chk"><input type="checkbox" data-k="63"><span>Lecciones</span></label></div>
+
+
+<div class="kpi">▸ KPI: Informe 60d</div>
+</details>
+<details class="card day"><summary><b>Día 58</b> · Día 58 — Balance público <span class="tag">mar 17 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="64"><span>Post balance 60 días (números reales)</span></label>
+<label class="chk"><input type="checkbox" data-k="64"><span>Agradecer</span></label>
+<label class="chk"><input type="checkbox" data-k="64"><span>Anunciar ciclo 2</span></label></div>
+
+
+<div class="kpi">▸ KPI: Balance público</div>
+</details>
+<details class="card day"><summary><b>Día 59</b> · Día 59 — Descanso <span class="tag">mié 18 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="65"><span>Mínimo operativo</span></label>
+<label class="chk"><input type="checkbox" data-k="65"><span>Responder</span></label>
+<label class="chk"><input type="checkbox" data-k="65"><span>Dormir</span></label></div>
+
+
+<div class="kpi">▸ KPI: Recarga</div>
+</details>
+<details class="card day"><summary><b>Día 60</b> · Día 60 — Cierre <span class="tag">jue 19 nov · $10.000</span></summary>
+<div class="tasks"><label class="chk"><input type="checkbox" data-k="66"><span>Celebrar 2-3 clientes</span></label>
+<label class="chk"><input type="checkbox" data-k="66"><span>Sistema documentado para replicar</span></label>
+<label class="chk"><input type="checkbox" data-k="66"><span>Plan ciclo 2</span></label></div>
+<div class="tip"><b>TIP</b> ESTÁ TODO. AHORA A REPLICAR.</div>
+
+<div class="kpi">▸ KPI: 🎯 2-3 clientes</div>
+</details>
+
+<h2>📚 Guiones y campañas</h2>
+<details class="card doc"><summary>Guion reel Día 1 — Ferney</summary><pre>IG @ferneypamplona · 35-40s · 9:16 · Publicar lun 12:00-14:00
+
+[0-3s] HOOK — a cámara con tinto en mano. Texto: "Paré un mes. Esto aprendí."
+[3-12s] EL POR QUÉ — "Publicaba todos los días. Funcionó a medias: seguidores, no clientes."
+[12-22s] LA LECCIÓN — pantalla pipeline vacío. "Seguidores ✓ Clientes ✗. Contenido con objetivo: confianza primero, venta después."
+[22-32s] LO QUE VIENE — "Retomo Fuxia: diagnóstico gratis primero. Sin presión."
+[32-38s] CIERRE — "Negocio en Medellín: escribime. El diagnóstico es gratis. El tinto lo pongo yo."
+[38-40s] OUTRO — Logo FUXIA.
+
+Grabación: 8-10 AM luz frontal, tinto en mano, mirar AL LENTE, subtítulos quemados, música tendencia vol 20%.
+
+CAPTION:
+Paré un mes. Esto es lo que aprendí:
+Publicar todos los días sin sistema = seguidores, no clientes.
+Retomo Fuxia: diagnóstico gratis primero, propuesta después. Sin presión, sin letra chica.
+Negocio en Medellín: escribime por DM. El tinto lo pongo yo ☕
+📍 Medellín · @fuxia_oficial
+#automatizacion #ia #pymes #medellin #fuxia #emprendimiento #inteligenciaartificial
+
+STORIES (30 min después): 1) screenshot reel "te costó escribir", 2) selfie + sticker link WA, 3) "5 cupos diagnóstico" + caja de preguntas.</pre></details>
+<details class="card doc"><summary>Creativo A — Reel demo del bot (25-30s)</summary><pre>9:16 · Orgánico día 18 + anuncio en todas las campañas.
+[0-3s] Notificación WA entrante. Texto: "Un cliente escribe a las 11 PM."
+[3-8s] Split dueño dormido / cliente esperando. Voz: "Esto pasa todos los días en Medellín."
+[8-20s] SCREEN RECORDING REAL sin cortes: cliente pregunta → bot responde → agenda → link de pago. Texto: "Respuesta instantánea. 24/7."
+[20-25s] Ferney a cámara con celular: "Esto se monta en 1 semana."
+[25-30s] Logo + "DM o comenta DEMO".
+Reglas: pantalla real, subtítulos quemados, música sin copyright vol 20%.</pre></details>
+<details class="card doc"><summary>Creativo B — Carrusel de casos (6 slides 1080x1350)</summary><pre>Orgánico días 2 y 4 + anuncio. Paleta: fondo #0A0A0C, texto #F2EFE9, acento #E040FB.
+S1 Portada: "2 negocios. 2 casos reales."
+S2 KATOBO antes: pedidos por WA y DM mezclados, todo a cuaderno.
+S3 KATOBO después: bot contesta 70% · pedidos a panel · 8h/semana recuperadas.
+S4 DB antes: web solo portafolio, sin captación.
+S5 DB después: formulario a WA · respuesta &lt;30s · 3 leads calificados mes 1.
+S6 Cierre: "Tu negocio puede ser el siguiente. Diagnóstico gratis. Link en bio."
+
+CAPTION DÍA 2:
+2 casos reales de Medellín. KATOBO: 8h/semana. DB: 3 leads mes 1. No es magia, es automatización.
+Comentá CASO o escribime por DM. 📍 Medellín · @fuxia_oficial</pre></details>
+<details class="card doc"><summary>Creativo C — Reel proceso Fuxia (30-40s)</summary><pre>9:16 · Orgánico día 16 + anuncio.
+[0-3s] "Así trabajamos en Fuxia."
+[3-10s] PASO 1 Diagnóstico gratis 15 min: qué te quita tiempo, qué se automatiza y qué no.
+[10-18s] PASO 2 Propuesta 1 página en 48h, precio fijo, sin letra chica.
+[18-28s] PASO 3 Implementación 1-2 semanas, aprobás cada paso.
+[28-35s] PASO 4 Soporte: si algo falla nos enteramos los dos.
+[35-40s] "Diagnóstico gratis. Escribime y arrancamos."
+A cámara siempre, fondo limpio, pantallas sin datos sensibles, subtítulos quemados.
+
+CAPTION DÍA 16:
+1. Diagnóstico gratis (15 min) 2. Propuesta 1 página (48h) 3. Implementación (1-2 sem) 4. Soporte.
+Sin contratos 12 meses. Sin letra chica. Sin cobrar por hora. DM. 📍 Medellín · @fuxia_oficial</pre></details>
+<details class="card doc"><summary>Campaña 1 — Retargeting (d16-30, $150k)</summary><pre>Ads Manager → Crear → Objetivo Interacción → "FUXIA | Retargeting | D16-30 | WhatsApp". Sin Advantage+ presupuesto, sin A/B.
+CONJUNTO "Caliente | WhatsApp": Conversión Mensajes → WhatsApp. $10.000/día. Medellín +25km, 25-50, todos.
+Públicos combinados (O): visitantes web 30d + interactuaron IG Fuxia 30d + interactuaron IG Ferney 30d + vieron 50%+ reels 30d.
+Ubicaciones Advantage+. 3 ANUNCIOS:
+1A Demo bot (reel A): "Mientras dormís, el bot contesta. Real, sin edición." Titular: Tu WhatsApp se responde solo.
+1B Casos (carrusel B): "2 negocios, 2 resultados. ¿El siguiente?" Titular: Casos reales.
+1C Proceso (reel C): "Diagnóstico, propuesta, 1-2 semanas, soporte." Titular: Diagnóstico gratis 15 min.
+Botón: Enviar mensaje. URL: https://wa.me/573005370203?text=Hola,%20quiero%20info
+D16-21 NO TOCAR (responder &lt;1h, anotar). D21: comparar costo/conversación, ganador +30%, pausar 2.</pre></details>
+<details class="card doc"><summary>Campaña 2 — Frío controlado (d31-45, $150k)</summary><pre>Misma estructura. "FUXIA | Frío | D31-45 | WhatsApp". $10.000/día.
+PÚBLICO: Medellín +25km 25-50. Intereses (O): PyME, Emprendimiento, WhatsApp Business, Marketing digital, Publicidad en línea.
+EXCLUIR: retargeting + seguidores.
+ANUNCIOS (mismos creativos, textos educativos):
+2A "3 tareas a mano que la IA hace en segundos. ¿Cuál te quita más tiempo?" Titular: Automatizá lo repetitivo.
+2B "Web que vende sola (caso DB)." Titular: Webs que venden solas.
+2C "5 cupos fundador, precio congelado." Titular: 5 cupos · Precio fundador.
+D31-36 NO TOCAR. D37: pausar 2 peores; ganador +30% SOLO si CPA &lt; $10.000; si todo &gt; $15.000 pausar C2 y reforzar C1.
+D45 DECISIÓN: ¿escalar ganadora +20%? ¿cambiar creativos? ¿pausar y esperar mes 2?</pre></details>
+<details class="card doc"><summary>Plantillas copy-paste Ads Manager</summary><pre>CAMPAÑA: Interacción · FUXIA | [Retargeting/Frío] | WhatsApp · $10.000/día · Mensajes → WhatsApp.
+RETARGETING: Medellín +25km, 25-50, todos. O: web 30d + IG Fuxia 30d + IG Ferney 30d + video 50% 30d.
+FRÍO: igual geo/edad. O: PyME, Emprendimiento, WA Business, Marketing digital, Publi en línea. Excluir retargeting.
+COPIES (texto/titular/descripción/botón):
+1A "Mientras dormís, el bot contesta…" / Tu WhatsApp se responde solo / Diagnóstico gratis · Medellín / Enviar mensaje
+1B "2 negocios, 2 resultados…" / Casos reales de automatización / Diagnóstico gratis · Medellín / Enviar mensaje
+1C "Diagnóstico, propuesta, 1-2 semanas…" / Diagnóstico gratis en 15 minutos / Automatización e IA · Medellín / Enviar mensaje
+2A "3 tareas a mano…" / Automatizá lo repetitivo / Diagnóstico gratis · Medellín / Enviar mensaje
+2B "Web que vende sola…" / Webs que venden solas / Ejemplos reales · Medellín / Enviar mensaje
+2C "5 cupos fundador…" / 5 cupos · Precio fundador / Diagnóstico sin costo / Enviar mensaje
+URL base: https://wa.me/573005370203</pre></details>
+<details class="card doc"><summary>Checklist lanzamiento (día 16)</summary><pre>[ ] WA Business Fuxia funcionando + link wa.me probado
+[ ] Tagueo disparando eventos en la landing
+[ ] Retargeting con 100+ personas (si no, esperar 2 días)
+[ ] 3 creativos subidos (A, B, C) + textos del documento
+[ ] Página FB vinculada + método de pago activo
+[ ] $10.000/día definidos, campaña en Borrador
+Todo ✅ → PUBLICAR.</pre></details>
+<details class="card doc"><summary>6 reglas que no se rompen</summary><pre>1. NUNCA "Promocionar publicación". Siempre Ads Manager.
+2. NO tocar la campaña los primeros 6 días (aprendizaje).
+3. WhatsApp respondido en MENOS DE 1 HORA. La velocidad ES el producto.
+4. El KPI es conversación → llamada, NO el clic.
+5. Primeros $10k/día validan: CPA &lt; $8.000 a 15 días = subir. CPA &gt; $15.000 = pausar y revisar.
+6. Escasez REAL: 5 cupos son 5. Cierran viernes = cierran viernes.</pre></details>
+<h2>💬 WhatsApp</h2>
+<div class="card"><b>Bienvenida automática</b><pre>Hola 👋 Gracias por escribir a FUXIA. Contamos en 2 líneas qué hacen en tu negocio y te digo en 15 min qué se puede automatizar. ¿A qué se dedican? — Ferney</pre></div>
+<div class="card"><b>Calificación (3 preguntas)</b><pre>Perfecto. Para no hacerte perder tiempo, 3 cortas: 1) ¿Cuántos mensajes les llegan al día por WA/IG? 2) ¿Quién los responde y en qué horario? 3) ¿Qué pregunta les repiten el 80% del tiempo?</pre></div>
+<div class="card"><b>Agendamiento</b><pre>Con eso ya veo por dónde va. ¿Te sirve una llamada de 15 min mañana? Te mando propuesta de 1 página en 48h después. ¿Mañana AM o PM?</pre></div>
+<div class="card"><b>Seguimiento 48h</b><pre>Hola [nombre], te había mandado la propuesta corta de FUXIA. ¿La pudiste ver? Si no es el momento, todo bien, me decís y la dejamos para después.</pre></div>
+<div class="card"><b>Reactivación leads fríos</b><pre>Hola [nombre], soy Ferney de FUXIA (Medellín). Hace un tiempo hablamos de automatizar [negocio]. Abrí 5 cupos de diagnóstico gratis esta semana. ¿Te sirve uno de 15 min?</pre></div>
+<div class="card"><b>Venta Links Pro ($250k pago único)</b><pre>Hola [nombre], vi que usan Linktree en su bio. Les armo su propia página de links con su marca y dominio, QR para el local y tagueo para medir clics — pago único de $250.000, sin mensualidad (el Pro de Linktree sale $312.000 al año). ¿Les mando un ejemplo en 48h?</pre></div>
+<div class="card"><b>Venta Maps ($300k · combo $550k)</b><pre>Hola [nombre], busqué [negocio] en Google Maps y [observación: "la ficha está sin reclamar" / "tienen pocas reseñas sin responder" / "la categoría no es la correcta"]. Lo dejo compitiendo por el top 3 del mapa en 7-15 días por $300.000 pago único — o con página de links incluida por $550.000. ¿Revisamos su ficha en 15 min?</pre></div>
+<h2>🎯 Metas por fase</h2>
+<div class="card"><div class="small">Setup</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">Todo técnico listo para el día 1</div></div>
+<div class="card"><div class="small">F1 · Cimientos</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">20 leads · 5 conversaciones · 1 llamada</div></div>
+<div class="card"><div class="small">F2 · Tracción</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">50 leads · 15 conversaciones · 5 llamadas · 2 propuestas</div></div>
+<div class="card"><div class="small">F3 · Conversión</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">80 leads · 25 conversaciones · 8 llamadas · 4 propuestas · 1-2 cierres</div></div>
+<div class="card"><div class="small">F4 · Escalar</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">2-3 clientes cerrados · sistema documentado</div></div>
+
+<script>
+(function () {
+  var KEY = "fuxia60_checks_v1";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+  var boxes = document.querySelectorAll('input[type="checkbox"][data-k]');
+  function paint() {
+    var done = 0;
+    boxes.forEach(function (b) {
+      var on = !!saved[b.dataset.k];
+      b.checked = on;
+      b.closest("label").classList.toggle("done", on);
+      if (on) done++;
+    });
+    var pct = boxes.length ? Math.round(done / boxes.length * 100) : 0;
+    document.getElementById("pct").textContent = pct + "%";
+    document.querySelector("#progbar > div").style.width = pct + "%";
+  }
+  boxes.forEach(function (b) {
+    b.addEventListener("change", function () {
+      saved[b.dataset.k] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+      paint();
+    });
+  });
+  paint();
+})();
+</script>
+<footer>© 2026 FUXIA · Medellín · WA +57 300 537 0203 · Ley 1581 de 2012 · Pixel de Meta solo si aceptas<br /><a href="https://fuxia-landing.vercel.app/politica-datos.html">Tratamiento de datos</a> · <a href="https://fuxia-landing.vercel.app/politica-cookies.html">Cookies</a> · <a href="https://fuxia-landing.vercel.app/terminos.html">Términos</a></footer>
+<div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+  <div><strong>🍪 Cookies + Pixel de Meta.</strong> El Pixel solo se activa si aceptas. <a href="https://fuxia-landing.vercel.app/politica-cookies.html">Ver política</a>.</div>
+  <div class="ck-btns"><button id="ck-accept" type="button">Aceptar todo</button><button id="ck-reject" type="button">Solo necesarias</button></div>
+</div>
+<button id="ck-float" type="button" aria-label="Configurar cookies" title="Configurar cookies">🍪</button>
+<script>
+(function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner'),f=document.getElementById('ck-float');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}function show(){b.classList.add('show');f.classList.remove('show');}function hide(){b.classList.remove('show');if(g())f.classList.add('show');}var force=/[?#&]cookies/.test(location.search+location.hash);setTimeout(function(){if(!g()||force)show();else if(g())f.classList.add('show');},700);document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');hide();if(window.FuxiaPixelLoad)window.FuxiaPixelLoad();});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');hide();});f.addEventListener('click',show);})();
+</script>
+</body>
+</html>

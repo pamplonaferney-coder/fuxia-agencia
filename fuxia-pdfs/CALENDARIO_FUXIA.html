@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>CALENDARIO FUXIA</title>
+<style>
+body{background:#070707;color:#eee;font-family:Arial,sans-serif;margin:0;padding:20px}
+.tabs{display:flex;gap:10px;margin-bottom:20px}
+.tab{padding:10px 20px;background:#222;color:#aaa;border:none;cursor:pointer;border-bottom:2px solid transparent}
+.tab.active{color:#E040FB;border-bottom-color:#E040FB}
+.semana{display:none}
+.semana.active{display:block}
+.dia{background:#1a1a1a;border:1px solid #333;margin-bottom:10px;border-radius:8px;overflow:hidden}
+.dia-header{padding:15px;background:#222;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.dia-header:hover{background:#2a2a2a}
+.dia-content{display:none;padding:15px;border-top:1px solid #333}
+.dia-content.show{display:block}
+.tarea{margin:8px 0;cursor:pointer}
+.check{color:#E040FB;margin-right:8px}
+</style>
+</head>
+<body>
+
+<div class="tabs">
+<button class="tab active" onclick="mostrarSemana(0)">Semana 1</button>
+<button class="tab" onclick="mostrarSemana(1)">Semana 2</button>
+<button class="tab" onclick="mostrarSemana(2)">Semana 3</button>
+<button class="tab" onclick="mostrarSemana(3)">Semana 4</button>
+</div>
+
+<div id="semana0" class="semana active">
+  <div class="dia"><div class="dia-header" onclick="toggle('d1')"><span>Día 1 - Lunes - Creación de perfiles</span><span>▼</span></div><div class="dia-content" id="d1"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Crear @fuxia.co en Instagram</div><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Crear @fuxia.co en TikTok</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d2')"><span>Día 2 - Martes - Identidad visual</span><span>▼</span></div><div class="dia-content" id="d2"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Crear plantilla en Canva</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d3')"><span>Día 3 - Miércoles - PRIMER REEL</span><span>▼</span></div><div class="dia-content" id="d3"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Grabar 2 min de clips</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d4')"><span>Día 4 - Jueves - Storytelling</span><span>▼</span></div><div class="dia-content" id="d4"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Grabar 3 historias</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d5')"><span>Día 5 - Viernes - Engagement</span><span>▼</span></div><div class="dia-content" id="d5"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Comentar 20 posts</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d6')"><span>Día 6 - Sábado - Análisis</span><span>▼</span></div><div class="dia-content" id="d6"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Revisar insights</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d7')"><span>Día 7 - Domingo - Planificación</span><span>▼</span></div><div class="dia-content" id="d7"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Planear semana 2</div></div></div>
+</div>
+
+<div id="semana1" class="semana">
+  <div class="dia"><div class="dia-header" onclick="toggle('d8')"><span>Día 8 - Lunes - Reel educativo IA</span><span>▼</span></div><div class="dia-content" id="d8"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Grabar texto animado</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d9')"><span>Día 9 - Martes - Story detrás de cámara</span><span>▼</span></div><div class="dia-content" id="d9"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Grabar proceso edición</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d10')"><span>Día 10 - Miércoles - Post carrusel Tips</span><span>▼</span></div><div class="dia-content" id="d10"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Diseñar carrusel 5 slides</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d11')"><span>Día 11 - Jueves - Post FUXIA Precios</span><span>▼</span></div><div class="dia-content" id="d11"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Diseñar carrusel precios</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d12')"><span>Día 12 - Viernes - Primer prospecto</span><span>▼</span></div><div class="dia-content" id="d12"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Identificar 3 negocios</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d13')"><span>Día 13 - Sábado - Reel testimonio</span><span>▼</span></div><div class="dia-content" id="d13"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Grabar testimonio</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d14')"><span>Día 14 - Domingo - Análisis semana 2</span><span>▼</span></div><div class="dia-content" id="d14"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Comparar métricas</div></div></div>
+</div>
+
+<div id="semana2" class="semana">
+  <div class="dia"><div class="dia-header" onclick="toggle('d15')"><span>Día 15 - Lunes - Reel Antes de agencia</span><span>▼</span></div><div class="dia-content" id="d15"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Grabar a cámara</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d16')"><span>Día 16 - Martes - Story interactiva</span><span>▼</span></div><div class="dia-content" id="d16"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Subir encuesta</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d17')"><span>Día 17 - Miércoles - Reel de Medellín</span><span>▼</span></div><div class="dia-content" id="d17"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Salir a grabar ciudad</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d18')"><span>Día 18 - Jueves - Post caso éxito</span><span>▼</span></div><div class="dia-content" id="d18"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Mostrar resultados</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d19')"><span>Día 19 - Viernes - DM masivos</span><span>▼</span></div><div class="dia-content" id="d19"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Enviar 10 DMs</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d20')"><span>Día 20 - Sábado - Reel tendencia</span><span>▼</span></div><div class="dia-content" id="d20"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Usar audio trending</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d21')"><span>Día 21 - Domingo - Planificación semana 4</span><span>▼</span></div><div class="dia-content" id="d21"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Preparar cierre</div></div></div>
+</div>
+
+<div id="semana3" class="semana">
+  <div class="dia"><div class="dia-header" onclick="toggle('d22')"><span>Día 22 - Lunes - Reel de cierre</span><span>▼</span></div><div class="dia-content" id="d22"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Grabar resumen 30 días</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d23')"><span>Día 23 - Martes - Post especial</span><span>▼</span></div><div class="dia-content" id="d23"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Post 30 días FUXIA</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d24')"><span>Día 24 - Miércoles - Llamadas venta</span><span>▼</span></div><div class="dia-content" id="d24"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Agendar 3 llamadas</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d25')"><span>Día 25 - Jueves - Propuesta cierre</span><span>▼</span></div><div class="dia-content" id="d25"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Enviar propuesta</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d26')"><span>Día 26 - Viernes - Onboarding cliente</span><span>▼</span></div><div class="dia-content" id="d26"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Crear carpeta Notion</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d27')"><span>Día 27 - Sábado - Reel celebrando</span><span>▼</span></div><div class="dia-content" id="d27"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Grabar celebración</div></div></div>
+  <div class="dia"><div class="dia-header" onclick="toggle('d28')"><span>Día 28 - Domingo - Cierre de mes</span><span>▼</span></div><div class="dia-content" id="d28"><div class="tarea" onclick="this.querySelector('.check').textContent=this.querySelector('.check').textContent=='☐'?'✓':'☐'"><span class="check">☐</span>Reporte mensual</div></div></div>
+</div>
+
+<script>
+function mostrarSemana(n){
+  var secciones = document.querySelectorAll('.semana');
+  for(var i=0; i<secciones.length; i++) secciones[i].classList.remove('active');
+  var tabs = document.querySelectorAll('.tab');
+  for(var i=0; i<tabs.length; i++) tabs[i].classList.remove('active');
+  document.getElementById('semana'+n).classList.add('active');
+  tabs[n].classList.add('active');
+}
+
+function toggle(id){
+  var el = document.getElementById(id);
+  if(el.classList.contains('show')){
+    el.classList.remove('show');
+  } else {
+    el.classList.add('show');
+  }
+}
+</script>
+</body>
+</html>

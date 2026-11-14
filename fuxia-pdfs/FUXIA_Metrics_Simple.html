@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FUXIA Metrics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --F: #E040FB; --BG: #070707; --S1: #101010; --S2: #181818; --S3: #222222; --T1: #F0EFE8; --T2: #888880; --T3: #444440; --B2: rgba(255,255,255,0.06); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--BG); min-height: 100vh; font-family: 'Syne', sans-serif; color: var(--T1); }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    .header { background: var(--S1); border-bottom: 0.5px solid var(--B2); padding: 16px 20px; position: sticky; top: 0; }
+    .logo { font-size: 24px; font-weight: 800; color: var(--F); }
+    .label { font-size: 10px; letter-spacing: 0.2em; color: var(--T3); text-transform: uppercase; }
+    .tabs { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; }
+    .tab { background: transparent; border: none; color: var(--T2); font-size: 12px; padding: 8px 12px; cursor: pointer; white-space: nowrap; }
+    .tab.active { color: var(--F); border-bottom: 2px solid var(--F); }
+    .section { display: none; padding: 20px; }
+    .section.active { display: block; }
+    .week-btns { display: flex; gap: 8px; margin: 16px 0; }
+    .week-btn { background: var(--S2); border: 1px solid var(--B2); color: var(--T2); padding: 8px 16px; border-radius: 20px; cursor: pointer; }
+    .week-btn.active { border-color: var(--F); color: var(--F); }
+    .input-card { background: var(--S1); border: 1px solid var(--B2); border-radius: 8px; padding: 14px; margin-bottom: 10px; }
+    .input-title { font-size: 13px; font-weight: 500; color: var(--T1); }
+    .input-meta { font-size: 10px; color: var(--T3); margin: 4px 0 8px; }
+    .input-field { width: 100%; background: var(--S3); border: 1px solid var(--B2); color: var(--T1); padding: 10px; border-radius: 6px; font-size: 16px; }
+    .input-field:focus { border-color: var(--F); outline: none; }
+    .input-pct { font-size: 14px; font-weight: 700; color: var(--T2); text-align: right; }
+    .input-pct.high { color: #8AE8A0; }
+    .input-pct.mid { color: var(--F); }
+    .input-bar { background: var(--S3); height: 4px; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+    .input-bar-fill { height: 100%; background: var(--F); border-radius: 2px; transition: width 0.3s; }
+    .cat-pill { font-size: 9px; padding: 4px 10px; border-radius: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .cat-redes { background: rgba(105,201,208,0.15); color: #69C9D0; }
+    .cat-contenido { background: rgba(224,64,251,0.15); color: var(--F); }
+    .cat-negocio { background: rgba(138,232,160,0.15); color: #8AE8A0; }
+    .save-btn { background: var(--F); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+    .save-btn:hover { opacity: 0.9; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .kpi-card { background: var(--S1); border: 1px solid var(--B2); border-radius: 12px; padding: 16px; }
+    .kpi-value { font-size: 28px; font-weight: 800; color: var(--T1); }
+    .kpi-label { font-size: 10px; color: var(--T3); }
+    .progress-box { background: var(--S1); border: 1px solid var(--B2); border-radius: 10px; padding: 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
+    .progress-bar { flex: 1; background: var(--S3); height: 8px; border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--F); }
+    .progress-pct { font-size: 24px; font-weight: 800; color: var(--F); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="container" style="padding: 0;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="logo">FUXIA</span>
+        <span class="mono" style="font-size: 10px; color: var(--T3);">METRICS</span>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('ingresar')">Ingresar</button>
+        <button class="tab" onclick="showTab('overview')">Overview</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- INGRESAR -->
+    <div id="ingresar" class="section active">
+      <div class="label">Semana actual</div>
+      <div class="week-btns">
+        <button class="week-btn active" onclick="selectWeek(0)">Semana 1</button>
+        <button class="week-btn" onclick="selectWeek(1)">Semana 2</button>
+        <button class="week-btn" onclick="selectWeek(2)">Semana 3</button>
+        <button class="week-btn" onclick="selectWeek(3)">Semana 4</button>
+      </div>
+
+      <div class="progress-box">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+        <div class="progress-pct" id="progressPct">0%</div>
+      </div>
+
+      <div class="cat-pill cat-redes" style="display:inline-block; margin-bottom: 12px;">Redes</div>
+      <div id="redesInputs"></div>
+
+      <div class="cat-pill cat-contenido" style="display:inline-block; margin: 20px 0 12px;">Contenido</div>
+      <div id="contenidoInputs"></div>
+
+      <div class="cat-pill cat-negocio" style="display:inline-block; margin: 20px 0 12px;">Negocio</div>
+      <div id="negocioInputs"></div>
+
+      <button class="save-btn" onclick="saveAll()">💾 Guardar Todo</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="section">
+      <div class="label" style="margin-bottom: 16px;">Resumen 90 días</div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-value" id="totalSeguidores">0</div>
+          <div class="kpi-label">Total Seguidores IG</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value" id="totalReels">0</div>
+          <div class="kpi-label">Reels Publicados</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value" id="totalProspectos">0</div>
+          <div class="kpi-label">Prospectos</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-value" id="totalFacturacion">0K</div>
+          <div class="kpi-label">Facturación (K COP)</div>
+        </div>
+      </div>
+
+      <div class="label" style="margin-bottom: 12px;">Por semana</div>
+      <div id="tablaSemanas"></div>
+    </div>
+  </div>
+
+  <script>
+    const METAS = {
+      ig_ferney: [500, 1000, 2000], tiktok: [200, 500, 1000], facebook: [100, 300, 600], threads: [50, 200, 500],
+      reels: [3, 8, 16], guardados: [20, 80, 200], prospectos: [3, 8, 15], clientes: [0, 2, 4], facturacion: [0, 2000, 5000]
+    };
+
+    const CAMPOS = [
+      { id: 'ig_ferney', label: '@ferneypamplona IG', cat: 'redes' },
+      { id: 'tiktok', label: 'TikTok', cat: 'redes' },
+      { id: 'facebook', label: 'Facebook', cat: 'redes' },
+      { id: 'reels', label: 'Reels publicados', cat: 'contenido' },
+      { id: 'prospectos', label: 'Prospectos DM', cat: 'negocio' },
+      { id: 'facturacion', label: 'Facturación (K COP)', cat: 'negocio' }
+    ];
+
+    let data = [{}, {}, {}, {}];
+    let week = 0;
+
+    // Cargar datos guardados
+    function loadData() {
+      const saved = localStorage.getItem('fuxia_metrics');
+      if (saved) data = JSON.parse(saved);
+    }
+
+    // Guardar datos
+    function saveAll() {
+      localStorage.setItem('fuxia_metrics', JSON.stringify(data));
+      updateOverview();
+      alert('✓ Datos guardados correctamente');
+    }
+
+    // Renderizar inputs
+    function renderInputs() {
+      const redesHtml = CAMPOS.filter(c => c.cat === 'redes').map(c => createInput(c)).join('');
+      const contenidoHtml = CAMPOS.filter(c => c.cat === 'contenido').map(c => createInput(c)).join('');
+      const negocioHtml = CAMPOS.filter(c => c.cat === 'negocio').map(c => createInput(c)).join('');
+
+      document.getElementById('redesInputs').innerHTML = redesHtml;
+      document.getElementById('contenidoInputs').innerHTML = contenidoHtml;
+      document.getElementById('negocioInputs').innerHTML = negocioHtml;
+
+      loadWeekData();
+    }
+
+    function createInput(c) {
+      const meta = METAS[c.id][week];
+      const val = data[week][c.id] || 0;
+      const pct = meta > 0 ? Math.round((val / meta) * 100) : 0;
+      const color = pct >= 100 ? '#8AE8A0' : pct >= 60 ? '#E040FB' : '#888880';
+      
+      return `
+        <div class="input-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <div class="input-title">${c.label}</div>
+              <div class="input-meta">Meta: ${meta}</div>
+            </div>
+            <div class="input-pct" style="color: ${color}">${pct}%</div>
+          </div>
+          <input type="number" class="input-field" value="${val}" oninput="updateVal('${c.id}', this.value)">
+          <div class="input-bar"><div class="input-bar-fill" style="width: ${Math.min(pct, 100)}%; background: ${color}"></div></div>
+        </div>
+      `;
+    }
+
+    function updateVal(id, value) {
+      data[week][id] = parseInt(value) || 0;
+      renderInputs();
+      saveData();
+    }
+
+    function loadWeekData() {
+      CAMPOS.forEach(c => {
+        const input = document.querySelector(`input[oninput="updateVal('${c.id}', this.value)"]`);
+        if (input) input.value = data[week][c.id] || 0;
+      });
+      updateProgress();
+    }
+
+    function updateProgress() {
+      let total = 0, count = 0;
+      CAMPOS.forEach(c => {
+        const val = data[week][c.id] || 0;
+        const meta = METAS[c.id][week];
+        if (meta > 0) { total += Math.min(100, Math.round((val / meta) * 100)); count++; }
+      });
+      const pct = count > 0 ? Math.round(total / count) : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressPct').textContent = pct + '%';
+    }
+
+    function selectWeek(w) {
+      week = w;
+      document.querySelectorAll('.week-btn').forEach((btn, i) => btn.classList.toggle('active', i === w));
+      renderInputs();
+    }
+
+    function showTab(tabId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+      if (tabId === 'overview') updateOverview();
+    }
+
+    function saveData() {
+      localStorage.setItem('fuxia_metrics', JSON.stringify(data));
+    }
+
+    function updateOverview() {
+      // Totales
+      const totalSeg = (data[0].ig_ferney || 0) + (data[1].ig_ferney || 0) + (data[2].ig_ferney || 0) + (data[3].ig_ferney || 0);
+      const totalReels = [0,1,2,3].reduce((a, w) => a + (data[w].reels || 0), 0);
+      const totalProsp = [0,1,2,3].reduce((a, w) => a + (data[w].prospectos || 0), 0);
+      const totalFact = [0,1,2,3].reduce((a, w) => a + (data[w].facturacion || 0), 0);
+
+      document.getElementById('totalSeguidores').textContent = totalSeg;
+      document.getElementById('totalReels').textContent = totalReels;
+      document.getElementById('totalProspectos').textContent = totalProsp;
+      document.getElementById('totalFacturacion').textContent = totalFact + 'K';
+
+      // Tabla
+      let html = '<table style="width:100%; border-collapse: collapse;">';
+      html += '<tr style="border-bottom:1px solid #222;"><th style="text-align:left;padding:10px;color:#444;font-size:11px;">Métrica</th>';
+      for (let i = 1; i <= 4; i++) html += `<th style="padding:10px;color:#444;font-size:11px;">S${i}</th>`;
+      html += '</tr>';
+      
+      CAMPOS.forEach(c => {
+        html += `<tr style="border-bottom:1px solid #222;">
+          <td style="padding:10px;color:#888;font-size:12px;">${c.label}</td>`;
+        for (let w = 0; w < 4; w++) {
+          html += `<td style="padding:10px;text-align:right;color:#888;font-size:12px;">${data[w][c.id] || 0}</td>`;
+        }
+        html += '</tr>';
+      });
+      html += '</table>';
+      document.getElementById('tablaSemanas').innerHTML = html;
+    }
+
+    // Iniciar
+    loadData();
+    renderInputs();
+  </script>
+</body>
+</html>

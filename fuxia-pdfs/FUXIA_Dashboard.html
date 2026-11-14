@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FUXIA Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --F: #E040FB;
+      --F2: #9C27B0;
+      --BG: #080808;
+      --S1: #111111;
+      --S2: #1A1A1A;
+      --S3: #222222;
+      --T1: #F5F5F0;
+      --T2: #999990;
+      --T3: #555550;
+      --BORDER: rgba(224,64,251,0.15);
+      --BORDER2: rgba(255,255,255,0.07);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--BG); min-height: 100vh; font-family: 'Syne', sans-serif; color: var(--T1); padding-bottom: 40px; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    h1 { font-size: 42px; font-weight: 800; color: var(--F); letter-spacing: -1px; }
+    h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    h3 { font-size: 14px; font-weight: 500; }
+    .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--T3); }
+    .body-text { font-size: 13px; line-height: 1.7; color: var(--T2); }
+    .metric { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; color: var(--T1); }
+    
+    .container { max-width: 800px; margin: 0 auto; padding: 24px; }
+    
+    /* Header */
+    .header { border-bottom: 0.5px solid var(--BORDER2); background: var(--S1); padding: 20px 24px; position: sticky; top: 0; z-index: 100; }
+    .header-content { max-width: 800px; margin: 0 auto; }
+    .logo-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+    .logo { font-size: 36px; font-weight: 800; color: var(--F); letter-spacing: -1px; }
+    .logo-sub { font-size: 11px; color: var(--T3); letter-spacing: 0.15em; }
+    .logo-sub2 { font-size: 11px; color: var(--T2); letter-spacing: 0.1em; }
+    .logo-right { font-size: 10px; color: var(--T3); margin-left: auto; letter-spacing: 0.1em; }
+    
+    /* Tabs */
+    .tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { background: transparent; border: none; color: var(--T2); font-family: 'Syne', sans-serif; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 16px; cursor: pointer; transition: color 0.2s; white-space: nowrap; font-weight: 500; border-bottom: 1.5px solid transparent; }
+    .tab:hover { color: var(--T1); }
+    .tab.active { color: var(--F); border-bottom-color: var(--F); }
+    
+    /* Cards */
+    .card { background: var(--S1); border: 0.5px solid var(--BORDER2); border-radius: 12px; padding: 20px 22px; }
+    .card-accent { background: var(--S1); border: 0.5px solid var(--BORDER); border-radius: 12px; padding: 20px 22px; }
+    .pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 20px; font-weight: 400; }
+    
+    /* Sections */
+    .section { display: none; flex-direction: column; gap: 20px; animation: fadeIn 0.25s ease forwards; }
+    .section.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* Grid */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .grid-flex { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+    
+    /* Reels */
+    .reel-toggle { background: transparent; border: 0.5px solid var(--BORDER2); color: var(--T1); border-radius: 8px; padding: 14px 16px; cursor: pointer; width: 100%; text-align: left; font-family: 'Syne', sans-serif; font-size: 13px; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.2s; }
+    .reel-toggle:hover { border-color: var(--BORDER); }
+    .reel-toggle.open { border-color: var(--F); }
+    .reel-content { display: none; background: var(--S1); border: 0.5px solid var(--BORDER); border-top: none; border-radius: 0 0 8px 8px; padding: 16px 18px; flex-direction: column; gap: 14px; }
+    .reel-content.open { display: flex; }
+    .reel-star { color: var(--T3); }
+    .reel-star.active { color: var(--F); }
+    
+    /* Copy button */
+    .copy-btn { background: transparent; border: 0.5px solid var(--BORDER2); color: var(--T2); font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 5px 12px; border-radius: 6px; cursor: pointer; letter-spacing: 0.1em; transition: all 0.2s; }
+    .copy-btn:hover { border-color: var(--F); color: var(--F); }
+    .copy-btn.copied { border-color: #8AE8A0; color: #8AE8A0; }
+    
+    /* Tip box */
+    .tip-box { background: #0F0A12; border: 0.5px solid var(--F); border-radius: 12px; padding: 20px 22px; }
+    .tip-box h3 { color: var(--F); margin-bottom: 10px; }
+    .tip-list li { display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start; }
+    .tip-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--F); min-width: 20px; padding-top: 2px; }
+    
+    /* KPI cards */
+    .kpi-item { text-align: center; }
+    .kpi-item .label { margin-bottom: 6px; }
+    .kpi-item .metric { color: var(--F); }
+    .kpi-item .mono { font-size: 10px; color: var(--T3); margin-top: 4px; }
+    
+    /* Services */
+    .service-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .service-name { font-size: 13px; font-weight: 500; color: var(--T1); display: flex; align-items: center; gap: 8px; }
+    .service-price { font-size: 14px; font-weight: 700; color: var(--F); white-space: nowrap; }
+    .service-tag { background: #1A0F1A; color: var(--F); border: 0.5px solid var(--BORDER); font-size: 9px; }
+    
+    /* Color swatches */
+    .color-swatches { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+    .swatch { text-align: center; }
+    .swatch-color { width: 44px; height: 44px; border-radius: 8px; margin-bottom: 4px; }
+    .swatch-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--T3); }
+    
+    /* Week plan */
+    .week-card { border-left: 2px solid var(--F); border-radius: 0 12px 12px 0; padding-left: 20px; }
+    .week-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--F); letter-spacing: 0.15em; margin-bottom: 10px; }
+    .week-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 6px; }
+    .week-item span:first-child { color: var(--T3); font-size: 11px; padding-top: 2px; }
+    .week-item span:last-child { font-size: 13px; color: var(--T2); line-height: 1.5; }
+    
+    /* Focus section */
+    .focus-card { background: #0F0A12; border: 0.5px solid var(--F); border-radius: 12px; padding: 20px 22px; }
+    .focus-title { color: var(--F); margin-bottom: 14px; }
+    
+    /* Print styles */
+    @media print {
+      body { background: white; color: black; }
+      .tab { display: none; }
+      .section { display: block !important; page-break-after: always; }
+      .reel-content { display: block !important; }
+    }
+    
+    @media (max-width: 600px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .logo-row { flex-direction: column; gap: 8px; }
+      .logo-right { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <div class="logo-row">
+        <span class="logo">FUXIA</span>
+        <span class="logo-sub mono">×</span>
+        <span class="logo-sub2 mono">ferneypamplona</span>
+        <span class="logo-right mono">2026 · MED</span>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('overview')">Vista general</button>
+        <button class="tab" onclick="showTab('personal')">@ferneypamplona</button>
+        <button class="tab" onclick="showTab('fuxia')">FUXIA</button>
+        <button class="tab" onclick="showTab('reels')">Reels</button>
+        <button class="tab" onclick="showTab('plan')">Plan 90 días</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- OVERVIEW -->
+    <div id="overview" class="section active">
+      <div>
+        <div class="label" style="margin-bottom: 8px;">Diagnóstico</div>
+        <div class="card-accent grid-auto">
+          <div class="kpi-item">
+            <div class="label">Seguidores IG</div>
+            <div class="metric">0→∞</div>
+            <div class="mono">arrancamos</div>
+          </div>
+          <div class="kpi-item">
+            <div class="label">Clientes</div>
+            <div class="metric">0</div>
+            <div class="mono">mes 1: conseguir 1</div>
+          </div>
+          <div class="kpi-item">
+            <div class="label">Facturación</div>
+            <div class="metric">$0</div>
+            <div class="mono">meta: $3M/mes</div>
+          </div>
+          <div class="kpi-item">
+            <div class="label">Contenido</div>
+            <div class="metric">0</div>
+            <div class="mono">meta: 2/semana</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="focus-card">
+        <div class="label focus-title">Esta semana — sin excusas</div>
+        <ul class="tip-list">
+          <li><span class="tip-num">01</span><span>Crear @fuxia en IG y TikTok. Foto de perfil + bio lista.</span></li>
+          <li><span class="tip-num">02</span><span>Publicar el primer reel (B-roll del día, sin hablar, 15 seg).</span></li>
+          <li><span class="tip-num">03</span><span>Escribir la propuesta de valor de FUXIA en una oración.</span></li>
+          <li><span class="tip-num">04</span><span>Identificar 3 negocios en Medellín que podrían ser clientes.</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="label" style="margin-bottom: 12px;">Stack gratuito para empezar</div>
+        <div class="grid-flex">
+          <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">Notion</div>
+              <div class="body-text" style="font-size: 11px;">Todo centralizado</div>
+            </div>
+            <div class="pill" style="background: #0F180F; color: #5DCB6A; border: 0.5px solid #2A4A2A;">Gratis</div>
+          </div>
+          <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">CapCut</div>
+              <div class="body-text" style="font-size: 11px;">Reels y edición</div>
+            </div>
+            <div class="pill" style="background: #0F180F; color: #5DCB6A; border: 0.5px solid #2A4A2A;">Gratis</div>
+          </div>
+          <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">V0.dev</div>
+              <div class="body-text" style="font-size: 11px;">Landing pages rápidas</div>
+            </div>
+            <div class="pill" style="background: #0F180F; color: #5DCB6A; border: 0.5px solid #2A4A2A;">Gratis</div>
+          </div>
+          <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">Make / n8n</div>
+              <div class="body-text" style="font-size: 11px;">Automatizaciones</div>
+            </div>
+            <div class="pill" style="background: #0F180F; color: #5DCB6A; border: 0.5px solid #2A4A2A;">Gratis</div>
+          </div>
+          <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">Cal.com</div>
+              <div class="body-text" style="font-size: 11px;">Agendamiento</div>
+            </div>
+            <div class="pill" style="background: #0F180F; color: #5DCB6A; border: 0.5px solid #2A4A2A;">Gratis</div>
+          </div>
+          <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">Canva</div>
+              <div class="body-text" style="font-size: 11px;">Assets visuales</div>
+            </div>
+            <div class="pill" style="background: #0F180F; color: #5DCB6A; border: 0.5px solid #2A4A2A;">Gratis</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--BORDER2);">
+        <div class="label" style="margin-bottom: 10px;">Regla de oro FUXIA</div>
+        <div style="font-size: 15px; font-weight: 500; color: var(--T1); line-height: 1.6;">
+          Nunca pagués por una herramienta antes de que un cliente pagado la pague por vos.
+        </div>
+      </div>
+    </div>
+
+    <!-- PERSONAL -->
+    <div id="personal" class="section">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <div class="label" style="margin-bottom: 6px;">Marca personal</div>
+          <h2>@ferneypamplona</h2>
+          <div class="mono" style="font-size: 11px; color: var(--T3); margin-top: 4px;">80% personal · 20% profesional</div>
+        </div>
+        <div class="pill" style="background: #1A0F1A; color: var(--F); border: 0.5px solid var(--BORDER);">Fundador de FUXIA</div>
+      </div>
+
+      <div class="card-accent">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div class="label">Bio para redes</div>
+          <button class="copy-btn" onclick="copyBio()">copiar</button>
+        </div>
+        <div class="mono" style="font-size: 12px; color: var(--T1); line-height: 2; background: var(--S2); padding: 14px 16px; border-radius: 8px;">
+          Automatización + IA para negocios reales 🔌<br>
+          Fundador @fuxia.co · Medellín<br>
+          Landing pages que venden mientras dormís<br>
+          ↓ Trabajemos
+        </div>
+      </div>
+
+      <div>
+        <div class="label" style="margin-bottom: 12px;">Los 5 pilares de contenido</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="card" style="display: flex; align-items: center; gap: 16;">
+            <div style="font-size: 20px;">🏙️</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">Medellín</div>
+              <div class="body-text" style="font-size: 12px;">La ciudad como personaje. Tu perspectiva local.</div>
+            </div>
+            <div class="mono" style="font-size: 13px; color: var(--T2); font-weight: 300;">25%</div>
+          </div>
+          <div class="card" style="display: flex; align-items: center; gap: 16;">
+            <div style="font-size: 20px;">🧬</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">Proceso</div>
+              <div class="body-text" style="font-size: 12px;">Cómo trabajás. Cómo pensás. Sin filtro.</div>
+            </div>
+            <div class="mono" style="font-size: 13px; color: var(--T2); font-weight: 300;">20%</div>
+          </div>
+          <div class="card" style="display: flex; align-items: center; gap: 16;">
+            <div style="font-size: 20px;">🎭</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">Vida real</div>
+              <div class="body-text" style="font-size: 12px;">Tatuajes, gym, música, lo que te mueve.</div>
+            </div>
+            <div class="mono" style="font-size: 13px; color: var(--T2); font-weight: 300;">20%</div>
+          </div>
+          <div class="card" style="display: flex; align-items: center; gap: 16;">
+            <div style="font-size: 20px;">📚</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">Aprendizajes</div>
+              <div class="body-text" style="font-size: 12px;">Lo que aprendiste esta semana. Crudo.</div>
+            </div>
+            <div class="mono" style="font-size: 13px; color: var(--T2); font-weight: 300;">15%</div>
+          </div>
+          <div class="card" style="display: flex; align-items: center; gap: 16;">
+            <div style="font-size: 20px;">⚡</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 500; color: var(--T1);">FUXIA</div>
+              <div class="body-text" style="font-size: 12px;">Casos, resultados, lo que construís.</div>
+            </div>
+            <div class="mono" style="font-size: 13px; color: var(--F); font-weight: 500;">20%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label" style="margin-bottom: 12px;">Tono de voz</div>
+        <div class="grid-2" style="gap: 8px;">
+          <div style="display: flex; flex-direction: column; gap: 4;">
+            <div style="font-size: 12px; color: #5DCB6A;">✓ Hablás como con un parcero</div>
+            <div style="font-size: 12px; color: #5DCB6A;">✓ Contás el proceso, no el resultado</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4;">
+            <div style="font-size: 11px; color: var(--T3);">✗ No como un speaker de LinkedIn</div>
+            <div style="font-size: 11px; color: var(--T3);">✗ No el highlight real</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4;">
+            <div style="font-size: 12px; color: #5DCB6A;">✓ Usás el error como contenido</div>
+            <div style="font-size: 12px; color: #5DCB6A;">✓ Nombrás a Medellín siempre</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4;">
+            <div style="font-size: 11px; color: var(--T3);">✗ No solo los logros</div>
+            <div style="font-size: 11px; color: var(--T3);">✗ No sos genérico</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="background: #0A0A12;">
+        <div class="label" style="margin-bottom: 10px;">Cadencia semanal</div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <div class="mono" style="font-size: 11px; color: var(--F); min-width: 70px;">Lunes</div>
+            <div style="font-size: 13px; color: var(--T2); line-height: 1.5;">Reel educativo (IA, automatización, tip)</div>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <div class="mono" style="font-size: 11px; color: var(--F); min-width: 70px;">Miércoles</div>
+            <div style="font-size: 13px; color: var(--T2); line-height: 1.5;">Reel personal (vida, Medellín, proceso)</div>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <div class="mono" style="font-size: 11px; color: var(--F); min-width: 70px;">Viernes</div>
+            <div style="font-size: 13px; color: var(--T2); line-height: 1.5;">Story o carrusel: aprendizaje de la semana</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FUXIA AGENCIA -->
+    <div id="fuxia" class="section">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+        <h1 style="line-height: 1;">FUXIA</h1>
+        <div class="mono" style="font-size: 11px; color: var(--T3); letter-spacing: 0.15em;">automatización con actitud</div>
+      </div>
+
+      <div class="tip-box">
+        <div class="label" style="color: var(--F); margin-bottom: 10px;">Propuesta de valor</div>
+        <div style="font-size: 15px; font-weight: 500; color: var(--T1); line-height: 1.7;">
+          En FUXIA no vendemos software. Vendemos tiempo de vuelta.
+        </div>
+        <div style="font-size: 13px; color: var(--T2); line-height: 1.7; margin-top: 10px;">
+          Landing pages que venden mientras dormís. CRMs que se actualizan solos. Procesos que piensan por vos. Construido en Medellín, ejecutado en una semana, con la cara de la persona que lo arma — no una agencia anónima.
+        </div>
+      </div>
+
+      <div>
+        <div class="label" style="margin-bottom: 12px;">Servicios · precios en COP</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="card service-row">
+            <div style="flex: 1;">
+              <div class="service-name">Landing page que convierte <span class="pill service-tag">más pedido</span></div>
+              <div class="mono" style="font-size: 10px; color: var(--T3); margin-top: 3px;">1 semana</div>
+            </div>
+            <div class="service-price">$1M – $2M</div>
+          </div>
+          <div class="card service-row">
+            <div style="flex: 1;">
+              <div class="service-name">CRM automatizado</div>
+              <div class="mono" style="font-size: 10px; color: var(--T3); margin-top: 3px;">1–2 semanas</div>
+            </div>
+            <div class="service-price">$1.5M – $2.5M</div>
+          </div>
+          <div class="card service-row">
+            <div style="flex: 1;">
+              <div class="service-name">Automatización de mensajes/leads</div>
+              <div class="mono" style="font-size: 10px; color: var(--T3); margin-top: 3px;">3–5 días</div>
+            </div>
+            <div class="service-price">$800K – $1.5M</div>
+          </div>
+          <div class="card service-row">
+            <div style="flex: 1;">
+              <div class="service-name">Sistema de agendamiento inteligente</div>
+              <div class="mono" style="font-size: 10px; color: var(--T3); margin-top: 3px;">2–3 días</div>
+            </div>
+            <div class="service-price">$600K – $1M</div>
+          </div>
+          <div class="card service-row">
+            <div style="flex: 1;">
+              <div class="service-name">Pack FUXIA completo <span class="pill service-tag">mejor valor</span></div>
+              <div class="mono" style="font-size: 10px; color: var(--T3); margin-top: 3px;">3–4 semanas</div>
+            </div>
+            <div class="service-price">$3M – $5M</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label" style="margin-bottom: 12px;">Identidad visual</div>
+        <div class="color-swatches">
+          <div class="swatch"><div class="swatch-color" style="background: var(--F);"></div><div class="swatch-label">FUXIA</div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #F5F5F0; border: 0.5px solid var(--BORDER2);"></div><div class="swatch-label">Blanco</div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #111111;"></div><div class="swatch-label">Negro</div></div>
+          <div class="swatch"><div class="swatch-color" style="background: #9C27B0;"></div><div class="swatch-label">Profundo</div></div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <div class="pill" style="background: var(--S2); color: var(--T2); border: 0.5px solid var(--BORDER2); font-size: 11px;">Syne (display)</div>
+          <div class="pill" style="background: var(--S2); color: var(--T2); border: 0.5px solid var(--BORDER2); font-size: 11px;">JetBrains Mono (datos)</div>
+          <div class="pill" style="background: var(--S2); color: var(--T2); border: 0.5px solid var(--BORDER2); font-size: 11px;">Futurista · Irreverente · Directo</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label" style="margin-bottom: 10px;">Lo que FUXIA NO hace</div>
+        <div class="body-text" style="line-height: 2;">
+          No vendemos "paquetes de redes sociales". No manejamos pauta. No hacemos logos. No somos community managers. Somos el back-end del negocio — la parte que automatiza, conecta y hace que todo funcione sin que el dueño esté presente.
+        </div>
+      </div>
+    </div>
+
+    <!-- REELS -->
+    <div id="reels" class="section">
+      <div>
+        <div class="label" style="margin-bottom: 6px;">6 reels listos para grabar</div>
+        <div class="mono" style="font-size: 10px; color: var(--T3);">★ sin hablar · ★★ voz en off · ★★★ a cámara — empezá por los ★</div>
+      </div>
+
+      <div style="background: var(--S1); border: 0.5px solid #2A1A0A; border-radius: 12px; padding: 14px 16px;">
+        <div class="label" style="color: #EF9F27; margin-bottom: 10px;">Antes de grabar — léelo una vez</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px;">
+          <div><div class="mono" style="font-size: 10px; color: #EF9F27; margin-bottom: 3px;">Luz</div><div style="font-size: 12px; color: var(--T2); line-height: 1.5;">Frente a una ventana. Nunca con luz detrás.</div></div>
+          <div><div class="mono" style="font-size: 10px; color: #EF9F27; margin-bottom: 3px;">Audio</div><div style="font-size: 12px; color: var(--T2); line-height: 1.5;">Silencio total. Audífonos iPhone como micrófono.</div></div>
+          <div><div class="mono" style="font-size: 10px; color: #EF9F27; margin-bottom: 3px;">Encuadre</div><div style="font-size: 12px; color: var(--T2); line-height: 1.5;">Celular vertical, a la altura de tus ojos.</div></div>
+          <div><div class="mono" style="font-size: 10px; color: #EF9F27; margin-bottom: 3px;">App</div><div style="font-size: 12px; color: var(--T2); line-height: 1.5;">CapCut. Gratis. Tiene todo lo que necesitás.</div></div>
+          <div><div class="mono" style="font-size: 10px; color: #EF9F27; margin-bottom: 3px;">Subtítulos</div><div style="font-size: 12px; color: var(--T2); line-height: 1.5;">SIEMPRE. 80% ve sin sonido. 1 click en CapCut.</div></div>
+          <div><div class="mono" style="font-size: 10px; color: #EF9F27; margin-bottom: 3px;">Tomas</div><div style="font-size: 12px; color: var(--T2); line-height: 1.5;">Grabá 3 versiones. Elegí la más natural, no la perfecta.</div></div>
+        </div>
+      </div>
+
+      <!-- Reel 1 -->
+      <div>
+        <button class="reel-toggle" onclick="toggleReel(0)">
+          <div style="display: flex; align-items: center; gap: 12;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">01</span>
+            <span style="font-weight: 500;">B-roll de tu día</span>
+            <span><span class="reel-star active">★</span><span class="reel-star">★</span><span class="reel-star">★</span></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">15–20 seg</span>
+            <span style="font-size: 12px; color: var(--T3);">▼</span>
+          </div>
+        </button>
+        <div class="reel-content" id="reel0">
+          <div><div class="label" style="margin-bottom: 6px;">Por qué funciona</div><div class="body-text">El de menor esfuerzo. Funciona siempre. Muestra quién sos sin que tengas que explicarlo.</div></div>
+          <div><div class="label" style="margin-bottom: 6px;">Hook</div><div style="font-size: 13px; color: var(--F); font-weight: 500; font-style: italic;">"Día normal en Medellín."</div></div>
+          <div><div class="label" style="margin-bottom: 8px;">Guión</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">1.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Clips cortos de tu rutina: café, laptop, ciudad, manos tecleando</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">2.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Texto en pantalla: '6am. Medellín.'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">3.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Corte rápido a tu setup</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">4.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Texto: 'Construyendo lo que otros cobran caro.'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">5.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Último clip: pantalla con código o dashboard abierto</div></div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div><div class="label" style="margin-bottom: 6px;">Cierre</div><div style="font-size: 12px; color: var(--T2);">Sin CTA. La imagen sola vende.</div></div>
+            <div><div class="label" style="margin-bottom: 6px;">Música</div><div style="font-size: 12px; color: var(--T2);">Minimal house o ambient oscuro. Que suene a ciudad de noche.</div></div>
+          </div>
+          <div style="background: #0F0A12; border: 0.5px solid var(--F); border-radius: 8px; padding: 10px 14px;">
+            <div class="mono" style="font-size: 10px; color: var(--F); margin-bottom: 4px;">TIP</div>
+            <div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Graba 2 minutos random de tu día. Después en CapCut los editas en 15 seg.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel 2 -->
+      <div>
+        <button class="reel-toggle" onclick="toggleReel(1)">
+          <div style="display: flex; align-items: center; gap: 12;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">02</span>
+            <span style="font-weight: 500;">IA explicada en 30 seg</span>
+            <span><span class="reel-star active">★</span><span class="reel-star">★</span><span class="reel-star">★</span></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">25–35 seg</span>
+            <span style="font-size: 12px; color: var(--T3);">▼</span>
+          </div>
+        </button>
+        <div class="reel-content" id="reel1">
+          <div><div class="label" style="margin-bottom: 6px;">Por qué funciona</div><div class="body-text">Educas sin hablar a cámara. El formato de texto animado sobre fondo negro es el más fácil de producir y uno de los más efectivos.</div></div>
+          <div><div class="label" style="margin-bottom: 6px;">Hook</div><div style="font-size: 13px; color: var(--F); font-weight: 500; font-style: italic;">"Lo que hace la IA por tu negocio mientras dormís."</div></div>
+          <div><div class="label" style="margin-bottom: 8px;">Guión</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">1.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Fondo negro, texto blanco</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">2.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Texto aparece: 'Responde mensajes de clientes'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">3.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Corte: 'Actualiza tu CRM'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">4.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Corte: 'Agenda reuniones'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">5.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Último: 'Todo sin que vos hagas nada.'</div></div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div><div class="label" style="margin-bottom: 6px;">Cierre</div><div style="font-size: 12px; color: var(--T2);">FUXIA. Automatización con actitud.</div></div>
+            <div><div class="label" style="margin-bottom: 6px;">Música</div><div style="font-size: 12px; color: var(--T2);">Techno minimal. Un loop de 8 tiempos. Sin letra.</div></div>
+          </div>
+          <div style="background: #0F0A12; border: 0.5px solid var(--F); border-radius: 8px; padding: 10px 14px;">
+            <div class="mono" style="font-size: 10px; color: var(--F); margin-bottom: 4px;">TIP</div>
+            <div style="font-size: 12px; color: var(--T2); line-height: 1.6;">CapCut tiene templates de texto animado. Elige el más limpio, no el más llamativo.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- More reels... (continuing pattern for reels 3-6) -->
+      
+      <!-- Reel 3 -->
+      <div>
+        <button class="reel-toggle" onclick="toggleReel(2)">
+          <div style="display: flex; align-items: center; gap: 12;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">03</span>
+            <span style="font-weight: 500;">Tu tatuaje te enseñó algo</span>
+            <span><span class="reel-star">★</span><span class="reel-star active">★</span><span class="reel-star">★</span></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">25–35 seg</span>
+            <span style="font-size: 12px; color: var(--T3);">▼</span>
+          </div>
+        </button>
+        <div class="reel-content" id="reel2">
+          <div><div class="label" style="margin-bottom: 6px;">Por qué funciona</div><div class="body-text">Lo personal vende. Tus tatuajes son parte de tu marca. Conectar uno con una lección de negocios es 80% personal + 20% profesional ejecutado perfectamente.</div></div>
+          <div><div class="label" style="margin-bottom: 6px;">Hook</div><div style="font-size: 13px; color: var(--F); font-weight: 500; font-style: italic;">"Este tatuaje me enseñó algo que ningún curso me enseñó."</div></div>
+          <div><div class="label" style="margin-bottom: 8px;">Guión</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">1.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Close-up del tatuaje, cámara lenta</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">2.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Tu voz en off: por qué te lo hiciste, qué representa</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">3.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Conectas la metáfora con tu trabajo</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">4.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Plano medio, mirando hacia un lado</div></div>
+            </div>
+          </div>
+          <div style="background: #0F0A12; border: 0.5px solid var(--F); border-radius: 8px; padding: 10px 14px;">
+            <div class="mono" style="font-size: 10px; color: var(--F); margin-bottom: 4px;">TIP</div>
+            <div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Graba el audio aparte con el celular pegado a la boca, en silencio. Después lo montas en CapCut.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel 4 -->
+      <div>
+        <button class="reel-toggle" onclick="toggleReel(3)">
+          <div style="display: flex; align-items: center; gap: 12;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">04</span>
+            <span style="font-weight: 500;">Mi setup de 0 pesos</span>
+            <span><span class="reel-star">★</span><span class="reel-star active">★</span><span class="reel-star">★</span></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">30–40 seg</span>
+            <span style="font-size: 12px; color: var(--T3);">▼</span>
+          </div>
+        </button>
+        <div class="reel-content" id="reel3">
+          <div><div class="label" style="margin-bottom: 6px;">Por qué funciona</div><div class="body-text">Mostrar tu espacio te humaniza. Setup minimalista funcional = autoridad inmediata.</div></div>
+          <div><div class="label" style="margin-bottom: 6px;">Hook</div><div style="font-size: 13px; color: var(--F); font-weight: 500; font-style: italic;">"Mi oficina tiene 3 cosas. Eso es todo."</div></div>
+          <div><div class="label" style="margin-bottom: 8px;">Guión</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">1.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Plano de tu escritorio entero, lento</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">2.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Voz off: 'Laptop. Cuaderno. Café.'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">3.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Close-up de cada cosa, 3 seg c/u</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">4.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Plano final de espalda en el escritorio</div></div>
+            </div>
+          </div>
+          <div style="background: #0F0A12; border: 0.5px solid var(--F); border-radius: 8px; padding: 10px 14px;">
+            <div class="mono" style="font-size: 10px; color: var(--F); margin-bottom: 4px;">TIP</div>
+            <div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Limpia el escritorio antes. Que no haya nada más. La estética minimalista comunica más que tus palabras.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel 5 -->
+      <div>
+        <button class="reel-toggle" onclick="toggleReel(4)">
+          <div style="display: flex; align-items: center; gap: 12;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">05</span>
+            <span style="font-weight: 500;">Antes de pagarle a una agencia</span>
+            <span><span class="reel-star">★</span><span class="reel-star">★</span><span class="reel-star active">★</span></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">40–60 seg</span>
+            <span style="font-size: 12px; color: var(--T3);">▼</span>
+          </div>
+        </button>
+        <div class="reel-content" id="reel4">
+          <div><div class="label" style="margin-bottom: 6px;">Por qué funciona</div><div class="body-text">Cuando te animes a hablar a cámara, este es el reel. Sos directo, das valor, posicionás FUXIA sin venderla.</div></div>
+          <div><div class="label" style="margin-bottom: 6px;">Hook</div><div style="font-size: 13px; color: var(--F); font-weight: 500; font-style: italic;">"Antes de pagarle 5 millones a una agencia, leé esto."</div></div>
+          <div><div class="label" style="margin-bottom: 8px;">Guión</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">1.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">A cámara, plano medio cerrado, mirada directa</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">2.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">'Tres cosas que ninguna agencia en Medellín te va a decir.'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">3.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">'Una: una landing bien hecha cuesta entre 1 y 2 millones, no 5.'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">4.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">'Dos: si te cobran por proyecto y no por resultado, escapá.'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">5.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">'Tres: si no te muestran el código antes, te están armando un cuento.'</div></div>
+            </div>
+          </div>
+          <div style="background: #0F0A12; border: 0.5px solid var(--F); border-radius: 8px; padding: 10px 14px;">
+            <div class="mono" style="font-size: 10px; color: var(--F); margin-bottom: 4px;">TIP</div>
+            <div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Pon el celular a la altura de tus ojos. Mirá al lente, no a tu imagen.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel 6 -->
+      <div>
+        <button class="reel-toggle" onclick="toggleReel(5)">
+          <div style="display: flex; align-items: center; gap: 12;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">06</span>
+            <span style="font-weight: 500;">La diferencia entre $1M y $5M</span>
+            <span><span class="reel-star">★</span><span class="reel-star">★</span><span class="reel-star active">★</span></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10;">
+            <span class="mono" style="font-size: 10px; color: var(--T3);">45–60 seg</span>
+            <span style="font-size: 12px; color: var(--T3);">▼</span>
+          </div>
+        </button>
+        <div class="reel-content" id="reel5">
+          <div><div class="label" style="margin-bottom: 6px;">Por qué funciona</div><div class="body-text">Educás y vendés al mismo tiempo. Mostrar la diferencia con un caso real es el contenido que más mueve la aguja.</div></div>
+          <div><div class="label" style="margin-bottom: 6px;">Hook</div><div style="font-size: 13px; color: var(--F); font-weight: 500; font-style: italic;">"Te muestro la diferencia entre una landing de $1 millón y una de $5."</div></div>
+          <div><div class="label" style="margin-bottom: 8px;">Guión</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">1.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">(A cámara) 'Esta es la landing de un cliente que pagó 5M a una agencia.'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">2.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">(Pantalla: landing genérica)</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">3.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">'Ahora mirá la versión que le hice yo en una semana por menos.'</div></div>
+              <div style="display: flex; gap: 10;"><span class="mono" style="font-size: 10px; color: var(--T3); padding-top: 2;">4.</span><div style="font-size: 12px; color: var(--T2); line-height: 1.6;">(Pantalla: versión limpia con CTA claro)</div></div>
+            </div>
+          </div>
+          <div style="background: #0F0A12; border: 0.5px solid var(--F); border-radius: 8px; padding: 10px 14px;">
+            <div class="mono" style="font-size: 10px; color: var(--F); margin-bottom: 4px;">TIP</div>
+            <div style="font-size: 12px; color: var(--T2); line-height: 1.6;">Si no tenés cliente real todavía, usá V0.dev y creá 2 versiones — una 'agencia genérica' y una 'tuya'. Funciona igual.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAN 90 DÍAS -->
+    <div id="plan" class="section">
+      <div>
+        <div class="label" style="margin-bottom: 6px;">Horizonte</div>
+        <h2>90 días para el primer $5M COP / mes</h2>
+        <div class="body-text" style="margin-top: 6px;">Mayo → Julio 2026 · Medellín</div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="card week-card">
+          <div class="week-title">MES 1 — MAYO</div>
+          <div class="week-item"><span>—</span><span>500 seguidores reales en Instagram</span></div>
+          <div class="week-item"><span>—</span><span>200 en TikTok</span></div>
+          <div class="week-item"><span>—</span><span>3 reels publicados</span></div>
+          <div class="week-item"><span>—</span><span>1 cliente de prueba (puede ser gratis)</span></div>
+          <div class="week-item"><span>—</span><span>Landing FUXIA online</span></div>
+        </div>
+        <div class="card week-card">
+          <div class="week-title">MES 2 — JUNIO</div>
+          <div class="week-item"><span>—</span><span>1.000 seguidores IG</span></div>
+          <div class="week-item"><span>—</span><span>500 TikTok</span></div>
+          <div class="week-item"><span>—</span><span>2 reels/semana constantes</span></div>
+          <div class="week-item"><span>—</span><span>2 clientes pagos activos</span></div>
+          <div class="week-item"><span>—</span><span>$2M – $3M COP facturados</span></div>
+        </div>
+        <div class="card week-card">
+          <div class="week-title">MES 3 — JULIO</div>
+          <div class="week-item"><span>—</span><span>2.000 seguidores IG</span></div>
+          <div class="week-item"><span>—</span><span>1.000 TikTok</span></div>
+          <div class="week-item"><span>—</span><span>1 collab con otra cuenta Medellín</span></div>
+          <div class="week-item"><span>—</span><span>3 clientes activos</span></div>
+          <div class="week-item"><span>—</span><span>$3M – $5M COP / mes predecible</span></div>
+        </div>
+      </div>
+
+      <div class="card-accent">
+        <div class="label" style="margin-bottom: 12px;">Foco por semana</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; gap: 14px; align-items: flex-start;"><span class="mono" style="font-size: 10px; color: var(--F); min-width: 40px; padding-top: 3px;">S1–S2</span><span style="font-size: 13px; color: var(--T2); line-height: 1.6;">Setup total: perfiles, bio, herramientas, primera pieza de contenido.</span></div>
+          <div style="display: flex; gap: 14px; align-items: flex-start;"><span class="mono" style="font-size: 10px; color: var(--F); min-width: 40px; padding-top: 3px;">S3–S4</span><span style="font-size: 13px; color: var(--T2); line-height: 1.6;">Consistencia: 2 reels/semana. Prospectar 3 negocios.</span></div>
+          <div style="display: flex; gap: 14px; align-items: flex-start;"><span class="mono" style="font-size: 10px; color: var(--F); min-width: 40px; padding-top: 3px;">S5–S6</span><span style="font-size: 13px; color: var(--T2); line-height: 1.6;">Primer cliente: aunque sea un favor. Documentar el proceso.</span></div>
+          <div style="display: flex; gap: 14px; align-items: flex-start;"><span class="mono" style="font-size: 10px; color: var(--F); min-width: 40px; padding-top: 3px;">S7–S8</span><span style="font-size: 13px; color: var(--T2); line-height: 1.6;">Cobrar: $800K – $1.5M por el primer proyecto real.</span></div>
+          <div style="display: flex; gap: 14px; align-items: flex-start;"><span class="mono" style="font-size: 10px; color: var(--F); min-width: 40px; padding-top: 3px;">S9–S10</span><span style="font-size: 13px; color: var(--T2); line-height: 1.6;">Escalar: 2 clientes simultáneos. Empezar a delegar.</span></div>
+          <div style="display: flex; gap: 14px; align-items: flex-start;"><span class="mono" style="font-size: 10px; color: var(--F); min-width: 40px; padding-top: 3px;">S11–S12</span><span style="font-size: 13px; color: var(--T2); line-height: 1.6;">Sistema: que FUXIA funcione sin que vos estés pendiente todo el día.</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="text-align: center; padding: 28px 22px;">
+        <div class="mono" style="font-size: 10px; color: var(--T3); letter-spacing: 0.2em; margin-bottom: 12px;">EL ÚNICO KPI QUE IMPORTA HOY</div>
+        <div style="font-size: 22px; font-weight: 700; color: var(--F); line-height: 1.4;">
+          ¿Publicaste algo esta semana?
+        </div>
+        <div class="body-text" style="margin-top: 8px;">
+          Si la respuesta es sí, vas bien. Todo lo demás es consecuencia.
+        </div>
+      </div>
+
+      <div style="border-top: 0.5px solid var(--BORDER2); padding-top: 20px; text-align: center;">
+        <div class="mono" style="font-size: 10px; color: var(--T3); letter-spacing: 0.2em;">FUXIA × FERNEYPAMPLONA · MEDELLÍN · 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function toggleReel(index) {
+      const content = document.getElementById('reel' + index);
+      const btn = content.previousElementSibling;
+      content.classList.toggle('open');
+      btn.classList.toggle('open');
+      const arrow = btn.querySelector('div:last-child span:last-child');
+      arrow.textContent = content.classList.contains('open') ? '▲' : '▼';
+    }
+
+    function copyBio() {
+      navigator.clipboard.writeText("Automatización + IA para negocios reales 🔌\nFundador @fuxia.co · Medellín\nLanding pages que venden mientras dormís\n↓ Trabajemos");
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = '✓ copiado';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'copiar';
+        btn.classList.remove('copied');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

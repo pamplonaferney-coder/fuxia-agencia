@@ -1,0 +1,12 @@
+#!/bin/sh
+# FUXIA — hook pre-push: bloquea el push si el código no está limpio.
+echo "▶ FUXIA pre-push: ESLint + escaneo de secretos..."
+npm run --silent check
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "✖ PUSH BLOQUEADO — errores de lint o secretos detectados."
+  echo "  Corrige y vuelve a intentar (npm run check para ver el detalle)."
+  exit 1
+fi
+echo "✔ Pre-push OK — código limpio."
+exit 0

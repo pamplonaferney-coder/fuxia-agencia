@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Cookies — FUXIA</title>
+  <meta name="description" content="Política de Cookies de FUXIA: qué cookies usamos, para qué sirven y cómo aceptarlas, rechazarlas o configurarlas." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --fuxia:#CC00FF; --negro:#050508; --blanco:#fff; --gris:#888899; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: linear-gradient(135deg,#0a0420 0%,#050508 50%,#1a0030 100%);
+      color: var(--blanco); font-family:'Syne',sans-serif;
+      line-height:1.7; min-height:100vh; padding:3rem 1.25rem;
+    }
+    .wrap { max-width:760px; margin:0 auto; }
+    .back {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-family:'JetBrains Mono',monospace; font-size:0.75rem;
+      color:var(--gris); text-decoration:none; letter-spacing:0.1em;
+      margin-bottom:2rem; transition:color 0.2s;
+    }
+    .back:hover { color:var(--fuxia); }
+    .label { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.3em; color:var(--fuxia); text-transform:uppercase; margin-bottom:0.75rem; }
+    h1 { font-size:clamp(1.8rem,5vw,2.8rem); font-weight:800; line-height:1.1; margin-bottom:0.5rem; }
+    h1 span { color:var(--fuxia); }
+    .updated { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--gris); margin-bottom:2.5rem; }
+    h2 { font-size:1.15rem; font-weight:700; color:var(--fuxia); margin:2rem 0 0.6rem; }
+    p, li { font-size:0.95rem; color:#ccccdd; margin-bottom:0.6rem; }
+    ul { padding-left:1.25rem; }
+    a { color:var(--fuxia); }
+    table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.85rem; }
+    th, td { text-align:left; padding:0.6rem; border:1px solid rgba(204,0,255,0.2); color:#ccccdd; }
+    th { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; color:var(--fuxia); text-transform:uppercase; }
+    .btns { display:flex; gap:0.75rem; flex-wrap:wrap; margin:1.5rem 0; }
+    .btns button {
+      font-family:'JetBrains Mono',monospace; font-size:0.75rem; letter-spacing:0.08em;
+      padding:0.7rem 1.4rem; border-radius:4px; cursor:pointer; transition:all 0.2s;
+    }
+    .btn-accept { background:var(--fuxia); color:#fff; border:1px solid var(--fuxia); font-weight:700; }
+    .btn-accept:hover { background:#dd22ff; }
+    .btn-reject { background:transparent; color:var(--gris); border:1px solid rgba(255,255,255,0.25); }
+    .btn-reject:hover { color:#fff; border-color:#fff; }
+    .footer { margin-top:3rem; padding-top:1.5rem; border-top:1px solid rgba(204,0,255,0.15); font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--gris); line-height:2; }
+    .footer a { color:var(--gris); }
+    #cookie-banner { position:fixed; left:1rem; right:1rem; bottom:1rem; z-index:10002; background:rgba(13,13,18,0.98); border:2px solid var(--fuxia); border-radius:12px; padding:1rem 1.1rem; display:none; gap:0.8rem; max-width:640px; margin:0 auto; align-items:center; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#aaaabb; line-height:1.6; }
+    #cookie-banner.show { display:flex; }
+    #cookie-banner a { color:var(--fuxia); }
+    #cookie-banner .ck-btns { display:flex; gap:0.5rem; flex-shrink:0; }
+    #cookie-banner button { font-family:inherit; font-size:0.7rem; padding:0.6rem 1rem; border-radius:4px; cursor:pointer; font-weight:700; }
+    #ck-accept { background:var(--fuxia); color:#fff; border:1px solid var(--fuxia); }
+    #ck-reject { background:transparent; color:#aaaabb; border:1px solid rgba(255,255,255,0.3); }
+    #ck-float { position:fixed; left:1rem; bottom:1rem; z-index:10001; width:44px; height:44px; border-radius:50%; background:rgba(13,13,18,0.95); border:1px solid var(--fuxia); color:#fff; font-size:20px; cursor:pointer; display:none; align-items:center; justify-content:center; }
+    #ck-float.show { display:flex; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">← Volver a FUXIA</a>
+    <div class="label">// legal</div>
+    <h1>Política de <span>Cookies</span></h1>
+    <p class="updated">Última actualización: 29 de septiembre de 2026</p>
+
+    <p>Esta página explica qué cookies y almacenamientos locales usa el sitio de <strong>FUXIA</strong> (https://fuxia-landing.vercel.app), para qué sirven y cómo puedes aceptarlas, rechazarlas o cambiar tu decisión en cualquier momento.</p>
+
+    <h2>1. ¿Qué son las cookies?</h2>
+    <p>Archivos pequeños que el navegador guarda en tu dispositivo para recordar preferencias, medir visitas o mostrar contenido. También usamos <strong>localStorage</strong> (almacenamiento local) para lo mismo, sin enviar datos a terceros.</p>
+
+    <h2>2. Qué usamos en este sitio</h2>
+    <table>
+      <tr><th>Nombre</th><th>Tipo</th><th>Para qué sirve</th><th>Duración</th></tr>
+      <tr><td>fuxia_cookie_consent</td><td>Necesaria</td><td>Recuerda si aceptaste o rechazaste cookies.</td><td>12 meses</td></tr>
+      <tr><td>fuxia_theme</td><td>Funcional</td><td>Recuerda modo oscuro / claro.</td><td>12 meses</td></tr>
+      <tr><td>fuxia_popup_seen</td><td>Funcional</td><td>Evita mostrar el popup de oferta cada visita (7 días).</td><td>7 días</td></tr>
+      <tr><td>fuxia_lead</td><td>Funcional</td><td>Guarda temporalmente tu mensaje para reabrir WhatsApp en la página de gracias.</td><td>Sesión</td></tr>
+      <tr><td>_fbp, _fbc (Meta Pixel)</td><td>Analítica / publicidad</td><td>Solo se activan si aceptas cookies. Miden visitas y clics a WhatsApp para mejorar la pauta. Proveedor: Meta Platforms.</td><td>Hasta 3 meses</td></tr>
+    </table>
+    <p>No usamos cookies de perfiles publicitarios propios ni vendemos datos. Terceros que pueden recibir datos si aceptas: <strong>Meta (Pixel)</strong>, <strong>WhatsApp</strong> (al hacer clic), <strong>Google Fonts / jsDelivr</strong> (carga de fuentes y librerías).</p>
+
+    <h2>3. Base legal (Colombia)</h2>
+    <p>Conforme a la <strong>Ley 1581 de 2012</strong> y el Decreto 1377 de 2013, las cookies no necesarias <strong>solo se instalan con tu autorización previa</strong>, que nos das con el botón “Aceptar”. Las necesarias y funcionales se usan por interés legítimo para que el sitio funcione.</p>
+
+    <h2>4. Aceptar o rechazar</h2>
+    <p>Puedes cambiar tu decisión aquí mismo:</p>
+    <div class="btns">
+      <button class="btn-accept" onclick="localStorage.setItem('fuxia_cookie_consent','accepted');location.reload()">Aceptar todas</button>
+      <button class="btn-reject" onclick="localStorage.setItem('fuxia_cookie_consent','rejected');location.reload()">Rechazar no necesarias</button>
+    </div>
+    <p>También puedes borrar cookies desde tu navegador: Chrome → Configuración → Privacidad → Borrar datos. Al borrar <em>fuxia_cookie_consent</em>, el banner vuelve a aparecer.</p>
+
+    <h2>5. Contacto</h2>
+    <p><strong>FUXIA</strong> — Medellín, Colombia.<br />WhatsApp <a href="https://wa.me/573005370203" target="_blank" rel="noopener">+57 300 537 0203</a> · Instagram <a href="https://instagram.com/fuxia_oficial" target="_blank" rel="noopener">@fuxia_oficial</a>.<br />Para ejercer tus derechos de habeas data (conocer, actualizar, rectificar, suprimir) ver la <a href="politica-datos.html">Política de Tratamiento de Datos</a>.</p>
+
+    <div class="footer">© 2026 FUXIA · Medellín, Colombia<br /><a href="politica-datos.html">Tratamiento de datos</a> · <a href="politica-cookies.html">Cookies</a> · <a href="terminos.html">Términos</a></div>
+  </div>
+  <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies"><span><strong>🍪 Cookies + Pixel de Meta.</strong> El Pixel solo se activa si aceptas. <a href="politica-cookies.html">Ver política</a>.</span><span class="ck-btns"><button id="ck-accept" type="button">Aceptar todo</button><button id="ck-reject" type="button">Solo necesarias</button></span></div>
+  <button id="ck-float" type="button" aria-label="Configurar cookies" title="Configurar cookies">🍪</button>
+  <script>(function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner'),f=document.getElementById('ck-float');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}function show(){b.classList.add('show');f.classList.remove('show');}function hide(){b.classList.remove('show');if(g())f.classList.add('show');}var force=/[?#&]cookies/.test(location.search+location.hash);setTimeout(function(){if(!g()||force)show();else if(g())f.classList.add('show');},700);document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');hide();});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');hide();});f.addEventListener('click',show);})();</script>
+</body>
+</html>

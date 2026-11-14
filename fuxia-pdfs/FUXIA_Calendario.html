@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FUXIA Calendario - 4 Semanas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --F: #E040FB;
+      --F2: #9C27B0;
+      --BG: #070707;
+      --S1: #101010;
+      --S2: #181818;
+      --S3: #202020;
+      --T1: #F0EFE8;
+      --T2: #888880;
+      --T3: #444440;
+      --BORDER: rgba(224,64,251,0.18);
+      --B2: rgba(255,255,255,0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--BG); min-height: 100vh; font-family: 'Syne', sans-serif; color: var(--T1); padding-bottom: 40px; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    h1 { font-size: 36px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+    h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    h3 { font-size: 14px; font-weight: 500; }
+    .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--T3); font-weight: 400; }
+    .body-text { font-size: 13px; line-height: 1.7; color: var(--T2); }
+    .pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 20px; font-weight: 400; }
+    
+    .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+    
+    /* Header */
+    .header { border-bottom: 0.5px solid var(--B2); background: var(--S1); padding: 20px 24px; position: sticky; top: 0; z-index: 100; }
+    .header-content { max-width: 900px; margin: 0 auto; }
+    .logo-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+    .logo { font-size: 32px; font-weight: 800; color: var(--F); letter-spacing: -1px; }
+    .logo-sub { font-size: 10px; color: var(--T2); letter-spacing: 0.1em; }
+    .logo-right { font-size: 10px; color: var(--T3); margin-left: auto; letter-spacing: 0.1em; }
+    
+    /* Week selector */
+    .week-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+    .week-tabs::-webkit-scrollbar { display: none; }
+    .week-tab { background: transparent; border: none; color: var(--T2); font-family: 'Syne', sans-serif; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 16px; cursor: pointer; transition: all 0.2s; white-space: nowrap; font-weight: 500; border-bottom: 1.5px solid transparent; }
+    .week-tab:hover { color: var(--T1); }
+    .week-tab.active { color: var(--F); border-bottom-color: var(--F); }
+    
+    /* Cards */
+    .card { background: var(--S1); border: 0.5px solid var(--B2); border-radius: 12px; padding: 20px 22px; }
+    .card-accent { background: var(--S1); border: 0.5px solid var(--BORDER); border-radius: 12px; padding: 20px 22px; }
+    
+    /* Sections */
+    .week-section { display: none; flex-direction: column; gap: 20px; animation: fadeIn 0.25s ease forwards; }
+    .week-section.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* Week header */
+    .week-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+    .week-title { font-size: 18px; font-weight: 700; color: var(--T1); }
+    .week-subtitle { font-size: 12px; color: var(--T2); margin-top: 4px; }
+    .week-meta { text-align: right; }
+    .week-meta .label { display: block; margin-bottom: 4px; }
+    .week-meta .meta-text { font-size: 12px; color: var(--T2); }
+    
+    /* Day card */
+    .day-card { background: var(--S2); border: 0.5px solid var(--B2); border-radius: 10px; overflow: hidden; }
+    .day-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: var(--S3); cursor: pointer; transition: background 0.2s; }
+    .day-header:hover { background: var(--S1); }
+    .day-header.open { border-bottom: 0.5px solid var(--B2); }
+    .day-info { display: flex; align-items: center; gap: 12px; }
+    .day-name { font-size: 13px; font-weight: 600; color: var(--T1); }
+    .day-date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--T3); }
+    .day-title { font-size: 13px; color: var(--T2); }
+    .day-arrow { font-size: 12px; color: var(--T3); transition: transform 0.2s; }
+    .day-arrow.open { transform: rotate(180deg); }
+    .day-content { display: none; padding: 16px; }
+    .day-content.open { display: block; }
+    
+    /* Platform tags */
+    .platform-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .platform-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.05em; }
+    .platform-tag.ig { background: rgba(224,64,251,0.15); color: var(--F); }
+    .platform-tag.tiktok { background: rgba(105,201,208,0.15); color: #69C9D0; }
+    .platform-tag.facebook { background: rgba(91,140,245,0.15); color: #5B8CF5; }
+    .platform-tag.threads { background: rgba(200,200,192,0.15); color: #C8C8C0; }
+    .platform-tag.todos { background: rgba(224,64,251,0.1); color: var(--F); }
+    
+    .cuenta-tag { background: rgba(255,255,255,0.05); color: var(--T2); border: 0.5px solid var(--B2); }
+    
+    /* Tareas */
+    .tareas-title { font-size: 11px; font-weight: 600; color: var(--T2); margin-bottom: 10px; letter-spacing: 0.05em; }
+    .tarea-item { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+    .tarea-check { width: 16px; height: 16px; border: 1px solid var(--T3); border-radius: 4px; flex-shrink: 0; margin-top: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--T3); }
+    .tarea-check.checked { background: var(--F); border-color: var(--F); color: white; }
+    .tarea-text { font-size: 12px; color: var(--T2); line-height: 1.5; }
+    
+    /* Copy section */
+    .copy-section { background: var(--S3); border-radius: 8px; padding: 12px; margin-top: 12px; }
+    .copy-title { font-size: 10px; font-weight: 600; color: var(--F); margin-bottom: 8px; letter-spacing: 0.1em; }
+    .copy-platform { margin-bottom: 10px; }
+    .copy-platform-label { font-size: 9px; color: var(--T3); margin-bottom: 4px; letter-spacing: 0.1em; }
+    .copy-text { font-size: 11px; color: var(--T2); line-height: 1.6; white-space: pre-wrap; }
+    .copy-btn { background: transparent; border: 0.5px solid var(--B2); color: var(--T2); font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 4px 10px; border-radius: 4px; cursor: pointer; letter-spacing: 0.1em; transition: all 0.2s; }
+    .copy-btn:hover { border-color: var(--F); color: var(--F); }
+    
+    /* Reel guide */
+    .reel-guide { background: var(--S3); border-radius: 8px; padding: 12px; margin-top: 12px; }
+    .reel-title { font-size: 10px; font-weight: 600; color: var(--F); margin-bottom: 8px; letter-spacing: 0.1em; }
+    .reel-row { display: flex; gap: 8px; margin-bottom: 6px; }
+    .reel-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--T3); min-width: 60px; }
+    .reel-value { font-size: 11px; color: var(--T2); }
+    
+    /* Info boxes */
+    .info-box { background: var(--S3); border-radius: 8px; padding: 12px; margin-top: 12px; }
+    .info-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--F); letter-spacing: 0.15em; margin-bottom: 8px; }
+    .info-text { font-size: 11px; color: var(--T2); line-height: 1.6; }
+    .info-list { list-style: none; }
+    .info-list li { font-size: 11px; color: var(--T2); line-height: 1.8; padding-left: 12px; position: relative; }
+    .info-list li::before { content: "→"; position: absolute; left: 0; color: var(--T3); }
+    
+    /* Tip */
+    .tip { background: rgba(224,64,251,0.08); border: 0.5px solid var(--BORDER); border-radius: 8px; padding: 12px; margin-top: 12px; }
+    .tip-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--F); letter-spacing: 0.15em; margin-bottom: 6px; }
+    .tip-text { font-size: 11px; color: var(--T2); line-height: 1.6; }
+    
+    /* Print styles */
+    @media print {
+      body { background: white; color: black; }
+      .day-content { display: block !important; }
+      .week-section { display: block !important; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <div class="logo-row">
+        <span class="logo">FUXIA</span>
+        <span class="logo-sub">Calendario de contenido</span>
+        <span class="logo-right mono">4 SEMANAS · MEDELLÍN 2026</span>
+      </div>
+      <div class="week-tabs">
+        <button class="week-tab active" onclick="showWeek(0)">Semana 1</button>
+        <button class="week-tab" onclick="showWeek(1)">Semana 2</button>
+        <button class="week-tab" onclick="showWeek(2)">Semana 3</button>
+        <button class="week-tab" onclick="showWeek(3)">Semana 4</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- SEMANA 1 -->
+    <div id="week0" class="week-section active">
+      <div class="week-header">
+        <div>
+          <div class="week-title">Semana 1 — Fundación</div>
+          <div class="week-subtitle">Setup total + primera publicación</div>
+        </div>
+        <div class="week-meta">
+          <div class="label">META</div>
+          <div class="meta-text">Perfiles activos, bio lista, primer reel publicado</div>
+        </div>
+      </div>
+
+      <!-- Lunes -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(0)">
+          <div class="day-info">
+            <span class="day-name">Lunes</span>
+            <span class="day-date">Día 1</span>
+          </div>
+          <div>
+            <span class="day-title">Creación de perfiles</span>
+            <span class="day-arrow">▼</span>
+          </div>
+        </div>
+        <div class="day-content" id="day0">
+          <div class="platform-tags">
+            <span class="platform-tag todos">Todas</span>
+            <span class="platform-tag cuenta-tag">Ambos</span>
+          </div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear @fuxia.co en Instagram (foto de perfil: logo FUXIA en negro/fuchsia)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear @fuxia.co en TikTok — misma foto</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear página FUXIA en Facebook (categoría: Agencia de marketing)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear @fuxia en Threads (sale de Instagram, 1 click)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Actualizar bio @ferneypamplona en todas las redes con el texto del dashboard</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Instalar CapCut, Notion y Canva en el celular</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear carpeta en Notion: 'Banco de contenido FUXIA'</span></div>
+          <div class="info-box">
+            <div class="info-title">HERRAMIENTAS</div>
+            <ul class="info-list"><li>Canva (logo)</li><li>Notion (banco)</li><li>CapCut (instalado y listo)</li></ul>
+          </div>
+          <div class="tip">
+            <div class="tip-title">TIP</div>
+            <div class="tip-text">El logo de FUXIA en Canva: fondo negro, texto 'FUXIA' en #E040FB, fuente Syne ExtraBold. 5 minutos.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Martes -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(1)">
+          <div class="day-info">
+            <span class="day-name">Martes</span>
+            <span class="day-date">Día 2</span>
+          </div>
+          <div>
+            <span class="day-title">Identidad visual en Canva</span>
+            <span class="day-arrow">▼</span>
+          </div>
+        </div>
+        <div class="day-content" id="day1">
+          <div class="platform-tags">
+            <span class="platform-tag todos">Todas</span>
+            <span class="platform-tag cuenta-tag">Ambos</span>
+          </div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear plantilla de post cuadrado FUXIA en Canva (fondo negro, acento fuchsia)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear plantilla de historia FUXIA (1080x1920)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear plantilla de post @ferneypamplona (más personal, menos corporativo)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Definir 3 colores de paleta y guardarlos en Canva Brand Kit</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Tomar 10 fotos de tu setup (escritorio, manos, laptop, café) para banco de imágenes</span></div>
+          <div class="info-box">
+            <div class="info-title">FOTO ESTILO</div>
+            <div class="info-text">Fondo negro o gris oscuro · Celular en mano · Sin posados forzados · Luz de ventana lateral · Sin filtros, solo contraste +10</div>
+          </div>
+          <div class="tip">
+            <div class="tip-title">TIP</div>
+            <div class="tip-text">Fotografiá tu setup limpio HOY. Esas fotos van a durar 4 semanas de contenido.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Miércoles -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(2)">
+          <div class="day-info">
+            <span class="day-name">Miércoles</span>
+            <span class="day-date">Día 3</span>
+          </div>
+          <div>
+            <span class="day-title">PRIMER REEL — B-roll del día</span>
+            <span class="day-arrow">▼</span>
+          </div>
+        </div>
+        <div class="day-content" id="day2">
+          <div class="platform-tags">
+            <span class="platform-tag ig">Instagram</span>
+            <span class="platform-tag tiktok">TikTok</span>
+            <span class="platform-tag cuenta-tag">@ferneypamplona</span>
+          </div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar 2 min de clips: café, laptop, ventana, manos tecleando, calle desde arriba</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Editar en CapCut: 15 seg, cortes cada 2 seg, subtítulos automáticos activados</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Agregar música: minimal techno o ambient oscuro (biblioteca CapCut: 'dark lo-fi')</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar en Instagram Reels + TikTok (mismo video)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Escribir la descripción del reel (copy abajo)</span></div>
+          
+          <div class="copy-section">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div class="copy-title">COPY PARA PUBLICAR</div>
+              <button class="copy-btn" onclick="copyText(this, 'Día normal en Medellín. Café, código y automatización. Esto es lo que construís cuando dejás de intercambiar tiempo por plata. #Medellín #IA #Automatización #FUXIA #EmprendimientoDigital')">copiar</button>
+            </div>
+            <div class="copy-text">Día normal en Medellín.
+
+Café, código y automatización.
+
+Esto es lo que construís cuando dejás de intercambiar tiempo por plata.
+
+#Medellín #IA #Automatización #FUXIA #EmprendimientoDigital</div>
+          </div>
+
+          <div class="reel-guide">
+            <div class="reel-title">GUÍA DEL REEL</div>
+            <div class="reel-row"><span class="reel-label">Duración</span><span class="reel-value">15–18 seg</span></div>
+            <div class="reel-row"><span class="reel-label">Hook</span><span class="reel-value">Texto en pantalla: 'Día normal en Medellín.'</span></div>
+            <div class="reel-row"><span class="reel-label">Estructura</span><span class="reel-value">0–3 seg: clip café humeante, plano detalle | 3–6 seg: manos en laptop, cámara lenta | 6–9 seg: vista desde ventana, ciudad | 9–12 seg: pantalla con código o dashboard | 12–15 seg: texto final: 'Esto es FUXIA.'</span></div>
+            <div class="reel-row"><span class="reel-label">Música</span><span class="reel-value">Dark lo-fi o minimal house sin letra (CapCut biblioteca gratuita)</span></div>
+            <div class="reel-row"><span class="reel-label">Subtítulos</span><span class="reel-value">Activar en CapCut, fuente blanca, sin fondo</span></div>
+          </div>
+          <div class="tip">
+            <div class="tip-title">TIP</div>
+            <div class="tip-text">No esperes que sea perfecto. El primer reel es de práctica. Publicalo igual.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jueves -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(3)">
+          <div class="day-info">
+            <span class="day-name">Jueves</span>
+            <span class="day-date">Día 4</span>
+          </div>
+          <div>
+            <span class="day-title">Post educativo — qué es la automatización</span>
+            <span class="day-arrow">▼</span>
+          </div>
+        </div>
+        <div class="day-content" id="day3">
+          <div class="platform-tags">
+            <span class="platform-tag ig">Instagram</span>
+            <span class="platform-tag threads">Threads</span>
+            <span class="platform-tag facebook">Facebook</span>
+            <span class="platform-tag cuenta-tag">@fuxia</span>
+          </div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Diseñar carrusel de 5 slides en Canva (fondo negro, texto blanco, acento fuxia)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar como carrusel en Instagram</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar versión texto en Threads</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar en página Facebook FUXIA con imagen de portada</span></div>
+          <div class="tip">
+            <div class="tip-title">TIP</div>
+            <div class="tip-text">El carrusel educativo es el formato con más guardados en Instagram. Los guardados = alcance futuro.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Viernes -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(4)">
+          <div class="day-info">
+            <span class="day-name">Viernes</span>
+            <span class="day-date">Día 5</span>
+          </div>
+          <div>
+            <span class="day-title">Historia personal + reel de tatuajes</span>
+            <span class="day-arrow">▼</span>
+          </div>
+        </div>
+        <div class="day-content" id="day4">
+          <div class="platform-tags">
+            <span class="platform-tag ig">Instagram</span>
+            <span class="platform-tag tiktok">TikTok</span>
+            <span class="platform-tag cuenta-tag">@ferneypamplona</span>
+          </div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar close-up de tus tatuajes, cámara lenta, buena luz</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar voz en off por separado (audífonos iPhone como mic)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Editar: imagen tatuaje + voz over + texto en pantalla</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar reel en IG + TikTok</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar historia con pregunta: '¿Vos tenés tatuajes con significado?'</span></div>
+          <div class="tip">
+            <div class="tip-title">TIP</div>
+            <div class="tip-text">Grabá el audio en una habitación cerrada con ropa alrededor para amortiguar el eco. Audífonos Apple funcionan como mic decente.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sábado -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(5)">
+          <div class="day-info">
+            <span class="day-name">Sábado</span>
+            <span class="day-date">Día 6</span>
+          </div>
+          <div>
+            <span class="day-title">Contenido reprogramado + revisión</span>
+            <span class="day-arrow">▼</span>
+          </div>
+        </div>
+        <div class="day-content" id="day5">
+          <div class="platform-tags">
+            <span class="platform-tag threads">Threads</span>
+            <span class="platform-tag facebook">Facebook</span>
+            <span class="platform-tag cuenta-tag">Ambos</span>
+          </div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar thread largo en Threads sobre tu semana como emprendedor en Medellín</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Compartir el reel del miércoles en Facebook personal como Ferney</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Revisar métricas de la semana: ¿qué tuvo más vistas?</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Planear los 3 reels de la semana siguiente en Notion</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Responder todos los comentarios de la semana (aunque sean 3)</span></div>
+          <div class="tip">
+            <div class="tip-title">TIP</div>
+            <div class="tip-text">El sábado es día de revisar, no de crear desde cero. Responder comentarios en las primeras 2 horas post-publicación mejora el alcance hasta un 40%.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domingo -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(6)">
+          <div class="day-info">
+            <span class="day-name">Domingo</span>
+            <span class="day-date">Día 7</span>
+          </div>
+          <div>
+            <span class="day-title">Día libre — recarga y banco de ideas</span>
+            <span class="day-arrow">▼</span>
+          </div>
+        </div>
+        <div class="day-content" id="day6">
+          <div class="platform-tags">
+            <span class="platform-tag todos">Todas</span>
+            <span class="platform-tag cuenta-tag">Ambos</span>
+          </div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Anotar en Notion 5 ideas de contenido que se te ocurrieron esta semana</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Ver 15 reels de referencia en TikTok (cuentas de automatización, Medellín, IA)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Escribir los 2 hooks de los reels de la próxima semana</span></div>
+          <div class="tip">
+            <div class="tip-title">TIP</div>
+            <div class="tip-text">El banco de ideas es tu activo más valioso. Si tenés 20 ideas guardadas, nunca vas a tener bloqueo creativo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 2 -->
+    <div id="week1" class="week-section">
+      <div class="week-header">
+        <div>
+          <div class="week-title">Semana 2 — Consistencia</div>
+          <div class="week-subtitle">2 reels por semana + carruseles educativos</div>
+        </div>
+        <div class="week-meta">
+          <div class="label">META</div>
+          <div class="meta-text">500 seguidores IG · 200 TikTok · Primer prospecto contactado</div>
+        </div>
+      </div>
+
+      <!-- Lunes S2 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS2(0)">
+          <div class="day-info"><span class="day-name">Lunes</span><span class="day-date">Día 8</span></div>
+          <div><span class="day-title">Reel educativo — IA explicada sin tecnicismos</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS2_0">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@fuxia</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar texto animado en fondo negro (CapCut template 'typing effect')</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Agregar voz en off o solo texto (sin cara)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar IG + TikTok a las 7pm</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Compartir en historia con sticker de pregunta</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Los reels de texto sobre negro son los más fáciles de hacer y los más efectivos para educación. No necesitás cara, no necesitás locación.</div></div>
+        </div>
+      </div>
+
+      <!-- Martes S2 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS2(1)">
+          <div class="day-info"><span class="day-name">Martes</span><span class="day-date">Día 9</span></div>
+          <div><span class="day-title">Thread largo — La verdad sobre agencias en Medellín</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS2_1">
+          <div class="platform-tags"><span class="platform-tag threads">Threads</span><span class="platform-tag facebook">Facebook</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar thread en Threads (dividido en 5–6 posts encadenados)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar versión condensada en Facebook personal</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Hacer historia en IG con la frase más fuerte del thread</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">En Threads, el contenido controversial-educativo funciona muy bien. No tenés que insultar a nadie — solo decir lo que otros no dicen.</div></div>
+        </div>
+      </div>
+
+      <!-- Miércoles S2 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS2(9)">
+          <div class="day-info"><span class="day-name">Miércoles</span><span class="day-date">Día 10</span></div>
+          <div><span class="day-title">Reel — Mi setup de 3 cosas</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS2_2">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Limpiar el escritorio (solo laptop, cuaderno y café visible)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar tour de 30 seg: escritorio → close-ups → voz en off</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Editar en CapCut con cortes cada 3 seg</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar IG + TikTok</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">El plano cenital (desde arriba) es el más fácil de lograr con calidad. Ponés el celular apoyado contra algo alto mirando hacia abajo.</div></div>
+        </div>
+      </div>
+
+      <!-- Jueves S2 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS2(10)">
+          <div class="day-info"><span class="day-name">Jueves</span><span class="day-date">Día 11</span></div>
+          <div><span class="day-title">Post FUXIA — Precios y transparencia</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS2_3">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag facebook">Facebook</span><span class="platform-tag threads">Threads</span><span class="platform-tag cuenta-tag">@fuxia</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Diseñar carrusel 6 slides: cada servicio con precio real en COP</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar en Instagram FUXIA</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar en Facebook FUXIA con descripción larga</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Hilo en Threads con los precios</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Publicar precios es el acto de marketing más poderoso que existe. Filtra a los que no son tu cliente y atrae a los que sí. Hacelo sin miedo.</div></div>
+        </div>
+      </div>
+
+      <!-- Viernes S2 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS2(11)">
+          <div class="day-info"><span class="day-name">Viernes</span><span class="day-date">Día 12</span></div>
+          <div><span class="day-title">Primer prospecto — DM directo</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS2_4">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag facebook">Facebook</span><span class="platform-tag cuenta-tag">@fuxia</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Identificar 3 negocios locales en Medellín con Instagram activo pero sin automatización visible</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Enviar DM personalizado a cada uno</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Registrar en Notion: nombre, fecha de contacto, respuesta</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Historia en IG Ferney: 'Contactando mis primeros 3 clientes esta semana'</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">El DM perfecto es corto, específico y hace UNA sola pregunta al final. Nunca pongas todos los servicios en el primer mensaje. Solo abrí la conversación.</div></div>
+        </div>
+      </div>
+
+      <!-- Sábado S2 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS2(12)">
+          <div class="day-info"><span class="day-name">Sábado</span><span class="day-date">Día 13</span></div>
+          <div><span class="day-title">Reel de proceso — cómo trabajo</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS2_5">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar pantalla mientras usás Make, n8n o V0 (screen recording en CapCut)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Agregar voz en off explicando qué es lo que se ve</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar con copy educativo</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">No necesitás que el flujo esté funcionando perfecto para grabarlo. El proceso de construcción también es contenido.</div></div>
+        </div>
+      </div>
+
+      <!-- Domingo S2 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS2(13)">
+          <div class="day-info"><span class="day-name">Domingo</span><span class="day-date">Día 14</span></div>
+          <div><span class="day-title">Revisión semana 2 + banco semana 3</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS2_6">
+          <div class="platform-tags"><span class="platform-tag todos">Todas</span><span class="platform-tag cuenta-tag">Ambos</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Revisar métricas: alcance, guardados, seguidores nuevos por plataforma</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">¿Algún DM respondió? Follow-up si no hubo respuesta</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Anotar qué contenido funcionó mejor y por qué en Notion</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Planear reels semana 3 (hooks escritos)</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Mirá qué posts tiveram más GUARDADOS (no likes). Los guardados son el indicador real de contenido valioso.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 3 -->
+    <div id="week2" class="week-section">
+      <div class="week-header">
+        <div>
+          <div class="week-title">Semana 3 — Tracción</div>
+          <div class="week-subtitle">Primer cliente + collab + más autoridad</div>
+        </div>
+        <div class="week-meta">
+          <div class="label">META</div>
+          <div class="meta-text">1.000 seguidores IG · Primer pago recibido · 1 collab</div>
+        </div>
+      </div>
+
+      <!-- Lunes S3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS3(14)">
+          <div class="day-info"><span class="day-name">Lunes</span><span class="day-date">Día 15</span></div>
+          <div><span class="day-title">Reel — Antes de pagarle a una agencia</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS3_0">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar a cámara, plano medio cerrado, mirada al lente</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Luz frontal (ventana o ring light), fondo limpio o desordenado-intencional</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Editar: cortes rápidos, sin música, solo voz</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar IG + TikTok a las 6:30pm</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Mirá AL LENTE, no a tu imagen en pantalla. Ese es el único truco que diferencia un buen talking head de uno incómodo.</div></div>
+        </div>
+      </div>
+
+      <!-- Martes S3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS3(15)">
+          <div class="day-info"><span class="day-name">Martes</span><span class="day-date">Día 16</span></div>
+          <div><span class="day-title">Carrusel — Caso de uso real (o inventado con V0)</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS3_1">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag facebook">Facebook</span><span class="platform-tag cuenta-tag">@fuxia</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Construir 2 versiones de landing en V0.dev (genérica vs. FUXIA)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Tomar screenshots de ambas</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Armar carrusel comparativo en Canva (5–6 slides)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar en IG y Facebook con copy comparativo</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">V0.dev es gratis y genera landings completas con un prompt de texto. Podés hacer 'Landing genérica para restaurante' vs 'Landing minimalista para restaurante de autor'. 10 minutos.</div></div>
+        </div>
+      </div>
+
+      <!-- Miércoles S3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS3(16)">
+          <div class="day-info"><span class="day-name">Miércoles</span><span class="day-date">Día 17</span></div>
+          <div><span class="day-title">Reel de Medellín — tu ciudad como marca</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS3_2">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Salir a grabar: El Poblado, Laureles, o tu barrio — 10 clips de la ciudad</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Editar con texto: 'Construyendo desde Medellín.'</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar con geotag Medellín</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Compartir en historia con sticker de ubicación</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">El geotag de Medellín en los reels te da alcance local orgánico. Siempre etiquetá la ubicación.</div></div>
+        </div>
+      </div>
+
+      <!-- Jueves S3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS3(17)">
+          <div class="day-info"><span class="day-name">Jueves</span><span class="day-date">Día 18</span></div>
+          <div><span class="day-title">Collab — buscar cuenta aliada</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS3_3">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag threads">Threads</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Buscar 5 cuentas de Medellín complementarias (fotógrafo, diseñador, coach de negocios)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Seguirlas y comentar genuinamente 3 posts de cada una</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Enviar DM de collab a la más afín</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar post en Threads: '¿Quién está construyendo algo interesante en Medellín?'</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">DM de collab perfecto: 'Vi lo que hacés con [X], creo que nuestras audiencias se complementan. ¿Te interesa hacer algo juntos?' Sin pedir nada grande de entrada.</div></div>
+        </div>
+      </div>
+
+      <!-- Viernes S3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS3(18)">
+          <div class="day-info"><span class="day-name">Viernes</span><span class="day-date">Día 19</span></div>
+          <div><span class="day-title">Reel — La diferencia entre $1M y $5M (talking head)</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS3_4">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar a cámara mostrando pantalla (screen share + cara)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Usar las 2 landings de V0 del martes como apoyo visual</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Editar con CapCut: cortes rápidos, subtítulos, sin música</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar IG + TikTok</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">En CapCut podés combinar el video de tu cara en una esquina y la pantalla en el fondo. Es el formato más poderoso para contenido de proceso.</div></div>
+        </div>
+      </div>
+
+      <!-- Sábado S3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS3(19)">
+          <div class="day-info"><span class="day-name">Sábado</span><span class="day-date">Día 20</span></div>
+          <div><span class="day-title">Historia de aprendizaje semanal</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS3_5">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag threads">Threads</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar serie de 5 historias: '5 cosas que aprendí esta semana'</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar thread en Threads con el resumen de la semana 3</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Responder todos los comentarios y DMs pendientes</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Las series de historias ('5 cosas que aprendí') tienen el doble de retención que las historias individuales. La gente espera la siguiente.</div></div>
+        </div>
+      </div>
+
+      <!-- Domingo S3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS3(20)">
+          <div class="day-info"><span class="day-name">Domingo</span><span class="day-date">Día 21</span></div>
+          <div><span class="day-title">Revisión semana 3 + preparar semana 4</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS3_6">
+          <div class="platform-tags"><span class="platform-tag todos">Todas</span><span class="platform-tag cuenta-tag">Ambos</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Revisar todos los KPIs: seguidores, guardados, DMs, prospectos</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">¿Hubo respuesta de algún prospecto? Agendar llamada</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Documentar en Notion: qué funcionó, qué cambiar</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar banco de contenido para semana 4 (videos crudos sin editar)</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Si llegaste a la semana 3 publicando, ya ganaste. El 90% de las personas abandona antes. Eso ya te diferencia.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 4 -->
+    <div id="week3" class="week-section">
+      <div class="week-header">
+        <div>
+          <div class="week-title">Semana 4 — Monetización</div>
+          <div class="week-subtitle">Primer cobro + sistema que se sostiene solo</div>
+        </div>
+        <div class="week-meta">
+          <div class="label">META</div>
+          <div class="meta-text">2.000 seguidores IG · $1.5M–$3M COP primer proyecto · Sistema rodando</div>
+        </div>
+      </div>
+
+      <!-- Lunes S4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS4(21)">
+          <div class="day-info"><span class="day-name">Lunes</span><span class="day-date">Día 22</span></div>
+          <div><span class="day-title">Reel de cierre — 30 días, qué pasó</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS4_0">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar resumen honesto de los 30 días a cámara</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Mostrar pantalla con números reales (aunque sean pequeños)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar IG + TikTok</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Compartir en todas las stories</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Los números chicos con honestidad construyen más confianza que los números grandes con hype. Di exactamente lo que pasó.</div></div>
+        </div>
+      </div>
+
+      <!-- Martes S4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS4(22)">
+          <div class="day-info"><span class="day-name">Martes</span><span class="day-date">Día 23</span></div>
+          <div><span class="day-title">Post propuesta de valor definitiva FUXIA</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS4_1">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag facebook">Facebook</span><span class="platform-tag threads">Threads</span><span class="platform-tag cuenta-tag">@fuxia</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Crear el post definitivo de FUXIA (quiénes somos, qué hacemos, para quién)</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Fijarlo como post destacado en Instagram</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar versión en Facebook como post fijado de la página</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Thread largo en Threads</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">El post fijado es la primera impresión de quien llega a tu perfil. Tiene que responder en 3 segundos: qué hacés, para quién y cómo te contactan.</div></div>
+        </div>
+      </div>
+
+      <!-- Miércoles S4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS4(23)">
+          <div class="day-info"><span class="day-name">Miércoles</span><span class="day-date">Día 24</span></div>
+          <div><span class="day-title">Reel — IA para el negocio de tu barrio</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS4_2">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@fuxia</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar reel con ejemplo de negocio local: restaurante, salón, tienda</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Mostrar flujo específico para ese tipo de negocio</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar con geotag Medellín</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Crear reels para nichos específicos (restaurantes, salones, tiendas) te da alcance local muy preciso. El algoritmo los muestra a dueños de negocios similares.</div></div>
+        </div>
+      </div>
+
+      <!-- Jueves S4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS4(24)">
+          <div class="day-info"><span class="day-name">Jueves</span><span class="day-date">Día 25</span></div>
+          <div><span class="day-title">Propuesta + cierre primer cliente</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS4_3">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag facebook">Facebook</span><span class="platform-tag cuenta-tag">@fuxia</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Enviar propuesta formal (1 página en Notion o PDF) al prospecto más avanzado</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Hacer seguimiento a todos los DMs de la semana 2</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Si hay cliente confirmado: publicar historia '¡Primer proyecto FUXIA!'</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Registrar en Notion el estado de cada prospecto</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">La propuesta de 1 página funciona mejor que el documento de 10. Una sección por punto: qué hacés, cómo, en cuánto tiempo, cuánto cuesta, qué necesitás del cliente.</div></div>
+        </div>
+      </div>
+
+      <!-- Viernes S4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS4(25)">
+          <div class="day-info"><span class="day-name">Viernes</span><span class="day-date">Día 26</span></div>
+          <div><span class="day-title">Reel — Aprendizaje del mes</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS4_4">
+          <div class="platform-tags"><span class="platform-tag ig">Instagram</span><span class="platform-tag tiktok">TikTok</span><span class="platform-tag cuenta-tag">@ferneypamplona</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Grabar reel de cierre del primer mes, más reflexivo</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Combinar clips del mes con voz en off</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar IG + TikTok</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">El contenido de cierre de mes genera identificación. La gente se ve reflejada en el proceso, no solo en los resultados.</div></div>
+        </div>
+      </div>
+
+      <!-- Sábado S4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS4(26)">
+          <div class="day-info"><span class="day-name">Sábado</span><span class="day-date">Día 27</span></div>
+          <div><span class="day-title">Revisión final + документировать</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS4_5">
+          <div class="platform-tags"><span class="platform-tag todos">Todas</span><span class="platform-tag cuenta-tag">Ambos</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Hacer backup de todo el contenido publicado en carpeta</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Documentar lecciones aprendidas del mes 1 en Notion</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Planificar objetivos para el mes 2</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">La documentación es lo que separa a los que aprenden de los que repiten errores. 30 minutos de documentación te ahorran meses de errores.</div></div>
+        </div>
+      </div>
+
+      <!-- Domingo S4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDayS4(27)">
+          <div class="day-info"><span class="day-name">Domingo</span><span class="day-date">Día 28</span></div>
+          <div><span class="day-title">Celebración + descanso</span><span class="day-arrow">▼</span></div>
+        </div>
+        <div class="day-content" id="dayS4_6">
+          <div class="platform-tags"><span class="platform-tag todos">Todas</span><span class="platform-tag cuenta-tag">Ambos</span></div>
+          <div class="tareas-title">TAREAS</div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Publicar historia de celebración: 'Completé 28 días'</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Agradecer a quienes te siguieron desde el día 1</span></div>
+          <div class="tarea-item" onclick="toggleCheck(this)"><span class="tarea-check">☐</span><span class="tarea-text">Descansar. El trabajo duro sin descanso es sostenible solo 30 días.</span></div>
+          <div class="tip"><div class="tip-title">FELICIDADES</div><div class="tip-text">Completaste el mes 1. Eso ya te pone en el top 10% de las personas que empiezan algo. El mes 2 va a ser más fácil porque ya tenés sistema.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showWeek(weekIndex) {
+      document.querySelectorAll('.week-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.week-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('week' + weekIndex).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function toggleDay(dayIndex) {
+      const header = document.querySelectorAll('.day-header')[dayIndex];
+      const content = document.getElementById('day' + dayIndex);
+      const arrow = header.querySelector('.day-arrow');
+      header.classList.toggle('open');
+      content.classList.toggle('open');
+      arrow.classList.toggle('open');
+    }
+
+    function toggleDayS2(d) {
+      const card = document.querySelector('#week1 .day-card:nth-child(' + (d + 1) + ')');
+      if(card){card.querySelector('.day-header').classList.toggle('open');card.querySelector('.day-content').classList.toggle('open');card.querySelector('.day-arrow').classList.toggle('open');}
+    }
+    function toggleDayS3(d){
+      const card = document.querySelector('#week2 .day-card:nth-child(' + (d + 1) + ')');
+      if(card){card.querySelector('.day-header').classList.toggle('open');card.querySelector('.day-content').classList.toggle('open');card.querySelector('.day-arrow').classList.toggle('open');}
+    }
+    function toggleDayS4(d){
+      const card = document.querySelector('#week3 .day-card:nth-child(' + (d + 1) + ')');
+      if(card){card.querySelector('.day-header').classList.toggle('open');card.querySelector('.day-content').classList.toggle('open');card.querySelector('.day-arrow').classList.toggle('open');}
+    }
+
+    function toggleCheck(item) {
+      const check = item.querySelector('.tarea-check');
+      check.classList.toggle('checked');
+      check.textContent = check.classList.contains('checked') ? '✓' : '☐';
+      saveChecks();
+    }
+
+    function saveChecks() {
+      const checks = {};
+      document.querySelectorAll('.tarea-item').forEach((item, i) => {
+        checks['tarea_' + i] = item.querySelector('.tarea-check').classList.contains('checked');
+      });
+      localStorage.setItem('fuxia_calendario_checks', JSON.stringify(checks));
+    }
+
+    function loadChecks() {
+      const saved = localStorage.getItem('fuxia_calendario_checks');
+      if (saved) {
+        const checks = JSON.parse(saved);
+        document.querySelectorAll('.tarea-item').forEach((item, i) => {
+          const check = item.querySelector('.tarea-check');
+          if (checks['tarea_' + i]) {
+            check.classList.add('checked');
+            check.textContent = '✓';
+          }
+        });
+      }
+    }
+
+    window.onload = loadChecks;
+
+    function copyText(btn, text) {
+      navigator.clipboard.writeText(text);
+      const originalText = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => btn.textContent = originalText, 1500);
+    }
+  </script>
+</body>
+</html>

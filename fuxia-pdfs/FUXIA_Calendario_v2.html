@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>FUXIA Calendario</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root { --F: #E040FB; --BG: #070707; --S1: #101010; --S2: #181818; --S3: #222222; --T1: #F0EFE8; --T2: #888880; --T3: #444440; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--BG); font-family: 'Syne', sans-serif; color: var(--T1); }
+    .container { max-width: 700px; margin: 0 auto; padding: 20px; }
+    .header { background: var(--S1); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 16px 20px; position: sticky; top: 0; }
+    .logo { font-size: 24px; font-weight: 800; color: var(--F); }
+    .tabs { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; }
+    .tab { background: transparent; border: none; color: var(--T2); font-size: 12px; padding: 8px 12px; cursor: pointer; }
+    .tab.active { color: var(--F); border-bottom: 2px solid var(--F); }
+    .section { display: none; }
+    .section.active { display: block; }
+    .week-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .day-card { background: var(--S1); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+    .day-header { display: flex; justify-content: space-between; padding: 14px 16px; background: var(--S2); cursor: pointer; }
+    .day-header:hover { background: var(--S3); }
+    .day-left { display: flex; align-items: center; gap: 8px; }
+    .day-name { font-weight: 600; font-size: 13px; }
+    .day-date { font-size: 10px; color: var(--T3); }
+    .day-task { font-size: 12px; color: var(--T2); margin-left: 8px; }
+    .day-arrow { color: var(--T3); }
+    .day-content { display: none; padding: 16px; }
+    .day-content.show { display: block; }
+    .tarea { display: flex; gap: 10px; margin-bottom: 10px; }
+    .check { width: 18px; height: 18px; border: 1px solid var(--T3); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .check.checked { background: var(--F); border-color: var(--F); color: white; }
+    .tarea-text { font-size: 12px; color: var(--T2); }
+    .tip { background: rgba(224,64,251,0.1); border: 1px solid var(--F); border-radius: 8px; padding: 12px; margin-top: 12px; }
+    .tip-title { font-size: 9px; color: var(--F); letter-spacing: 0.15em; margin-bottom: 4px; }
+    .tip-text { font-size: 11px; color: var(--T2); }
+    .platform-tag { font-size: 9px; padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block; }
+    .platform-tag.ig { background: rgba(224,64,251,0.15); color: var(--F); }
+    .platform-tag.tiktok { background: rgba(105,201,208,0.15); color: #69C9D0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="container" style="padding: 0;">
+      <span class="logo">FUXIA</span>
+      <div class="tabs">
+        <button class="tab" onclick="cambiarSemana(0)">Semana 1</button>
+        <button class="tab" onclick="cambiarSemana(1)">Semana 2</button>
+        <button class="tab" onclick="cambiarSemana(2)">Semana 3</button>
+        <button class="tab" onclick="cambiarSemana(3)">Semana 4</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <!-- SEMANA 1 -->
+    <div class="section active" id="semana0">
+      <div class="week-title">Semana 1 — Fundación</div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s1-d1')">
+          <div class="day-left"><span class="day-name">Lunes</span><span class="day-date">Día 1</span><span class="day-task">Creación de perfiles</span></div>
+          <span class="day-arrow" id="arrow-s1-d1">▼</span>
+        </div>
+        <div class="day-content" id="s1-d1">
+          <span class="platform-tag ig">IG</span><span class="platform-tag tiktok">TikTok</span>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c1">☐</span><span class="tarea-text">Crear @fuxia.co en Instagram</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c2">☐</span><span class="tarea-text">Crear @fuxia.co en TikTok</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c3">☐</span><span class="tarea-text">Crear página FUXIA en Facebook</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Logo: fondo negro, texto #E040FB, fuente Syne ExtraBold.</div></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s1-d3')">
+          <div class="day-left"><span class="day-name">Miércoles</span><span class="day-date">Día 3</span><span class="day-task">PRIMER REEL</span></div>
+          <span class="day-arrow" id="arrow-s1-d3">▼</span>
+        </div>
+        <div class="day-content" id="s1-d3">
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c4">☐</span><span class="tarea-text">Grabar 2 min de clips (café, laptop, ventana)</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c5">☐</span><span class="tarea-text">Editar en CapCut: 15 seg, cortes cada 2 seg</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c6">☐</span><span class="tarea-text">Publicar en Instagram Reels + TikTok</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">No esperes que sea perfecto. Publicalo igual.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 2 -->
+    <div class="section" id="semana1">
+      <div class="week-title">Semana 2 — Consistencia</div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s2-d8')">
+          <div class="day-left"><span class="day-name">Lunes</span><span class="day-date">Día 8</span><span class="day-task">Reel educativo — IA</span></div>
+          <span class="day-arrow" id="arrow-s2-d8">▼</span>
+        </div>
+        <div class="day-content" id="s2-d8">
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c7">☐</span><span class="tarea-text">Grabar texto animado en fondo negro (CapCut)</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c8">☐</span><span class="tarea-text">Publicar IG + TikTok a las 7pm</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Los reels de texto sobre negro son los más fáciles.</div></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s2-d11')">
+          <div class="day-left"><span class="day-name">Jueves</span><span class="day-date">Día 11</span><span class="day-task">Post FUXIA — Precios</span></div>
+          <span class="day-arrow" id="arrow-s2-d11">▼</span>
+        </div>
+        <div class="day-content" id="s2-d11">
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c9">☐</span><span class="tarea-text">Diseñar carrusel 6 slides con precios</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c10">☐</span><span class="tarea-text">Publicar en Instagram y Facebook</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Publicar precios filtra clientes.</div></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s2-d12')">
+          <div class="day-left"><span class="day-name">Viernes</span><span class="day-date">Día 12</span><span class="day-task">Primer prospecto</span></div>
+          <span class="day-arrow" id="arrow-s2-d12">▼</span>
+        </div>
+        <div class="day-content" id="s2-d12">
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c11">☐</span><span class="tarea-text">Identificar 3 negocios en Medellín</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c12">☐</span><span class="tarea-text">Enviar DM personalizado a cada uno</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c13">☐</span><span class="tarea-text">Registrar en Notion</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">El DM perfecto es corto.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 3 -->
+    <div class="section" id="semana2">
+      <div class="week-title">Semana 3 — Tracción</div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s3-d15')">
+          <div class="day-left"><span class="day-name">Lunes</span><span class="day-date">Día 15</span><span class="day-task">Reel — Antes de agencia</span></div>
+          <span class="day-arrow" id="arrow-s3-d15">▼</span>
+        </div>
+        <div class="day-content" id="s3-d15">
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c14">☐</span><span class="tarea-text">Grabar a cámara, plano medio cerrado</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c15">☐</span><span class="tarea-text">Editar: cortes rápidos, sin música</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c16">☐</span><span class="tarea-text">Publicar IG + TikTok</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Mirá al lente, no a la pantalla.</div></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s3-d17')">
+          <div class="day-left"><span class="day-name">Miércoles</span><span class="day-date">Día 17</span><span class="day-task">Reel de Medellín</span></div>
+          <span class="day-arrow" id="arrow-s3-d17">▼</span>
+        </div>
+        <div class="day-content" id="s3-d17">
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c17">☐</span><span class="tarea-text">Salir a grabar: 10 clips de la ciudad</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c18">☐</span><span class="tarea-text">Publicar con geotag Medellín</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">El geotag da alcance local.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 4 -->
+    <div class="section" id="semana3">
+      <div class="week-title">Semana 4 — Monetización</div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s4-d22')">
+          <div class="day-left"><span class="day-name">Lunes</span><span class="day-date">Día 22</span><span class="day-task">Reel de cierre</span></div>
+          <span class="day-arrow" id="arrow-s4-d22">▼</span>
+        </div>
+        <div class="day-content" id="s4-d22">
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c19">☐</span><span class="tarea-text">Grabar resumen honesto de 30 días</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c20">☐</span><span class="tarea-text">Mostrar pantalla con números reales</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Los números claros construyen confianza.</div></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header" onclick="abrirDia('s4-d25')">
+          <div class="day-left"><span class="day-name">Jueves</span><span class="day-date">Día 25</span><span class="day-task">Propuesta + cierre</span></div>
+          <span class="day-arrow" id="arrow-s4-d25">▼</span>
+        </div>
+        <div class="day-content" id="s4-d25">
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c21">☐</span><span class="tarea-text">Enviar propuesta formal al prospecto</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c22">☐</span><span class="tarea-text">Hacer seguimiento a todos los DMs</span></div>
+          <div class="tarea" onclick="marcarCheck(this)"><span class="check" id="c23">☐</span><span class="tarea-text">Publicar '¡Primer proyecto FUXIA!'</span></div>
+          <div class="tip"><div class="tip-title">TIP</div><div class="tip-text">Propuesta de 1 página.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function cambiarSemana(n) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === n));
+      document.getElementById('semana' + n).classList.add('active');
+    }
+
+    function abrirDia(id) {
+      const contenido = document.getElementById(id);
+      const flecha = document.getElementById('arrow-' + id);
+      if (contenido.style.display === 'block') {
+        contenido.style.display = 'none';
+        flecha.textContent = '▼';
+      } else {
+        contenido.style.display = 'block';
+        flecha.textContent = '▲';
+      }
+    }
+
+    function marcarCheck(div) {
+      const check = div.querySelector('.check');
+      check.classList.toggle('checked');
+      check.textContent = check.classList.contains('checked') ? '✓' : '☐';
+      localStorage.setItem('checks', document.querySelectorAll('.check').length);
+    }
+
+    // Inicializar
+    document.querySelectorAll('.tab')[0].classList.add('active');
+  </script>
+</body>
+</html>

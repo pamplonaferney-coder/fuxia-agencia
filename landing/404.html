@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>404 — FUXIA · Esta página no existe</title>
+<link rel="icon" type="image/png" href="/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { background: #050508; color: #fff; font-family: 'Syne', sans-serif; overflow: hidden; }
+  #flow { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .veil { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 20%, rgba(5,5,8,0.6) 70%, rgba(5,5,8,0.92) 100%); }
+  main { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+  .code { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.35em; color: #CC00FF; text-transform: uppercase; margin-bottom: 16px; }
+  h1 { font-size: clamp(4rem, 18vw, 9rem); font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+  h1 span { color: #CC00FF; }
+  p { margin-top: 16px; font-size: 1rem; color: #aaaabb; max-width: 420px; line-height: 1.7; }
+  p strong { color: #fff; }
+  .btns { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; justify-content: center; }
+  a.btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.95rem; padding: 14px 28px; border-radius: 4px; text-decoration: none; transition: transform 0.15s, box-shadow 0.2s; }
+  a.btn:hover { transform: translateY(-2px); }
+  a.primary { background: #CC00FF; color: #fff; box-shadow: 0 0 30px rgba(204,0,255,0.35); }
+  a.ghost { border: 1px solid #CC00FF; color: #CC00FF; }
+  a.ghost:hover { background: #CC00FF; color: #fff; }
+  .hint { margin-top: 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: #55555f; text-transform: uppercase; }
+  #cookie-banner { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 10002; background: rgba(13,13,18,0.98); border: 2px solid #CC00FF; border-radius: 12px; padding: 1rem 1.1rem; display: none; gap: 0.8rem; max-width: 640px; margin: 0 auto; align-items: center; font-family: 'JetBrains Mono',monospace; font-size: 0.7rem; color: #aaaabb; line-height: 1.6; }
+  #cookie-banner.show { display: flex; }
+  #cookie-banner a { color: #CC00FF; }
+  #cookie-banner .ck-btns { display: flex; gap: 0.5rem; }
+  #cookie-banner button { font-family: inherit; font-size: 0.7rem; padding: 0.6rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 700; }
+  #ck-accept { background: #CC00FF; color: #fff; border: 1px solid #CC00FF; }
+  #ck-reject { background: transparent; color: #aaaabb; border: 1px solid rgba(255,255,255,0.3); }
+  #ck-float { position: fixed; left: 1rem; bottom: 1rem; z-index: 10001; width: 44px; height: 44px; border-radius: 50%; background: rgba(13,13,18,0.95); border: 1px solid #CC00FF; color: #fff; font-size: 20px; cursor: pointer; display: none; align-items: center; justify-content: center; }
+  #ck-float.show { display: flex; }
+  .legal { margin-top: 22px; font-family: 'JetBrains Mono',monospace; font-size: 0.62rem; color: #55555f; line-height: 2; }
+  .legal a { color: #777788; }
+  @media (max-width:600px){ #cookie-banner{ flex-direction:column; align-items:stretch; } #cookie-banner .ck-btns button{ flex:1; } }
+</style>
+</head>
+<body>
+<canvas id="flow"></canvas>
+<div class="veil"></div>
+<main>
+  <div class="code">// error 404</div>
+  <h1>Perdido<span>?</span></h1>
+  <p>Esta página no existe. Pero tu negocio <strong>sí puede funcionar solo</strong>.</p>
+  <div class="btns">
+    <a class="btn primary" href="/">Volver al inicio →</a>
+    <a class="btn ghost" href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20quiero%20automatizar%20mi%20negocio" target="_blank" rel="noopener noreferrer">Hablemos por WhatsApp</a>
+  </div>
+  <div class="hint">tocá en cualquier lado ✦</div>
+  <div class="legal"><a href="/politica-datos.html">Tratamiento de datos</a> · <a href="/politica-cookies.html">Cookies</a> · <a href="/terminos.html">Términos</a><br />© 2026 FUXIA · Medellín · Pixel de Meta solo si aceptas</div>
+</main>
+<div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+  <span><strong>🍪 Cookies + Pixel de Meta.</strong> El Pixel solo se activa si aceptas. <a href="/politica-cookies.html">Ver política</a>.</span>
+  <span class="ck-btns"><button id="ck-accept" type="button">Aceptar todo</button><button id="ck-reject" type="button">Solo necesarias</button></span>
+</div>
+<button id="ck-float" type="button" aria-label="Configurar cookies" title="Configurar cookies">🍪</button>
+<script>
+  // Flow de fondo estilo gateway (vanilla, sin dependencias)
+  (function () {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var canvas = document.getElementById("flow");
+    var ctx = canvas.getContext("2d");
+    var W = 0, H = 0, paths = [], booms = [], run = true;
+    var N = window.innerWidth < 700 ? 42 : 80;
+    var LINE = "rgba(204, 0, 255, 0.32)";
+    var DOT = "rgba(230, 150, 255, 0.8)";
+    function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function seed() {
+      paths = [];
+      for (var i = 0; i < N; i++) {
+        paths.push({
+          left: i % 2 === 0,
+          y0: (i / N) * H * 1.4 - H * 0.2,
+          t: Math.random(),
+          sp: 0.0015 + Math.random() * 0.002
+        });
+      }
+    }
+    function bz(t, a, b, c, d) {
+      var u = 1 - t;
+      return {
+        x: u*u*u*a.x + 3*u*u*t*b.x + 3*u*t*t*c.x + t*t*t*d.x,
+        y: u*u*u*a.y + 3*u*u*t*b.y + 3*u*t*t*c.y + t*t*t*d.y
+      };
+    }
+    function frame() {
+      requestAnimationFrame(frame);
+      if (!run) return;
+      ctx.clearRect(0, 0, W, H);
+      var cx = W / 2, cy = H / 2;
+      for (var b = booms.length - 1; b >= 0; b--) {
+        booms[b].r += 14; booms[b].l -= 0.016;
+        if (booms[b].l <= 0) booms.splice(b, 1);
+      }
+      for (var k = 0; k < paths.length; k++) {
+        var p = paths[k];
+        var p0 = { x: p.left ? 0 : W, y: p.y0 };
+        var p1 = { x: p.left ? cx * 0.5 : W - cx * 0.5, y: p.y0 };
+        var p2 = { x: p.left ? cx * 0.8 : W - cx * 0.8, y: cy };
+        var p3 = { x: cx, y: cy };
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+        ctx.strokeStyle = LINE;
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([1, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        p.t += p.sp;
+        if (p.t > 1) { p.t = 0; p.y0 += (Math.random() - 0.5) * 10; }
+        var pos = bz(p.t, p0, p1, p2, p3);
+        var dx = 0, dy = 0;
+        for (var j = 0; j < booms.length; j++) {
+          var e = booms[j];
+          var vx = pos.x - e.x, vy = pos.y - e.y;
+          var dist = Math.hypot(vx, vy) || 1;
+          if (dist < e.r + 120 && dist > e.r - 120) {
+            var f = (1 - Math.abs(dist - e.r) / 120) * e.l;
+            dx += (vx / dist) * f * 80;
+            dy += (vy / dist) * f * 80;
+          }
+        }
+        ctx.fillStyle = DOT;
+        ctx.fillRect(pos.x + dx - 1.5, pos.y + dy - 1.5, 3, 3);
+      }
+    }
+    size();
+    seed();
+    window.addEventListener("resize", function () { size(); seed(); });
+    window.addEventListener("click", function (e) {
+      booms.push({ x: e.clientX, y: e.clientY, r: 0, l: 1 });
+    });
+    document.addEventListener("visibilitychange", function () { run = !document.hidden; });
+    frame();
+  })();
+</script>
+<script>
+(function(){
+  var KEY='fuxia_cookie_consent', b=document.getElementById('cookie-banner'), f=document.getElementById('ck-float');
+  function get(){ try{ return localStorage.getItem(KEY);}catch(e){return null;} }
+  function set(v){ try{ localStorage.setItem(KEY,v);}catch(e){} }
+  function show(){ b.classList.add('show'); f.classList.remove('show'); }
+  function hide(){ b.classList.remove('show'); if(get()) f.classList.add('show'); }
+  var force=/[?#&]cookies/.test(location.search+location.hash);
+  setTimeout(function(){ if(!get()||force) show(); else if(get()) f.classList.add('show'); },700);
+  document.getElementById('ck-accept').addEventListener('click',function(){ set('accepted'); hide(); });
+  document.getElementById('ck-reject').addEventListener('click',function(){ set('rejected'); hide(); });
+  f.addEventListener('click',show);
+})();
+</script>
+</body>
+</html>

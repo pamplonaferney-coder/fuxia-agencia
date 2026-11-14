@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FUXIA Metrics - Seguimiento 90 días</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --F: #E040FB;
+      --F2: #9C27B0;
+      --BG: #070707;
+      --S1: #101010;
+      --S2: #181818;
+      --S3: #222222;
+      --T1: #F0EFE8;
+      --T2: #888880;
+      --T3: #444440;
+      --B2: rgba(255,255,255,0.06);
+      --BF: rgba(224,64,251,0.18);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--BG); min-height: 100vh; font-family: 'Syne', sans-serif; color: var(--T1); padding-bottom: 40px; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+    h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    h3 { font-size: 14px; font-weight: 500; }
+    .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--T3); font-weight: 400; }
+    .body-text { font-size: 13px; line-height: 1.7; color: var(--T2); }
+    .pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; padding: 2px 8px; border-radius: 20px; }
+    
+    .container { max-width: 850px; margin: 0 auto; padding: 24px; }
+    
+    /* Header */
+    .header { border-bottom: 0.5px solid var(--B2); background: var(--S1); padding: 18px 20px; position: sticky; top: 0; z-index: 100; }
+    .header-content { max-width: 850px; margin: 0 auto; }
+    .logo-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .logo { font-size: 24px; font-weight: 800; color: var(--F); letter-spacing: -0.5; }
+    .logo-sub { font-size: 10px; color: var(--T3); letter-spacing: 0.2em; }
+    .logo-right { font-size: 10px; color: var(--T3); margin-left: auto; letter-spacing: 0.1em; }
+    
+    /* Tabs */
+    .tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { background: transparent; border: none; color: var(--T2); font-family: 'Syne', sans-serif; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 14px; cursor: pointer; transition: color 0.2s; white-space: nowrap; font-weight: 500; border-bottom: 1.5px solid transparent; }
+    .tab:hover { color: var(--T1); }
+    .tab.active { color: var(--F); border-bottom-color: var(--F); }
+    
+    /* Sections */
+    .section { display: none; flex-direction: column; gap: 20px; animation: fadeIn 0.2s ease forwards; }
+    .section.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* Week buttons */
+    .week-btns { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 24px; }
+    .week-btn { background: transparent; border: 0.5px solid var(--B2); color: var(--T2); font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 7px 14px; border-radius: 20px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .week-btn:hover { border-color: var(--BF); color: var(--T1); }
+    .week-btn.active { border-color: var(--F); color: var(--F); background: rgba(224,64,251,0.08); }
+    .week-btn .count { margin-left: 6px; font-size: 9px; opacity: 0.7; }
+    
+    /* Progress bar */
+    .progress-box { background: var(--S1); border: 0.5px solid var(--B2); border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .progress-bar { flex: 1; background: var(--S3); border-radius: 2px; height: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--F); border-radius: 2px; transition: width 0.4s; }
+    .progress-text { text-align: center; min-width: 60px; }
+    .progress-pct { font-size: 22px; font-weight: 800; color: var(--F); }
+    .progress-label { font-size: 9px; color: var(--T3); }
+    
+    /* Input card */
+    .input-card { background: var(--S1); border: 0.5px solid var(--B2); border-radius: 10px; padding: 12px 14px; }
+    .input-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .input-title { font-size: 12px; font-weight: 500; color: var(--T1); }
+    .input-meta { font-size: 10px; color: var(--T3); margin-top: 2px; }
+    .input-pct { font-size: 13px; font-weight: 700; }
+    .input-pct.high { color: #8AE8A0; }
+    .input-pct.mid { color: var(--F); }
+    .input-pct.low { color: var(--T2); }
+    .input-field { background: var(--S3); border: 0.5px solid var(--B2); color: var(--T1); font-family: 'JetBrains Mono', monospace; font-size: 14px; padding: 8px 12px; border-radius: 8px; width: 100%; outline: none; transition: border-color 0.2s; }
+    .input-field:focus { border-color: var(--F); }
+    .input-field::placeholder { color: var(--T3); }
+    .input-bar { margin-top: 8px; background: var(--S3); border-radius: 2px; height: 3px; overflow: hidden; }
+    .input-bar-fill { height: 3px; border-radius: 2px; transition: width 0.3s; }
+    
+    /* Category */
+    .cat-pill { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; }
+    
+    /* Save button */
+    .save-btn { background: var(--F); border: none; color: #fff; font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; padding: 10px 22px; border-radius: 8px; cursor: pointer; transition: opacity 0.2s; }
+    .save-btn:hover { opacity: 0.85; }
+    .saved-badge { background: rgba(138,232,160,0.1); border: 0.5px solid rgba(138,232,160,0.3); color: #8AE8A0; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 8px 16px; border-radius: 8px; }
+    
+    /* Note textarea */
+    .note-area { background: var(--S3); border: 0.5px solid var(--B2); color: var(--T1); font-family: 'Syne', sans-serif; font-size: 13px; padding: 12px; border-radius: 8px; width: 100%; height: 80px; resize: vertical; outline: none; line-height: 1.6; }
+    .note-area:focus { border-color: var(--F); }
+    .note-area::placeholder { color: var(--T3); }
+    
+    /* KPI cards */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+    .kpi-card { background: var(--S1); border: 0.5px solid var(--B2); border-radius: 12px; padding: 16px 14px; position: relative; overflow: hidden; }
+    .kpi-card .label { margin-bottom: 8px; }
+    .kpi-value { font-size: 26px; font-weight: 800; color: var(--T1); letter-spacing: -0.5; }
+    .kpi-meta { font-size: 9px; color: var(--T2); margin-top: 4px; }
+    
+    /* Radial */
+    .radial-wrap { position: absolute; top: 10px; right: 10px; }
+    .radial-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 9px; font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+    
+    /* Table */
+    .table-wrap { background: var(--S1); border: 0.5px solid var(--B2); border-radius: 12px; overflow: hidden; }
+    .table-title { padding: 14px 18px; border-bottom: 0.5px solid var(--B2); }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 500px; }
+    th { padding: 10px 18px; text-align: left; font-size: 11px; color: var(--T3); font-weight: 400; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; }
+    th:last-child, td:last-child { text-align: right; }
+    td { padding: 10px 18px; font-size: 12px; color: var(--T2); border-bottom: 0.5px solid var(--B2); }
+    td.mono { font-family: 'JetBrains Mono', monospace; }
+    .trend-up { color: #8AE8A0; }
+    .trend-down { color: #FF6B6B; }
+    .trend-neutral { color: var(--T3); }
+    
+    /* Network cards */
+    .network-card { background: var(--S1); border: 0.5px solid var(--B2); border-radius: 12px; padding: 16px 18px; }
+    .network-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .network-name { font-size: 14px; font-weight: 500; color: var(--T1); }
+    .network-plat { font-size: 10px; margin-top: 3px; }
+    .network-stats { text-align: right; }
+    .network-value { font-size: 22px; font-weight: 800; color: var(--T1); }
+    .network-pct { font-size: 10px; }
+    .network-bars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+    .bar-item .bar-label { font-size: 9px; color: var(--T3); margin-bottom: 4px; }
+    .bar-track { background: var(--S3); border-radius: 3px; height: 6px; overflow: hidden; }
+    .bar-fill { height: 6px; border-radius: 3px; transition: width 0.4s; }
+    .bar-values { display: flex; justify-content: space-between; }
+    .bar-val { font-size: 9px; }
+    .meta-badges { display: flex; gap: 6px; }
+    .meta-badge { background: var(--S2); border-radius: 6px; padding: 4px 10px; }
+    .meta-badge-label { font-size: 8px; color: var(--T3); letter-spacing: 0.1em; }
+    .meta-badge-val { font-size: 11px; }
+    
+    /* Business cards */
+    .big-stat { background: var(--S1); border: 0.5px solid var(--BF); border-radius: 12px; padding: 20px 18px; }
+    .big-stat-label { font-size: 10px; color: var(--T3); letter-spacing: 0.15em; margin-bottom: 10px; }
+    .big-stat-value { font-size: 36px; font-weight: 800; color: #FF8A65; letter-spacing: -1; }
+    .big-stat-meta { font-size: 11px; color: var(--T2); margin-top: 4px; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat-card { background: var(--S1); border: 0.5px solid var(--B2); border-radius: 12px; padding: 16px; }
+    .stat-label { font-size: 9px; color: var(--T3); letter-spacing: 0.15em; margin-bottom: 8px; text-transform: uppercase; }
+    .stat-value { font-size: 28px; font-weight: 800; color: var(--T1); margin-bottom: 4px; }
+    .stat-desc { font-size: 10px; color: var(--T2); margin-bottom: 12px; }
+    .conversion-box { background: var(--S2); border-radius: 6px; padding: 6px 10px; margin-top: 10px; }
+    .conversion-label { font-size: 9px; color: var(--T3); }
+    .conversion-value { font-size: 14px; color: #8AE8A0; font-weight: 500; }
+    
+    /* Goal cards */
+    .goal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 6px; }
+    .goal-card { background: var(--S1); border: 0.5px solid var(--B2); border-radius: 10px; padding: 14px 12px; text-align: center; }
+    .goal-card .label { margin-bottom: 8px; }
+    .goal-card .radial-wrap { position: relative; display: inline-block; margin-bottom: 8px; }
+    .goal-card .radial-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 11px; font-weight: 500; }
+    .goal-status { font-size: 9px; }
+    
+    /* Colors for platforms */
+    .color-ig { color: #E040FB; }
+    .color-tiktok { color: #69C9D0; }
+    .color-fb { color: #5B8CF5; }
+    .color-threads { color: #C8C8C0; }
+    .color-prospect { color: #F5C842; }
+    .color-client { color: #8AE8A0; }
+    .color-billing { color: #FF8A65; }
+    
+    /* Print */
+    @media print {
+      body { background: white; color: black; }
+      .tab { display: none; }
+      .section { display: block !important; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <div class="logo-row">
+        <span class="logo">FUXIA</span>
+        <span class="logo-sub mono">METRICS</span>
+        <span class="logo-right mono">90 DÍAS · MED 2026</span>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('ingresar')">Ingresar datos</button>
+        <button class="tab" onclick="showTab('overview')">Overview</button>
+        <button class="tab" onclick="showTab('redes')">Redes</button>
+        <button class="tab" onclick="showTab('negocio')">Negocio</button>
+        <button class="tab" onclick="showTab('metas')">Metas 90 días</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- INGRESAR DATOS -->
+    <div id="ingresar" class="section active">
+      <div style="margin-bottom: 20px;">
+        <div class="mono" style="font-size: 10px; color: var(--F); letter-spacing: 0.2em; margin-bottom: 6px;">REGISTRO SEMANAL</div>
+        <div style="font-size: 15px; font-weight: 500; color: var(--T1);">Ingresá tus números reales al final de cada semana.</div>
+      </div>
+
+      <div class="week-btns">
+        <button class="week-btn active" onclick="selectWeek(0)">Semana 1<span class="count" id="count0">0/10</span></button>
+        <button class="week-btn" onclick="selectWeek(1)">Semana 2<span class="count" id="count1">0/10</span></button>
+        <button class="week-btn" onclick="selectWeek(2)">Semana 3<span class="count" id="count2">0/10</span></button>
+        <button class="week-btn" onclick="selectWeek(3)">Semana 4<span class="count" id="count3">0/10</span></button>
+      </div>
+
+      <div class="progress-box">
+        <div style="flex: 1;">
+          <div class="mono" style="font-size: 10px; color: var(--T3); letter-spacing: 0.15em; margin-bottom: 6px;">PROGRESO VS META · SEMANA <span id="weekNum">1</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+        </div>
+        <div class="progress-text">
+          <div class="progress-pct" id="progressPct">0%</div>
+          <div class="progress-label">de metas</div>
+        </div>
+      </div>
+
+      <!-- Redes -->
+      <div style="margin-bottom: 20px;">
+        <div class="cat-pill" style="background: rgba(105,201,208,0.15); color: #69C9D0; border: 0.5px solid rgba(105,201,208,0.4);">redes</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 12px;">
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">@ferneypamplona IG</div><div class="input-meta">Meta: <span id="meta_ig_ferney">500</span></div></div>
+              <div class="input-pct" id="pct_ig_ferney">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 seg" id="ig_ferney" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_ig_ferney" style="width: 0%; background: #E040FB;"></div></div>
+          </div>
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">FUXIA IG</div><div class="input-meta">Meta: <span id="meta_ig_fuxia_0">300</span></div></div>
+              <div class="input-pct" id="pct_ig_fuxia_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 seg" id="ig_fuxia" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_ig_fuxia_0" style="width: 0%; background: #C060E0;"></div></div>
+          </div>
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">TikTok</div><div class="input-meta">Meta: <span id="meta_tiktok_0">200</span></div></div>
+              <div class="input-pct" id="pct_tiktok_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 seg" id="tiktok" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_tiktok_0" style="width: 0%; background: #69C9D0;"></div></div>
+          </div>
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">Facebook</div><div class="input-meta">Meta: <span id="meta_facebook_0">100</span></div></div>
+              <div class="input-pct" id="pct_facebook_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 seg" id="facebook" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_facebook_0" style="width: 0%; background: #5B8CF5;"></div></div>
+          </div>
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">Threads</div><div class="input-meta">Meta: <span id="meta_threads_0">50</span></div></div>
+              <div class="input-pct" id="pct_threads_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 seg" id="threads" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_threads_0" style="width: 0%; background: #C8C8C0;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenido -->
+      <div style="margin-bottom: 20px;">
+        <div class="cat-pill" style="background: rgba(224,64,251,0.15); color: #E040FB; border: 0.5px solid rgba(224,64,251,0.4);">contenido</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 12px;">
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">Reels publicados</div><div class="input-meta">Meta: <span id="meta_reels_0">3</span></div></div>
+              <div class="input-pct" id="pct_reels_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 reels" id="reels" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_reels_0" style="width: 0%; background: #E040FB;"></div></div>
+          </div>
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">Guardados totales</div><div class="input-meta">Meta: <span id="meta_guardados_0">20</span></div></div>
+              <div class="input-pct" id="pct_guardados_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 saves" id="guardados" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_guardados_0" style="width: 0%; background: #69C9D0;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Negocio -->
+      <div style="margin-bottom: 20px;">
+        <div class="cat-pill" style="background: rgba(138,232,160,0.15); color: #8AE8A0; border: 0.5px solid rgba(138,232,160,0.4);">negocio</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 12px;">
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">Prospectos DM</div><div class="input-meta">Meta: <span id="meta_prospectos_0">3</span></div></div>
+              <div class="input-pct" id="pct_prospectos_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 leads" id="prospectos" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_prospectos_0" style="width: 0%; background: #F5C842;"></div></div>
+          </div>
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">Clientes activos</div><div class="input-meta">Meta: <span id="meta_clientes_0">0</span></div></div>
+              <div class="input-pct" id="pct_clientes_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 clts" id="clientes" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_clientes_0" style="width: 0%; background: #8AE8A0;"></div></div>
+          </div>
+          <div class="input-card">
+            <div class="input-header">
+              <div><div class="input-title">Facturación COP (K)</div><div class="input-meta">Meta: <span id="meta_facturacion_0">0</span></div></div>
+              <div class="input-pct" id="pct_facturacion_0">0%</div>
+            </div>
+            <input type="number" class="input-field" placeholder="0 K" id="facturacion" oninput="updateValue(event)">
+            <div class="input-bar"><div class="input-bar-fill" id="bar_facturacion_0" style="width: 0%; background: #FF8A65;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nota -->
+      <div style="margin-bottom: 20px;">
+        <div class="label" style="margin-bottom: 8px;">NOTA DE LA SEMANA (opcional)</div>
+        <textarea class="note-area" placeholder="¿Qué funcionó? ¿Qué cambiarías? ¿Algún aprendizaje clave..." id="note_0"></textarea>
+      </div>
+
+      <!-- Save -->
+      <div style="display: flex; align-items: center; gap: 12;">
+        <button class="save-btn" onclick="saveWeek()">Guardar semana <span id="saveWeekNum">1</span></button>
+        <div id="savedMsg" style="display: none;"><div class="saved-badge">✓ Guardado</div></div>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="section">
+      <div class="mono" style="font-size: 10px; color: var(--F); letter-spacing: 0.2em; margin-bottom: 4px;">PANORAMA GENERAL · 4 SEMANAS</div>
+      
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="radial-wrap">
+            <svg width="44" height="44" style="transform: rotate(-90deg);">
+              <circle cx="22" cy="22" r="18" fill="none" stroke="#222" stroke-width="4"/>
+              <circle cx="22" cy="22" r="18" fill="none" stroke="#E040FB" stroke-width="4" stroke-dasharray="0 113" id="rad_ig_ferney"/>
+            </svg>
+            <div class="radial-text" style="color: #E040FB;" id="rad_text_ig_ferney">0%</div>
+          </div>
+          <div class="label" style="margin-bottom: 8px;">@ferneypamplona IG</div>
+          <div class="kpi-value" id="val_ig_ferney">0</div>
+          <div class="kpi-meta">meta 90d: 2.000</div>
+        </div>
+        <div class="kpi-card">
+          <div class="radial-wrap">
+            <svg width="44" height="44" style="transform: rotate(-90deg);">
+              <circle cx="22" cy="22" r="18" fill="none" stroke="#222" stroke-width="4"/>
+              <circle cx="22" cy="22" r="18" fill="none" stroke="#69C9D0" stroke-width="4" stroke-dasharray="0 113" id="rad_tiktok"/>
+            </svg>
+            <div class="radial-text" style="color: #69C9D0;" id="rad_text_tiktok">0%</div>
+          </div>
+          <div class="label" style="margin-bottom: 8px;">TikTok</div>
+          <div class="kpi-value" id="val_tiktok">0</div>
+          <div class="kpi-meta">meta 90d: 1.000</div>
+        </div>
+        <div class="kpi-card">
+          <div class="radial-wrap">
+            <svg width="44" height="44" style="transform: rotate(-90deg);">
+              <circle cx="22" cy="22" r="18" fill="none" stroke="#222" stroke-width="4"/>
+              <circle cx="22" cy="22" r="18" fill="none" stroke="#F5C842" stroke-width="4" stroke-dasharray="0 113" id="rad_prospectos"/>
+            </svg>
+            <div class="radial-text" style="color: #F5C842;" id="rad_text_prospectos">0%</div>
+          </div>
+          <div class="label" style="margin-bottom: 8px;">Prospectos totales</div>
+          <div class="kpi-value" id="val_prospectos">0</div>
+          <div class="kpi-meta">meta 90d: 15</div>
+        </div>
+        <div class="kpi-card">
+          <div class="radial-wrap">
+            <svg width="44" height="44" style="transform: rotate(-90deg);">
+              <circle cx="22" cy="22" r="18" fill="none" stroke="#222" stroke-width="4"/>
+              <circle cx="22" cy="22" r="18" fill="none" stroke="#FF8A65" stroke-width="4" stroke-dasharray="0 113" id="rad_facturacion"/>
+            </svg>
+            <div class="radial-text" style="color: #FF8A65;" id="rad_text_facturacion">0%</div>
+          </div>
+          <div class="label" style="margin-bottom: 8px;">Facturación (K COP)</div>
+          <div class="kpi-value" id="val_facturacion">0</div>
+          <div class="kpi-meta">meta 90d: 5.000K</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-title">
+          <div class="label">EVOLUCIÓN POR SEMANA</div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Métrica</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>Tendencia</th></tr></thead>
+            <tbody id="overviewTable">
+              <!-- Generated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- REDES -->
+    <div id="redes" class="section">
+      <div class="mono" style="font-size: 10px; color: var(--F); letter-spacing: 0.2em; margin-bottom: 4px;">CRECIMIENTO EN REDES SOCIALES</div>
+      
+      <!-- IG Ferney -->
+      <div class="network-card" style="margin-bottom: 12px;">
+        <div class="network-header">
+          <div><div class="network-name">@ferneypamplona</div><div class="network-plat" style="color: #E040FB;">Instagram</div></div>
+          <div class="network-stats"><div class="network-value" id="net_ig_ferney_val">0</div><div class="network-pct" id="net_ig_ferney_pct">0% de meta</div></div>
+        </div>
+        <div class="network-bars">
+          <div class="bar-item"><div class="bar-label">S1</div><div class="bar-track"><div class="bar-fill" id="net_ig_ferney_bar0" style="width: 0%; background: #E040FB;"></div></div><div class="bar-values"><span class="bar-val" id="net_ig_ferney_v0">—</span><span class="bar-val" style="color: var(--T3);">500</span></div></div>
+          <div class="bar-item"><div class="bar-label">S2</div><div class="bar-track"><div class="bar-fill" id="net_ig_ferney_bar1" style="width: 0%; background: #E040FB;"></div></div><div class="bar-values"><span class="bar-val" id="net_ig_ferney_v1">—</span><span class="bar-val" style="color: var(--T3);">750</span></div></div>
+          <div class="bar-item"><div class="bar-label">S3</div><div class="bar-track"><div class="bar-fill" id="net_ig_ferney_bar2" style="width: 0%; background: #E040FB;"></div></div><div class="bar-values"><span class="bar-val" id="net_ig_ferney_v2">—</span><span class="bar-val" style="color: var(--T3);">1.250</span></div></div>
+          <div class="bar-item"><div class="bar-label">S4</div><div class="bar-track"><div class="bar-fill" id="net_ig_ferney_bar3" style="width: 0%; background: #E040FB;"></div></div><div class="bar-values"><span class="bar-val" id="net_ig_ferney_v3">—</span><span class="bar-val" style="color: var(--T3);">2.000</span></div></div>
+        </div>
+        <div class="meta-badges"><div class="meta-badge"><div class="meta-badge-label">MES 1</div><div class="meta-badge-val" style="color: #E040FB;">500</div></div><div class="meta-badge"><div class="meta-badge-label">MES 2</div><div class="meta-badge-val" style="color: #E040FB;">1.000</div></div><div class="meta-badge"><div class="meta-badge-label">MES 3</div><div class="meta-badge-val" style="color: #E040FB;">2.000</div></div></div>
+      </div>
+
+      <!-- TikTok -->
+      <div class="network-card" style="margin-bottom: 12px;">
+        <div class="network-header">
+          <div><div class="network-name">@ferneypamplona</div><div class="network-plat" style="color: #69C9D0;">TikTok</div></div>
+          <div class="network-stats"><div class="network-value" id="net_tiktok_val">0</div><div class="network-pct" id="net_tiktok_pct">0% de meta</div></div>
+        </div>
+        <div class="network-bars">
+          <div class="bar-item"><div class="bar-label">S1</div><div class="bar-track"><div class="bar-fill" id="net_tiktok_bar0" style="width: 0%; background: #69C9D0;"></div></div><div class="bar-values"><span class="bar-val" id="net_tiktok_v0">—</span><span class="bar-val" style="color: var(--T3);">200</span></div></div>
+          <div class="bar-item"><div class="bar-label">S2</div><div class="bar-track"><div class="bar-fill" id="net_tiktok_bar1" style="width: 0%; background: #69C9D0;"></div></div><div class="bar-values"><span class="bar-val" id="net_tiktok_v1">—</span><span class="bar-val" style="color: var(--T3);">350</span></div></div>
+          <div class="bar-item"><div class="bar-label">S3</div><div class="bar-track"><div class="bar-fill" id="net_tiktok_bar2" style="width: 0%; background: #69C9D0;"></div></div><div class="bar-values"><span class="bar-val" id="net_tiktok_v2">—</span><span class="bar-val" style="color: var(--T3);">650</span></div></div>
+          <div class="bar-item"><div class="bar-label">S4</div><div class="bar-track"><div class="bar-fill" id="net_tiktok_bar3" style="width: 0%; background: #69C9D0;"></div></div><div class="bar-values"><span class="bar-val" id="net_tiktok_v3">—</span><span class="bar-val" style="color: var(--T3);">1.000</span></div></div>
+        </div>
+        <div class="meta-badges"><div class="meta-badge"><div class="meta-badge-label">MES 1</div><div class="meta-badge-val" style="color: #69C9D0;">200</div></div><div class="meta-badge"><div class="meta-badge-label">MES 2</div><div class="meta-badge-val" style="color: #69C9D0;">500</div></div><div class="meta-badge"><div class="meta-badge-label">MES 3</div><div class="meta-badge-val" style="color: #69C9D0;">1.000</div></div></div>
+      </div>
+
+      <!-- Contenido -->
+      <div class="network-card">
+        <div class="label" style="margin-bottom: 14px;">CONTENIDO PUBLICADO</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div style="background: var(--S2); border-radius: 10px; padding: 14px;">
+            <div class="label" style="margin-bottom: 8px;">REELS PUBLICADOS</div>
+            <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+              <div style="font-size: 24px; font-weight: 800; color: var(--T1);" id="total_reels">0</div>
+              <div style="font-size: 10px; color: var(--T3);">meta 90d: 16</div>
+            </div>
+            <div style="margin-top: 10px; background: var(--S3); border-radius: 2px; height: 3px; overflow: hidden;"><div style="height: 3px; background: #E040FB; border-radius: 2px; width: 0%;" id="reels_bar"></div></div>
+          </div>
+          <div style="background: var(--S2); border-radius: 10px; padding: 14px;">
+            <div class="label" style="margin-bottom: 8px;">GUARDADOS TOTALES</div>
+            <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+              <div style="font-size: 24px; font-weight: 800; color: var(--T1);" id="total_guardados">0</div>
+              <div style="font-size: 10px; color: var(--T3);">meta 90d: 200</div>
+            </div>
+            <div style="margin-top: 10px; background: var(--S3); border-radius: 2px; height: 3px; overflow: hidden;"><div style="height: 3px; background: #69C9D0; border-radius: 2px; width: 0%;" id="guardados_bar"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEGOCIO -->
+    <div id="negocio" class="section">
+      <div class="mono" style="font-size: 10px; color: var(--F); letter-spacing: 0.2em; margin-bottom: 4px;">MÉTRICAS DE NEGOCIO · FUXIA</div>
+
+      <div class="big-stat" style="margin-bottom: 12px;">
+        <div class="big-stat-label">FACTURACIÓN ACUMULADA · COP (miles)</div>
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+          <div><div class="big-stat-value" id="total_fact">0K</div><div class="big-stat-meta">meta 90 días: 5.000K COP</div></div>
+          <div style="display: flex; gap: 8px; align-items: flex-end;">
+            <div style="text-align: center;"><div class="mono" style="font-size: 9px; color: var(--T3); margin-bottom: 4px;">S1</div><div style="width: 24px; height: 8px; background: var(--S3); border-radius: 4px 4px 0 0;" id="fact_bar0"></div></div>
+            <div style="text-align: center;"><div class="mono" style="font-size: 9px; color: var(--T3); margin-bottom: 4px;">S2</div><div style="width: 24px; height: 8px; background: var(--S3); border-radius: 4px 4px 0 0;" id="fact_bar1"></div></div>
+            <div style="text-align: center;"><div class="mono" style="font-size: 9px; color: var(--T3); margin-bottom: 4px;">S3</div><div style="width: 24px; height: 8px; background: var(--S3); border-radius: 4px 4px 0 0;" id="fact_bar2"></div></div>
+            <div style="text-align: center;"><div class="mono" style="font-size: 9px; color: var(--T3); margin-bottom: 4px;">S4</div><div style="width: 24px; height: 8px; background: var(--S3); border-radius: 4px 4px 0 0;" id="fact_bar3"></div></div>
+          </div>
+        </div>
+        <div style="margin-top: 16px; background: var(--S3); border-radius: 2px; height: 4px; overflow: hidden;"><div style="height: 4px; background: #FF8A65; border-radius: 2px; width: 0%;" id="fact_progress"></div></div>
+      </div>
+
+      <div class="stat-grid" style="margin-bottom: 12px;">
+        <div class="stat-card">
+          <div class="stat-label">Prospectos DM</div>
+          <div class="stat-value" id="stat_prospectos">0</div>
+          <div class="stat-desc">Personas contactadas</div>
+          <div style="background: var(--S3); border-radius: 2px; height: 3px; overflow: hidden; margin-bottom: 6px;"><div style="height: 3px; background: #F5C842; border-radius: 2px; width: 0%;" id="prospect_bar"></div></div>
+          <div style="display: flex; justify-content: space-between;"><span class="mono" style="font-size: 9px; color: var(--T3);">meta: 15</span><span class="mono" style="font-size: 9px; color: #F5C842;" id="prospect_pct">0%</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Clientes activos</div>
+          <div class="stat-value" id="stat_clientes">0</div>
+          <div class="stat-desc">Con proyecto en curso</div>
+          <div style="background: var(--S3); border-radius: 2px; height: 3px; overflow: hidden; margin-bottom: 6px;"><div style="height: 3px; background: #8AE8A0; border-radius: 2px; width: 0%;" id="clientes_bar"></div></div>
+          <div style="display: flex; justify-content: space-between;"><span class="mono" style="font-size: 9px; color: var(--T3);">meta: 4</span><span class="mono" style="font-size: 9px; color: #8AE8A0;" id="clientes_pct">0%</span></div>
+          <div class="conversion-box" id="conversion_box" style="display: none;">
+            <div class="conversion-label">Tasa de conversión</div>
+            <div class="conversion-value" id="conversion_val">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="network-card">
+        <div class="label" style="margin-bottom: 14px;">EMBUDO FUXIA · SEMANA ACTUAL</div>
+        <div style="margin-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><div style="font-size: 12px; color: var(--T2);">Alcance estimado</div><div class="mono" style="font-size: 11px; color: #69C9D0;">0</div></div>
+          <div style="background: var(--S3); border-radius: 3px; height: 8px; overflow: hidden;"><div style="height: 8px; background: #69C9D0; border-radius: 3px; width: 0%; opacity: 0.8;"></div></div>
+        </div>
+        <div style="margin-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><div style="font-size: 12px; color: var(--T2);">Contenido publicado</div><div class="mono" style="font-size: 11px; color: #E040FB;">0</div></div>
+          <div style="background: var(--S3); border-radius: 3px; height: 8px; overflow: hidden;"><div style="height: 8px; background: #E040FB; border-radius: 3px; width: 0%; opacity: 0.8;"></div></div>
+        </div>
+        <div style="margin-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><div style="font-size: 12px; color: var(--T2);">Prospectos DM</div><div class="mono" style="font-size: 11px; color: #F5C842;">0</div></div>
+          <div style="background: var(--S3); border-radius: 3px; height: 8px; overflow: hidden;"><div style="height: 8px; background: #F5C842; border-radius: 3px; width: 0%; opacity: 0.8;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><div style="font-size: 12px; color: var(--T2);">Clientes activos</div><div class="mono" style="font-size: 11px; color: #8AE8A0;">0</div></div>
+          <div style="background: var(--S3); border-radius: 3px; height: 8px; overflow: hidden;"><div style="height: 8px; background: #8AE8A0; border-radius: 3px; width: 0%; opacity: 0.8;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METAS -->
+    <div id="metas" class="section">
+      <div class="mono" style="font-size: 10px; color: var(--F); letter-spacing: 0.2em; margin-bottom: 4px;">METAS DEL PLAN 90 DÍAS</div>
+
+      <div class="goal-grid" style="margin-bottom: 6px;">
+        <div class="goal-card">
+          <div class="label">MES 1 — MAYO</div>
+          <div class="radial-wrap">
+            <svg width="56" height="56" style="transform: rotate(-90deg);">
+              <circle cx="28" cy="28" r="24" fill="none" stroke="#222" stroke-width="4"/>
+              <circle cx="28" cy="28" r="24" fill="none" stroke="#E040FB" stroke-width="4" stroke-dasharray="0 151" id="goal_rad0"/>
+            </svg>
+            <div class="radial-text" id="goal_text0">0%</div>
+          </div>
+          <div class="goal-status" id="goal_status0">Sin datos</div>
+        </div>
+        <div class="goal-card">
+          <div class="label">MES 2 — JUNIO</div>
+          <div class="radial-wrap">
+            <svg width="56" height="56" style="transform: rotate(-90deg);">
+              <circle cx="28" cy="28" r="24" fill="none" stroke="#222" stroke-width="4"/>
+              <circle cx="28" cy="28" r="24" fill="none" stroke="#E040FB" stroke-width="4" stroke-dasharray="0 151" id="goal_rad1"/>
+            </svg>
+            <div class="radial-text" id="goal_text1">0%</div>
+          </div>
+          <div class="goal-status" id="goal_status1">Sin datos</div>
+        </div>
+        <div class="goal-card">
+          <div class="label">MES 3 — JULIO</div>
+          <div class="radial-wrap">
+            <svg width="56" height="56" style="transform: rotate(-90deg);">
+              <circle cx="28" cy="28" r="24" fill="none" stroke="#222" stroke-width="4"/>
+              <circle cx="28" cy="28" r="24" fill="none" stroke="#E040FB" stroke-width="4" stroke-dasharray="0 151" id="goal_rad2"/>
+            </svg>
+            <div class="radial-text" id="goal_text2">0%</div>
+          </div>
+          <div class="goal-status" id="goal_status2">Sin datos</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-title"><div class="label">METAS DETALLADAS VS ACTUAL</div></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>KPI</th><th>Mes 1</th><th>Mes 2</th><th>Mes 3</th><th>Actual</th></tr></thead>
+            <tbody id="metasTable">
+              <!-- Generated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px;">
+        <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 8px; height: 8px; border-radius: 50%; background: #8AE8A0;"></div><div class="mono" style="font-size: 10px; color: var(--T2);">En meta (≥100%)</div></div>
+        <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 8px; height: 8px; border-radius: 50%; background: #E040FB;"></div><div class="mono" style="font-size: 10px; color: var(--T2);">En progreso (≥60%)</div></div>
+        <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 8px; height: 8px; border-radius: 50%; background: #F5C842;"></div><div class="mono" style="font-size: 10px; color: var(--T2);">Por debajo (>0%)</div></div>
+        <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 8px; height: 8px; border-radius: 50%; background: var(--T3);"></div><div class="mono" style="font-size: 10px; color: var(--T2);">Sin datos</div></div>
+      </div>
+
+      <div style="border-top: 0.5px solid var(--B2); padding-top: 16px; text-align: center; margin-top: 20px;">
+        <div class="mono" style="font-size: 10px; color: var(--T3); letter-spacing: 0.2em;">FUXIA × FERNEYPAMPLONA · MEDELLÍN · 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const METAS = {
+      ig_ferney: [500, 1000, 2000], ig_fuxia: [300, 800, 1500], tiktok: [200, 500, 1000],
+      facebook: [100, 300, 600], threads: [50, 200, 500], prospectos: [3, 8, 15],
+      clientes: [0, 2, 4], facturacion: [0, 2000, 5000], reels: [3, 8, 16], guardados: [20, 80, 200]
+    };
+    const METRIC_LABELS = [
+      { id: 'ig_ferney', label: '@ferneypamplona IG', cat: 'redes' },
+      { id: 'ig_fuxia', label: 'FUXIA IG', cat: 'redes' },
+      { id: 'tiktok', label: 'TikTok', cat: 'redes' },
+      { id: 'facebook', label: 'Facebook', cat: 'redes' },
+      { id: 'threads', label: 'Threads', cat: 'redes' },
+      { id: 'reels', label: 'Reels publicados', cat: 'contenido' },
+      { id: 'guardados', label: 'Guardados totales', cat: 'contenido' },
+      { id: 'prospectos', label: 'Prospectos DM', cat: 'negocio' },
+      { id: 'clientes', label: 'Clientes activos', cat: 'negocio' },
+      { id: 'facturacion', label: 'Facturación COP (K)', cat: 'negocio' }
+    ];
+    const CAT_COLORS = { redes: '#69C9D0', contenido: '#E040FB', negocio: '#8AE8A0' };
+
+    let data = [{}, {}, {}, {}];
+    let notes = ['', '', '', ''];
+    let currentWeek = 0;
+
+    // Guardar en localStorage
+    function saveData() {
+      localStorage.setItem('fuxia_metrics_data', JSON.stringify(data));
+      localStorage.setItem('fuxia_metrics_notes', JSON.stringify(notes));
+    }
+
+    // Cargar desde localStorage
+    function loadData() {
+      const savedData = localStorage.getItem('fuxia_metrics_data');
+      const savedNotes = localStorage.getItem('fuxia_metrics_notes');
+      if (savedData) {
+        data = JSON.parse(savedData);
+      }
+      if (savedNotes) {
+        notes = JSON.parse(savedNotes);
+      }
+    }
+
+    function showTab(tabId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      if (event) event.target.classList.add('active');
+      updateOverview();
+      updateRedes();
+      updateNegocio();
+      updateMetas();
+    }
+
+    function selectWeek(w) {
+      currentWeek = w;
+      document.querySelectorAll('.week-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === w);
+      });
+      document.getElementById('weekNum').textContent = w + 1;
+      document.getElementById('saveWeekNum').textContent = w + 1;
+      updateMetaLabels();
+      loadWeekData();
+      renderInputsForWeek(w);
+    }
+
+    function renderInputsForWeek(w) {
+      const ids = ['ig_ferney', 'ig_fuxia', 'tiktok', 'facebook', 'threads', 'reels', 'guardados', 'prospectos', 'clientes', 'facturacion'];
+      ids.forEach(id => {
+        const input = document.getElementById(id);
+        const metaSpan = document.getElementById('meta_' + id);
+        const pctDiv = document.getElementById('pct_' + id);
+        const barDiv = document.getElementById('bar_' + id);
+        
+        if (input) input.value = data[w] && data[w][id] ? data[w][id] : '';
+        if (metaSpan && METAS[id]) metaSpan.textContent = METAS[id][Math.min(w, 2)];
+        
+        if (input && metaSpan) {
+          const val = parseInt(input.value) || 0;
+          const meta = METAS[id][Math.min(w, 2)];
+          const pct = meta > 0 ? Math.min(100, Math.round((val / meta) * 100)) : 0;
+          if (pctDiv) {
+            pctDiv.textContent = pct + '%';
+            pctDiv.className = 'input-pct ' + (pct >= 100 ? 'high' : pct >= 60 ? 'mid' : 'low');
+          }
+          if (barDiv) {
+            barDiv.style.width = pct + '%';
+            const colors = { tiktok: '#69C9D0', prospectos: '#F5C842', clientes: '#8AE8A0', facturacion: '#FF8A65' };
+            barDiv.style.background = pct >= 100 ? '#8AE8A0' : (colors[id] || '#E040FB');
+          }
+        }
+      });
+      updateProgress();
+    }
+
+    function updateMetaLabels() {
+      const w = currentWeek;
+      const ids = ['ig_ferney', 'ig_fuxia', 'tiktok', 'facebook', 'threads', 'reels', 'guardados', 'prospectos', 'clientes', 'facturacion'];
+      ids.forEach(id => {
+        const meta = METAS[id][Math.min(w, 2)];
+        const el = document.getElementById('meta_' + id);
+        if (el) el.textContent = meta;
+      });
+    }
+
+    function updateValue(e) {
+      const input = e.target;
+      const inputId = input.id;
+      const week = currentWeek;
+      const id = inputId.replace('_' + week, '');
+      
+      const val = parseInt(input.value) || 0;
+      const meta = METAS[id] ? METAS[id][Math.min(week, 2)] : 1;
+      const pct = meta > 0 ? Math.min(100, Math.round((val / meta) * 100)) : 0;
+      
+      if (!data[week]) data[week] = {};
+      data[week][id] = val;
+      
+      // Actualizar porcentaje
+      const pctEl = document.getElementById('pct_' + id);
+      if (pctEl) {
+        pctEl.textContent = pct + '%';
+        pctEl.className = 'input-pct ' + (pct >= 100 ? 'high' : pct >= 60 ? 'mid' : 'low');
+      }
+      
+      // Actualizar barra
+      const barEl = document.getElementById('bar_' + id);
+      if (barEl) {
+        barEl.style.width = pct + '%';
+        const colors = { tiktok: '#69C9D0', prospectos: '#F5C842', clientes: '#8AE8A0', facturacion: '#FF8A65' };
+        barEl.style.background = pct >= 100 ? '#8AE8A0' : (colors[id] || '#E040FB');
+      }
+      
+      // Actualizar meta label
+      const metaEl = document.getElementById('meta_' + id);
+      if (metaEl) metaEl.textContent = meta;
+      
+      updateProgress();
+      saveData();
+      updateOverview();
+    }
+
+    function updateProgress() {
+      const w = currentWeek;
+      let total = 0, filled = 0;
+      METRIC_LABELS.forEach(m => {
+        const val = data[w][m.id];
+        if (val !== undefined && val !== '') {
+          const meta = METAS[m.id][Math.min(w, 2)];
+          if (meta > 0) total += Math.min(100, Math.round((val / meta) * 100));
+          filled++;
+        }
+      });
+      const avg = filled > 0 ? Math.round(total / METRIC_LABELS.length) : 0;
+      
+      const fill = document.getElementById('progressFill');
+      const pct = document.getElementById('progressPct');
+      const count = document.getElementById(`count${w}`);
+      if (fill) fill.style.width = avg + '%';
+      if (pct) pct.textContent = avg + '%';
+      if (count) count.textContent = `${filled}/10`;
+    }
+
+    function loadWeekData() {
+      const w = currentWeek;
+      METRIC_LABELS.forEach(m => {
+        const input = document.getElementById(m.id);
+        if (input) {
+          const val = data[w] ? data[w][m.id] : undefined;
+          if (val !== undefined && val !== '') {
+            input.value = val;
+            const meta = METAS[m.id][Math.min(w, 2)];
+            const pct = meta > 0 ? Math.min(100, Math.round((val / meta) * 100)) : 0;
+            
+            const pctEl = document.getElementById('pct_' + m.id);
+            if (pctEl) {
+              pctEl.textContent = pct + '%';
+              pctEl.className = 'input-pct ' + (pct >= 100 ? 'high' : pct >= 60 ? 'mid' : 'low');
+            }
+            
+            const barEl = document.getElementById('bar_' + m.id);
+            if (barEl) {
+              barEl.style.width = pct + '%';
+              const colors = { tiktok: '#69C9D0', prospectos: '#F5C842', clientes: '#8AE8A0', facturacion: '#FF8A65' };
+              barEl.style.background = pct >= 100 ? '#8AE8A0' : (colors[m.id] || '#E040FB');
+            }
+          } else {
+            input.value = '';
+          }
+        }
+      });
+      
+      const note = document.getElementById('note_' + w);
+      if (note) note.value = notes[w] || '';
+      
+      updateProgress();
+    }
+
+    function saveWeek() {
+      const w = currentWeek;
+      const noteInput = document.getElementById(`note_${w}`);
+      if (noteInput) {
+        notes[w] = noteInput.value;
+      }
+      saveData();
+      const msg = document.getElementById('savedMsg');
+      if (msg) {
+        msg.style.display = 'block';
+        setTimeout(() => msg.style.display = 'none', 2200);
+      }
+    }
+
+    // Actualizar vista Overview
+    function updateOverview() {
+      // KPI cards
+      const kpis = [
+        { id: 'ig_ferney', key: 'val_ig_ferney', meta: 2000 },
+        { id: 'tiktok', key: 'val_tiktok', meta: 1000 },
+        { id: 'prospectos', key: 'val_prospectos', meta: 15 },
+        { id: 'facturacion', key: 'val_facturacion', meta: 5000 }
+      ];
+      
+      kpis.forEach(k => {
+        const vals = [0,1,2,3].map(w => data[w][k.id] || 0);
+        const last = vals.filter(v => v > 0).slice(-1)[0] || 0;
+        const pct = Math.min(100, Math.round((last / k.meta) * 100));
+        const el = document.getElementById(k.key);
+        if (el) el.textContent = k.id === 'facturacion' ? last + 'K' : last.toLocaleString();
+        
+        const rad = document.getElementById('rad_' + k.id);
+        if (rad) rad.setAttribute('stroke-dasharray', `${pct * 1.13} 113`);
+        
+        const txt = document.getElementById('rad_text_' + k.id);
+        if (txt) txt.textContent = pct + '%';
+      });
+
+      // Tabla
+      const tbody = document.getElementById('overviewTable');
+      if (!tbody) return;
+      
+      let html = '';
+      METRIC_LABELS.forEach(m => {
+        const vals = [0,1,2,3].map(w => data[w][m.id] || 0);
+        const hasData = vals.some(v => v > 0);
+        const last = vals.filter(v => v > 0).slice(-1)[0] || 0;
+        const prev = vals.filter(v => v > 0).slice(-2, -1)[0] || 0;
+        const trend = last > prev ? '↑' : last < prev ? '↓' : '—';
+        const trendColor = last > prev ? '#8AE8A0' : last < prev ? '#FF6B6B' : '#444440';
+        
+        html += `<tr style="opacity: ${hasData ? 1 : 0.4};">
+          <td>${m.label}</td>
+          ${vals.map(v => `<td class="mono">${v > 0 ? (m.id === 'facturacion' ? v + 'K' : v.toLocaleString()) : '—'}</td>`).join('')}
+          <td style="color: ${trendColor}">${hasData ? trend : '—'}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    // Actualizar vista Redes
+    function updateRedes() {
+      // IG Ferney
+      const igVals = [0,1,2,3].map(w => data[w].ig_ferney || 0);
+      const igLast = igVals.filter(v => v > 0).slice(-1)[0] || 0;
+      const igPct = Math.min(100, Math.round((igLast / 2000) * 100));
+      
+      const igVal = document.getElementById('net_ig_ferney_val');
+      const igPctEl = document.getElementById('net_ig_ferney_pct');
+      if (igVal) igVal.textContent = igLast.toLocaleString();
+      if (igPctEl) igPctEl.textContent = igPct + '% de meta';
+      
+      [0,1,2,3].forEach(i => {
+        const v = igVals[i];
+        const bar = document.getElementById('net_ig_ferney_bar' + i);
+        const val = document.getElementById('net_ig_ferney_v' + i);
+        const meta = METAS.ig_ferney[Math.min(i, 2)];
+        if (bar) bar.style.width = Math.min(100, (v / meta) * 100) + '%';
+        if (val) val.textContent = v > 0 ? v : '—';
+      });
+
+      // TikTok
+      const ttVals = [0,1,2,3].map(w => data[w].tiktok || 0);
+      const ttLast = ttVals.filter(v => v > 0).slice(-1)[0] || 0;
+      const ttPct = Math.min(100, Math.round((ttLast / 1000) * 100));
+      
+      const ttVal = document.getElementById('net_tiktok_val');
+      const ttPctEl = document.getElementById('net_tiktok_pct');
+      if (ttVal) ttVal.textContent = ttLast.toLocaleString();
+      if (ttPctEl) ttPctEl.textContent = ttPct + '% de meta';
+      
+      [0,1,2,3].forEach(i => {
+        const v = ttVals[i];
+        const bar = document.getElementById('net_tiktok_bar' + i);
+        const val = document.getElementById('net_tiktok_v' + i);
+        const meta = METAS.tiktok[Math.min(i, 2)];
+        if (bar) bar.style.width = Math.min(100, (v / meta) * 100) + '%';
+        if (val) val.textContent = v > 0 ? v : '—';
+      });
+
+      // Contenido
+      const totalReels = [0,1,2,3].reduce((a, w) => a + (data[w].reels || 0), 0);
+      const totalGuardados = [0,1,2,3].reduce((a, w) => a + (data[w].guardados || 0), 0);
+      
+      const reelsEl = document.getElementById('total_reels');
+      const guardEl = document.getElementById('total_guardados');
+      const reelsBar = document.getElementById('reels_bar');
+      const guardBar = document.getElementById('guardados_bar');
+      
+      if (reelsEl) reelsEl.textContent = totalReels;
+      if (guardEl) guardEl.textContent = totalGuardados;
+      if (reelsBar) reelsBar.style.width = Math.min(100, (totalReels / 16) * 100) + '%';
+      if (guardBar) guardBar.style.width = Math.min(100, (totalGuardados / 200) * 100) + '%';
+    }
+
+    // Actualizar vista Negocio
+    function updateNegocio() {
+      const totalFact = [0,1,2,3].reduce((a, w) => a + (data[w].facturacion || 0), 0);
+      
+      const factEl = document.getElementById('total_fact');
+      const factBar = document.getElementById('fact_progress');
+      if (factEl) factEl.textContent = totalFact + 'K';
+      if (factBar) factBar.style.width = Math.min(100, (totalFact / 5000) * 100) + '%';
+
+      [0,1,2,3].forEach(i => {
+        const v = data[i].facturacion || 0;
+        const bar = document.getElementById('fact_bar' + i);
+        const max = Math.max(...[0,1,2,3].map(w => data[w].facturacion || 0), 1);
+        if (bar) {
+          bar.style.height = (v > 0 ? (v / max) * 60 : 8) + 'px';
+          bar.style.background = v > 0 ? '#FF8A65' : '#222';
+        }
+      });
+
+      // Prospectos y clientes
+      const lastSem = 3;
+      const prospectos = data[lastSem].prospectos || 0;
+      const clientes = data[lastSem].clientes || 0;
+      
+      const prosEl = document.getElementById('stat_prospectos');
+      const cliEl = document.getElementById('stat_clientes');
+      const prosBar = document.getElementById('prospect_bar');
+      const cliBar = document.getElementById('clientes_bar');
+      const prosPct = document.getElementById('prospect_pct');
+      const cliPct = document.getElementById('clientes_pct');
+      const convBox = document.getElementById('conversion_box');
+      const convVal = document.getElementById('conversion_val');
+      
+      if (prosEl) prosEl.textContent = prospectos;
+      if (cliEl) cliEl.textContent = clientes;
+      if (prosBar) prosBar.style.width = Math.min(100, (prospectos / 15) * 100) + '%';
+      if (cliBar) cliBar.style.width = Math.min(100, (clientes / 4) * 100) + '%';
+      if (prosPct) prosPct.textContent = Math.min(100, Math.round((prospectos / 15) * 100)) + '%';
+      if (cliPct) cliPct.textContent = Math.min(100, Math.round((clientes / 4) * 100)) + '%';
+      
+      if (prospectos > 0 && convBox && convVal) {
+        convBox.style.display = 'block';
+        convVal.textContent = Math.round((clientes / prospectos) * 100) + '%';
+      }
+    }
+
+    // Actualizar vista Metas
+    function updateMetas() {
+      [0,1,2].forEach(mi => {
+        const ids = METRIC_LABELS.map(m => m.id);
+        let total = 0, count = 0;
+        
+        ids.forEach(id => {
+          const m = METAS[id]?.[mi] ?? 0;
+          const w = mi === 0 ? 1 : mi === 1 ? 3 : 3;
+          const v = data[w][id] || 0;
+          if (m > 0) {
+            total += Math.min(100, (v / m) * 100);
+            count++;
+          }
+        });
+        
+        const avg = count > 0 ? Math.round(total / count) : 0;
+        
+        const rad = document.getElementById('goal_rad' + mi);
+        const txt = document.getElementById('goal_text' + mi);
+        const status = document.getElementById('goal_status' + mi);
+        
+        if (rad) rad.setAttribute('stroke-dasharray', `${avg * 1.51} 151`);
+        if (txt) {
+          txt.textContent = avg + '%';
+          txt.style.color = avg >= 80 ? '#8AE8A0' : avg >= 50 ? '#E040FB' : '#555550';
+        }
+        if (status) {
+          status.textContent = avg >= 80 ? 'En meta' : avg >= 50 ? 'En progreso' : avg > 0 ? 'Por debajo' : 'Sin datos';
+          status.style.color = avg >= 80 ? '#8AE8A0' : avg >= 50 ? '#E040FB' : '#555550';
+        }
+      });
+
+      // Tabla
+      const tbody = document.getElementById('metasTable');
+      if (!tbody) return;
+      
+      let html = '';
+      METRIC_LABELS.forEach(m => {
+        const last = [0,1,2,3].map(w => data[w][m.id] || 0).filter(v => v > 0).slice(-1)[0] || 0;
+        const meta3 = METAS[m.id]?.[2] ?? 0;
+        const pct = meta3 > 0 ? Math.min(100, Math.round((last / meta3) * 100)) : 0;
+        const statusColor = pct >= 100 ? '#8AE8A0' : pct >= 60 ? '#E040FB' : pct > 0 ? '#F5C842' : '#555550';
+        
+        html += `<tr>
+          <td><div style="font-size: 12px; color: #888880;">${m.label}</div></td>
+          <td class="mono" style="color: #555550">${METAS[m.id]?.[0]?.toLocaleString() ?? '—'}</td>
+          <td class="mono" style="color: #555550">${METAS[m.id]?.[1]?.toLocaleString() ?? '—'}</td>
+          <td class="mono" style="color: #555550">${METAS[m.id]?.[2]?.toLocaleString() ?? '—'}</td>
+          <td><div class="mono" style="font-size: 13px; color: ${statusColor}; font-weight: 500;">${last > 0 ? last.toLocaleString() : '—'}</div>${last > 0 ? `<div class="mono" style="font-size: 9px; color: ${statusColor}">${pct}%</div>` : ''}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    // Inicializar
+    window.onload = function() {
+      loadData();
+      selectWeek(0);
+      updateMetaLabels();
+    };
+  </script>
+</body>
+</html>

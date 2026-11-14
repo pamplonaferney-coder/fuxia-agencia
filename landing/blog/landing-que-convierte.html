@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Por quÃ© tu landing page no convierte â€” FUXIA</title>
+  <meta name="description" content="El 80% de las landings fallan por lo mismo: no tienen una propuesta de valor clara en los primeros 5 segundos." />
+  <link rel="icon" type="image/png" href="../logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root { --fuxia: #CC00FF; --negro: #050508; --negro-card: #0d0d12; --gris: #888899; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--negro); color: #fff; font-family: 'Syne', sans-serif; }
+    nav { padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a1a22; }
+    .back-link { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--gris); letter-spacing: 0.15em; text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: #fff; }
+    article { max-width: 720px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+    .art-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fuxia); margin-bottom: 1rem; display: block; }
+    h1 { font-size: clamp(1.75rem, 5vw, 2.75rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; }
+    .art-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--gris); letter-spacing: 0.1em; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #1a1a22; }
+    h2 { font-size: 1.3rem; font-weight: 700; margin: 2.5rem 0 1rem; }
+    p { font-size: 1rem; line-height: 1.8; color: #ccc; margin-bottom: 1.25rem; }
+    .highlight { background: var(--negro-card); border-left: 3px solid var(--fuxia); padding: 1.25rem 1.5rem; border-radius: 0 6px 6px 0; margin: 2rem 0; }
+    .highlight p { color: #fff; margin: 0; }
+    .cta-inline { background: var(--negro-card); border: 1px solid rgba(204,0,255,0.4); border-radius: 8px; padding: 2rem; text-align: center; margin-top: 3rem; }
+    .cta-inline h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .cta-inline p { color: var(--gris); margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--fuxia); color: #fff; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 0.8rem 1.75rem; border-radius: 4px; text-decoration: none; box-shadow: 0 0 20px rgba(204,0,255,0.3); transition: background 0.2s, transform 0.15s; }
+    .btn:hover { background: #dd22ff; transform: translateY(-2px); }
+    @media (max-width: 600px) { article { padding: 3rem 1.25rem 5rem; } nav { padding: 1rem 1.25rem; } }
+    footer { max-width: 720px; margin: 0 auto; padding: 0 2rem 2rem; font-family: 'JetBrains Mono',monospace; font-size: 0.62rem; color: #55555f; line-height: 2; }
+    footer a { color: #777788; }
+    #cookie-banner { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 9997; background: rgba(13,13,18,0.97); border: 1px solid rgba(204,0,255,0.4); border-radius: 12px; padding: 1rem 1.1rem; display: none; gap: 0.8rem; max-width: 640px; margin: 0 auto; align-items: center; font-family: 'JetBrains Mono',monospace; font-size: 0.7rem; color: #aaaabb; line-height: 1.6; }
+    #cookie-banner.show { display: flex; }
+    #cookie-banner a { color: #CC00FF; }
+    #cookie-banner .ck-btns { display: flex; gap: 0.5rem; }
+    #cookie-banner button { font-family: inherit; font-size: 0.7rem; padding: 0.55rem 0.95rem; border-radius: 4px; cursor: pointer; }
+    #ck-accept { background: #CC00FF; color: #fff; border: 1px solid #CC00FF; font-weight: 700; }
+    #ck-reject { background: transparent; color: #aaaabb; border: 1px solid rgba(255,255,255,0.25); }
+    @media (max-width:600px){ #cookie-banner{ flex-direction:column; align-items:stretch; } #cookie-banner .ck-btns button{ flex:1; } footer{ padding:0 1.25rem 2rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html"><img src="../logo.png" alt="FUXIA" style="height:36px;" /></a>
+    <a href="../index.html" class="back-link">â† volver al inicio</a>
+  </nav>
+  <article>
+    <span class="art-tag">// landing pages</span>
+    <h1>Por quÃ© tu landing page no convierte (y no es el diseÃ±o)</h1>
+    <div class="art-meta">4 min de lectura Â· FUXIA</div>
+
+    <p>Cuando alguien llega a tu landing page tiene menos de 5 segundos para decidir si se queda o se va. Y en esos 5 segundos no estÃ¡ leyendo â€” estÃ¡ escaneando. EstÃ¡ buscando una respuesta a una sola pregunta: <strong style="color:#fff">Â¿esto es para mÃ­?</strong></p>
+
+    <div class="highlight"><p>La mayorÃ­a de las landings fallan porque responden a "quÃ© hacemos" en lugar de "quÃ© ganÃ¡s vos".</p></div>
+
+    <h2>El error mÃ¡s comÃºn</h2>
+    <p>El dueÃ±o del negocio redacta la landing pensando en su empresa. En sus aÃ±os de experiencia, en sus certificaciones, en el proceso que siguen. Todo eso es ruido para alguien que llegÃ³ buscando resolver un problema.</p>
+    <p>Lo primero que tiene que ver el visitante es quÃ© problema le resolvÃ©s, cÃ³mo y en cuÃ¡nto tiempo. Sin adornos.</p>
+
+    <h2>La estructura que funciona</h2>
+    <p><strong>1. Titular de impacto.</strong> Una frase que describa el resultado que obtiene el cliente. No "somos expertos en X", sino "en una semana tenÃ©s X funcionando".</p>
+    <p><strong>2. Prueba social inmediata.</strong> Un nÃºmero, un resultado, un testimonio corto. Justo despuÃ©s del titular, no al final.</p>
+    <p><strong>3. Un solo llamado a la acciÃ³n.</strong> No cuatro botones. No un menÃº. Un solo botÃ³n que diga exactamente quÃ© pasa cuando se hace clic.</p>
+
+    <h2>Por quÃ© el diseÃ±o importa menos de lo que creÃ©s</h2>
+    <p>Una landing bien escrita con diseÃ±o mediocre convierte mejor que una landing con diseÃ±o premium y copy dÃ©bil. El diseÃ±o genera confianza â€” el copy genera acciÃ³n.</p>
+    <p>En FUXIA trabajamos los dos, pero siempre empezamos por el mensaje. Porque si el mensaje estÃ¡ mal, el diseÃ±o bonito solo hace que la gente rebote mÃ¡s rÃ¡pido.</p>
+
+    <div class="cta-inline">
+      <h3>Â¿Tu landing estÃ¡ convirtiendo lo que deberÃ­a?</h3>
+      <p>Te decimos en 15 minutos quÃ© le falta y quÃ© cambiarÃ­a.</p>
+      <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20le%C3%AD%20el%20art%C3%ADculo%20de%20landing%20pages%20y%20quiero%20una%20revisi%C3%B3n" class="btn" target="_blank" rel="noopener">Hablemos â†’</a>
+    </div>
+  </article>
+  <footer><a href="../politica-datos.html">Tratamiento de datos</a> · <a href="../politica-cookies.html">Cookies</a> · <a href="../terminos.html">Términos</a><br />© 2026 FUXIA · Medellín · Ley 1581 de 2012</footer>
+  <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+    <span>Usamos cookies necesarias y, solo si aceptas, analítica. <a href="../politica-cookies.html">Ver política</a>.</span>
+    <span class="ck-btns"><button id="ck-accept" type="button">Aceptar</button><button id="ck-reject" type="button">Rechazar</button></span>
+  </div>
+  <script>
+  (function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}if(!g()&&b)b.classList.add('show');document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');b.classList.remove('show');});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');b.classList.remove('show');});})();
+  </script>
+</body>
+</html>
