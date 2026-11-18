@@ -517,11 +517,43 @@ const CSS = `
 .fx-bar { height: 6px; background: ${S2}; border-radius: 3px; overflow: hidden; }
 .fx-bar > div { height: 100%; border-radius: 3px; }
 .fx-copybtn { background: transparent; border: 0.5px solid ${B2}; color: ${T2}; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+.fx-copybtn:hover { border-color: ${F}; color: ${F}; }
+.fx-btn { background: ${F}; border: none; color: #000; font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.fx-btn:hover { opacity: 0.9; }
+.fx-in { background: ${S2}; border: 0.5px solid ${B2}; color: ${T1}; font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 8px 10px; border-radius: 8px; width: 100%; outline: none; }
+.fx-in:focus { border-color: ${F}; }
+.fx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.fx-fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.fx-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding: 12px 0; border-bottom: 0.5px solid ${B2}; }
+.fx-row:last-child { border-bottom: none; }
 .scrollx { overflow-x: auto; scrollbar-width: none; }
 .scrollx::-webkit-scrollbar { display: none; }
 `;
 
-function money(n) { return "$" + n.toLocaleString("es-CO"); }
+const PIPE_KEY = "fuxia_marketing_pipeline_v1";
+const ETAPAS = ["Lead", "Conversación", "Llamada", "Propuesta", "Cierre", "Perdido"];
+const ETAPA_IDX = { "Lead": 1, "Conversación": 2, "Llamada": 3, "Propuesta": 4, "Cierre": 5, "Perdido": 0 };
+const CANALES = ["DM IG", "Reel / Orgánico", "Meta Ads Retargeting", "Meta Ads Frío", "Landing / Web", "WhatsApp Directo", "Referido"];
+const PLANES_VAL = [
+  { label: "Diagnóstico ($0)", val: 0 },
+  { label: "Arranque ($1.5M)", val: 1500000 },
+  { label: "Crecimiento ($1.5M + $750k/m)", val: 2250000 },
+  { label: "Escala ($2.5M + $1.2M/m)", val: 3700000 },
+  { label: "Combo Entrada ($550k)", val: 550000 },
+  { label: "Piloto ($750k)", val: 750000 }
+];
+const ETAPA_COLOR = {
+  "Lead": T2,
+  "Conversación": "#69C9D0",
+  "Llamada": WARN,
+  "Propuesta": F,
+  "Cierre": OK,
+  "Perdido": GASTO
+};
+
+function money(n) { return "$" + (Number(n) || 0).toLocaleString("es-CO"); }
+function todayIso() { return new Date().toISOString().slice(0, 10); }
+function csvCell(v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }
 
 export { PLAN, DOCS, WA_T };
 
@@ -531,6 +563,17 @@ export default function FuxiaTrafico() {
   const [fase, setFase] = useState("Setup");
   const [checks, setChecks] = useState({});
   const [copied, setCopied] = useState("");
+  const [pipe, setPipe] = useState({ pautaReal: 0, leads: [] });
+  const [filtro, setFiltro] = useState("Todos");
+  const [form, setForm] = useState({
+    tienda: "",
+    contacto: "",
+    canal: "DM IG",
+    etapa: "Lead",
+    plan: "Arranque ($1.5M)",
+    valor: 1500000,
+    nota: ""
+  });
 
   useEffect(() => {
     const el = document.createElement("style");
@@ -543,7 +586,60 @@ export default function FuxiaTrafico() {
       const s = JSON.parse(localStorage.getItem("fuxia_marketing_checks_v1") || "{}");
       setChecks(s);
     } catch (e) {}
+    try {
+      const p = JSON.parse(localStorage.getItem(PIPE_KEY) || "null");
+      if (p && Array.isArray(p.leads)) {
+        setPipe({ pautaReal: Number(p.pautaReal) || 0, leads: p.leads });
+      }
+    } catch (e) {}
   }, []);
+  function savePipe(next) {
+    setPipe(next);
+    try { localStorage.setItem(PIPE_KEY, JSON.stringify(next)); } catch (e) {}
+  }
+  function addLead(e) {
+    e.preventDefault();
+    const tienda = form.tienda.trim();
+    if (!tienda) return;
+    const item = {
+      id: Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+      fecha: todayIso(),
+      tienda,
+      contacto: form.contacto.trim(),
+      canal: form.canal,
+      etapa: form.etapa,
+      plan: form.plan,
+      valor: Number(form.valor) || 0,
+      nota: form.nota.trim()
+    };
+    savePipe({ pautaReal: pipe.pautaReal, leads: [item, ...pipe.leads] });
+    setForm((prev) => Object.assign({}, prev, { tienda: "", contacto: "", nota: "" }));
+  }
+  function updateEtapa(id, nuevaEtapa) {
+    savePipe({
+      pautaReal: pipe.pautaReal,
+      leads: pipe.leads.map((l) => (l.id === id ? Object.assign({}, l, { etapa: nuevaEtapa }) : l))
+    });
+  }
+  function removeLead(id) {
+    savePipe({ pautaReal: pipe.pautaReal, leads: pipe.leads.filter((l) => l.id !== id) });
+  }
+  function exportCsv() {
+    const header = ["Fecha", "Tienda", "Contacto", "Canal", "Etapa", "Plan", "Valor_COP", "Nota"];
+    const rows = pipe.leads.map((l) => [l.fecha, l.tienda, l.contacto, l.canal, l.etapa, l.plan, l.valor, l.nota]);
+    const csv = "\uFEFF" + [header, ...rows].map((r) => r.map(csvCell).join(",")).join("\r\n");
+    try {
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "fuxia_tablero_leads_" + todayIso() + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (e) {}
+  }
   function toggle(k) {
     setChecks((prev) => {
       const n = Object.assign({}, prev, { [k]: !prev[k] });
@@ -571,6 +667,19 @@ export default function FuxiaTrafico() {
     "F4 · Escala": "2-3 clientes · MRR $1.5M+ · sistema documentado"
   };
 
+  // Métricas reales del tablero (acumulativas por avance en embudo)
+  const totalLeads = pipe.leads.length;
+  const totalConv = pipe.leads.filter((l) => (ETAPA_IDX[l.etapa] || 0) >= 2).length;
+  const totalLlam = pipe.leads.filter((l) => (ETAPA_IDX[l.etapa] || 0) >= 3).length;
+  const totalProp = pipe.leads.filter((l) => (ETAPA_IDX[l.etapa] || 0) >= 4).length;
+  const totalCierres = pipe.leads.filter((l) => l.etapa === "Cierre").length;
+  const valorCerrado = pipe.leads.filter((l) => l.etapa === "Cierre").reduce((a, l) => a + (Number(l.valor) || 0), 0);
+  const cplReal = totalLeads > 0 && pipe.pautaReal > 0 ? Math.round(pipe.pautaReal / totalLeads) : 0;
+  const cacReal = totalCierres > 0 && pipe.pautaReal > 0 ? Math.round(pipe.pautaReal / totalCierres) : 0;
+  const tasaConv = totalLeads > 0 ? Math.round((totalConv / totalLeads) * 100) : 0;
+  const tasaCierre = totalLlam > 0 ? Math.round((totalCierres / totalLlam) * 100) : 0;
+  const filteredLeads = filtro === "Todos" ? pipe.leads : pipe.leads.filter((l) => l.etapa === filtro);
+
   return (
     <div className="fx">
       <div style={{ borderBottom: "0.5px solid " + B2, background: S1 }}>
@@ -582,7 +691,7 @@ export default function FuxiaTrafico() {
           </div>
           <div className="fx-mono" style={{ fontSize: 10, color: T2, marginBottom: 10 }}>Marketing digital para tiendas de tecnología · Medellín</div>
           <div className="scrollx" style={{ display: "flex" }}>
-            {[["cal", "Calendario"], ["camp", "Campañas"], ["wa", "WhatsApp"], ["kpi", "KPIs"]].map(([id, l]) => (
+            {[["cal", "Calendario"], ["tab", "Tablero (" + totalLeads + ")"], ["camp", "Campañas"], ["wa", "WhatsApp"], ["kpi", "KPIs"]].map(([id, l]) => (
               <button key={id} className={"fx-tab" + (tab === id ? " on" : "")} onClick={() => setTab(id)}>{l}</button>
             ))}
           </div>
@@ -629,6 +738,117 @@ export default function FuxiaTrafico() {
                 </details>
               ))}
               <div className="fx-mono" style={{ fontSize: 11, color: WARN, marginTop: 12 }}>▸ KPI del día: {day.kpi}</div>
+            </div>
+          </div>
+        )}
+
+        {tab === "tab" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div className="fx-grid">
+              {[
+                ["Leads", totalLeads, "Meta 80-100", T1],
+                ["Conversaciones", totalConv, "Meta 30 · " + tasaConv + "%", "#69C9D0"],
+                ["Llamadas", totalLlam, "Meta 8-12", WARN],
+                ["Propuestas", totalProp, "Meta 4-6", F],
+                ["Cierres", totalCierres, "Meta 2-3 · " + tasaCierre + "%", OK],
+                ["Cerrado COP", money(valorCerrado), cplReal ? "CPL " + money(cplReal) : "Sin pauta aún", OK]
+              ].map(([lbl, val, sub, col]) => (
+                <div key={lbl} className="fx-card" style={{ padding: "14px 16px" }}>
+                  <div className="fx-label">{lbl}</div>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: col, marginTop: 6 }}>{val}</div>
+                  <div className="fx-mono" style={{ fontSize: 10, color: T2, marginTop: 4 }}>{sub}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="fx-card" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                <span className="fx-label" style={{ color: T2 }}>Pauta real invertida (COP)</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="10000"
+                  className="fx-in"
+                  style={{ width: 150 }}
+                  value={pipe.pautaReal || ""}
+                  placeholder="Ej. 150000"
+                  onChange={(e) => savePipe({ pautaReal: Math.max(0, Number(e.target.value) || 0), leads: pipe.leads })}
+                />
+                <span className="fx-mono" style={{ fontSize: 11, color: cplReal > 15000 ? GASTO : (cplReal > 0 && cplReal <= 10000 ? OK : T2) }}>
+                  {cplReal ? "CPL " + money(cplReal) : "CPL —"} · {cacReal ? "CAC " + money(cacReal) : "CAC —"}
+                </span>
+              </div>
+              <button type="button" className="fx-copybtn" onClick={exportCsv}>⬇ Exportar CSV (Excel)</button>
+            </div>
+
+            <form className="fx-card" onSubmit={addLead} style={{ borderColor: "rgba(224,64,251,0.3)", display: "flex", flexDirection: "column", gap: 10 }}>
+              <div className="fx-label" style={{ color: F }}>+ Registrar lead / tienda</div>
+              <div className="fx-fgrid">
+                <input className="fx-in" required placeholder="Tienda / Negocio *" value={form.tienda} onChange={(e) => setForm(Object.assign({}, form, { tienda: e.target.value }))} />
+                <input className="fx-in" placeholder="IG o WhatsApp" value={form.contacto} onChange={(e) => setForm(Object.assign({}, form, { contacto: e.target.value }))} />
+                <select className="fx-in" value={form.canal} onChange={(e) => setForm(Object.assign({}, form, { canal: e.target.value }))}>
+                  {CANALES.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+                <select className="fx-in" value={form.etapa} onChange={(e) => setForm(Object.assign({}, form, { etapa: e.target.value }))}>
+                  {ETAPAS.map((et) => <option key={et} value={et}>{et}</option>)}
+                </select>
+                <select
+                  className="fx-in"
+                  value={form.plan}
+                  onChange={(e) => {
+                    const p = PLANES_VAL.find((x) => x.label === e.target.value);
+                    setForm(Object.assign({}, form, { plan: e.target.value, valor: p ? p.val : form.valor }));
+                  }}
+                >
+                  {PLANES_VAL.map((p) => <option key={p.label} value={p.label}>{p.label}</option>)}
+                </select>
+                <input className="fx-in" type="number" min="0" step="50000" placeholder="Valor COP" value={form.valor} onChange={(e) => setForm(Object.assign({}, form, { valor: Number(e.target.value) || 0 }))} />
+              </div>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                <input className="fx-in" style={{ flex: 1, minWidth: 200 }} placeholder="Nota rápida o próximo seguimiento (ej: enviar diagnóstico jueves 3pm)" value={form.nota} onChange={(e) => setForm(Object.assign({}, form, { nota: e.target.value }))} />
+                <button type="submit" className="fx-btn">+ Agregar</button>
+              </div>
+            </form>
+
+            <div className="scrollx" style={{ display: "flex", gap: 6 }}>
+              {["Todos", ...ETAPAS].map((et) => (
+                <button
+                  key={et}
+                  type="button"
+                  className="fx-pill"
+                  style={{ cursor: "pointer", border: "0.5px solid " + (filtro === et ? F : B2), color: filtro === et ? F : T2, background: filtro === et ? "rgba(224,64,251,0.08)" : "transparent", padding: "6px 12px", whiteSpace: "nowrap" }}
+                  onClick={() => setFiltro(et)}
+                >
+                  {et} ({et === "Todos" ? totalLeads : pipe.leads.filter((l) => l.etapa === et).length})
+                </button>
+              ))}
+            </div>
+
+            <div className="fx-card">
+              <div className="fx-label" style={{ marginBottom: 6 }}>Pipeline activo ({filteredLeads.length})</div>
+              {filteredLeads.length === 0 ? (
+                <div className="fx-body" style={{ padding: "12px 0" }}>Aún no hay registros en esta vista. Agrega tu primer prospecto arriba y se guarda automático en este dispositivo.</div>
+              ) : filteredLeads.map((l) => (
+                <div key={l.id} className="fx-row">
+                  <div style={{ flex: 1, minWidth: 200 }}>
+                    <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                      <span className="fx-h2" style={{ fontSize: 15 }}>{l.tienda}</span>
+                      <span className="fx-pill" style={{ color: ETAPA_COLOR[l.etapa] || T2, border: "0.5px solid " + (ETAPA_COLOR[l.etapa] || B2) }}>{l.etapa}</span>
+                      <span className="fx-mono" style={{ fontSize: 10, color: T2 }}>{l.canal} · {l.fecha}</span>
+                    </div>
+                    <div className="fx-mono" style={{ fontSize: 11, color: T2, marginTop: 4 }}>
+                      {l.contacto ? l.contacto + " · " : ""}{l.plan}{l.valor ? " (" + money(l.valor) + ")" : ""}
+                    </div>
+                    {l.nota ? <div className="fx-body" style={{ fontSize: 12, marginTop: 2 }}>{l.nota}</div> : null}
+                  </div>
+                  <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                    <select className="fx-in" style={{ width: 135, padding: "6px 8px" }} value={l.etapa} onChange={(e) => updateEtapa(l.id, e.target.value)}>
+                      {ETAPAS.map((et) => <option key={et} value={et}>{et}</option>)}
+                    </select>
+                    <button type="button" className="fx-copybtn" onClick={() => removeLead(l.id)} title="Eliminar">✕</button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}

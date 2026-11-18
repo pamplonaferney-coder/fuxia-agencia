@@ -49,6 +49,25 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
   .tip b { color: #E040FB; font-size: 11px; margin-right: 6px; }
   .kpi { font-size: 12px; color: #F5C842; margin-top: 10px; }
   .small { font-size: 13px; color: #888880; }
+  .m-nav { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; padding-bottom: 4px; }
+  .m-nav a { flex-shrink: 0; background: #101010; border: 1px solid rgba(255,255,255,0.1); color: #F0EFE8; text-decoration: none; font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 20px; }
+  .m-nav a.hi { border-color: #E040FB; color: #E040FB; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+  .kpi-box { background: #181818; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px; }
+  .kpi-box .kl { font-size: 10px; color: #888880; text-transform: uppercase; letter-spacing: 0.6px; }
+  .kpi-box .kv { font-size: 18px; font-weight: 800; margin-top: 3px; }
+  .m-in { width: 100%; background: #181818; border: 1px solid rgba(255,255,255,0.12); color: #F0EFE8; border-radius: 8px; padding: 9px 10px; font-size: 13.5px; margin-bottom: 8px; }
+  .m-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .m-btn { width: 100%; background: #E040FB; color: #000; border: none; border-radius: 8px; padding: 11px; font-size: 14px; font-weight: 800; cursor: pointer; }
+  .m-btn-sec { background: transparent; color: #F0EFE8; border: 1px solid rgba(224,64,251,0.5); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .m-pills { display: flex; gap: 6px; overflow-x: auto; margin: 10px 0; }
+  .m-pill { flex-shrink: 0; background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #888880; border-radius: 18px; padding: 5px 10px; font-size: 11.5px; cursor: pointer; }
+  .m-pill.on { border-color: #E040FB; color: #E040FB; background: rgba(224,64,251,0.1); }
+  .lead-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .lead-item:last-child { border-bottom: none; }
+  .lead-ctrl { display: flex; gap: 6px; margin-top: 8px; align-items: center; }
+  .lead-ctrl select { flex: 1; margin-bottom: 0; padding: 7px 8px; font-size: 12.5px; }
+  .lead-del { background: transparent; border: 1px solid rgba(255,255,255,0.16); color: #FF8A65; border-radius: 8px; padding: 7px 10px; cursor: pointer; font-size: 12px; }
   #prog { position: sticky; top: 0; background: #070707; padding: 12px 0; border-bottom: 1px solid rgba(224,64,251,0.25); margin: -4px 0 12px; font-size: 14px; z-index: 5; }
   #progbar { height: 6px; background: #1a1a1a; border-radius: 3px; margin-top: 8px; overflow: hidden; }
   #progbar > div { height: 100%; background: #E040FB; width: 0%; }
@@ -69,8 +88,62 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
 <div id="prog"><b id="pct">0%</b> completado · FUXIA MARKETING 60d<div id="progbar"><div></div></div></div>
 <h1>FUXIA MARKETING · 60 días</h1>
 <div class="sub">Setup 23–29 nov 2026 · Día 1: 30 nov · Día 60: 28 ene 2027 · Pauta $500k · Tiendas de tecnología</div>
+<div class="m-nav">
+  <a href="#tablero" class="hi">📊 Tablero</a>
+  <a href="#calendario">📅 Calendario</a>
+  <a href="#guiones">📄 Guiones</a>
+  <a href="#whatsapp">💬 WhatsApp</a>
+  <a href="#metas">🎯 Metas</a>
+</div>
 
-<h2>Calendario (tocá para abrir)</h2>
+<h2 id="tablero">Tablero · Leads y Cierres</h2>
+<div class="card">
+  <div class="kpi-grid">
+    <div class="kpi-box"><div class="kl">Leads</div><div class="kv" id="tb-leads">0</div></div>
+    <div class="kpi-box"><div class="kl">Conv.</div><div class="kv" style="color:#69C9D0" id="tb-conv">0</div></div>
+    <div class="kpi-box"><div class="kl">Llamadas</div><div class="kv" style="color:#F5C842" id="tb-llam">0</div></div>
+    <div class="kpi-box"><div class="kl">Propuestas</div><div class="kv" style="color:#E040FB" id="tb-prop">0</div></div>
+    <div class="kpi-box"><div class="kl">Cierres</div><div class="kv" style="color:#8AE8A0" id="tb-cierres">0</div></div>
+    <div class="kpi-box"><div class="kl">CPL real</div><div class="kv" style="font-size:14px" id="tb-cpl">—</div></div>
+  </div>
+  <div class="small" style="margin-bottom:8px;">Cerrado: <b style="color:#8AE8A0" id="tb-val">$0</b> · CAC: <b id="tb-cac">—</b></div>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+    <input id="tb-pauta" class="m-in" type="number" min="0" step="10000" placeholder="Pauta real COP (ej. 150000)" style="margin-bottom:0;flex:1;" />
+    <button type="button" id="tb-csv" class="m-btn-sec">⬇ CSV</button>
+  </div>
+  <details class="doc" id="tb-add-box">
+    <summary>+ Registrar nuevo lead / tienda</summary>
+    <form id="tb-form" style="padding-top:8px;">
+      <input id="tb-tienda" class="m-in" required placeholder="Tienda / Negocio *" />
+      <input id="tb-contacto" class="m-in" placeholder="IG o WhatsApp" />
+      <div class="m-row2">
+        <select id="tb-canal" class="m-in">
+          <option>DM IG</option><option>Reel / Orgánico</option><option>Meta Ads Retargeting</option><option>Meta Ads Frío</option><option>Landing / Web</option><option>WhatsApp Directo</option><option>Referido</option>
+        </select>
+        <select id="tb-etapa" class="m-in">
+          <option>Lead</option><option>Conversación</option><option>Llamada</option><option>Propuesta</option><option>Cierre</option><option>Perdido</option>
+        </select>
+      </div>
+      <div class="m-row2">
+        <select id="tb-plan" class="m-in">
+          <option value="0">Diagnóstico ($0)</option>
+          <option value="1500000" selected>Arranque ($1.5M)</option>
+          <option value="2250000">Crecimiento ($1.5M+$750k/m)</option>
+          <option value="3700000">Escala ($2.5M+$1.2M/m)</option>
+          <option value="550000">Combo ($550k)</option>
+          <option value="750000">Piloto ($750k)</option>
+        </select>
+        <input id="tb-valor" class="m-in" type="number" min="0" step="50000" value="1500000" placeholder="Valor COP" />
+      </div>
+      <input id="tb-nota" class="m-in" placeholder="Nota / próximo seguimiento" />
+      <button type="submit" class="m-btn">+ Guardar lead</button>
+    </form>
+  </details>
+  <div class="m-pills" id="tb-filters"></div>
+  <div id="tb-list" class="small">Aún no hay leads registrados.</div>
+</div>
+
+<h2 id="calendario">Calendario (tocá para abrir)</h2>
 <h2>Setup</h2>
 <details class="card day"><summary><b>Setup D-7</b> · Nicho, oferta y precios <span class="tag">lun 23 nov · setup</span></summary>
 <div class="tasks"><label class="chk"><input type="checkbox" data-k="0-0"><span>Definir nicho: tiendas de tecnología y accesorios en Medellín</span></label><label class="chk"><input type="checkbox" data-k="0-1"><span>Elegir 2-3 dolores: respuesta lenta, seguimiento manual, pauta sin medición</span></label><label class="chk"><input type="checkbox" data-k="0-2"><span>Fijar oferta: diagnóstico gratis + Arranque/Crecimiento/Escala</span></label><label class="chk"><input type="checkbox" data-k="0-3"><span>Escribir promesa en 1 frase + 3 pruebas reales</span></label></div>
@@ -829,7 +902,7 @@ Nota: los números se explican con contexto, no solo con capturas.</pre></detail
 <div class="tasks"><label class="chk"><input type="checkbox" data-k="66-0"><span>Celebrar 2-3 clientes</span></label><label class="chk"><input type="checkbox" data-k="66-1"><span>Sistema documentado para replicar</span></label><label class="chk"><input type="checkbox" data-k="66-2"><span>Plan del ciclo 2</span></label></div>
 <div class="tip"><b>TIP</b> ESTÁ TODO. AHORA A REPLICAR.</div>
 <div class="kpi">▸ KPI: 2-3 clientes · MRR $1.5M+</div></details>
-<h2>Guiones y campañas</h2>
+<h2 id="guiones">Guiones y campañas</h2>
 <details class="card doc"><summary>Nicho y cliente ideal (ICP)</summary><pre>NICHO INICIAL — TIENDAS DE TECNOLOGÍA EN MEDELLÍN
 
 Quién es el cliente:
@@ -1163,18 +1236,123 @@ Nota: los números se explican con contexto, no solo con capturas.</pre></detail
 [ ] Fecha de lanzamiento y fecha del primer reporte.
 [ ] Grupo de WhatsApp o canal de comunicación.
 [ ] Responsable de responder leads y horario.</pre></details>
-<h2>WhatsApp</h2>
+<h2 id="whatsapp">WhatsApp</h2>
 <div class="card"><b>Bienvenida automática</b><pre>Hola, gracias por escribir a FUXIA Marketing. Contame en 2 líneas qué vendés y por dónde te llegan los clientes hoy. Te respondo en menos de 1 hora. — Ferney</pre></div>
 <div class="card"><b>Calificación (3 preguntas)</b><pre>Perfecto. Para no hacerte perder tiempo, 3 cortas: 1) ¿Qué vendés exactamente? 2) ¿Cuántos mensajes te llegan al día por WhatsApp/Instagram? 3) ¿Quién los responde y en qué horario?</pre></div>
 <div class="card"><b>Agendamiento</b><pre>Con eso ya veo por dónde va. Te propongo un diagnóstico gratis de 15 min. Salís con 3 oportunidades concretas, sin compromiso. ¿Te sirve mañana AM o PM?</pre></div>
 <div class="card"><b>Seguimiento 48h</b><pre>Hola [nombre], te escribí por el diagnóstico gratis de FUXIA. ¿Lo pudiste ver? Si no es el momento, todo bien, me decís y lo dejamos para después.</pre></div>
 <div class="card"><b>Reactivación leads fríos</b><pre>Hola [nombre], soy Ferney de FUXIA (Medellín). Hace un tiempo hablamos de mejorar las ventas por WhatsApp de [negocio]. Abrí 5 diagnósticos gratis esta semana. ¿Te sirve uno de 15 min?</pre></div>
-<h2>Metas por fase</h2>
+<h2 id="metas">Metas por fase</h2>
 <div class="card"><div class="small">Setup</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">Oferta, nicho, landing, WhatsApp y medición listos</div></div>
 <div class="card"><div class="small">F1 · Base</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">20 leads · 10 conversaciones · 2 llamadas</div></div>
 <div class="card"><div class="small">F2 · Tracción</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">50 leads · 20 conversaciones · 5 llamadas · 2 propuestas</div></div>
 <div class="card"><div class="small">F3 · Conversión</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">80 leads · 30 conversaciones · 8 llamadas · 4 propuestas · 1-2 clientes</div></div>
 <div class="card"><div class="small">F4 · Escala</div><div style="font-size:16px;font-weight:800;color:#E040FB;margin-top:4px;">2-3 clientes · MRR $1.5M+ · sistema documentado</div></div>
+<script>
+(function () {
+  var PKEY = "fuxia_marketing_pipeline_v1";
+  var ETAPAS = ["Lead", "Conversación", "Llamada", "Propuesta", "Cierre", "Perdido"];
+  var EIDX = { "Lead": 1, "Conversación": 2, "Llamada": 3, "Propuesta": 4, "Cierre": 5, "Perdido": 0 };
+  var state = { pautaReal: 0, leads: [] };
+  var filtro = "Todos";
+  try {
+    var raw = JSON.parse(localStorage.getItem(PKEY) || "null");
+    if (raw && Array.isArray(raw.leads)) state = { pautaReal: Number(raw.pautaReal) || 0, leads: raw.leads };
+  } catch (e) {}
+  function save() { try { localStorage.setItem(PKEY, JSON.stringify(state)); } catch (e) {} }
+  function money(n) { return "$" + (Number(n) || 0).toLocaleString("es-CO"); }
+  function esc(s) { return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function csvCell(v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }
+  var pautaIn = document.getElementById("tb-pauta");
+  var planSel = document.getElementById("tb-plan");
+  var valIn = document.getElementById("tb-valor");
+  pautaIn.value = state.pautaReal || "";
+  pautaIn.addEventListener("input", function () {
+    state.pautaReal = Math.max(0, Number(pautaIn.value) || 0);
+    save(); renderPipe();
+  });
+  planSel.addEventListener("change", function () { valIn.value = planSel.value; });
+  document.getElementById("tb-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var tienda = document.getElementById("tb-tienda").value.trim();
+    if (!tienda) return;
+    state.leads.unshift({
+      id: Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+      fecha: new Date().toISOString().slice(0, 10),
+      tienda: tienda,
+      contacto: document.getElementById("tb-contacto").value.trim(),
+      canal: document.getElementById("tb-canal").value,
+      etapa: document.getElementById("tb-etapa").value,
+      plan: planSel.options[planSel.selectedIndex].text,
+      valor: Number(valIn.value) || 0,
+      nota: document.getElementById("tb-nota").value.trim()
+    });
+    document.getElementById("tb-tienda").value = "";
+    document.getElementById("tb-contacto").value = "";
+    document.getElementById("tb-nota").value = "";
+    save(); renderPipe();
+  });
+  document.getElementById("tb-csv").addEventListener("click", function () {
+    var hdr = ["Fecha","Tienda","Contacto","Canal","Etapa","Plan","Valor_COP","Nota"];
+    var rows = state.leads.map(function (l) { return [l.fecha, l.tienda, l.contacto, l.canal, l.etapa, l.plan, l.valor, l.nota]; });
+    var csv = "\uFEFF" + [hdr].concat(rows).map(function (r) { return r.map(csvCell).join(","); }).join("\r\n");
+    try {
+      var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = "fuxia_tablero_leads_" + new Date().toISOString().slice(0, 10) + ".csv";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+    } catch (e) {}
+  });
+  function renderPipe() {
+    var total = state.leads.length;
+    var conv = state.leads.filter(function (l) { return (EIDX[l.etapa] || 0) >= 2; }).length;
+    var llam = state.leads.filter(function (l) { return (EIDX[l.etapa] || 0) >= 3; }).length;
+    var prop = state.leads.filter(function (l) { return (EIDX[l.etapa] || 0) >= 4; }).length;
+    var cierres = state.leads.filter(function (l) { return l.etapa === "Cierre"; }).length;
+    var valC = state.leads.filter(function (l) { return l.etapa === "Cierre"; }).reduce(function (a, l) { return a + (Number(l.valor) || 0); }, 0);
+    document.getElementById("tb-leads").textContent = total;
+    document.getElementById("tb-conv").textContent = conv;
+    document.getElementById("tb-llam").textContent = llam;
+    document.getElementById("tb-prop").textContent = prop;
+    document.getElementById("tb-cierres").textContent = cierres;
+    document.getElementById("tb-val").textContent = money(valC);
+    document.getElementById("tb-cpl").textContent = (total > 0 && state.pautaReal > 0) ? money(Math.round(state.pautaReal / total)) : "—";
+    document.getElementById("tb-cac").textContent = (cierres > 0 && state.pautaReal > 0) ? money(Math.round(state.pautaReal / cierres)) : "—";
+    var fBox = document.getElementById("tb-filters");
+    fBox.innerHTML = ["Todos"].concat(ETAPAS).map(function (et) {
+      var cnt = et === "Todos" ? total : state.leads.filter(function (l) { return l.etapa === et; }).length;
+      return '<button type="button" class="m-pill' + (filtro === et ? ' on' : '') + '" data-f="' + esc(et) + '">' + esc(et) + ' (' + cnt + ')</button>';
+    }).join("");
+    fBox.querySelectorAll("button").forEach(function (btn) {
+      btn.addEventListener("click", function () { filtro = btn.dataset.f; renderPipe(); });
+    });
+    var list = filtro === "Todos" ? state.leads : state.leads.filter(function (l) { return l.etapa === filtro; });
+    var lBox = document.getElementById("tb-list");
+    if (!list.length) { lBox.innerHTML = '<div class="small" style="padding:8px 0;">Sin leads en esta vista.</div>'; return; }
+    lBox.innerHTML = list.map(function (l) {
+      var opts = ETAPAS.map(function (et) { return '<option' + (l.etapa === et ? ' selected' : '') + '>' + esc(et) + '</option>'; }).join("");
+      return '<div class="lead-item"><div><b>' + esc(l.tienda) + '</b> <span class="tag">· ' + esc(l.canal) + ' · ' + esc(l.fecha) + '</span></div>' +
+        '<div class="small">' + (l.contacto ? esc(l.contacto) + ' · ' : '') + esc(l.plan) + (l.valor ? ' (' + money(l.valor) + ')' : '') + '</div>' +
+        (l.nota ? '<div class="small" style="color:#ccc;">' + esc(l.nota) + '</div>' : '') +
+        '<div class="lead-ctrl"><select class="m-in" data-id="' + esc(l.id) + '">' + opts + '</select><button type="button" class="lead-del" data-del="' + esc(l.id) + '">✕</button></div></div>';
+    }).join("");
+    lBox.querySelectorAll("select[data-id]").forEach(function (sel) {
+      sel.addEventListener("change", function () {
+        state.leads = state.leads.map(function (l) { return l.id === sel.dataset.id ? Object.assign({}, l, { etapa: sel.value }) : l; });
+        save(); renderPipe();
+      });
+    });
+    lBox.querySelectorAll("button[data-del]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.leads = state.leads.filter(function (l) { return l.id !== btn.dataset.del; });
+        save(); renderPipe();
+      });
+    });
+  }
+  renderPipe();
+})();
+</script>
 <script>
 (function () {
   var KEY = "fuxia_marketing_mobile_checks_v1";
