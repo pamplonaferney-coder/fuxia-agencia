@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "FUXIA — Agencia de Automatización. Pipeline de calidad: ESLint + escaneo de secretos + SonarCloud.",
+  "description": "FUXIA — Agencia de Marketing Digital y Automatización. Pipeline de calidad: ESLint + escaneo de secretos + SonarCloud.",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

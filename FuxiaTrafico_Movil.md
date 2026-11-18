@@ -1,42 +1,43 @@
-# 📲 FUXIA · Tráfico 30 días (móvil)
+# FUXIA Marketing — Tráfico 60 días (móvil)
 
-Marca personal @ferneypamplona · TH · IG · FB · LI + pauta $500k · Meta: seguidores + leads WA.
+Marca personal @ferneypamplona + @fuxia_oficial · TH · IG · FB · LI + pauta $500k · Meta: leads WA y 2-3 clientes.
 
-## 💰 Presupuesto
+## Presupuesto
 
-| Semana | Fase | Gasto |
+| Fase | Días | Gasto |
 |---|---|---|
-| 1 (d1-7) | Setup+Test | ~$48k |
-| 2 (d8-14) | Test | ~$84k |
-| 3 (d15-21) | Escala | ~$140k |
-| 4 (d22-30) | Top | ~$162k |
-| **Total plan** | | **~$434k** (margen $66k) |
+| Setup | 23–29 nov | $0 |
+| F1 · Base | 1–15 | $0 (orgánico) |
+| F2 · Tracción | 16–30 | $150k |
+| F3 · Conversión | 31–45 | $150k |
+| F4 · Escala | 46–60 | $150k |
+| **Total pauta** | | **$450k** (techo $500k) |
 
 Reglas: +20% máx cada 48h · sin leads en 5d/$20k = pausar · frecuencia >3 = rotar.
 
-## 🗓️ Marca personal por red (detalle día a día en el JSX)
+## Calendario por fase
 
-Ritmo: **TH diario · IG 4x/sem · FB 3x/sem · LI 2x/sem** + 5 DMs/día + responder <2h.
+- **Setup:** nicho, oferta, precios, 20 prospectos, perfiles, WhatsApp Business, landing, pixel/UTMs, lead magnet, 30 días de contenido y 3 reels.
+- **F1 · Base:** 3 reels/semana, 2 carruseles, stories diarias, 5 DMs/día. Meta: 20 leads, 10 conversaciones, 2 llamadas.
+- **F2 · Tracción:** publicar casos, activar retargeting nativo Meta (IG + video 50%, $10k/día, 2 creativos ganadores), no tocar 6 días, optimizar día 21. Meta: 50 leads, 20 conversaciones, 5 llamadas, 2 propuestas.
+- **F3 · Conversión:** activar frío enero ($10k/día, 2 creativos, ángulo arranque de año), empujar propuestas y cierres, onboarding. Meta: 80 leads, 30 conversaciones, 8 llamadas, 4 propuestas, 1-2 clientes.
+- **F4 · Escala:** sostener ganadora, documentar playbook, reporte 60 días y plan ciclo 2. Meta: 2-3 clientes, MRR $1.5M+.
 
-**S1 · SETUP** — presentación, precios, detrás de cámara, IA-mientras-dormís, agencias, setup, números S1.
-**S2 · TEST** — 4 síntomas, caso Impulsa, Medellín, transparencia pauta, objeción precio, banco contenido, 14 días números.
-**S3 · ESCALA** — propuesta fijada, nicho restaurantes, collabs, $1Mvs$5M, escasez real, aprendizaje mes, balance.
-**S4 · TOP** — 30 días números, reciclar ganador, comparativa V0, cierre mes, reflexión, informe público, banco mes 2, orden, celebración.
+## Contenido y oferta
 
-Cada día trae por red: **contenido descriptivo + 💡 consejo**.
+- Pilares: educación, prueba social, oferta, detrás de cámara y objeciones (diciembre: urgencia de temporada; enero: sistema estable).
+- Oferta (sin IVA por defecto, +19% con factura): diagnóstico gratis + Arranque ($1.5M), Crecimiento ($1.5M + $750k/mes), Escala ($2.5M + $1.2M/mes) + puente Links Pro ($250k) / Maps ($300k) / Combo ($550k).
+- Pauta aparte: $300k–$600k/mes pagada directo a Meta.
 
-## 💵 Pauta (resumen)
+## Base diaria
 
-d1-3 $0 (BM, píxel⛔, 3 CRs) → d4-14 C1 test $12k/d → d15 C2 retargeting $20k/d → d23-24 piloto TikTok → d28-30 $14k/d.
+- [ ] Pieza(s) del día según el calendario
+- [ ] 5 DMs de prospección
+- [ ] Responder comentarios y WhatsApp en <1h
+- [ ] Registrar leads, conversaciones y llamadas
 
-## 🌱 Base diaria (todos los días)
+## KPIs 60 días
 
-- [ ] Pieza(s) del día según JSX (red que toque)
-- [ ] 5 DMs prospección (lista 20 en prospectos_FUXIA.md)
-- [ ] Responder comentarios <2h
+CPL ≤$10k · CAC ≤$250k · 80–100 leads · 30 conversaciones · 8–12 llamadas · 4–6 propuestas · 2-3 clientes · MRR $1.5M+.
 
-## 🎯 KPIs 30d
-
-CPL ≤$15k · 100 chats WA · 5-8 calls · +500 seguidores (IG+300/TH+100/FB+50/LI+50) · 1-2 clientes · CAC ≤$250k.
-
-UTMs ya miden origen (hero, paquetes, popup, flotante). Ver en WA qué texto trae cada lead.
+UTMs miden origen (hero, packs, popup, flotante). Ver en WhatsApp qué texto trae cada lead.

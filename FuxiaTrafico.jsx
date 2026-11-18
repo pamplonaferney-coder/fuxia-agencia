@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
 // ═══════════════════════════════════════════════════════════════════
-// FUXIA × FERNEY — SISTEMA 60 DÍAS + SETUP
-// Setup: lun 14 – dom 20 sept 2026 · Día 1: lun 21 sept · Día 60: jue 19 nov
-// Pauta: C1 retargeting d16-30 + C2 frío d31-45 ($10k/d) + sostener F4
-// Base $450k · Techo $500k · Uso: claude.ai artifacts o CodeSandbox
+// FUXIA MARKETING × FERNEY — SISTEMA 60 DÍAS + SETUP
+// Setup: lun 23 – dom 29 nov 2026 · Día 1: lun 30 nov · Día 60: jue 28 ene 2027
+// Nicho: tiendas de tecnología y accesorios en Medellín
+// Pauta: retargeting d16-30 + frío d31-45 ($10k/d) + sostener F4
+// Base $450k · Techo $500k
 // ═══════════════════════════════════════════════════════════════════
 
 const F = "#E040FB";
@@ -24,7 +25,7 @@ const WA_NUM = "573005370203";
 const WD = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
 const MO = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 function fecha(idx) {
-  const b = new Date(2026, 8, 14 + idx);
+  const b = new Date(2026, 10, 23 + idx);
   return WD[b.getDay()] + " " + b.getDate() + " " + MO[b.getMonth()];
 }
 function gastoDia(idx) {
@@ -35,114 +36,221 @@ function gastoDia(idx) {
 
 // ─── DOCUMENTOS COMPLETOS (guiones, campañas, plantillas, reglas) ───
 const DOCS = {
-reel1: { t: "Guion reel Día 1 — Ferney", txt:
-`IG @ferneypamplona · 35-40s · 9:16 · Publicar lun 12:00-14:00
+nicho: { t: "Nicho y cliente ideal (ICP)", txt:
+`NICHO INICIAL — TIENDAS DE TECNOLOGÍA EN MEDELLÍN
 
-[0-3s] HOOK — a cámara con tinto en mano. Texto: "Paré un mes. Esto aprendí."
-[3-12s] EL POR QUÉ — "Publicaba todos los días. Funcionó a medias: seguidores, no clientes."
-[12-22s] LA LECCIÓN — pantalla pipeline vacío. "Seguidores ✓ Clientes ✗. Contenido con objetivo: confianza primero, venta después."
-[22-32s] LO QUE VIENE — "Retomo Fuxia: diagnóstico gratis primero. Sin presión."
-[32-38s] CIERRE — "Negocio en Medellín: escribime. El diagnóstico es gratis. El tinto lo pongo yo."
+Quién es el cliente:
+- Tienda de celulares, accesorios, computadores o electrodomésticos.
+- 1 a 3 sedes en Medellín o área metropolitana.
+- Dueño o administrador que atiende WhatsApp e Instagram.
+- Entre 5 y 50 mensajes diarios.
+- Sin CRM, sin seguimiento sistematizado y con pauta irregular.
+
+Dolores que le quitamos:
+- Responde tarde y el cliente compra en otro lado.
+- Anota leads en cuaderno o los pierde en el chat.
+- Publica todos los días, pero no tiene oferta clara.
+- Pauta sin medición: no sabe qué anuncio trae ventas.
+
+Señales de buen prospecto:
+- Vende por WhatsApp o Instagram.
+- Tiene catálogo o página web desactualizada.
+- Publica contenido, pero no tiene estrategia.
+- Ya invirtió en pauta, aunque sea poco.
+
+Promesa FUXIA:
+"Te montamos un sistema de captación y seguimiento por WhatsApp en 30 días. No solo posts: clientes."
+
+Frase de ascensor:
+"Soy Ferney, de FUXIA. Ayudo a tiendas de tecnología en Medellín a vender más por WhatsApp con contenido, anuncios y seguimiento."` },
+
+precios: { t: "Packs, precios y add-ons", txt:
+`PACKS FUXIA MARKETING (COP, sin IVA · +19% si requiere factura con IVA)
+
+DIAGNÓSTICO — Gratis (15 min)
+- Auditoría express de Instagram, WhatsApp y pauta actual.
+- 3 oportunidades concretas. Sin compromiso.
+
+1) ARRANQUE — $1.500.000 (pago único)
+- Landing de conversión + WhatsApp + pixel + UTMs.
+- Perfiles optimizados (IG/FB) + highlights.
+- 4 piezas de contenido + guion de 2 reels.
+- Campaña de Meta Ads configurada (pauta aparte).
+
+2) CRECIMIENTO — $1.500.000 setup + $750.000/mes (recomendado)
+- Todo lo de Arranque.
+- 8 piezas/mes + stories + guiones.
+- Gestión de Meta Ads (pauta aparte: $300k-$600k/mes).
+- Respuestas y seguimiento por WhatsApp con plantillas.
+- Reporte mensual: leads, conversaciones, CPL y ventas.
+
+3) ESCALA — $2.500.000 setup + $1.200.000/mes
+- Todo lo de Crecimiento.
+- 12 piezas/mes + 4 reels.
+- CRM simple + automatización con n8n + IA de respuesta.
+- Dashboard de métricas y reunión quincenal.
+- Onboarding del equipo de ventas.
+
+PRODUCTOS DE ENTRADA (puente para tiendas pequeñas)
+- Links Pro: $250.000 · Google Maps: $300.000 · Combo: $550.000.
+- Piloto fundador (1-2 cupos por DM/llamada): descuento por caso documentado + testimonio.
+
+PAUTA
+- Se paga directo a Meta con tarjeta del cliente.
+- Inicio recomendado: $300.000-$600.000/mes.
+- FUXIA no cobra comisión sobre pauta.
+
+ADD-ONS
+- Sesión de fotos: $350.000.
+- Reel extra: $250.000.
+- Email marketing: $450.000/mes.
+- Auditoría de embudo: $300.000.
+
+REGLA
+No vender horas. Vender sistema, entregables y resultados.` },
+
+reel1: { t: "Guion reel Día 1 — Ferney", txt:
+`IG @ferneypamplona · 35-40s · 9:16 · Publicar día 1, 12:00-14:00
+
+[0-3s] HOOK — a cámara en una tienda de celulares. Texto: "En diciembre tu WhatsApp te está costando ventas."
+[3-10s] PROBLEMA — "En temporada la gente cotiza en 3 tiendas; si respondés en 2 horas ya compró en otro lado."
+[10-20s] ERRORES — "1) Publicás sin oferta. 2) No medís. 3) No hacés seguimiento a los que piden precio."
+[20-30s] SOLUCIÓN — "En FUXIA armamos el sistema: contenido, anuncios y seguimiento por WhatsApp."
+[30-38s] CTA — "Diagnóstico gratis de 15 min. Escribime por DM. Sin presión."
 [38-40s] OUTRO — Logo FUXIA.
 
-Grabación: 8-10 AM luz frontal, tinto en mano, mirar AL LENTE, subtítulos quemados, música tendencia vol 20%.
+Grabación: luz frontal, vertical, subtítulos quemados, música tendencia volumen 20%.
 
 CAPTION:
-Paré un mes. Esto es lo que aprendí:
-Publicar todos los días sin sistema = seguidores, no clientes.
-Retomo Fuxia: diagnóstico gratis primero, propuesta después. Sin presión, sin letra chica.
-Negocio en Medellín: escribime por DM. El tinto lo pongo yo ☕
-📍 Medellín · @fuxia_oficial
-#automatizacion #ia #pymes #medellin #fuxia #emprendimiento #inteligenciaartificial
+En temporada navideña tu WhatsApp te está costando ventas y no es por el producto.
+Es por respuesta lenta, falta de seguimiento y pauta sin medición.
+En FUXIA armamos el sistema completo: contenido + anuncios + WhatsApp.
+Diagnóstico gratis de 15 min. DM o link en bio.
+#marketingdigital #medellin #tiendasdecelulares #whatsappbusiness #fuxia
 
-STORIES (30 min después): 1) screenshot reel "te costó escribir", 2) selfie + sticker link WA, 3) "5 cupos diagnóstico" + caja de preguntas.` },
-creativoA: { t: "Creativo A — Reel demo del bot (25-30s)", txt:
+STORIES (30 min después):
+1) Screenshot del reel.
+2) Sticker de link a WhatsApp.
+3) Caja de preguntas: "¿Cuántos mensajes te llegan al día en temporada?"` },
+
+creativoA: { t: "Creativo A — Reel caso real (25-30s)", txt:
 `9:16 · Orgánico día 18 + anuncio en todas las campañas.
-[0-3s] Notificación WA entrante. Texto: "Un cliente escribe a las 11 PM."
-[3-8s] Split dueño dormido / cliente esperando. Voz: "Esto pasa todos los días en Medellín."
-[8-20s] SCREEN RECORDING REAL sin cortes: cliente pregunta → bot responde → agenda → link de pago. Texto: "Respuesta instantánea. 24/7."
-[20-25s] Ferney a cámara con celular: "Esto se monta en 1 semana."
-[25-30s] Logo + "DM o comenta DEMO".
-Reglas: pantalla real, subtítulos quemados, música sin copyright vol 20%.` },
-creativoB: { t: "Creativo B — Carrusel de casos (6 slides 1080x1350)", txt:
-`Orgánico días 2 y 4 + anuncio. Paleta: fondo #0A0A0C, texto #F2EFE9, acento #E040FB.
-S1 Portada: "2 negocios. 2 casos reales."
-S2 KATOBO antes: pedidos por WA y DM mezclados, todo a cuaderno.
-S3 KATOBO después: bot contesta 70% · pedidos a panel · 8h/semana recuperadas.
-S4 DB antes: web solo portafolio, sin captación.
-S5 DB después: formulario a WA · respuesta <30s · 3 leads calificados mes 1.
-S6 Cierre: "Tu negocio puede ser el siguiente. Diagnóstico gratis. Link en bio."
+
+[0-3s] Texto: "Una tienda, dos problemas: WhatsApp y seguimiento."
+[3-8s] Dueño con celular: "Respondía a las 11 PM y perdía ventas."
+[8-18s] Pantalla real: respuesta automática, calificación y agenda (sin datos sensibles).
+[18-24s] Texto: "KATOBO: 8 horas/semana recuperadas. DB Digital: 3 leads calificados el primer mes."
+[24-30s] CTA: "Diagnóstico gratis. DM o comentá SISTEMA."
+
+Reglas:
+- No inventar resultados.
+- Mostrar pantalla real, sin cortes.
+- Subtítulos quemados y música sin copyright al 20%.
+
+CAPTION:
+No es magia, es sistema. Dos casos reales de Medellín: automatización y captación.
+Comentá SISTEMA o escribime por DM. 📍 Medellín · @fuxia_oficial` },
+
+creativoB: { t: "Creativo B — Carrusel 6 slides (1080x1350)", txt:
+`Orgánico días 2 y 4 + anuncio. Paleta: #0A0A0C / #F2EFE9 / #E040FB.
+
+S1 Portada: "3 señales de que tu WhatsApp te está costando ventas."
+S2 "Respondés en más de 1 hora."
+S3 "No sabés de dónde vienen tus clientes."
+S4 "Publicás todos los días, pero no tenés oferta."
+S5 "Caso real: KATOBO recuperó 8 h/semana. DB Digital captó 3 leads calificados el primer mes."
+S6 Cierre: "Diagnóstico gratis de 15 min. Link en bio o DM."
 
 CAPTION DÍA 2:
-2 casos reales de Medellín. KATOBO: 8h/semana. DB: 3 leads mes 1. No es magia, es automatización.
-Comentá CASO o escribime por DM. 📍 Medellín · @fuxia_oficial` },
-creativoC: { t: "Creativo C — Reel proceso Fuxia (30-40s)", txt:
+Si te pasa 1 de 3, estás dejando plata en la mesa.
+No es falta de producto: es falta de sistema.
+DM SISTEMA o link en bio. 📍 Medellín · @fuxia_oficial` },
+
+creativoC: { t: "Creativo C — Reel proceso FUXIA (30-40s)", txt:
 `9:16 · Orgánico día 16 + anuncio.
-[0-3s] "Así trabajamos en Fuxia."
-[3-10s] PASO 1 Diagnóstico gratis 15 min: qué te quita tiempo, qué se automatiza y qué no.
-[10-18s] PASO 2 Propuesta 1 página en 48h, precio fijo, sin letra chica.
-[18-28s] PASO 3 Implementación 1-2 semanas, aprobás cada paso.
-[28-35s] PASO 4 Soporte: si algo falla nos enteramos los dos.
+
+[0-3s] "Así trabajamos en FUXIA."
+[3-10s] PASO 1 Diagnóstico gratis 15 min: qué vendés, cómo llegan clientes y dónde se pierden.
+[10-18s] PASO 2 Estrategia de una página en 48 h: oferta, contenido, anuncios y seguimiento.
+[18-28s] PASO 3 Implementación 2-4 semanas: landing, WhatsApp, campañas y contenido.
+[28-35s] PASO 4 Reporte: leads, conversaciones, CPL y ventas.
 [35-40s] "Diagnóstico gratis. Escribime y arrancamos."
-A cámara siempre, fondo limpio, pantallas sin datos sensibles, subtítulos quemados.
+
+A cámara, fondo limpio, pantallas sin datos sensibles, subtítulos quemados.
 
 CAPTION DÍA 16:
-1. Diagnóstico gratis (15 min) 2. Propuesta 1 página (48h) 3. Implementación (1-2 sem) 4. Soporte.
-Sin contratos 12 meses. Sin letra chica. Sin cobrar por hora. DM. 📍 Medellín · @fuxia_oficial` },
-camp1: { t: "Campaña 1 — Retargeting (d16-30, $150k)", txt:
+1. Diagnóstico gratis (15 min) 2. Estrategia (48 h) 3. Implementación (2-4 semanas) 4. Reporte.
+Sin contratos de 12 meses. Sin letra chica. DM. 📍 Medellín · @fuxia_oficial` },
+
+camp1: { t: "Campaña 1 — Retargeting nativo Meta (d16-30, $150k)", txt:
 `Ads Manager → Crear → Objetivo Interacción → "FUXIA | Retargeting | D16-30 | WhatsApp". Sin Advantage+ presupuesto, sin A/B.
-CONJUNTO "Caliente | WhatsApp": Conversión Mensajes → WhatsApp. $10.000/día. Medellín +25km, 25-50, todos.
-Públicos combinados (O): visitantes web 30d + interactuaron IG Fuxia 30d + interactuaron IG Ferney 30d + vieron 50%+ reels 30d.
-Ubicaciones Advantage+. 3 ANUNCIOS:
-1A Demo bot (reel A): "Mientras dormís, el bot contesta. Real, sin edición." Titular: Tu WhatsApp se responde solo.
-1B Casos (carrusel B): "2 negocios, 2 resultados. ¿El siguiente?" Titular: Casos reales.
-1C Proceso (reel C): "Diagnóstico, propuesta, 1-2 semanas, soporte." Titular: Diagnóstico gratis 15 min.
-Botón: Enviar mensaje. URL: https://wa.me/${WA_NUM}?text=Hola,%20quiero%20info
-D16-21 NO TOCAR (responder <1h, anotar). D21: comparar costo/conversación, ganador +30%, pausar 2.` },
-camp2: { t: "Campaña 2 — Frío controlado (d31-45, $150k)", txt:
+
+CONJUNTO "Caliente | WhatsApp": Conversión Mensajes → WhatsApp. $10.000/día. Medellín +25 km, 25-50, todos.
+PÚBLICOS NATIVOS META (base principal, no dependen del banner de cookies/Pixel):
+- Interactuaron IG @fuxia_oficial 30d + interactuaron IG @ferneypamplona 30d + vieron 50%+ reels 30d.
+- Complemento: visitantes web 30d (solo quienes aceptaron cookies).
+Ubicaciones Advantage+. ARRANCAR CON 2 ANUNCIOS GANADORES DEL ORGÁNICO (no diluir $10k/día en 3; rotar el 3º si hay volumen):
+1A Reel caso/auditoría tech (A): "En temporada tu WhatsApp te está costando ventas. Mirá el sistema." Titular: Diagnóstico gratis.
+1B Carrusel señales (B): "3 señales de que perdés ventas por WhatsApp." Titular: ¿Te pasa?
+1C (reserva) Reel proceso (C): "Diagnóstico, estrategia, implementación y reporte." Titular: Sistema en 30 días.
+Botón: Enviar mensaje. URL: https://wa.me/${WA_NUM}?text=Hola,%20quiero%20el%20diagnostico
+
+D16-21 NO TOCAR (responder <1h, anotar). D21: comparar costo/conversación, ganador +30%, pausar el perdedor.` },
+
+camp2: { t: "Campaña 2 — Frío controlado enero (d31-45, $150k)", txt:
 `Misma estructura. "FUXIA | Frío | D31-45 | WhatsApp". $10.000/día.
-PÚBLICO: Medellín +25km 25-50. Intereses (O): PyME, Emprendimiento, WhatsApp Business, Marketing digital, Publicidad en línea.
-EXCLUIR: retargeting + seguidores.
-ANUNCIOS (mismos creativos, textos educativos):
-2A "3 tareas a mano que la IA hace en segundos. ¿Cuál te quita más tiempo?" Titular: Automatizá lo repetitivo.
-2B "Web que vende sola (caso DB)." Titular: Webs que venden solas.
-2C "5 cupos fundador, precio congelado." Titular: 5 cupos · Precio fundador.
-D31-36 NO TOCAR. D37: pausar 2 peores; ganador +30% SOLO si CPA < $10.000; si todo > $15.000 pausar C2 y reforzar C1.
+Ángulo enero: "Pasó diciembre: arrancá el año con un sistema que traiga clientes por WhatsApp todas las semanas."
+
+PÚBLICO: Medellín +25 km, 25-50. Intereses (O): dueños de pequeños negocios, emprendimiento, WhatsApp Business, marketing digital, tiendas de telefonía.
+EXCLUIR: retargeting (IG/video/web) + seguidores.
+
+ARRANCAR CON 2 ANUNCIOS (1 dolor + 1 prueba; reservar el 3º para rotar):
+2A "Pasó diciembre y bajaron los chats: 3 errores que frenan tus ventas por WhatsApp." Titular: Vendé más por WhatsApp.
+2B "Caso real: sistema de captación y seguimiento." Titular: Casos reales.
+2C (reserva) "5 cupos fundador: diagnóstico + estrategia." Titular: 5 cupos.
+
+D31-36 NO TOCAR. D37: pausar el peor; ganador +30% SOLO si CPA < $10.000; si todo > $15.000, pausar C2 y reforzar C1.
 D45 DECISIÓN: ¿escalar ganadora +20%? ¿cambiar creativos? ¿pausar y esperar mes 2?` },
+
 plantillas: { t: "Plantillas copy-paste Ads Manager", txt:
-`CAMPAÑA: Interacción · FUXIA | [Retargeting/Frío] | WhatsApp · $10.000/día · Mensajes → WhatsApp.
-RETARGETING: Medellín +25km, 25-50, todos. O: web 30d + IG Fuxia 30d + IG Ferney 30d + video 50% 30d.
-FRÍO: igual geo/edad. O: PyME, Emprendimiento, WA Business, Marketing digital, Publi en línea. Excluir retargeting.
-COPIES (texto/titular/descripción/botón):
-1A "Mientras dormís, el bot contesta…" / Tu WhatsApp se responde solo / Diagnóstico gratis · Medellín / Enviar mensaje
-1B "2 negocios, 2 resultados…" / Casos reales de automatización / Diagnóstico gratis · Medellín / Enviar mensaje
-1C "Diagnóstico, propuesta, 1-2 semanas…" / Diagnóstico gratis en 15 minutos / Automatización e IA · Medellín / Enviar mensaje
-2A "3 tareas a mano…" / Automatizá lo repetitivo / Diagnóstico gratis · Medellín / Enviar mensaje
-2B "Web que vende sola…" / Webs que venden solas / Ejemplos reales · Medellín / Enviar mensaje
+`CAMPAÑA: Interacción · FUXIA Marketing | [Retargeting/Frío] | WhatsApp · $10.000/día · Mensajes → WhatsApp.
+RETARGETING (priorizar nativos Meta por consentimiento de cookies): Medellín +25 km, 25-50, todos. O: IG Fuxia 30d + IG Ferney 30d + video 50% 30d (+ web 30d como extra).
+FRÍO: igual geo/edad. O: dueños de pequeños negocios, emprendimiento, WhatsApp Business, marketing digital, tiendas de telefonía. Excluir retargeting + seguidores.
+
+COPIES (texto/titular/descripción/botón — usar 2 activos por conjunto con $10k/día):
+1A "En temporada tu WhatsApp te está costando ventas…" / Diagnóstico gratis / Marketing para tiendas de tecnología / Enviar mensaje
+1B "3 señales de que perdés ventas…" / ¿Te pasa? / Auditoría gratis en 15 min / Enviar mensaje
+1C "Diagnóstico, estrategia, implementación…" / Sistema en 30 días / Marketing + automatización / Enviar mensaje
+2A "Pasó diciembre y bajaron los chats: 3 errores…" / Vendé más por WhatsApp / Diagnóstico gratis · Medellín / Enviar mensaje
+2B "Caso real: captación y seguimiento…" / Casos reales / Estrategia + contenido + pauta / Enviar mensaje
 2C "5 cupos fundador…" / 5 cupos · Precio fundador / Diagnóstico sin costo / Enviar mensaje
 URL base: https://wa.me/${WA_NUM}` },
+
 checklist16: { t: "Checklist lanzamiento (día 16)", txt:
-`[ ] WA Business Fuxia funcionando + link wa.me probado
-[ ] Pixel disparando eventos en la landing
-[ ] Retargeting con 100+ personas (si no, esperar 2 días)
-[ ] 3 creativos subidos (A, B, C) + textos del documento
+`[ ] WhatsApp Business de FUXIA funcionando + link wa.me probado
+[ ] Públicos nativos Meta (IG Fuxia + IG Ferney + video 50%) con 100+ personas (no depender solo del Pixel por opt-in de cookies)
+[ ] Pixel disparando eventos en la landing (probado aceptando cookies en incógnito)
+[ ] 2 creativos ganadores subidos (A y B; C en reserva) + textos del documento
 [ ] Página FB vinculada + método de pago activo
 [ ] $10.000/día definidos, campaña en Borrador
-Todo ✅ → PUBLICAR.` },
+[ ] Landing con propuesta de marketing y CTA a WhatsApp
+Todo listo → PUBLICAR.` },
+
 reglas: { t: "6 reglas que no se rompen", txt:
 `1. NUNCA "Promocionar publicación". Siempre Ads Manager.
 2. NO tocar la campaña los primeros 6 días (aprendizaje).
-3. WhatsApp respondido en MENOS DE 1 HORA. La velocidad ES el producto.
+3. WhatsApp respondido en MENOS DE 1 HORA. La velocidad ES el servicio.
 4. El KPI es conversación → llamada, NO el clic.
 5. Primeros $10k/día validan: CPA < $8.000 a 15 días = subir. CPA > $15.000 = pausar y revisar.
 6. Escasez REAL: 5 cupos son 5. Cierran viernes = cierran viernes.` },
+
 arbol: { t: "Árbol NO vende — D16/D21/D31/D37 (3 capas)", txt:
 `SOLO usar con 6+ días sin tocar. Si no, NO TOCAR y salir.
 
 CAPA 1 — DATOS (si falla, no toques presupuesto ni creativo):
-[ ] Pixel Helper en incógnito + Aceptar todo: PageView ID 1632121441954497 en verde?
+[ ] Pixel Helper en incógnito + Aceptar todo: PageView en verde?
 [ ] Lead (formulario) y Contact (clic wa.me) disparando? + /api/lead llega a Telegram?
-[ ] UTMs por CTA (hero/paquetes/popup) separando origen?
+[ ] UTMs por CTA (hero, paquetes, popup) separando origen?
 [ ] WA respondido <1h en todos los chats? (si no, no es algoritmo, es operación)
 NO → fix medición, reinicia conteo 6 días. SÍ → pasa a Capa 2.
 
@@ -154,97 +262,230 @@ CPA >$15k en 6 días → pausar C2 y reforzar C1. CPA $10-15k → aguanta + iter
 SÍ → pasa a Capa 3.
 
 CAPA 3 — NEGOCIO (cierra el número?):
-Ticket Starter $1.5M / Pro $3.5M / Fund $6.5M. Cierre 1/20 conv = CPA viable <$75k, pero para escalar exige <$8-10k.
-[ ] Oferta clara? Diagnóstico 15min gratis + propuesta 1 página 48h?
-[ ] Creativo pantalla real (demo bot / caso / proceso)? Sin humo, subtítulos quemados?
+Ticket Arranque $1.5M / Crecimiento $1.5M + $750k/mes / Escala $2.5M + $1.2M/mes.
+[ ] Oferta clara? Diagnóstico 15 min gratis + propuesta de 1 página en 48 h?
+[ ] Creativo con prueba real (caso / pantalla / proceso)? Sin humo, subtítulos quemados?
 [ ] Calificación 3 preguntas WA aplicada? Sin filtro = curiosos.
+
 DECISIÓN:
 - Dato roto → fix + reiniciar.
 - 1 ángulo gana → réplica mismo hook otro inicio, pausa 2 perdedores, ganador +30% SOLO si CPA <$10k.
 - Todo >$15k → mata frío, orgánico + retargeting hasta mes 2.
-- D45: escalar ganadora +20%? cambiar creativos? pausar? Con dato, no gusto.` } };
+- D45: escalar ganadora +20%? cambiar creativos? pausar? Con dato, no gusto.` },
+
+contenido30: { t: "Calendario de contenido 30 días", txt:
+`SEMANA 1 — CONFIANZA
+Lun: Reel "3 errores que te cuestan ventas".
+Mar: Carrusel "3 señales de que perdés ventas por WhatsApp".
+Mié: Stories detrás de cámara + encuesta.
+Jue: Reel caso real (KATOBO / DB Digital).
+Vie: Post de oferta + diagnóstico gratis.
+Sáb: Stories Q&A.
+Dom: Descanso / grabar banco.
+
+SEMANA 2 — AUTORIDAD
+Lun: Reel "Cómo responder rápido sin estar pegado al celular".
+Mar: Carrusel "Antes/después de un sistema de captación".
+Mié: Stories de proceso + caja de preguntas.
+Jue: Reel "3 tareas que podés automatizar esta semana".
+Vie: Testimonio o caso de cliente.
+Sáb: Stories de resultados.
+Dom: Descanso / editar.
+
+SEMANA 3 — OFERTA
+Lun: Reel "Qué incluye el diagnóstico gratis".
+Mar: Carrusel "Arranque vs Crecimiento vs Escala".
+Mié: Stories de objeciones ("es caro", "no tengo tiempo").
+Jue: Reel caso de éxito + CTA.
+Vie: Post de escasez real (5 cupos).
+Sáb: Stories de cierre de cupos.
+Dom: Descanso.
+
+SEMANA 4 — PRUEBA
+Lun: Reel "Esto aprendí en 30 días".
+Mar: Carrusel resultados del mes.
+Mié: Stories de agradecimiento.
+Jue: Reel "El error que yo cometía".
+Vie: Post balance + próximo ciclo.
+Sáb: Stories de behind the scenes.
+Dom: Descanso.
+
+RITMO: 3 reels/semana · 2 carruseles/semana · stories diarias · 5 DMs/día.` },
+
+propuesta: { t: "Propuesta de 1 página (plantilla)", txt:
+`PROPUESTA FUXIA MARKETING — [NOMBRE DEL NEGOCIO]
+
+1. Diagnóstico
+- Qué venden, cómo llegan los clientes y dónde se pierden.
+- 3 hallazgos concretos de Instagram/WhatsApp/pauta.
+
+2. Objetivo
+- [Ej: 30 leads calificados/mes y 10 conversaciones por WhatsApp].
+- Plazo: 60 días.
+
+3. Qué hacemos
+- Contenido: X piezas/mes + stories + reels.
+- Anuncios: campaña de mensajes + retargeting.
+- WhatsApp: plantillas, calificación y seguimiento.
+- Reporte: leads, conversaciones, CPL y ventas.
+
+4. Inversión
+- Pack [Arranque/Crecimiento/Escala]: $[valor].
+- Pauta aparte: $[300k-600k]/mes directo a Meta.
+- Sin contratos de 12 meses. Sin cobro por hora.
+
+5. Próximos pasos
+1) Aprobación de propuesta.
+2) Onboarding y accesos.
+3) Implementación en 2-4 semanas.
+4) Primer reporte a los 30 días.
+
+Firma: Ferney Pamplona · FUXIA · WhatsApp +57 300 537 0203` },
+
+dm: { t: "Guion de prospección por DM", txt:
+`DM 1 (sin vender):
+"Hola [nombre], vi que venden [producto] por Instagram. Estoy haciendo un estudio de tiendas de tecnología en Medellín. ¿Puedo hacerte una pregunta rápida?"
+
+DM 2 (diagnóstico):
+"¿Cuántos mensajes te llegan al día por WhatsApp y quién los responde?"
+
+DM 3 (dolor):
+"El 80% de las tiendas que veo pierde ventas por responder tarde o no hacer seguimiento. ¿Te está pasando?"
+
+DM 4 (oferta):
+"Estoy abriendo 5 diagnósticos gratis de 15 min para tiendas de tecnología. Te muestro 3 mejoras concretas, sin compromiso. ¿Te sirve esta semana?"
+
+Reglas:
+- No mandar audio sin permiso.
+- No enviar precio en el primer mensaje.
+- Personalizar con el nombre y un detalle real del negocio.
+- Máximo 5 DMs nuevos por día + seguimiento.` },
+
+reporte: { t: "Reporte mensual (plantilla)", txt:
+`REPORTE FUXIA — [CLIENTE] — [MES]
+
+1) Resultados
+- Leads: [X]
+- Conversaciones: [X]
+- Llamadas: [X]
+- Propuestas: [X]
+- Cierres: [X]
+- CPL: $[X]
+- Ventas atribuidas: $[X]
+
+2) Contenido
+- Piezas publicadas: [X]
+- Mejor pieza: [enlace] — [resultado]
+- Peor pieza: [enlace] — [aprendizaje]
+
+3) Pauta
+- Invertido: $[X]
+- Campaña ganadora: [nombre]
+- CPA: $[X]
+- Ajustes para el próximo mes: [X]
+
+4) Próximos pasos
+- [Acción 1]
+- [Acción 2]
+- [Acción 3]
+
+Nota: los números se explican con contexto, no solo con capturas.` },
+
+onboarding: { t: "Onboarding de cliente (checklist)", txt:
+`[ ] Contrato/propuesta firmada + anticipo recibido.
+[ ] Accesos: Instagram, Facebook, WhatsApp Business, web (si aplica).
+[ ] Pago de pauta configurado con tarjeta del cliente.
+[ ] Brief: productos, precios, público, zonas de entrega, objeciones.
+[ ] Casos o testimonios disponibles.
+[ ] Calendario de contenido del primer mes aprobado.
+[ ] Plantillas de WhatsApp y flujo de calificación.
+[ ] Fecha de lanzamiento y fecha del primer reporte.
+[ ] Grupo de WhatsApp o canal de comunicación.
+[ ] Responsable de responder leads y horario.` }
+};
 
 const WA_T = [
-{ t: "Bienvenida automática", txt: `Hola 👋 Gracias por escribir a FUXIA. Contamos en 2 líneas qué hacen en tu negocio y te digo en 15 min qué se puede automatizar. ¿A qué se dedican? — Ferney` },
-{ t: "Calificación (3 preguntas)", txt: `Perfecto. Para no hacerte perder tiempo, 3 cortas: 1) ¿Cuántos mensajes les llegan al día por WA/IG? 2) ¿Quién los responde y en qué horario? 3) ¿Qué pregunta les repiten el 80% del tiempo?` },
-{ t: "Agendamiento", txt: `Con eso ya veo por dónde va. ¿Te sirve una llamada de 15 min mañana? Te mando propuesta de 1 página en 48h después. ¿Mañana AM o PM?` },
-{ t: "Seguimiento 48h", txt: `Hola [nombre], te había mandado la propuesta corta de FUXIA. ¿La pudiste ver? Si no es el momento, todo bien, me decís y la dejamos para después.` },
-{ t: "Reactivación leads fríos", txt: `Hola [nombre], soy Ferney de FUXIA (Medellín). Hace un tiempo hablamos de automatizar [negocio]. Abrí 5 cupos de diagnóstico gratis esta semana. ¿Te sirve uno de 15 min?` } ];
+{ t: "Bienvenida automática", txt: `Hola, gracias por escribir a FUXIA Marketing. Contame en 2 líneas qué vendés y por dónde te llegan los clientes hoy. Te respondo en menos de 1 hora. — Ferney` },
+{ t: "Calificación (3 preguntas)", txt: `Perfecto. Para no hacerte perder tiempo, 3 cortas: 1) ¿Qué vendés exactamente? 2) ¿Cuántos mensajes te llegan al día por WhatsApp/Instagram? 3) ¿Quién los responde y en qué horario?` },
+{ t: "Agendamiento", txt: `Con eso ya veo por dónde va. Te propongo un diagnóstico gratis de 15 min. Salís con 3 oportunidades concretas, sin compromiso. ¿Te sirve mañana AM o PM?` },
+{ t: "Seguimiento 48h", txt: `Hola [nombre], te escribí por el diagnóstico gratis de FUXIA. ¿Lo pudiste ver? Si no es el momento, todo bien, me decís y lo dejamos para después.` },
+{ t: "Reactivación leads fríos", txt: `Hola [nombre], soy Ferney de FUXIA (Medellín). Hace un tiempo hablamos de mejorar las ventas por WhatsApp de [negocio]. Abrí 5 diagnósticos gratis esta semana. ¿Te sirve uno de 15 min?` }
+];
 
-// ─── PLAN: setup idx 0-6 (14-20 sep) + días 1-60 (21 sep - 19 nov) ───
+// ─── PLAN: setup idx 0-6 (23-29 nov) + días 1-60 (30 nov - 28 ene) ───
 // d: -7..-1 setup · 1..60 · tareas: máx 5 · docs: claves de DOCS
 const PLAN = [
-{ i: 0, fase: "Setup", titulo: "WhatsApp Business de Fuxia", tareas: ["Descargar WA Business y crear cuenta Fuxia", "Perfil: foto logo, horario, ubicación Medellín, catálogo con 3 paquetes", "Bienvenida + mensaje de ausencia automáticos", "Probar wa.me/" + WA_NUM + " con mensaje precargado"], kpi: "WA operativo con bienvenida + catálogo", tip: "La velocidad de respuesta ES el producto que vendés." },
-{ i: 1, fase: "Setup", titulo: "Pixel + medición", tareas: ["Pedir/instalar Pixel ID en la landing", "Verificar con Meta Pixel Helper: ViewContent, Contact, Lead", "Probar formulario: debe llegar aviso a Telegram (/api/lead)", "Confirmar UTMs por CTA (hero, paquetes, popup)"], kpi: "Eventos disparando", tip: "Sin medición, la pauta es adivinanza." },
-{ i: 2, fase: "Setup", titulo: "Lead magnet", tareas: ["PDF '5 procesos que podés automatizar esta semana'", "Subirlo con URL pública + link en bio", "Caption de lanzamiento en historias", "Conectar descarga a captura (DM o email)"], kpi: "Magnet descargable", tip: "1 problema, 1 promesa, 2 páginas." },
-{ i: 3, fase: "Setup", titulo: "Bios que venden", tareas: ["Bio @ferneypamplona: propuesta + prueba + CTA WA", "Bio @fuxia_oficial igual + highlights (casos, precios, WA)", "Links actualizados en ambas", "Foto perfil nítida en ambas"], kpi: "Bios listas", tip: "3 segundos: qué, para quién, cómo contactar." },
-{ i: 4, fase: "Setup", titulo: "Reactivar fríos + grabar A", tareas: ["Enviar 15 mensajes reactivación (plantilla WA)", "Grabar Creativo A: reel demo del bot (guion completo)", "Subtítulos quemados + música sin copyright"], kpi: "15 mensajes + CR-A listo", tip: "Pantalla real, sin cortes: lo real vende.", docs: ["creativoA"] },
-{ i: 5, fase: "Setup", titulo: "Casos + diseñar B", tareas: ["Empaquetar KATOBO (fotos, 8h/semana) y DB (3 leads)", "Diseñar Creativo B: carrusel 6 slides en Canva", "Revisar paleta #0A0A0C/#F2EFE9/#E040FB"], kpi: "Carrusel B listo", tip: "Un dato por slide.", docs: ["creativoB"] },
-{ i: 6, fase: "Setup", titulo: "BM + pago + grabar C", tareas: ["Business Manager + método de pago activo", "Vincular página FB + cuenta WA", "Grabar Creativo C: reel proceso", "Pasar checklist de lanzamiento"], kpi: "Todo en borrador + CR-C listo", tip: "Nada se publica hoy.", docs: ["creativoC", "checklist16"] },
+{ i: 0, fase: "Setup", titulo: "Nicho, oferta y precios", tareas: ["Definir nicho: tiendas de tecnología y accesorios en Medellín", "Elegir 2-3 dolores: respuesta lenta, seguimiento manual, pauta sin medición", "Fijar oferta: diagnóstico gratis + Arranque/Crecimiento/Escala", "Escribir promesa en 1 frase + 3 pruebas reales"], kpi: "Oferta clara en 1 página", tip: "Si no lo explicás en 15 segundos, no está listo.", docs: ["nicho", "precios"] },
+{ i: 1, fase: "Setup", titulo: "Auditoría + 20 prospectos", tareas: ["Auditar 10 tiendas de tecnología en Instagram/WhatsApp", "Listar 20 prospectos con nombre, negocio y canal", "Anotar 3 dolores por prospecto", "Elegir los 10 primeros para DM"], kpi: "20 prospectos calificados", tip: "La lista vale más que el logo." },
+{ i: 2, fase: "Setup", titulo: "Perfiles y WhatsApp Business", tareas: ["Bio IG/FB: qué hacés, para quién y CTA a WhatsApp", "Highlights: casos, precios, proceso y diagnóstico", "WhatsApp Business: perfil, catálogo con 3 packs, bienvenida y ausencia", "Probar wa.me/" + WA_NUM + " con mensaje precargado"], kpi: "Perfiles y WA listos", tip: "3 segundos: qué, para quién, cómo contactar." },
+{ i: 3, fase: "Setup", titulo: "Landing de marketing", tareas: ["Actualizar hero: promesa para tiendas de tecnología", "Sección de casos y prueba social", "Oferta con packs y CTA a WhatsApp", "SEO local: Medellín + marketing digital + WhatsApp"], kpi: "Landing publicada", tip: "Una landing, una promesa, un CTA." },
+{ i: 4, fase: "Setup", titulo: "Medición y seguimiento", tareas: ["Pixel + eventos Lead/Contact en la landing", "UTMs por CTA (hero, packs, popup)", "Formulario/WhatsApp conectado a aviso interno", "Tablero simple: leads, conversaciones, llamadas, cierres"], kpi: "Medición funcionando", tip: "Sin medición, la pauta es adivinanza." },
+{ i: 5, fase: "Setup", titulo: "Lead magnet + contenido base", tareas: ["Crear PDF '5 puntos que frenan tus ventas por WhatsApp'", "Diseñar calendario de contenido de 30 días", "Escribir 3 guiones de reels", "Preparar banco de 5 piezas"], kpi: "Magnet + calendario listos", tip: "1 problema, 1 promesa, 2 páginas." },
+{ i: 6, fase: "Setup", titulo: "Grabar creativos + campaña en borrador", tareas: ["Grabar reels A, B y C con guiones", "Subtítulos quemados + música sin copyright", "Business Manager + método de pago activo", "Dejar campaña de retargeting en borrador"], kpi: "Creativos listos + C1 en borrador", tip: "Nada se publica hoy.", docs: ["reel1", "creativoA", "creativoB", "creativoC", "checklist16"] },
 
-{ i: 7, fase: "F1 · Cimientos", titulo: "Día 1 — Reel Ferney", tareas: ["Publicar reel día 1 (12:00-14:00) + historias", "Enviar 3 DMs con el magnet", "Responder TODO <2h"], kpi: "Reel vivo + 3 DMs", tip: "El tinto lo pones vos.", docs: ["reel1"] },
-{ i: 8, fase: "F1 · Cimientos", titulo: "Día 2 — Carrusel casos", tareas: ["Publicar carrusel B + caption día 2", "Enviar 3 DMs", "Historias anunciando el carrusel"], kpi: "Carrusel vivo", docs: ["creativoB"] },
-{ i: 9, fase: "F1 · Cimientos", titulo: "Día 3 — Detrás de cámara", tareas: ["Historia setup + encuesta", "3 DMs magnet", "Comentar 5 cuentas aliadas"], kpi: "Alcance orgánico" },
-{ i: 10, fase: "F1 · Cimientos", titulo: "Día 4 — Rotar formato", tareas: ["Reel o carrusel del banco", "3 DMs", "Registrar leads en Notion"], kpi: "Pipeline al día" },
-{ i: 11, fase: "F1 · Cimientos", titulo: "Día 5 — Encuesta + follow-up", tareas: ["Historia encuesta nicho", "3 DMs", "Follow-up a los del día 1"], kpi: "Follow-ups hechos" },
-{ i: 12, fase: "F1 · Cimientos", titulo: "Día 6 — Banco", tareas: ["Grabar 2 crudos", "2 DMs", "Editar 1 para mañana"], kpi: "Banco +2" },
-{ i: 13, fase: "F1 · Cimientos", titulo: "Día 7 — Revisión S1", tareas: ["Contar: leads / conversaciones / llamadas", "Anotar qué pieza rindió", "Planear semana 2"], kpi: "Informe S1" },
-{ i: 14, fase: "F1 · Cimientos", titulo: "Día 8 — Reel 3 procesos", tareas: ["Reel '3 tareas a mano' (base anuncio 2A)", "3 DMs", "Historias"], kpi: "Reel vivo" },
-{ i: 15, fase: "F1 · Cimientos", titulo: "Día 9 — Caso DB", tareas: ["Carrusel/post caso DB", "3 DMs", "Calificar leads (plantilla WA)"], kpi: "Leads calificados" },
-{ i: 16, fase: "F1 · Cimientos", titulo: "Día 10 — Historias + DMs", tareas: ["Historias cotidianas + link", "3 DMs", "Agendar llamadas que salgan"], kpi: "Calls en agenda" },
-{ i: 17, fase: "F1 · Cimientos", titulo: "Día 11 — Reel + follow-ups", tareas: ["Reel del banco", "3 DMs", "Follow-up días 2-4"], kpi: "2da vuelta lista" },
-{ i: 18, fase: "F1 · Cimientos", titulo: "Día 12 — Historias", tareas: ["Historias + caja de preguntas", "3 DMs", "Responder todo"], kpi: "Engagement" },
-{ i: 19, fase: "F1 · Cimientos", titulo: "Día 13 — Banco", tareas: ["Grabar 2 crudos", "2 DMs", "Revisar magnet: ¿descargas?"], kpi: "Banco +2" },
-{ i: 20, fase: "F1 · Cimientos", titulo: "Día 14 — Revisión 2 sem", tareas: ["Totales 14 días vs meta F1 (20/5/1)", "Ajustar hooks flojos", "Descanso"], kpi: "Informe 14d" },
-{ i: 21, fase: "F1 · Cimientos", titulo: "Día 15 — Pre-lanzamiento C1", tareas: ["Pasar checklist lanzamiento completo", "Verificar retargeting ≥100 personas (si no, esperar)", "Dejar C1 en BORRADOR (no publicar)", "Avisar en historias: 'mañana arranca pauta'"], kpi: "C1 lista para publicar", tip: "Si el público es chico, esperar 2 días.", docs: ["checklist16", "plantillas"] },
+{ i: 7, fase: "F1 · Base", titulo: "Día 1 — Reel de lanzamiento", tareas: ["Publicar reel día 1 (12:00-14:00) + historias", "Enviar 5 DMs con el guion de prospección", "Responder TODO en menos de 1 hora"], kpi: "Reel vivo + 5 DMs", tip: "Tu WhatsApp es el mostrador.", docs: ["reel1", "dm"] },
+{ i: 8, fase: "F1 · Base", titulo: "Día 2 — Carrusel de señales", tareas: ["Publicar carrusel B + caption día 2", "5 DMs nuevos", "Historias anunciando el carrusel"], kpi: "Carrusel vivo", docs: ["creativoB"] },
+{ i: 9, fase: "F1 · Base", titulo: "Día 3 — Detrás de cámara", tareas: ["Stories de proceso + encuesta", "5 DMs nuevos", "Comentar 5 cuentas de tiendas aliadas"], kpi: "Alcance orgánico" },
+{ i: 10, fase: "F1 · Base", titulo: "Día 4 — Reel educativo", tareas: ["Publicar reel '3 tareas que podés automatizar'", "5 DMs", "Registrar leads en el tablero"], kpi: "Pipeline al día" },
+{ i: 11, fase: "F1 · Base", titulo: "Día 5 — Encuesta + seguimiento", tareas: ["Historia encuesta: ¿cuántos mensajes te llegan al día?", "5 DMs", "Follow-up a los leads del día 1"], kpi: "Follow-ups hechos" },
+{ i: 12, fase: "F1 · Base", titulo: "Día 6 — Banco de contenido", tareas: ["Grabar 2 reels crudos", "4 DMs", "Editar 1 para mañana"], kpi: "Banco +2" },
+{ i: 13, fase: "F1 · Base", titulo: "Día 7 — Revisión S1", tareas: ["Contar leads / conversaciones / llamadas", "Anotar qué pieza generó conversaciones", "Planear la semana 2"], kpi: "Informe S1" },
+{ i: 14, fase: "F1 · Base", titulo: "Día 8 — Reel de objeciones", tareas: ["Publicar reel 'es caro vs cuánto te cuesta no vender'", "5 DMs", "Historias con caja de preguntas"], kpi: "Reel vivo" },
+{ i: 15, fase: "F1 · Base", titulo: "Día 9 — Caso real", tareas: ["Publicar carrusel de caso (KATOBO / DB Digital)", "5 DMs", "Calificar leads con las 3 preguntas"], kpi: "Leads calificados", docs: ["creativoA"] },
+{ i: 16, fase: "F1 · Base", titulo: "Día 10 — Historias + DMs", tareas: ["Historias cotidianas + link a WhatsApp", "5 DMs", "Agendar llamadas que salgan"], kpi: "Calls en agenda" },
+{ i: 17, fase: "F1 · Base", titulo: "Día 11 — Reel + follow-ups", tareas: ["Publicar reel del banco", "5 DMs", "Follow-up a los leads de días 2-4"], kpi: "Segunda vuelta lista" },
+{ i: 18, fase: "F1 · Base", titulo: "Día 12 — Historias Q&A", tareas: ["Historias + caja de preguntas", "5 DMs", "Responder todo en menos de 1 hora"], kpi: "Engagement" },
+{ i: 19, fase: "F1 · Base", titulo: "Día 13 — Banco + magnet", tareas: ["Grabar 2 reels crudos", "4 DMs", "Revisar descargas del lead magnet"], kpi: "Banco +2" },
+{ i: 20, fase: "F1 · Base", titulo: "Día 14 — Revisión 2 semanas", tareas: ["Totales 14 días vs meta F1 (20/10/2)", "Ajustar hooks flojos", "Descanso"], kpi: "Informe 14d" },
+{ i: 21, fase: "F1 · Base", titulo: "Día 15 — Pre-lanzamiento C1", tareas: ["Pasar checklist de lanzamiento completo", "Verificar públicos nativos Meta (IG + video 50%) ≥100 personas", "Subir 2 creativos ganadores en C1 borrador (3º en reserva)", "Anunciar en historias: 'mañana arranca pauta'"], kpi: "C1 lista para publicar", tip: "Priorizá públicos de IG/video: el Pixel web solo dispara si aceptan cookies.", docs: ["checklist16", "plantillas"] },
 
-{ i: 22, fase: "F2 · Tracción", titulo: "Día 16 — PUBLICAR C1 + reel proceso", tareas: ["Pasar Árbol NO vende Capa 1 (Pixel+WA+UTMs) antes de publicar", "Publicar Campaña 1 (paso a paso)", "Publicar reel proceso C + caption día 16", "Responder <1h todo"], kpi: "C1 activa", tip: "Desde hoy: NO TOCAR 6 días.", docs: ["arbol", "camp1", "creativoC"] },
-{ i: 23, fase: "F2 · Tracción", titulo: "Día 17 — Observar", tareas: ["Solo revisar rechazos", "Orgánico normal + 3 DMs", "Anotar leads"], kpi: "0 rechazos" },
-{ i: 24, fase: "F2 · Tracción", titulo: "Día 18 — Reel demo orgánico", tareas: ["Publicar reel demo bot + caption (comenta DEMO)", "3 DMs", "Responder DEMOs al instante"], kpi: "Comentarios DEMO", docs: ["creativoA"] },
-{ i: 25, fase: "F2 · Tracción", titulo: "Día 19 — Sostener", tareas: ["Orgánico + 3 DMs", "Calificar chats con plantilla", "Agendar llamadas"], kpi: "Calls agendadas" },
-{ i: 26, fase: "F2 · Tracción", titulo: "Día 20 — Sostener", tareas: ["Orgánico + 3 DMs", "Follow-up propuestas", "Anotar"], kpi: "Pipeline vivo" },
-{ i: 27, fase: "F2 · Tracción", titulo: "Día 21 — OPTIMIZACIÓN C1", tareas: ["Pasar Árbol NO vende (Capas 1-2-3) — solo si lleva 6 días intacta", "Comparar costo/conversación A vs B vs C", "Ganador +30%, pausar 2 perdedores", "Anotar ángulo ganador (demo/caso/proceso)"], kpi: "C1 optimizada", tip: "El dato manda, no el gusto.", docs: ["arbol", "camp1"] },
-{ i: 28, fase: "F2 · Tracción", titulo: "Día 22 — Réplica", tareas: ["Variación del ángulo ganador (mismo hook, otro inicio)", "3 DMs", "Llamadas"], kpi: "Variación lista" },
-{ i: 29, fase: "F2 · Tracción", titulo: "Día 23 — Sostener", tareas: ["Orgánico + 3 DMs", "Propuestas pendientes", "Anotar"], kpi: "2 propuestas (meta F2)" },
-{ i: 30, fase: "F2 · Tracción", titulo: "Día 24 — Sostener", tareas: ["Orgánico + historias", "3 DMs", "Revisar CPL acumulado"], kpi: "CPL controlado" },
+{ i: 22, fase: "F2 · Tracción", titulo: "Día 16 — PUBLICAR C1 + reel proceso", tareas: ["Pasar Árbol NO vende Capa 1 (pixel + WA + UTMs)", "Publicar Campaña 1 de retargeting nativo Meta", "Publicar reel proceso C + caption día 16", "Responder <1h todo (ángulo temporada diciembre)"], kpi: "C1 activa", tip: "Desde hoy: NO TOCAR 6 días.", docs: ["arbol", "camp1", "creativoC"] },
+{ i: 23, fase: "F2 · Tracción", titulo: "Día 17 — Observar", tareas: ["Solo revisar rechazos", "Orgánico normal + 5 DMs", "Anotar leads y calidad"], kpi: "0 rechazos" },
+{ i: 24, fase: "F2 · Tracción", titulo: "Día 18 — Reel caso orgánico", tareas: ["Publicar reel caso A + caption (comentá SISTEMA)", "5 DMs", "Responder comentarios al instante"], kpi: "Comentarios SISTEMA", docs: ["creativoA"] },
+{ i: 25, fase: "F2 · Tracción", titulo: "Día 19 — Sostener", tareas: ["Orgánico + 5 DMs", "Calificar chats con las 3 preguntas", "Agendar llamadas"], kpi: "Calls agendadas" },
+{ i: 26, fase: "F2 · Tracción", titulo: "Día 20 — Sostener", tareas: ["Orgánico + 5 DMs", "Follow-up a propuestas", "Anotar objeciones"], kpi: "Pipeline vivo" },
+{ i: 27, fase: "F2 · Tracción", titulo: "Día 21 — OPTIMIZACIÓN C1", tareas: ["Pasar Árbol NO vende (Capas 1-2-3) solo si lleva 6 días intacta", "Comparar costo/conversación A vs B vs C", "Ganador +30%, pausar 2 perdedores", "Anotar ángulo ganador"], kpi: "C1 optimizada", tip: "El dato manda, no el gusto.", docs: ["arbol", "camp1"] },
+{ i: 28, fase: "F2 · Tracción", titulo: "Día 22 — Réplica", tareas: ["Variación del ángulo ganador (mismo hook, otro inicio)", "5 DMs", "Llamadas"], kpi: "Variación lista" },
+{ i: 29, fase: "F2 · Tracción", titulo: "Día 23 — Sostener", tareas: ["Orgánico + 5 DMs", "Propuestas pendientes", "Anotar"], kpi: "2 propuestas (meta F2)" },
+{ i: 30, fase: "F2 · Tracción", titulo: "Día 24 — Sostener", tareas: ["Orgánico + historias", "5 DMs", "Revisar CPL acumulado"], kpi: "CPL controlado" },
 { i: 31, fase: "F2 · Tracción", titulo: "Día 25 — Empuje", tareas: ["Historia 'quedan X cupos' (solo real)", "Follow-ups", "Llamadas"], kpi: "Urgencia real" },
-{ i: 32, fase: "F2 · Tracción", titulo: "Día 26 — Banco", tareas: ["Grabar 2 crudos", "2 DMs", "Descanso parcial"], kpi: "Banco" },
-{ i: 33, fase: "F2 · Tracción", titulo: "Día 27 — Informe", tareas: ["Gastado/leads/calls/propuestas F2", "Comparar vs meta (50/15/5/2)", "Ajustar"], kpi: "Informe F2" },
+{ i: 32, fase: "F2 · Tracción", titulo: "Día 26 — Banco", tareas: ["Grabar 2 reels crudos", "4 DMs", "Descanso parcial"], kpi: "Banco" },
+{ i: 33, fase: "F2 · Tracción", titulo: "Día 27 — Informe", tareas: ["Gastado/leads/calls/propuestas F2", "Comparar vs meta (50/20/5/2)", "Ajustar"], kpi: "Informe F2" },
 { i: 34, fase: "F2 · Tracción", titulo: "Día 28 — Transición", tareas: ["Preparar C2 en borrador", "Orgánico", "Descanso"], kpi: "C2 en borrador" },
 { i: 35, fase: "F2 · Tracción", titulo: "Día 29 — Revisión", tareas: ["Cerrar números F2", "Lecciones", "Anunciar C2"], kpi: "F2 cerrada" },
-{ i: 36, fase: "F2 · Tracción", titulo: "Día 30 — Cierre F2", tareas: ["Post balance público", "Agradecer", "Preparar d31"], kpi: "Balance público" },
+{ i: 36, fase: "F2 · Tracción", titulo: "Día 30 — Cierre F2", tareas: ["Post balance público", "Agradecer", "Preparar día 31"], kpi: "Balance público" },
 
-{ i: 37, fase: "F3 · Conversión", titulo: "Día 31 — PUBLICAR C2", tareas: ["Pasar Árbol NO vende Capa 1-2 (exclusiones + frecuencia + ≥100)", "Publicar Campaña 2 frío (paso a paso)", "Orgánico educativo", "Responder <1h"], kpi: "C2 activa", tip: "Frío cuesta más: normal.", docs: ["arbol", "camp2", "plantillas"] },
-{ i: 38, fase: "F3 · Conversión", titulo: "Día 32-36 — No tocar", tareas: ["NO tocar C2", "Orgánico + 3 DMs/día", "Anotar leads y calidad"], kpi: "Aprendizaje C2" },
+{ i: 37, fase: "F3 · Conversión", titulo: "Día 31 — PUBLICAR C2", tareas: ["Pasar Árbol NO vende Capa 1-2 (exclusiones + frecuencia + ≥100)", "Publicar Campaña 2 frío", "Orgánico educativo", "Responder <1h"], kpi: "C2 activa", tip: "Frío cuesta más: normal.", docs: ["arbol", "camp2", "plantillas"] },
+{ i: 38, fase: "F3 · Conversión", titulo: "Día 32 — Observar", tareas: ["NO tocar C2", "Orgánico + 5 DMs", "Anotar leads y calidad"], kpi: "Aprendizaje C2" },
 { i: 39, fase: "F3 · Conversión", titulo: "Día 33 — Sostener", tareas: ["Orgánico", "Llamadas y propuestas", "Follow-ups"], kpi: "Propuestas" },
-{ i: 40, fase: "F3 · Conversión", titulo: "Día 34 — Sostener", tareas: ["Orgánico", "3 DMs", "Calificar"], kpi: "Pipeline" },
-{ i: 41, fase: "F3 · Conversión", titulo: "Día 35 — Sostener", tareas: ["Orgánico", "Historias cupos", "Llamadas"], kpi: "Calls" },
+{ i: 40, fase: "F3 · Conversión", titulo: "Día 34 — Sostener", tareas: ["Orgánico", "5 DMs", "Calificar"], kpi: "Pipeline" },
+{ i: 41, fase: "F3 · Conversión", titulo: "Día 35 — Sostener", tareas: ["Orgánico", "Historias de cupos", "Llamadas"], kpi: "Calls" },
 { i: 42, fase: "F3 · Conversión", titulo: "Día 36 — Pre-corte", tareas: ["Revisar CPA provisorio C2", "Orgánico", "Anotar"], kpi: "CPA provisorio" },
-{ i: 43, fase: "F3 · Conversión", titulo: "Día 37 — OPTIMIZACIÓN C2", tareas: ["Pasar Árbol NO vende completo — decide: escalar / iterar / matar", "Pausar 2 peores", "Ganador +30% SOLO si CPA < $10.000", "Si todo > $15.000: pausar C2 y reforzar C1"], kpi: "C2 optimizada", docs: ["arbol", "camp2"] },
+{ i: 43, fase: "F3 · Conversión", titulo: "Día 37 — OPTIMIZACIÓN C2", tareas: ["Pasar Árbol NO vende completo: escalar / iterar / matar", "Pausar 2 peores", "Ganador +30% solo si CPA < $10.000", "Si todo > $15.000: pausar C2 y reforzar C1"], kpi: "C2 optimizada", docs: ["arbol", "camp2"] },
 { i: 44, fase: "F3 · Conversión", titulo: "Día 38 — Cierre", tareas: ["Empujar propuestas abiertas", "Follow-ups", "Llamadas"], kpi: "Cierres en curso" },
 { i: 45, fase: "F3 · Conversión", titulo: "Día 39 — Cierre", tareas: ["Orgánico + escasez real", "Cerrar", "Anotar"], kpi: "1-2 cierres" },
-{ i: 46, fase: "F3 · Conversión", titulo: "Día 40 — Sostener", tareas: ["Orgánico", "Onboarding cliente nuevo", "Anotar"], kpi: "Entrega inicia" },
-{ i: 47, fase: "F3 · Conversión", titulo: "Día 41 — Sostener", tareas: ["Orgánico", "Propuestas", "Banco 2 crudos"], kpi: "Banco" },
-{ i: 48, fase: "F3 · Conversión", titulo: "Día 42 — Informe", tareas: ["Números F3 vs meta (80/25/8/4/1-2)", "Qué campaña ganó y por qué", "Ajustar"], kpi: "Informe F3" },
+{ i: 46, fase: "F3 · Conversión", titulo: "Día 40 — Onboarding", tareas: ["Onboarding del cliente nuevo", "Pedir accesos y brief", "Agendar lanzamiento"], kpi: "Entrega inicia", docs: ["onboarding"] },
+{ i: 47, fase: "F3 · Conversión", titulo: "Día 41 — Sostener", tareas: ["Orgánico", "Propuestas", "Grabar 2 reels crudos"], kpi: "Banco" },
+{ i: 48, fase: "F3 · Conversión", titulo: "Día 42 — Informe", tareas: ["Números F3 vs meta (80/30/8/4/1-2)", "Qué campaña ganó y por qué", "Ajustar"], kpi: "Informe F3", docs: ["reporte"] },
 { i: 49, fase: "F3 · Conversión", titulo: "Día 43 — Transición", tareas: ["Planificar escala F4", "Orgánico", "Descanso"], kpi: "Plan F4" },
 { i: 50, fase: "F3 · Conversión", titulo: "Día 44 — Pre-cierre", tareas: ["Follow-ups finales F3", "Orgánico", "Anotar"], kpi: "Pipeline limpio" },
-{ i: 51, fase: "F3 · Conversión", titulo: "Día 45 — DECISIÓN FINAL", tareas: ["Pasar Árbol NO vende Capa 3 (¿escalar +20%? ¿cambiar? ¿pausar?)", "¿Escalar ganadora +20%? ¿Cambiar creativos? ¿Pausar y esperar?", "Decidir con datos, anotar", "Comunicar plan"], kpi: "Decisión tomada", tip: "Sin dato no hay decisión.", docs: ["arbol", "camp2"] },
+{ i: 51, fase: "F3 · Conversión", titulo: "Día 45 — DECISIÓN FINAL", tareas: ["Pasar Árbol NO vende Capa 3", "¿Escalar ganadora +20%? ¿Cambiar creativos? ¿Pausar?", "Decidir con datos y anotar", "Comunicar plan"], kpi: "Decisión tomada", tip: "Sin dato no hay decisión.", docs: ["arbol", "camp2"] },
 
-{ i: 52, fase: "F4 · Escalar", titulo: "Día 46 — Escalar", tareas: ["Aplicar decisión d45 (+20% ganadora)", "Orgánico", "Entregas clientes"], kpi: "Escala ON" },
-{ i: 53, fase: "F4 · Escalar", titulo: "Día 47 — Sostener", tareas: ["Vigilar CPL (no romper lo que anda)", "Orgánico + DMs", "Llamadas"], kpi: "CPL estable" },
-{ i: 54, fase: "F4 · Escalar", titulo: "Día 48 — Documentar 1", tareas: ["Escribir playbook: setup y F1", "Orgánico", "Anotar"], kpi: "Playbook 1/3" },
-{ i: 55, fase: "F4 · Escalar", titulo: "Día 49 — Documentar 2", tareas: ["Playbook: campañas y optimización", "Orgánico", "Anotar"], kpi: "Playbook 2/3" },
-{ i: 56, fase: "F4 · Escalar", titulo: "Día 50 — Punto medio", tareas: ["Revisar metas F4 (2-3 cierres)", "Ajustar budget si hace falta", "Orgánico"], kpi: "Mitad F4" },
-{ i: 57, fase: "F4 · Escalar", titulo: "Día 51 — Cierres", tareas: ["Empujar cierres pendientes", "Follow-ups", "Orgánico"], kpi: "Cierres" },
-{ i: 58, fase: "F4 · Escalar", titulo: "Día 52 — Cierres", tareas: ["Llamadas de cierre", "Propuestas finales", "Orgánico"], kpi: "Firmas" },
-{ i: 59, fase: "F4 · Escalar", titulo: "Día 53 — Documentar 3", tareas: ["Playbook: cierres y entrega", "Orgánico", "Anotar"], kpi: "Playbook 3/3" },
-{ i: 60, fase: "F4 · Escalar", titulo: "Día 54 — Sostener", tareas: ["Orgánico", "Entregas", "Banco mes siguiente"], kpi: "Banco" },
-{ i: 61, fase: "F4 · Escalar", titulo: "Día 55 — Sostener", tareas: ["Orgánico", "Llamadas", "Revisar CPL"], kpi: "Control" },
-{ i: 62, fase: "F4 · Escalar", titulo: "Día 56 — Pre-cierre", tareas: ["Follow-ups", "Orgánico", "Orden Notion"], kpi: "Orden" },
-{ i: 63, fase: "F4 · Escalar", titulo: "Día 57 — Informe", tareas: ["Números 60 días completos", "CAC real final", "Lecciones"], kpi: "Informe 60d" },
-{ i: 64, fase: "F4 · Escalar", titulo: "Día 58 — Balance público", tareas: ["Post balance 60 días (números reales)", "Agradecer", "Anunciar ciclo 2"], kpi: "Balance público" },
-{ i: 65, fase: "F4 · Escalar", titulo: "Día 59 — Descanso", tareas: ["Mínimo operativo", "Responder", "Dormir"], kpi: "Recarga" },
-{ i: 66, fase: "F4 · Escalar", titulo: "Día 60 — Cierre", tareas: ["Celebrar 2-3 clientes", "Sistema documentado para replicar", "Plan ciclo 2"], kpi: "🎯 2-3 clientes", tip: "ESTÁ TODO. AHORA A REPLICAR." }
+{ i: 52, fase: "F4 · Escala", titulo: "Día 46 — Escalar", tareas: ["Aplicar decisión día 45 (+20% ganadora)", "Orgánico", "Entregas de clientes"], kpi: "Escala ON" },
+{ i: 53, fase: "F4 · Escala", titulo: "Día 47 — Sostener", tareas: ["Vigilar CPL (no romper lo que anda)", "Orgánico + 5 DMs", "Llamadas"], kpi: "CPL estable" },
+{ i: 54, fase: "F4 · Escala", titulo: "Día 48 — Documentar 1", tareas: ["Escribir playbook: setup y oferta", "Orgánico", "Anotar"], kpi: "Playbook 1/3" },
+{ i: 55, fase: "F4 · Escala", titulo: "Día 49 — Documentar 2", tareas: ["Playbook: contenido y campañas", "Orgánico", "Anotar"], kpi: "Playbook 2/3" },
+{ i: 56, fase: "F4 · Escala", titulo: "Día 50 — Punto medio", tareas: ["Revisar metas F4 (2-3 clientes)", "Ajustar presupuesto si hace falta", "Orgánico"], kpi: "Mitad F4" },
+{ i: 57, fase: "F4 · Escala", titulo: "Día 51 — Cierres", tareas: ["Empujar cierres pendientes", "Follow-ups", "Orgánico"], kpi: "Cierres" },
+{ i: 58, fase: "F4 · Escala", titulo: "Día 52 — Cierres", tareas: ["Llamadas de cierre", "Propuestas finales", "Orgánico"], kpi: "Firmas" },
+{ i: 59, fase: "F4 · Escala", titulo: "Día 53 — Documentar 3", tareas: ["Playbook: cierres y onboarding", "Orgánico", "Anotar"], kpi: "Playbook 3/3" },
+{ i: 60, fase: "F4 · Escala", titulo: "Día 54 — Sostener", tareas: ["Orgánico", "Entregas", "Banco del mes siguiente"], kpi: "Banco" },
+{ i: 61, fase: "F4 · Escala", titulo: "Día 55 — Sostener", tareas: ["Orgánico", "Llamadas", "Revisar CPL"], kpi: "Control" },
+{ i: 62, fase: "F4 · Escala", titulo: "Día 56 — Pre-cierre", tareas: ["Follow-ups", "Orgánico", "Ordenar pipeline"], kpi: "Orden" },
+{ i: 63, fase: "F4 · Escala", titulo: "Día 57 — Informe 60d", tareas: ["Números completos: leads, CPL, CAC, MRR", "Lecciones", "Ajustar oferta"], kpi: "Informe 60d", docs: ["reporte"] },
+{ i: 64, fase: "F4 · Escala", titulo: "Día 58 — Balance público", tareas: ["Post balance 60 días (números reales)", "Agradecer", "Anunciar ciclo 2"], kpi: "Balance público" },
+{ i: 65, fase: "F4 · Escala", titulo: "Día 59 — Descanso", tareas: ["Mínimo operativo", "Responder", "Dormir"], kpi: "Recarga" },
+{ i: 66, fase: "F4 · Escala", titulo: "Día 60 — Cierre", tareas: ["Celebrar 2-3 clientes", "Sistema documentado para replicar", "Plan del ciclo 2"], kpi: "2-3 clientes · MRR $1.5M+", tip: "ESTÁ TODO. AHORA A REPLICAR." }
 ];
 
 const CSS = `
@@ -282,6 +523,8 @@ const CSS = `
 
 function money(n) { return "$" + n.toLocaleString("es-CO"); }
 
+export { PLAN, DOCS, WA_T };
+
 export default function FuxiaTrafico() {
   const [tab, setTab] = useState("cal");
   const [idx, setIdx] = useState(0);
@@ -297,14 +540,14 @@ export default function FuxiaTrafico() {
   }, []);
   useEffect(() => {
     try {
-      const s = JSON.parse(localStorage.getItem("fuxia60_checks") || "{}");
+      const s = JSON.parse(localStorage.getItem("fuxia_marketing_checks_v1") || "{}");
       setChecks(s);
     } catch (e) {}
   }, []);
   function toggle(k) {
     setChecks((prev) => {
       const n = Object.assign({}, prev, { [k]: !prev[k] });
-      try { localStorage.setItem("fuxia60_checks", JSON.stringify(n)); } catch (e) {}
+      try { localStorage.setItem("fuxia_marketing_checks_v1", JSON.stringify(n)); } catch (e) {}
       return n;
     });
   }
@@ -318,14 +561,14 @@ export default function FuxiaTrafico() {
   const gastado = PLAN.filter((p) => p.i <= day.i).reduce((a, p) => a + gastoDia(p.i), 0);
   const baseTotal = PLAN.reduce((a, p) => a + gastoDia(p.i), 0);
   const pct = Math.min(100, Math.round((gastado / TECHO) * 100));
-  const fases = ["Setup", "F1 · Cimientos", "F2 · Tracción", "F3 · Conversión", "F4 · Escalar"];
+  const fases = ["Setup", "F1 · Base", "F2 · Tracción", "F3 · Conversión", "F4 · Escala"];
   const fDays = PLAN.filter((p) => p.fase === fase);
   const metas = {
-    "Setup": "Todo técnico listo para el día 1",
-    "F1 · Cimientos": "20 leads · 5 conversaciones · 1 llamada",
-    "F2 · Tracción": "50 leads · 15 conversaciones · 5 llamadas · 2 propuestas",
-    "F3 · Conversión": "80 leads · 25 conversaciones · 8 llamadas · 4 propuestas · 1-2 cierres",
-    "F4 · Escalar": "2-3 clientes cerrados · sistema documentado"
+    "Setup": "Oferta, nicho, landing, WhatsApp y medición listos",
+    "F1 · Base": "20 leads · 10 conversaciones · 2 llamadas",
+    "F2 · Tracción": "50 leads · 20 conversaciones · 5 llamadas · 2 propuestas",
+    "F3 · Conversión": "80 leads · 30 conversaciones · 8 llamadas · 4 propuestas · 1-2 clientes",
+    "F4 · Escala": "2-3 clientes · MRR $1.5M+ · sistema documentado"
   };
 
   return (
@@ -333,10 +576,11 @@ export default function FuxiaTrafico() {
       <div style={{ borderBottom: "0.5px solid " + B2, background: S1 }}>
         <div style={{ maxWidth: 860, margin: "0 auto", padding: "20px 20px 0" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 6, flexWrap: "wrap" }}>
-            <span className="fx-h1" style={{ color: F }}>FUXIA × FERNEY</span>
+            <span className="fx-h1" style={{ color: F }}>FUXIA MARKETING</span>
             <span className="fx-mono" style={{ fontSize: 11, color: T2 }}>60 días + setup</span>
-            <span className="fx-mono" style={{ fontSize: 10, color: T3, marginLeft: "auto" }}>TECHO $500K</span>
+            <span className="fx-mono" style={{ fontSize: 10, color: T3, marginLeft: "auto" }}>PAUTA $500K</span>
           </div>
+          <div className="fx-mono" style={{ fontSize: 10, color: T2, marginBottom: 10 }}>Marketing digital para tiendas de tecnología · Medellín</div>
           <div className="scrollx" style={{ display: "flex" }}>
             {[["cal", "Calendario"], ["camp", "Campañas"], ["wa", "WhatsApp"], ["kpi", "KPIs"]].map(([id, l]) => (
               <button key={id} className={"fx-tab" + (tab === id ? " on" : "")} onClick={() => setTab(id)}>{l}</button>
@@ -366,7 +610,7 @@ export default function FuxiaTrafico() {
                   {gastoDia(day.i) ? money(gastoDia(day.i)) + " pauta" : (day.i < 7 ? "setup" : "orgánico")}
                 </span>
               </div>
-              <div className="fx-h2" style={{ margin: "8px 0 10px" }}>{day.i < 7 ? "Setup D" + (day.i - 7) + " — " + day.titulo : "Día " + (day.i - 6) + " — " + day.titulo}</div>
+              <div className="fx-h2" style={{ margin: "8px 0 10px" }}>{day.i < 7 ? "Setup D" + (day.i - 7) + " — " + day.titulo : day.titulo}</div>
               {day.tareas.map((t, ti) => {
                 const k = day.i + "-" + ti;
                 const on = !!checks[k];

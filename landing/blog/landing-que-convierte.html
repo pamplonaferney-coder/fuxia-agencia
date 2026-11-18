@@ -1,13 +1,31 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Por quÃ© tu landing page no convierte â€” FUXIA</title>
-  <meta name="description" content="El 80% de las landings fallan por lo mismo: no tienen una propuesta de valor clara en los primeros 5 segundos." />
+  <title>Por qué tu landing page no convierte — FUXIA Marketing</title>
+  <meta name="description" content="El 80% de las landings fallan por lo mismo: no tienen una propuesta de valor clara ni un camino directo a WhatsApp en los primeros 5 segundos." />
   <link rel="icon" type="image/png" href="../logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <!-- Meta Pixel Code (consentido: solo carga si aceptas cookies) -->
+  <script>
+    window.FUXIA_PIXEL_ID = '1632121441954497';
+    window.FuxiaPixelLoad = function () {
+      if (window.fbq) return;
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', window.FUXIA_PIXEL_ID);
+      fbq('track', 'PageView');
+    };
+    try { if (localStorage.getItem('fuxia_cookie_consent') === 'accepted') window.FuxiaPixelLoad(); } catch (e) {}
+  </script>
   <style>
     :root { --fuxia: #CC00FF; --negro: #050508; --negro-card: #0d0d12; --gris: #888899; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,56 +49,59 @@
     @media (max-width: 600px) { article { padding: 3rem 1.25rem 5rem; } nav { padding: 1rem 1.25rem; } }
     footer { max-width: 720px; margin: 0 auto; padding: 0 2rem 2rem; font-family: 'JetBrains Mono',monospace; font-size: 0.62rem; color: #55555f; line-height: 2; }
     footer a { color: #777788; }
-    #cookie-banner { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 9997; background: rgba(13,13,18,0.97); border: 1px solid rgba(204,0,255,0.4); border-radius: 12px; padding: 1rem 1.1rem; display: none; gap: 0.8rem; max-width: 640px; margin: 0 auto; align-items: center; font-family: 'JetBrains Mono',monospace; font-size: 0.7rem; color: #aaaabb; line-height: 1.6; }
+    #cookie-banner { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 10002; background: rgba(13,13,18,0.98); border: 2px solid #CC00FF; border-radius: 12px; padding: 1rem 1.1rem; display: none; gap: 0.8rem; max-width: 640px; margin: 0 auto; align-items: center; font-family: 'JetBrains Mono',monospace; font-size: 0.7rem; color: #aaaabb; line-height: 1.6; }
     #cookie-banner.show { display: flex; }
     #cookie-banner a { color: #CC00FF; }
     #cookie-banner .ck-btns { display: flex; gap: 0.5rem; }
-    #cookie-banner button { font-family: inherit; font-size: 0.7rem; padding: 0.55rem 0.95rem; border-radius: 4px; cursor: pointer; }
-    #ck-accept { background: #CC00FF; color: #fff; border: 1px solid #CC00FF; font-weight: 700; }
-    #ck-reject { background: transparent; color: #aaaabb; border: 1px solid rgba(255,255,255,0.25); }
+    #cookie-banner button { font-family: inherit; font-size: 0.7rem; padding: 0.6rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 700; }
+    #ck-accept { background: #CC00FF; color: #fff; border: 1px solid #CC00FF; }
+    #ck-reject { background: transparent; color: #aaaabb; border: 1px solid rgba(255,255,255,0.3); }
+    #ck-float { position: fixed; left: 1rem; bottom: 1rem; z-index: 10001; width: 44px; height: 44px; border-radius: 50%; background: rgba(13,13,18,0.95); border: 1px solid #CC00FF; color: #fff; font-size: 20px; cursor: pointer; display: none; align-items: center; justify-content: center; }
+    #ck-float.show { display: flex; }
     @media (max-width:600px){ #cookie-banner{ flex-direction:column; align-items:stretch; } #cookie-banner .ck-btns button{ flex:1; } footer{ padding:0 1.25rem 2rem; } }
   </style>
 </head>
 <body>
   <nav>
     <a href="../index.html"><img src="../logo.png" alt="FUXIA" style="height:36px;" /></a>
-    <a href="../index.html" class="back-link">â† volver al inicio</a>
+    <a href="../index.html" class="back-link">← volver al inicio</a>
   </nav>
   <article>
     <span class="art-tag">// landing pages</span>
-    <h1>Por quÃ© tu landing page no convierte (y no es el diseÃ±o)</h1>
-    <div class="art-meta">4 min de lectura Â· FUXIA</div>
+    <h1>Por qué tu landing page no convierte (y no es el diseño)</h1>
+    <div class="art-meta">4 min de lectura · FUXIA Marketing · Medellín</div>
 
-    <p>Cuando alguien llega a tu landing page tiene menos de 5 segundos para decidir si se queda o se va. Y en esos 5 segundos no estÃ¡ leyendo â€” estÃ¡ escaneando. EstÃ¡ buscando una respuesta a una sola pregunta: <strong style="color:#fff">Â¿esto es para mÃ­?</strong></p>
+    <p>Cuando alguien llega a tu landing desde un anuncio de Instagram o Meta Ads tiene menos de 5 segundos para decidir si se queda o se va. Y en esos 5 segundos no está leyendo — está escaneando. Busca respuesta a una sola pregunta: <strong style="color:#fff">¿esto es para mí?</strong></p>
 
-    <div class="highlight"><p>La mayorÃ­a de las landings fallan porque responden a "quÃ© hacemos" en lugar de "quÃ© ganÃ¡s vos".</p></div>
+    <div class="highlight"><p>La mayoría de las landings fallan porque responden a "qué hacemos" en lugar de "qué ganás vos".</p></div>
 
-    <h2>El error mÃ¡s comÃºn</h2>
-    <p>El dueÃ±o del negocio redacta la landing pensando en su empresa. En sus aÃ±os de experiencia, en sus certificaciones, en el proceso que siguen. Todo eso es ruido para alguien que llegÃ³ buscando resolver un problema.</p>
-    <p>Lo primero que tiene que ver el visitante es quÃ© problema le resolvÃ©s, cÃ³mo y en cuÃ¡nto tiempo. Sin adornos.</p>
+    <h2>El error más común</h2>
+    <p>El dueño del negocio redacta la página pensando en su empresa: años de experiencia, marcas que maneja o frases genéricas. Todo eso es ruido para alguien que llegó buscando comprar rápido o resolver un problema concreto.</p>
+    <p>Lo primero que tiene que ver el visitante es qué oferta tiene enfrente, por qué confiar y cómo escribir por WhatsApp en un clic.</p>
 
     <h2>La estructura que funciona</h2>
-    <p><strong>1. Titular de impacto.</strong> Una frase que describa el resultado que obtiene el cliente. No "somos expertos en X", sino "en una semana tenÃ©s X funcionando".</p>
-    <p><strong>2. Prueba social inmediata.</strong> Un nÃºmero, un resultado, un testimonio corto. Justo despuÃ©s del titular, no al final.</p>
-    <p><strong>3. Un solo llamado a la acciÃ³n.</strong> No cuatro botones. No un menÃº. Un solo botÃ³n que diga exactamente quÃ© pasa cuando se hace clic.</p>
+    <p><strong>1. Titular de impacto.</strong> Una frase clara que conecte con el producto o resultado. Sin rodeos ni tecnicismos.</p>
+    <p><strong>2. Prueba social inmediata.</strong> Reseñas, entregas reales, garantía o casos concretos justo después del titular, no escondidos al final.</p>
+    <p><strong>3. Un solo llamado a la acción medido.</strong> Un botón claro a WhatsApp o formulario con UTMs y eventos medidos para optimizar tus campañas.</p>
 
-    <h2>Por quÃ© el diseÃ±o importa menos de lo que creÃ©s</h2>
-    <p>Una landing bien escrita con diseÃ±o mediocre convierte mejor que una landing con diseÃ±o premium y copy dÃ©bil. El diseÃ±o genera confianza â€” el copy genera acciÃ³n.</p>
-    <p>En FUXIA trabajamos los dos, pero siempre empezamos por el mensaje. Porque si el mensaje estÃ¡ mal, el diseÃ±o bonito solo hace que la gente rebote mÃ¡s rÃ¡pido.</p>
+    <h2>Por qué el diseño importa menos de lo que creés</h2>
+    <p>Una landing bien escrita con diseño limpio convierte mucho más que una página llena de animaciones y copy débil. El diseño genera confianza — la oferta y el mensaje generan chats.</p>
+    <p>En FUXIA trabajamos ambos dentro de nuestro plan Arranque, empezando siempre por el mensaje y la medición para que tu pauta rinda.</p>
 
     <div class="cta-inline">
-      <h3>Â¿Tu landing estÃ¡ convirtiendo lo que deberÃ­a?</h3>
-      <p>Te decimos en 15 minutos quÃ© le falta y quÃ© cambiarÃ­a.</p>
-      <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20le%C3%AD%20el%20art%C3%ADculo%20de%20landing%20pages%20y%20quiero%20una%20revisi%C3%B3n" class="btn" target="_blank" rel="noopener">Hablemos â†’</a>
+      <h3>¿Tu landing está convirtiendo lo que debería?</h3>
+      <p>En un diagnóstico gratis de 15 minutos te decimos qué le falta y qué cambiar para convertir más visitas en chats.</p>
+      <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20le%C3%AD%20el%20art%C3%ADculo%20de%20landing%20pages%20y%20quiero%20una%20revisi%C3%B3n" class="btn" target="_blank" rel="noopener">Pedir diagnóstico gratis →</a>
     </div>
   </article>
-  <footer><a href="../politica-datos.html">Tratamiento de datos</a> · <a href="../politica-cookies.html">Cookies</a> · <a href="../terminos.html">Términos</a><br />© 2026 FUXIA · Medellín · Ley 1581 de 2012</footer>
+  <footer><a href="../politica-datos.html">Tratamiento de datos</a> · <a href="../politica-cookies.html">Cookies</a> · <a href="../terminos.html">Términos</a> · <a href="?cookies" id="ck-prefs">Configurar cookies</a><br />© 2026 FUXIA · Medellín · WA +57 300 537 0203 · Ley 1581 de 2012 · Pixel de Meta solo si aceptas</footer>
   <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
-    <span>Usamos cookies necesarias y, solo si aceptas, analítica. <a href="../politica-cookies.html">Ver política</a>.</span>
-    <span class="ck-btns"><button id="ck-accept" type="button">Aceptar</button><button id="ck-reject" type="button">Rechazar</button></span>
+    <span><strong>🍪 Cookies + Pixel de Meta.</strong> El Pixel solo se activa si aceptas. <a href="../politica-cookies.html">Ver política</a>.</span>
+    <span class="ck-btns"><button id="ck-accept" type="button">Aceptar todo</button><button id="ck-reject" type="button">Solo necesarias</button></span>
   </div>
+  <button id="ck-float" type="button" aria-label="Configurar cookies" title="Configurar cookies">🍪</button>
   <script>
-  (function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}if(!g()&&b)b.classList.add('show');document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');b.classList.remove('show');});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');b.classList.remove('show');});})();
+  (function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner'),f=document.getElementById('ck-float');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}function show(){b.classList.add('show');f.classList.remove('show');}function hide(){b.classList.remove('show');if(g())f.classList.add('show');}var force=/[?#&]cookies/.test(location.search+location.hash);setTimeout(function(){if(!g()||force)show();else if(g())f.classList.add('show');},700);document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');hide();if(window.FuxiaPixelLoad)window.FuxiaPixelLoad();});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');hide();});f.addEventListener('click',show);var p=document.getElementById('ck-prefs');if(p)p.addEventListener('click',function(e){e.preventDefault();show();});})();
   </script>
 </body>
 </html>

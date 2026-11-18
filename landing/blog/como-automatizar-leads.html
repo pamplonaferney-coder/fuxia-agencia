@@ -1,17 +1,35 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CÃ³moo dejÃ© de responder 200 mensajes al dÃ­a â€” FUXIA</title>
+  <title>Cómo dejé de responder 200 mensajes al día — FUXIA Marketing</title>
   <meta name="description"
-    content="El flujo exacto que armamos para que un negocio de servicios nunca mÃ¡s pierda un cliente por no contestar a tiempo." />
+    content="El flujo exacto para que una tienda de tecnología o negocio local nunca más pierda una venta por contestar tarde en WhatsApp." />
   <link rel="icon" type="image/png" href="../logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400&display=swap"
     rel="stylesheet" />
+  <!-- Meta Pixel Code (consentido: solo carga si aceptas cookies) -->
+  <script>
+    window.FUXIA_PIXEL_ID = '1632121441954497';
+    window.FuxiaPixelLoad = function () {
+      if (window.fbq) return;
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', window.FUXIA_PIXEL_ID);
+      fbq('track', 'PageView');
+    };
+    try { if (localStorage.getItem('fuxia_cookie_consent') === 'accepted') window.FuxiaPixelLoad(); } catch (e) {}
+  </script>
   <style>
     :root {
       --fuxia: #CC00FF;
@@ -20,153 +38,26 @@
       --gris: #888899;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: var(--negro);
-      color: #fff;
-      font-family: 'Syne', sans-serif;
-    }
-
-    nav {
-      padding: 1.25rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #1a1a22;
-    }
-
-    nav a {
-      text-decoration: none;
-    }
-
-    .back-link {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--gris);
-      letter-spacing: 0.15em;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .back-link:hover {
-      color: #fff;
-    }
-
-    article {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 4rem 2rem 6rem;
-    }
-
-    .art-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--fuxia);
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    h1 {
-      font-size: clamp(1.75rem, 5vw, 2.75rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-    }
-
-    .art-meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--gris);
-      letter-spacing: 0.1em;
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid #1a1a22;
-    }
-
-    h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin: 2.5rem 0 1rem;
-      color: #fff;
-    }
-
-    p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #ccc;
-      margin-bottom: 1.25rem;
-    }
-
-    .highlight {
-      background: var(--negro-card);
-      border-left: 3px solid var(--fuxia);
-      padding: 1.25rem 1.5rem;
-      border-radius: 0 6px 6px 0;
-      margin: 2rem 0;
-    }
-
-    .highlight p {
-      color: #fff;
-      margin: 0;
-    }
-
-    .cta-inline {
-      background: var(--negro-card);
-      border: 1px solid rgba(204, 0, 255, 0.4);
-      border-radius: 8px;
-      padding: 2rem;
-      text-align: center;
-      margin-top: 3rem;
-    }
-
-    .cta-inline h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .cta-inline p {
-      color: var(--gris);
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--fuxia);
-      color: #fff;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 0.8rem 1.75rem;
-      border-radius: 4px;
-      text-decoration: none;
-      box-shadow: 0 0 20px rgba(204, 0, 255, 0.3);
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .btn:hover {
-      background: #dd22ff;
-      transform: translateY(-2px);
-    }
-
-    @media (max-width: 600px) {
-      article {
-        padding: 3rem 1.25rem 5rem;
-      }
-
-      nav {
-        padding: 1rem 1.25rem;
-      }
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--negro); color: #fff; font-family: 'Syne', sans-serif; }
+    nav { padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a1a22; }
+    nav a { text-decoration: none; }
+    .back-link { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--gris); letter-spacing: 0.15em; text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: #fff; }
+    article { max-width: 720px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+    .art-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fuxia); margin-bottom: 1rem; display: block; }
+    h1 { font-size: clamp(1.75rem, 5vw, 2.75rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; }
+    .art-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--gris); letter-spacing: 0.1em; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #1a1a22; }
+    h2 { font-size: 1.3rem; font-weight: 700; margin: 2.5rem 0 1rem; color: #fff; }
+    p { font-size: 1rem; line-height: 1.8; color: #ccc; margin-bottom: 1.25rem; }
+    .highlight { background: var(--negro-card); border-left: 3px solid var(--fuxia); padding: 1.25rem 1.5rem; border-radius: 0 6px 6px 0; margin: 2rem 0; }
+    .highlight p { color: #fff; margin: 0; }
+    .cta-inline { background: var(--negro-card); border: 1px solid rgba(204, 0, 255, 0.4); border-radius: 8px; padding: 2rem; text-align: center; margin-top: 3rem; }
+    .cta-inline h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .cta-inline p { color: var(--gris); margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--fuxia); color: #fff; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 0.8rem 1.75rem; border-radius: 4px; text-decoration: none; box-shadow: 0 0 20px rgba(204, 0, 255, 0.3); transition: background 0.2s, transform 0.15s; }
+    .btn:hover { background: #dd22ff; transform: translateY(-2px); }
+    @media (max-width: 600px) { article { padding: 3rem 1.25rem 5rem; } nav { padding: 1rem 1.25rem; } }
     footer { max-width: 720px; margin: 0 auto; padding: 0 2rem 2rem; font-family: 'JetBrains Mono',monospace; font-size: 0.62rem; color: #55555f; line-height: 2; }
     footer a { color: #777788; }
     #cookie-banner { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 10002; background: rgba(13,13,18,0.98); border: 2px solid #CC00FF; border-radius: 12px; padding: 1rem 1.1rem; display: none; gap: 0.8rem; max-width: 640px; margin: 0 auto; align-items: center; font-family: 'JetBrains Mono',monospace; font-size: 0.7rem; color: #aaaabb; line-height: 1.6; }
@@ -185,57 +76,50 @@
 <body>
   <nav>
     <a href="../index.html"><img src="../logo.png" alt="FUXIA" style="height:36px;" /></a>
-    <a href="../index.html" class="back-link">â† volver al inicio</a>
+    <a href="../index.html" class="back-link">← volver al inicio</a>
   </nav>
   <article>
-    <span class="art-tag">// automatizaciÃ³n de leads</span>
-    <h1>CÃ³mo dejÃ© de responder 200 mensajes al dÃ­a sin perder un solo lead</h1>
-    <div class="art-meta">5 min de lectura Â· FUXIA</div>
+    <span class="art-tag">// leads y whatsapp</span>
+    <h1>Cómo dejé de responder 200 mensajes al día sin perder un solo lead</h1>
+    <div class="art-meta">5 min de lectura · FUXIA Marketing · Medellín</div>
 
-    <p>Un cliente llegÃ³ a nosotros con un problema que suena ridÃ­culo hasta que te pasa a vos: su negocio iba bien, pero
-      Ã©l se habÃ­a convertido en el cuello de botella. Cada lead que llegaba por WhatsApp, Instagram o su web dependÃ­a de
-      que Ã©l lo viera, respondiera y diera seguimiento. A mano. Uno por uno.</p>
+    <p>Un cliente llegó a nosotros con un problema que suena ridículo hasta que te pasa a vos: su negocio vendía bien, pero
+      él se había convertido en el cuello de botella. Cada persona que preguntaba por WhatsApp, Instagram o su web dependía de
+      que él lo viera, respondiera y diera seguimiento. A mano. Uno por uno.</p>
 
     <div class="highlight">
-      <p>"Estaba respondiendo mensajes a las 11pm porque en el dÃ­a no alcanzaba. Y aun asÃ­ se me escapaban clientes."
-      </p>
+      <p>"Estaba respondiendo mensajes a las 11 p. m. porque en el día no alcanzaba. Y aun así se me escapaban ventas."</p>
     </div>
 
     <h2>El problema real no era el volumen</h2>
-    <p>La mayorÃ­a piensa que el problema es que hay demasiados mensajes. Pero el problema es que el proceso dependÃ­a de
-      una sola persona tomando decisiones en tiempo real. Eso no escala.</p>
-    <p>Lo que construimos fue un flujo que recibe el lead, lo clasifica, responde automÃ¡ticamente con informaciÃ³n
-      relevante y lo agenda â€” todo sin intervenciÃ³n humana hasta que el cliente ya estÃ¡ listo para comprar.</p>
+    <p>La mayoría piensa que el problema es recibir demasiados chats, sobre todo en temporada alta o cuando se prende pauta en Meta.
+      Pero el verdadero problema es no tener un sistema de captación y seguimiento: el proceso dependía de una sola persona contestando en tiempo real.</p>
+    <p>Lo que construimos fue un flujo claro que ordena cada conversación desde anuncios y redes, califica rápido con plantillas (o automatización en el plan Escala) y asegura que ningún prospecto quede en visto.</p>
 
-    <h2>El flujo en tres partes</h2>
-    <p><strong>1. Captura unificada.</strong> Conectamos todos los canales (WhatsApp, Instagram DM, formulario web) a un
-      solo punto de entrada. Nada se pierde, todo queda registrado.</p>
-    <p><strong>2. Respuesta inmediata.</strong> En los primeros 2 minutos el lead recibe un mensaje personalizado segÃºn
-      de dÃ³nde vino y quÃ© preguntÃ³. No un bot genÃ©rico â€” un mensaje que parece humano porque usa la informaciÃ³n que el
-      mismo cliente dio.</p>
-    <p><strong>3. Seguimiento automÃ¡tico.</strong> Si el lead no responde en 24 horas, el sistema hace un follow-up. Si
-      no responde en 72 horas, otro. Todo configurable, todo medible.</p>
+    <h2>El sistema en tres partes</h2>
+    <p><strong>1. Captura ordenada con medición.</strong> Conectamos Instagram, campañas de Meta Ads y landing a un solo punto de entrada en WhatsApp con UTMs, para saber qué anuncio y qué contenido trae ventas reales.</p>
+    <p><strong>2. Respuesta rápida y calificación.</strong> En los primeros minutos el cliente recibe una respuesta clara con 3 preguntas cortas (qué busca, presupuesto/urgencia y cómo prefiere avanzar) sin sonar a robot genérico.</p>
+    <p><strong>3. Seguimiento disciplinado.</strong> Si el lead pide precio y no responde en 24–48 horas, se dispara un seguimiento concreto. Cuando el volumen crece, este paso se automatiza con CRM + n8n.</p>
 
     <h2>Resultado</h2>
-    <p>En el primer mes, el cliente pasÃ³ de responder manualmente a revisar solo los leads que ya estaban calificados.
-      Su tasa de cierre subiÃ³ porque dedicaba tiempo a las conversaciones que importaban, no a decir "hola, Â¿en quÃ© te
-      puedo ayudar?" cien veces al dÃ­a.</p>
+    <p>En el primer mes, el dueño pasó de responder mensajes a medianoche a concentrarse solo en cerrar conversaciones calificadas.
+      Su tasa de cierre subió porque dedicaba tiempo a clientes listos para comprar, no a repetir "hola, ¿en qué te puedo ayudar?" cien veces al día.</p>
 
     <div class="cta-inline">
-      <h3>Â¿Tu negocio tiene el mismo problema?</h3>
-      <p>Una llamada de 15 minutos es suficiente para saber si esto te sirve.</p>
-      <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20le%C3%AD%20el%20art%C3%ADculo%20de%20automatizaci%C3%B3n%20de%20leads%20y%20quiero%20saber%20m%C3%A1s"
-        class="btn" target="_blank" rel="noopener">Hablemos â†’</a>
+      <h3>¿Tu tienda pierde ventas por WhatsApp?</h3>
+      <p>En un diagnóstico gratis de 15 minutos revisamos tu Instagram, WhatsApp y pauta para mostrarte 3 mejoras concretas.</p>
+      <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20le%C3%AD%20el%20art%C3%ADculo%20de%20WhatsApp%20y%20quiero%20el%20diagn%C3%B3stico%20gratis"
+        class="btn" target="_blank" rel="noopener">Pedir diagnóstico gratis →</a>
     </div>
   </article>
-  <footer><a href="../politica-datos.html">Tratamiento de datos</a> · <a href="../politica-cookies.html">Cookies</a> · <a href="../terminos.html">Términos</a><br />© 2026 FUXIA · Medellín · Ley 1581 de 2012 · Pixel de Meta solo si aceptas</footer>
+  <footer><a href="../politica-datos.html">Tratamiento de datos</a> · <a href="../politica-cookies.html">Cookies</a> · <a href="../terminos.html">Términos</a> · <a href="?cookies" id="ck-prefs">Configurar cookies</a><br />© 2026 FUXIA · Medellín · WA +57 300 537 0203 · Ley 1581 de 2012 · Pixel de Meta solo si aceptas</footer>
   <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
     <span><strong>🍪 Cookies + Pixel de Meta.</strong> El Pixel solo se activa si aceptas. <a href="../politica-cookies.html">Ver política</a>.</span>
     <span class="ck-btns"><button id="ck-accept" type="button">Aceptar todo</button><button id="ck-reject" type="button">Solo necesarias</button></span>
   </div>
   <button id="ck-float" type="button" aria-label="Configurar cookies" title="Configurar cookies">🍪</button>
   <script>
-  (function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner'),f=document.getElementById('ck-float');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}function show(){b.classList.add('show');f.classList.remove('show');}function hide(){b.classList.remove('show');if(g())f.classList.add('show');}var force=/[?#&]cookies/.test(location.search+location.hash);setTimeout(function(){if(!g()||force)show();else if(g())f.classList.add('show');},700);document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');hide();});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');hide();});f.addEventListener('click',show);})();
+  (function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner'),f=document.getElementById('ck-float');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}function show(){b.classList.add('show');f.classList.remove('show');}function hide(){b.classList.remove('show');if(g())f.classList.add('show');}var force=/[?#&]cookies/.test(location.search+location.hash);setTimeout(function(){if(!g()||force)show();else if(g())f.classList.add('show');},700);document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');hide();if(window.FuxiaPixelLoad)window.FuxiaPixelLoad();});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');hide();});f.addEventListener('click',show);var p=document.getElementById('ck-prefs');if(p)p.addEventListener('click',function(e){e.preventDefault();show();});})();
   </script>
 </body>
 

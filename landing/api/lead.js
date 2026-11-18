@@ -1,5 +1,38 @@
 // POST /api/lead — captura server-side del lead (el form también abre WhatsApp).
 // Notifica por Telegram. Env vars en Vercel: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID.
+const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 minutos
+const RATE_MAX_REQ = 5;
+const RATE_MAX_KEYS = 500;
+const rateBuckets = new Map();
+
+function getClientIp(req) {
+  const fwd = req.headers && (req.headers['x-forwarded-for'] || req.headers['x-real-ip']);
+  if (typeof fwd === 'string' && fwd.trim()) {
+    return fwd.split(',')[0].trim().slice(0, 64);
+  }
+  return (req.socket && req.socket.remoteAddress) ? String(req.socket.remoteAddress).slice(0, 64) : 'unknown';
+}
+
+function checkRateLimit(ip, now) {
+  if (rateBuckets.size > RATE_MAX_KEYS) {
+    for (const [key, timestamps] of rateBuckets.entries()) {
+      const fresh = timestamps.filter((ts) => now - ts < RATE_WINDOW_MS);
+      if (fresh.length) rateBuckets.set(key, fresh);
+      else rateBuckets.delete(key);
+    }
+  }
+  const prev = rateBuckets.get(ip) || [];
+  const recent = prev.filter((ts) => now - ts < RATE_WINDOW_MS);
+  if (recent.length >= RATE_MAX_REQ) {
+    rateBuckets.set(ip, recent);
+    const retryAfterSec = Math.max(1, Math.ceil((RATE_WINDOW_MS - (now - recent[0])) / 1000));
+    return { allowed: false, retryAfterSec };
+  }
+  recent.push(now);
+  rateBuckets.set(ip, recent);
+  return { allowed: true, retryAfterSec: 0 };
+}
+
 function esc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
@@ -7,6 +40,14 @@ function esc(s) {
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, error: 'method' });
+    return;
+  }
+  const rl = checkRateLimit(getClientIp(req), Date.now());
+  if (!rl.allowed) {
+    if (typeof res.setHeader === 'function') {
+      res.setHeader('Retry-After', String(rl.retryAfterSec));
+    }
+    res.status(429).json({ ok: false, error: 'rate_limit', retryAfter: rl.retryAfterSec });
     return;
   }
   let body = req.body;

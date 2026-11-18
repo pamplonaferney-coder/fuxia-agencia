@@ -1,13 +1,31 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Un CRM no tiene que ser complicado ni caro â€” FUXIA</title>
-  <meta name="description" content="CÃ³mo armamos sistemas de seguimiento de clientes que cualquier persona puede manejar, sin cursos ni manuales." />
+  <title>Un CRM no tiene que ser complicado ni caro — FUXIA Marketing</title>
+  <meta name="description" content="Cómo armamos sistemas de seguimiento de clientes por WhatsApp que cualquier tienda puede manejar, sin cursos ni manuales." />
   <link rel="icon" type="image/png" href="../logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <!-- Meta Pixel Code (consentido: solo carga si aceptas cookies) -->
+  <script>
+    window.FUXIA_PIXEL_ID = '1632121441954497';
+    window.FuxiaPixelLoad = function () {
+      if (window.fbq) return;
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', window.FUXIA_PIXEL_ID);
+      fbq('track', 'PageView');
+    };
+    try { if (localStorage.getItem('fuxia_cookie_consent') === 'accepted') window.FuxiaPixelLoad(); } catch (e) {}
+  </script>
   <style>
     :root { --fuxia: #CC00FF; --negro: #050508; --negro-card: #0d0d12; --gris: #888899; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,57 +49,60 @@
     @media (max-width: 600px) { article { padding: 3rem 1.25rem 5rem; } nav { padding: 1rem 1.25rem; } }
     footer { max-width: 720px; margin: 0 auto; padding: 0 2rem 2rem; font-family: 'JetBrains Mono',monospace; font-size: 0.62rem; color: #55555f; line-height: 2; }
     footer a { color: #777788; }
-    #cookie-banner { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 9997; background: rgba(13,13,18,0.97); border: 1px solid rgba(204,0,255,0.4); border-radius: 12px; padding: 1rem 1.1rem; display: none; gap: 0.8rem; max-width: 640px; margin: 0 auto; align-items: center; font-family: 'JetBrains Mono',monospace; font-size: 0.7rem; color: #aaaabb; line-height: 1.6; }
+    #cookie-banner { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 10002; background: rgba(13,13,18,0.98); border: 2px solid #CC00FF; border-radius: 12px; padding: 1rem 1.1rem; display: none; gap: 0.8rem; max-width: 640px; margin: 0 auto; align-items: center; font-family: 'JetBrains Mono',monospace; font-size: 0.7rem; color: #aaaabb; line-height: 1.6; }
     #cookie-banner.show { display: flex; }
     #cookie-banner a { color: #CC00FF; }
     #cookie-banner .ck-btns { display: flex; gap: 0.5rem; }
-    #cookie-banner button { font-family: inherit; font-size: 0.7rem; padding: 0.55rem 0.95rem; border-radius: 4px; cursor: pointer; }
-    #ck-accept { background: #CC00FF; color: #fff; border: 1px solid #CC00FF; font-weight: 700; }
-    #ck-reject { background: transparent; color: #aaaabb; border: 1px solid rgba(255,255,255,0.25); }
+    #cookie-banner button { font-family: inherit; font-size: 0.7rem; padding: 0.6rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 700; }
+    #ck-accept { background: #CC00FF; color: #fff; border: 1px solid #CC00FF; }
+    #ck-reject { background: transparent; color: #aaaabb; border: 1px solid rgba(255,255,255,0.3); }
+    #ck-float { position: fixed; left: 1rem; bottom: 1rem; z-index: 10001; width: 44px; height: 44px; border-radius: 50%; background: rgba(13,13,18,0.95); border: 1px solid #CC00FF; color: #fff; font-size: 20px; cursor: pointer; display: none; align-items: center; justify-content: center; }
+    #ck-float.show { display: flex; }
     @media (max-width:600px){ #cookie-banner{ flex-direction:column; align-items:stretch; } #cookie-banner .ck-btns button{ flex:1; } footer{ padding:0 1.25rem 2rem; } }
   </style>
 </head>
 <body>
   <nav>
     <a href="../index.html"><img src="../logo.png" alt="FUXIA" style="height:36px;" /></a>
-    <a href="../index.html" class="back-link">â† volver al inicio</a>
+    <a href="../index.html" class="back-link">← volver al inicio</a>
   </nav>
   <article>
-    <span class="art-tag">// crm</span>
+    <span class="art-tag">// seguimiento y crm</span>
     <h1>Un CRM no tiene que ser complicado ni caro</h1>
-    <div class="art-meta">6 min de lectura Â· FUXIA</div>
+    <div class="art-meta">6 min de lectura · FUXIA Marketing · Medellín</div>
 
-    <p>La mayorÃ­a de los dueÃ±os de negocio escuchan "CRM" y piensan en Salesforce, en horas de configuraciÃ³n, en cursos de capacitaciÃ³n para el equipo. Y tienen razÃ³n â€” ese CRM no es para ellos.</p>
-    <p>Pero hay otra forma de entender un CRM: un sistema que sabe en quÃ© estado estÃ¡ cada cliente, quÃ© sigue y quiÃ©n es el responsable de moverlo. Eso puede ser tan simple como una hoja bien estructurada o tan robusto como quieras.</p>
+    <p>La mayoría de los dueños de tienda escuchan "CRM" y piensan en plataformas gigantes, horas de configuración y cursos eternos para el equipo. Y tienen razón — ese CRM no es para un negocio local que vende por WhatsApp.</p>
+    <p>Pero hay otra forma de entender un CRM: un sistema simple que te dice en qué estado está cada cliente (cotizó, pendiente de pago, comprado, seguimiento), qué sigue y quién es responsable de responder. Puede empezar en un tablero limpio y crecer con automatización cuando el volumen lo pida.</p>
 
-    <div class="highlight"><p>El mejor CRM es el que tu equipo realmente usa. No el mÃ¡s completo.</p></div>
+    <div class="highlight"><p>El mejor CRM es el que tu equipo realmente usa todos los días. No el más completo.</p></div>
 
     <h2>El problema de los CRMs tradicionales</h2>
-    <p>Son herramientas diseÃ±adas para equipos de ventas grandes con procesos estandarizados. Para un negocio mediano o pequeÃ±o, la mitad de las funciones no se usan y la otra mitad requiere un administrador de tiempo completo para mantenerlas al dÃ­a.</p>
-    <p>El resultado: el equipo vuelve a los WhatsApps y las hojas de Excel porque es mÃ¡s fÃ¡cil. Y el CRM queda como un museo digital de datos desactualizados.</p>
+    <p>Son herramientas diseñadas para equipos corporativos. Para una tienda de tecnología con 1 a 3 sedes, la mitad de las funciones estorban y la otra mitad exige alguien dedicado solo a llenar formularios.</p>
+    <p>El resultado: los vendedores vuelven al chat desordenado y al cuaderno porque es más rápido. Y la plata invertida en pauta se pierde sin saber qué cliente cerró.</p>
 
-    <h2>CÃ³mo lo hacemos diferente</h2>
-    <p><strong>Empezamos por el proceso, no por la herramienta.</strong> Primero entendemos cÃ³mo el negocio maneja sus clientes hoy â€” con todos sus vicios y sus atajos. Luego construimos el sistema alrededor de ese proceso real, no alrededor de un proceso ideal que nadie va a seguir.</p>
-    <p><strong>Automatizamos lo aburrido.</strong> Actualizaciones de estado, recordatorios, notificaciones â€” todo eso lo hace el sistema. El equipo solo interviene en las decisiones que requieren criterio humano.</p>
-    <p><strong>Lo construimos para que dure.</strong> Sin dependencias raras, sin integraciones frÃ¡giles. Si algo falla, es fÃ¡cil de arreglar. Y te explicamos cÃ³mo.</p>
+    <h2>Cómo lo hacemos diferente en FUXIA</h2>
+    <p><strong>Empezamos por tus ventas reales.</strong> Primero ordenamos tu captación (contenido + Meta Ads + WhatsApp Business) y entendemos cómo cotiza tu tienda hoy. Luego montamos el seguimiento alrededor de ese flujo real.</p>
+    <p><strong>Medimos cada peso de pauta.</strong> Sabés cuántos chats llegaron de cada campaña, cuántos cotizaron y cuántos compraron, sin adivinar.</p>
+    <p><strong>Escalamos con automatización cuando ya hay tracción.</strong> En nuestro plan Escala conectamos recordatorios, clasificación y automatizaciones con n8n e IA para que el equipo solo se enfoque en cerrar.</p>
 
-    <h2>Â¿CuÃ¡ndo tiene sentido contratar esto?</h2>
-    <p>Cuando perdÃ©s clientes por falta de seguimiento. Cuando no sabÃ©s en quÃ© estado estÃ¡ cada negociaciÃ³n. Cuando el equipo tiene procesos distintos para lo mismo. Cuando dependÃ©s de que una persona recuerde hacer algo.</p>
-    <p>Si te identificÃ¡s con alguno de esos puntos, hay algo que podemos mejorar.</p>
+    <h2>¿Cuándo tiene sentido ordenar tu seguimiento?</h2>
+    <p>Cuando te llegan 5 a 50 chats diarios y se te olvidan cotizaciones. Cuando invertís en pauta pero no sabés qué anuncio trajo ventas. Cuando dependés de la memoria del vendedor para hacer follow-up.</p>
+    <p>Si te identificás con alguno de esos puntos, un diagnóstico de 15 minutos te deja claro por dónde empezar.</p>
 
     <div class="cta-inline">
-      <h3>Â¿QuerÃ©s ver cÃ³mo quedarÃ­a tu CRM?</h3>
-      <p>En 15 minutos te mostramos cÃ³mo se verÃ­a para tu negocio especÃ­fico.</p>
-      <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20le%C3%AD%20el%20art%C3%ADculo%20de%20CRM%20y%20quiero%20ver%20c%C3%B3mo%20quedar%C3%ADa" class="btn" target="_blank" rel="noopener">Hablemos â†’</a>
+      <h3>¿Querés ordenar tu seguimiento por WhatsApp?</h3>
+      <p>En un diagnóstico gratis de 15 minutos te mostramos 3 mejoras concretas para tu negocio.</p>
+      <a href="https://wa.me/573005370203?text=Hola%20FUXIA%2C%20le%C3%AD%20el%20art%C3%ADculo%20de%20CRM%20y%20quiero%20el%20diagn%C3%B3stico%20gratis" class="btn" target="_blank" rel="noopener">Pedir diagnóstico gratis →</a>
     </div>
   </article>
-  <footer><a href="../politica-datos.html">Tratamiento de datos</a> · <a href="../politica-cookies.html">Cookies</a> · <a href="../terminos.html">Términos</a><br />© 2026 FUXIA · Medellín · Ley 1581 de 2012</footer>
+  <footer><a href="../politica-datos.html">Tratamiento de datos</a> · <a href="../politica-cookies.html">Cookies</a> · <a href="../terminos.html">Términos</a> · <a href="?cookies" id="ck-prefs">Configurar cookies</a><br />© 2026 FUXIA · Medellín · WA +57 300 537 0203 · Ley 1581 de 2012 · Pixel de Meta solo si aceptas</footer>
   <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
-    <span>Usamos cookies necesarias y, solo si aceptas, analítica. <a href="../politica-cookies.html">Ver política</a>.</span>
-    <span class="ck-btns"><button id="ck-accept" type="button">Aceptar</button><button id="ck-reject" type="button">Rechazar</button></span>
+    <span><strong>🍪 Cookies + Pixel de Meta.</strong> El Pixel solo se activa si aceptas. <a href="../politica-cookies.html">Ver política</a>.</span>
+    <span class="ck-btns"><button id="ck-accept" type="button">Aceptar todo</button><button id="ck-reject" type="button">Solo necesarias</button></span>
   </div>
+  <button id="ck-float" type="button" aria-label="Configurar cookies" title="Configurar cookies">🍪</button>
   <script>
-  (function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}if(!g()&&b)b.classList.add('show');document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');b.classList.remove('show');});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');b.classList.remove('show');});})();
+  (function(){var K='fuxia_cookie_consent',b=document.getElementById('cookie-banner'),f=document.getElementById('ck-float');function g(){try{return localStorage.getItem(K);}catch(e){return null;}}function s(v){try{localStorage.setItem(K,v);}catch(e){}}function show(){b.classList.add('show');f.classList.remove('show');}function hide(){b.classList.remove('show');if(g())f.classList.add('show');}var force=/[?#&]cookies/.test(location.search+location.hash);setTimeout(function(){if(!g()||force)show();else if(g())f.classList.add('show');},700);document.getElementById('ck-accept').addEventListener('click',function(){s('accepted');hide();if(window.FuxiaPixelLoad)window.FuxiaPixelLoad();});document.getElementById('ck-reject').addEventListener('click',function(){s('rejected');hide();});f.addEventListener('click',show);var p=document.getElementById('ck-prefs');if(p)p.addEventListener('click',function(e){e.preventDefault();show();});})();
   </script>
 </body>
 </html>
