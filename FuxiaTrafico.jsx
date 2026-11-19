@@ -21,7 +21,7 @@ const WARN = "#F5C842";
 const GASTO = "#FF8A65";
 
 const TECHO = 500000;
-const WA_NUM = "573005370203";
+const WA_NUM = "573235315015";
 const WD = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
 const MO = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 function fecha(idx) {
@@ -340,7 +340,7 @@ propuesta: { t: "Propuesta de 1 página (plantilla)", txt:
 3) Implementación en 2-4 semanas.
 4) Primer reporte a los 30 días.
 
-Firma: Ferney Pamplona · FUXIA · WhatsApp +57 300 537 0203` },
+Firma: Ferney Pamplona · FUXIA · WhatsApp +57 323 531 5015` },
 
 dm: { t: "Guion de prospección por DM", txt:
 `DM 1 (sin vender):
@@ -401,7 +401,41 @@ onboarding: { t: "Onboarding de cliente (checklist)", txt:
 [ ] Plantillas de WhatsApp y flujo de calificación.
 [ ] Fecha de lanzamiento y fecha del primer reporte.
 [ ] Grupo de WhatsApp o canal de comunicación.
-[ ] Responsable de responder leads y horario.` }
+[ ] Responsable de responder leads y horario.` },
+
+banco5: { t: "Banco de 5 piezas base (listo para grabar/diseñar)", txt:
+`BANCO DE 5 PIEZAS — TIENDAS DE TECNOLOGÍA MEDELLÍN (DIC 2026)
+Paleta carruseles: #0A0A0C / #F2EFE9 / #E040FB · CTA: DM "SISTEMA" o wa.me/${WA_NUM}
+
+1) REEL (35-40s · Día 1 · Dolor/Temporada):
+- Hook: "En diciembre tu WhatsApp te está costando ventas."
+- Desarrollo: El cliente con prima cotiza en 3 tiendas; si tardás +2h o no hacés seguimiento compra en otro lado. 3 errores: sin oferta, botón promocionar sin medir, chats en visto.
+- CTA: "5 diagnósticos gratis de 15 min. Escribime SISTEMA por DM."
+
+2) CARRUSEL 6 slides (1080x1350 · Día 2 · Educación / Anuncio 1B):
+- S1: "3 señales de que tu WhatsApp te está costando ventas."
+- S2: "01/ Respondés en más de 1 hora."
+- S3: "02/ No hacés seguimiento a las 24-48h."
+- S4: "03/ Pautás sin saber qué anuncio trae ventas."
+- S5: "Casos reales: KATOBO (8 h/sem) · DB Digital (3 leads calificados mes 1)."
+- S6: "Diagnóstico gratis 15 min · DM SISTEMA."
+
+3) REEL pantalla real (30-35s · Día 4 · Auditoría express):
+- Hook: "3 cosas que reviso en 60s para saber por qué una tienda de celulares no vende más."
+- Puntos: 1) Bio + link wa.me precargado 2) Calificación 3 preguntas (equipo, pago, entrega) 3) Etiquetas + follow-up 24h.
+- CTA: "Comentá AUDITORIA y reviso tu tienda 15 min gratis."
+
+4) REEL objeción precio (30-35s · Día 8 · ROI + Credibilidad):
+- Hook: "'El marketing es caro' — hagamos la cuenta con celulares."
+- Desarrollo: 3 chats enfriados/sem a $250k-$300k margen = $3M-$4M perdidos/mes. Experiencia real en Claro, Oppo, Tigo, Realme y Xiaomi.
+- CTA: "Escribime DIAGNOSTICO y hacemos la cuenta con tus números."
+
+5) CARRUSEL 6 slides (1080x1350 · Día 9/16 · Oferta + Proceso 4 pasos):
+- S1: "Así montamos tu sistema de ventas por WhatsApp en 30 días."
+- S2: "01/ Diagnóstico gratis 15 min." · S3: "02/ Plan 1 página en 48h."
+- S4: "03/ Arranque (7-10 días): landing + WA + pixel + 4 piezas + Meta Ads."
+- S5: "04/ Tracción y Escala: gestión mensual + CRM/n8n/IA."
+- S6: "5 cupos tiendas de tecnología Medellín · DM SISTEMA."` }
 };
 
 const WA_T = [
@@ -420,7 +454,7 @@ const PLAN = [
 { i: 2, fase: "Setup", titulo: "Perfiles y WhatsApp Business", tareas: ["Bio IG/FB: qué hacés, para quién y CTA a WhatsApp", "Highlights: casos, precios, proceso y diagnóstico", "WhatsApp Business: perfil, catálogo con 3 packs, bienvenida y ausencia", "Probar wa.me/" + WA_NUM + " con mensaje precargado"], kpi: "Perfiles y WA listos", tip: "3 segundos: qué, para quién, cómo contactar." },
 { i: 3, fase: "Setup", titulo: "Landing de marketing", tareas: ["Actualizar hero: promesa para tiendas de tecnología", "Sección de casos y prueba social", "Oferta con packs y CTA a WhatsApp", "SEO local: Medellín + marketing digital + WhatsApp"], kpi: "Landing publicada", tip: "Una landing, una promesa, un CTA." },
 { i: 4, fase: "Setup", titulo: "Medición y seguimiento", tareas: ["Pixel + eventos Lead/Contact en la landing", "UTMs por CTA (hero, packs, popup)", "Formulario/WhatsApp conectado a aviso interno", "Tablero simple: leads, conversaciones, llamadas, cierres"], kpi: "Medición funcionando", tip: "Sin medición, la pauta es adivinanza." },
-{ i: 5, fase: "Setup", titulo: "Lead magnet + contenido base", tareas: ["Crear PDF '5 puntos que frenan tus ventas por WhatsApp'", "Diseñar calendario de contenido de 30 días", "Escribir 3 guiones de reels", "Preparar banco de 5 piezas"], kpi: "Magnet + calendario listos", tip: "1 problema, 1 promesa, 2 páginas." },
+{ i: 5, fase: "Setup", titulo: "Lead magnet + contenido base", tareas: ["Crear PDF '5 puntos que frenan tus ventas por WhatsApp'", "Diseñar calendario de contenido de 30 días", "Escribir 3 guiones de reels", "Preparar banco de 5 piezas"], kpi: "Magnet + calendario listos", tip: "1 problema, 1 promesa, 2 páginas.", docs: ["contenido30", "banco5"] },
 { i: 6, fase: "Setup", titulo: "Grabar creativos + campaña en borrador", tareas: ["Grabar reels A, B y C con guiones", "Subtítulos quemados + música sin copyright", "Business Manager + método de pago activo", "Dejar campaña de retargeting en borrador"], kpi: "Creativos listos + C1 en borrador", tip: "Nada se publica hoy.", docs: ["reel1", "creativoA", "creativoB", "creativoC", "checklist16"] },
 
 { i: 7, fase: "F1 · Base", titulo: "Día 1 — Reel de lanzamiento", tareas: ["Publicar reel día 1 (12:00-14:00) + historias", "Enviar 5 DMs con el guion de prospección", "Responder TODO en menos de 1 hora"], kpi: "Reel vivo + 5 DMs", tip: "Tu WhatsApp es el mostrador.", docs: ["reel1", "dm"] },
