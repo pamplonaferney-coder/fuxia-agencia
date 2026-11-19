@@ -10,12 +10,12 @@ import { useState, useEffect } from "react";
 
 const F = "#E040FB";
 const BG = "#070707";
-const S1 = "#101010";
-const S2 = "#181818";
-const T1 = "#F0EFE8";
-const T2 = "#888880";
-const T3 = "#444440";
-const B2 = "rgba(255,255,255,0.06)";
+const S1 = "#111116";
+const S2 = "#1B1B22";
+const T1 = "#F8F8F4";
+const T2 = "#D2D2DF";
+const T3 = "#A6A6BA";
+const B2 = "rgba(255,255,255,0.12)";
 const OK = "#8AE8A0";
 const WARN = "#F5C842";
 const GASTO = "#FF8A65";
@@ -77,14 +77,16 @@ DIAGNÓSTICO — Gratis (15 min)
 - 4 piezas de contenido + guion de 2 reels.
 - Campaña de Meta Ads configurada (pauta aparte).
 
-2) CRECIMIENTO — $1.500.000 setup + $750.000/mes (recomendado)
+2) CRECIMIENTO — $2.250.000 primer mes (incluye setup único $1.500.000 + gestión mes 1 $750.000) · desde mes 2: $750.000/mes (recomendado)
+- Setup = pago único inicial donde montamos tu sistema base (landing, WhatsApp, pixel/UTMs, perfiles y campaña).
 - Todo lo de Arranque.
 - 8 piezas/mes + stories + guiones.
 - Gestión de Meta Ads (pauta aparte: $300k-$600k/mes).
 - Respuestas y seguimiento por WhatsApp con plantillas.
 - Reporte mensual: leads, conversaciones, CPL y ventas.
 
-3) ESCALA — $2.500.000 setup + $1.200.000/mes
+3) ESCALA — $3.700.000 primer mes (incluye setup completo único $2.500.000 + gestión mes 1 $1.200.000) · desde mes 2: $1.200.000/mes
+- Setup = pago único inicial para montar sistema base + CRM, automatizaciones n8n, IA y dashboard.
 - Todo lo de Crecimiento.
 - 12 piezas/mes + 4 reels.
 - CRM simple + automatización con n8n + IA de respuesta.
@@ -524,37 +526,37 @@ const PLAN = [
 
 const CSS = `
 .fx * { box-sizing: border-box; margin: 0; padding: 0; }
-.fx { background: ${BG}; min-height: 100vh; font-family: 'Syne', sans-serif; color: ${T1}; }
+.fx { background: ${BG}; min-height: 100vh; font-family: 'Syne', sans-serif; color: ${T1}; font-size: 15px; }
 .fx-mono { font-family: 'JetBrains Mono', monospace; }
-.fx-tab { background: transparent; border: none; color: ${T2}; font-family: 'Syne', sans-serif; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 14px; cursor: pointer; border-bottom: 1.5px solid transparent; white-space: nowrap; }
-.fx-tab.on { color: ${F}; border-bottom-color: ${F}; }
-.fx-card { background: ${S1}; border: 0.5px solid ${B2}; border-radius: 12px; padding: 18px 20px; }
-.fx-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: ${T3}; }
-.fx-h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
-.fx-h2 { font-size: 16px; font-weight: 700; }
-.fx-body { font-size: 13px; line-height: 1.7; color: ${T2}; }
-.fx-pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 10px; border-radius: 20px; }
-.fx-day { background: transparent; border: 0.5px solid ${B2}; color: ${T2}; font-family: 'JetBrains Mono', monospace; font-size: 11px; min-width: 38px; height: 38px; border-radius: 19px; cursor: pointer; padding: 0 8px; }
-.fx-day.on { border-color: ${F}; color: ${F}; background: rgba(224,64,251,0.08); }
-.fx-doc { background: ${S2}; border: 0.5px solid ${B2}; border-radius: 8px; padding: 0 14px; margin-top: 10px; }
-.fx-doc summary { cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: ${F}; padding: 12px 0; list-style: none; }
+.fx-tab { background: transparent; border: none; color: ${T2}; font-family: 'Syne', sans-serif; font-size: 13.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 15px; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+.fx-tab.on { color: #F072FF; border-bottom-color: ${F}; }
+.fx-card { background: ${S1}; border: 1px solid ${B2}; border-radius: 12px; padding: 18px 20px; }
+.fx-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: ${T3}; }
+.fx-h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+.fx-h2 { font-size: 17.5px; font-weight: 700; color: ${T1}; }
+.fx-body { font-size: 14.5px; line-height: 1.7; color: ${T2}; }
+.fx-pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 600; padding: 4px 11px; border-radius: 20px; }
+.fx-day { background: transparent; border: 1px solid ${B2}; color: ${T2}; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 600; min-width: 40px; height: 40px; border-radius: 20px; cursor: pointer; padding: 0 9px; }
+.fx-day.on { border-color: ${F}; color: #F072FF; background: rgba(224,64,251,0.14); }
+.fx-doc { background: ${S2}; border: 1px solid ${B2}; border-radius: 8px; padding: 0 14px; margin-top: 10px; }
+.fx-doc summary { cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 13.5px; font-weight: 700; color: #F072FF; padding: 13px 0; list-style: none; }
 .fx-doc summary::-webkit-details-marker { display: none; }
 .fx-doc summary:before { content: "+ "; font-weight: 700; }
 .fx-doc[open] summary:before { content: "– "; }
-.fx-doc pre { font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; color: ${T1}; white-space: pre-wrap; word-break: break-word; padding-bottom: 14px; }
-.fx-task { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; border-bottom: 0.5px solid ${B2}; cursor: pointer; }
+.fx-doc pre { font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.75; color: ${T1}; white-space: pre-wrap; word-break: break-word; padding-bottom: 14px; }
+.fx-task { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid ${B2}; cursor: pointer; }
 .fx-task:last-child { border-bottom: none; }
-.fx-cb { width: 18px; height: 18px; border: 1px solid ${T3}; border-radius: 4px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #000; font-weight: 700; }
+.fx-cb { width: 20px; height: 20px; border: 1.5px solid ${T3}; border-radius: 4px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #000; font-weight: 700; }
 .fx-cb.on { background: ${F}; border-color: ${F}; }
-.fx-txt { font-size: 13px; line-height: 1.6; color: ${T1}; }
+.fx-txt { font-size: 14.5px; line-height: 1.65; color: ${T1}; }
 .fx-txt.on { color: ${T3}; text-decoration: line-through; }
-.fx-bar { height: 6px; background: ${S2}; border-radius: 3px; overflow: hidden; }
-.fx-bar > div { height: 100%; border-radius: 3px; }
-.fx-copybtn { background: transparent; border: 0.5px solid ${B2}; color: ${T2}; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
-.fx-copybtn:hover { border-color: ${F}; color: ${F}; }
-.fx-btn { background: ${F}; border: none; color: #000; font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.fx-bar { height: 7px; background: ${S2}; border-radius: 4px; overflow: hidden; }
+.fx-bar > div { height: 100%; border-radius: 4px; }
+.fx-copybtn { background: transparent; border: 1px solid ${B2}; color: ${T1}; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 600; padding: 5px 11px; border-radius: 6px; cursor: pointer; }
+.fx-copybtn:hover { border-color: ${F}; color: #F072FF; }
+.fx-btn { background: ${F}; border: none; color: #000; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
 .fx-btn:hover { opacity: 0.9; }
-.fx-in { background: ${S2}; border: 0.5px solid ${B2}; color: ${T1}; font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 8px 10px; border-radius: 8px; width: 100%; outline: none; }
+.fx-in { background: ${S2}; border: 1px solid ${B2}; color: ${T1}; font-family: 'JetBrains Mono', monospace; font-size: 13.5px; padding: 9px 11px; border-radius: 8px; width: 100%; outline: none; }
 .fx-in:focus { border-color: ${F}; }
 .fx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
 .fx-fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }

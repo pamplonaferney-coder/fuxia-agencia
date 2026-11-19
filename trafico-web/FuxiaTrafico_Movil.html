@@ -28,51 +28,51 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #070707; color: #F0EFE8; font-family: system-ui, -apple-system, sans-serif; padding: 20px 16px 60px; line-height: 1.6; }
-  h1 { font-size: 24px; color: #E040FB; margin-bottom: 4px; }
-  .sub { font-size: 13px; color: #888880; margin-bottom: 20px; }
-  h2 { font-size: 16px; color: #E040FB; margin: 24px 0 10px; text-transform: uppercase; letter-spacing: 1px; }
-  .card { background: #101010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
-  details summary { cursor: pointer; list-style: none; font-size: 15px; }
+  body { background: #070707; color: #F8F8F4; font-family: system-ui, -apple-system, sans-serif; padding: 20px 16px 60px; line-height: 1.65; font-size: 15.5px; }
+  h1 { font-size: 26px; color: #EE72FF; margin-bottom: 6px; }
+  .sub { font-size: 14.5px; color: #D2D2DF; margin-bottom: 20px; line-height: 1.55; }
+  h2 { font-size: 17px; color: #EE72FF; margin: 24px 0 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .card { background: #121218; border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 15px 16px; margin-bottom: 12px; }
+  details summary { cursor: pointer; list-style: none; font-size: 16px; }
   details summary::-webkit-details-marker { display: none; }
-  details.day summary:before { content: "+ "; color: #E040FB; font-weight: 700; }
+  details.day summary:before { content: "+ "; color: #EE72FF; font-weight: 700; }
   details.day[open] summary:before { content: "– "; }
-  details.doc summary { font-size: 13px; color: #E040FB; padding: 10px 0; }
+  details.doc summary { font-size: 14.5px; font-weight: 700; color: #EE72FF; padding: 11px 0; }
   details.doc summary:before { content: "📄 "; }
-  pre { font-family: ui-monospace, monospace; font-size: 12.5px; line-height: 1.7; white-space: pre-wrap; word-break: break-word; color: #F0EFE8; padding: 6px 0 10px; }
-  .tag { font-size: 11px; color: #888880; }
+  pre { font-family: ui-monospace, monospace; font-size: 13.5px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; color: #F8F8F4; padding: 6px 0 10px; }
+  .tag { font-size: 12.5px; color: #C8C8D8; }
   .tasks { margin-top: 8px; }
-  label.chk { display: flex; gap: 12px; align-items: flex-start; padding: 10px 2px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14.5px; cursor: pointer; }
+  label.chk { display: flex; gap: 12px; align-items: flex-start; padding: 11px 2px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 15.5px; cursor: pointer; color: #F8F8F4; }
   label.chk input { width: 22px; height: 22px; margin-top: 2px; accent-color: #E040FB; flex-shrink: 0; }
-  label.chk.done span { text-decoration: line-through; color: #555550; }
-  .tip { margin-top: 10px; padding: 10px 12px; background: #181818; border-left: 2px solid #E040FB; border-radius: 4px; font-size: 13px; }
-  .tip b { color: #E040FB; font-size: 11px; margin-right: 6px; }
-  .kpi { font-size: 12px; color: #F5C842; margin-top: 10px; }
-  .small { font-size: 13px; color: #888880; }
+  label.chk.done span { text-decoration: line-through; color: #9696A8; }
+  .tip { margin-top: 10px; padding: 11px 13px; background: #1C1C24; border-left: 3px solid #E040FB; border-radius: 4px; font-size: 14px; color: #F4F4FA; }
+  .tip b { color: #EE72FF; font-size: 12px; margin-right: 6px; }
+  .kpi { font-size: 13.5px; font-weight: 600; color: #F5C842; margin-top: 10px; }
+  .small { font-size: 14px; color: #D0D0DF; }
   .m-nav { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; padding-bottom: 4px; }
-  .m-nav a { flex-shrink: 0; background: #101010; border: 1px solid rgba(255,255,255,0.1); color: #F0EFE8; text-decoration: none; font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 20px; }
-  .m-nav a.hi { border-color: #E040FB; color: #E040FB; }
+  .m-nav a { flex-shrink: 0; background: #121218; border: 1px solid rgba(255,255,255,0.18); color: #F8F8F4; text-decoration: none; font-size: 13px; font-weight: 700; padding: 8px 13px; border-radius: 20px; }
+  .m-nav a.hi { border-color: #E040FB; color: #EE72FF; }
   .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
-  .kpi-box { background: #181818; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px; }
-  .kpi-box .kl { font-size: 10px; color: #888880; text-transform: uppercase; letter-spacing: 0.6px; }
-  .kpi-box .kv { font-size: 18px; font-weight: 800; margin-top: 3px; }
-  .m-in { width: 100%; background: #181818; border: 1px solid rgba(255,255,255,0.12); color: #F0EFE8; border-radius: 8px; padding: 9px 10px; font-size: 13.5px; margin-bottom: 8px; }
+  .kpi-box { background: #1B1B24; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px; }
+  .kpi-box .kl { font-size: 11px; font-weight: 600; color: #C6C6D6; text-transform: uppercase; letter-spacing: 0.6px; }
+  .kpi-box .kv { font-size: 20px; font-weight: 800; margin-top: 3px; }
+  .m-in { width: 100%; background: #1B1B24; border: 1px solid rgba(255,255,255,0.2); color: #F8F8F4; border-radius: 8px; padding: 10px 11px; font-size: 14.5px; margin-bottom: 8px; }
   .m-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .m-btn { width: 100%; background: #E040FB; color: #000; border: none; border-radius: 8px; padding: 11px; font-size: 14px; font-weight: 800; cursor: pointer; }
-  .m-btn-sec { background: transparent; color: #F0EFE8; border: 1px solid rgba(224,64,251,0.5); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .m-btn { width: 100%; background: #E040FB; color: #000; border: none; border-radius: 8px; padding: 12px; font-size: 15px; font-weight: 800; cursor: pointer; }
+  .m-btn-sec { background: transparent; color: #F8F8F4; border: 1.5px solid rgba(224,64,251,0.65); border-radius: 8px; padding: 9px 13px; font-size: 13px; font-weight: 700; cursor: pointer; }
   .m-pills { display: flex; gap: 6px; overflow-x: auto; margin: 10px 0; }
-  .m-pill { flex-shrink: 0; background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #888880; border-radius: 18px; padding: 5px 10px; font-size: 11.5px; cursor: pointer; }
-  .m-pill.on { border-color: #E040FB; color: #E040FB; background: rgba(224,64,251,0.1); }
-  .lead-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .m-pill { flex-shrink: 0; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #D0D0DF; border-radius: 18px; padding: 6px 11px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+  .m-pill.on { border-color: #E040FB; color: #EE72FF; background: rgba(224,64,251,0.14); }
+  .lead-item { padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .lead-item:last-child { border-bottom: none; }
   .lead-ctrl { display: flex; gap: 6px; margin-top: 8px; align-items: center; }
-  .lead-ctrl select { flex: 1; margin-bottom: 0; padding: 7px 8px; font-size: 12.5px; }
-  .lead-del { background: transparent; border: 1px solid rgba(255,255,255,0.16); color: #FF8A65; border-radius: 8px; padding: 7px 10px; cursor: pointer; font-size: 12px; }
-  #prog { position: sticky; top: 0; background: #070707; padding: 12px 0; border-bottom: 1px solid rgba(224,64,251,0.25); margin: -4px 0 12px; font-size: 14px; z-index: 5; }
-  #progbar { height: 6px; background: #1a1a1a; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+  .lead-ctrl select { flex: 1; margin-bottom: 0; padding: 8px 9px; font-size: 13.5px; }
+  .lead-del { background: transparent; border: 1px solid rgba(255,255,255,0.24); color: #FF8A65; border-radius: 8px; padding: 8px 11px; cursor: pointer; font-size: 13px; }
+  #prog { position: sticky; top: 0; background: #070707; padding: 12px 0; border-bottom: 1px solid rgba(224,64,251,0.35); margin: -4px 0 12px; font-size: 15px; z-index: 5; }
+  #progbar { height: 7px; background: #1e1e26; border-radius: 4px; margin-top: 8px; overflow: hidden; }
   #progbar > div { height: 100%; background: #E040FB; width: 0%; }
-  footer { margin-top: 28px; padding: 18px 4px 10px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; color: #888880; line-height: 2; }
-  footer a { color: #E040FB; }
+  footer { margin-top: 28px; padding: 18px 4px 10px; border-top: 1px solid rgba(255,255,255,0.14); font-size: 12.5px; color: #C4C4D4; line-height: 2; }
+  footer a { color: #EE72FF; }
   #cookie-banner { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 10002; background: #131313; border: 2px solid #E040FB; border-radius: 12px; padding: 14px; display: none; font-size: 12px; color: #aaa; line-height: 1.6; box-shadow: 0 10px 40px rgba(224,64,251,0.35); }
   #cookie-banner.show { display: block; }
   #cookie-banner a { color: #E040FB; }
@@ -186,14 +186,16 @@ DIAGNÓSTICO — Gratis (15 min)
 - 4 piezas de contenido + guion de 2 reels.
 - Campaña de Meta Ads configurada (pauta aparte).
 
-2) CRECIMIENTO — $1.500.000 setup + $750.000/mes (recomendado)
+2) CRECIMIENTO — $2.250.000 primer mes (incluye setup único $1.500.000 + gestión mes 1 $750.000) · desde mes 2: $750.000/mes (recomendado)
+- Setup = pago único inicial donde montamos tu sistema base (landing, WhatsApp, pixel/UTMs, perfiles y campaña).
 - Todo lo de Arranque.
 - 8 piezas/mes + stories + guiones.
 - Gestión de Meta Ads (pauta aparte: $300k-$600k/mes).
 - Respuestas y seguimiento por WhatsApp con plantillas.
 - Reporte mensual: leads, conversaciones, CPL y ventas.
 
-3) ESCALA — $2.500.000 setup + $1.200.000/mes
+3) ESCALA — $3.700.000 primer mes (incluye setup completo único $2.500.000 + gestión mes 1 $1.200.000) · desde mes 2: $1.200.000/mes
+- Setup = pago único inicial para montar sistema base + CRM, automatizaciones n8n, IA y dashboard.
 - Todo lo de Crecimiento.
 - 12 piezas/mes + 4 reels.
 - CRM simple + automatización con n8n + IA de respuesta.
@@ -1010,14 +1012,16 @@ DIAGNÓSTICO — Gratis (15 min)
 - 4 piezas de contenido + guion de 2 reels.
 - Campaña de Meta Ads configurada (pauta aparte).
 
-2) CRECIMIENTO — $1.500.000 setup + $750.000/mes (recomendado)
+2) CRECIMIENTO — $2.250.000 primer mes (incluye setup único $1.500.000 + gestión mes 1 $750.000) · desde mes 2: $750.000/mes (recomendado)
+- Setup = pago único inicial donde montamos tu sistema base (landing, WhatsApp, pixel/UTMs, perfiles y campaña).
 - Todo lo de Arranque.
 - 8 piezas/mes + stories + guiones.
 - Gestión de Meta Ads (pauta aparte: $300k-$600k/mes).
 - Respuestas y seguimiento por WhatsApp con plantillas.
 - Reporte mensual: leads, conversaciones, CPL y ventas.
 
-3) ESCALA — $2.500.000 setup + $1.200.000/mes
+3) ESCALA — $3.700.000 primer mes (incluye setup completo único $2.500.000 + gestión mes 1 $1.200.000) · desde mes 2: $1.200.000/mes
+- Setup = pago único inicial para montar sistema base + CRM, automatizaciones n8n, IA y dashboard.
 - Todo lo de Crecimiento.
 - 12 piezas/mes + 4 reels.
 - CRM simple + automatización con n8n + IA de respuesta.
