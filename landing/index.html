@@ -436,12 +436,20 @@
       max-width: 880px; margin: 1.25rem auto 0;
     }
     .combo-strip {
-      max-width: 880px; margin: 1.25rem auto 0;
-      padding: 1.1rem 1.5rem; text-align: center;
-      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.06em;
-      color: #ccccdd;
+      max-width: 880px; margin: 1.4rem auto 0;
+      padding: 1.25rem 1.6rem; text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.94rem; line-height: 1.75; letter-spacing: 0.03em;
+      color: #F5F5FA;
+      background: rgba(16, 12, 28, 0.92);
+      border: 1.5px solid rgba(224, 64, 251, 0.65);
     }
-    .combo-strip b { color: var(--fuxia); }
+    .combo-strip b { color: #F27AFF; font-weight: 800; }
+    .combo-strip a {
+      display: inline-block; margin-left: 0.35rem; padding: 0.3rem 0.85rem;
+      border-radius: 6px; background: var(--fuxia); color: #FFFFFF !important;
+      text-decoration: none; font-weight: 800;
+    }
+    .combo-strip a:hover { background: #dd22ff; }
     .paquete-card {
       width: 100%; max-width: none;
       padding: 2.25rem;
@@ -900,7 +908,10 @@
     body.light .urgencia-txt { color: #16161d; }
     body.light .urgencia-txt b { color: #9c00cc; }
     body.light .desc-card p, body.light .paso-desc, body.light .faq-a p, body.light .pf-quote { color: #4a4a58; }
-    body.light .paquete-entrega, body.light .paquete-features li { color: #4a4a58; }
+    body.light .paquete-entrega, body.light .paquete-features li { color: #2d2d3b; }
+    body.light .combo-strip { background: rgba(255,255,255,0.96); border-color: rgba(156,0,204,0.55); color: #16161d; }
+    body.light .combo-strip b { color: #8c00b8; }
+    body.light .combo-strip a { background: #9c00cc; color: #ffffff !important; }
     body.light .form-field input, body.light .form-field select { background: rgba(255,255,255,0.85); }
     body.light .form-field select option { background: #ffffff; }
     body.light .portfolio-section { background: #f5f2ea; }
@@ -1266,7 +1277,7 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
                 </div>
 
               </div>
-              <div class="combo-strip glass">Llévalos juntos: <b>Combo Presencia (Links Pro + Maps) — $550.000</b> · <b>100% abonable</b> si en 30 días pasas a Arranque o Crecimiento · <a href="https://wa.me/573235315015?text=Hola%20FUXIA%2C%20me%20interesa%20el%20Combo%20Presencia%20abonable%20%28web-combo%29" target="_blank" rel="noopener noreferrer" style="color:var(--fuxia);font-weight:700;">Lo quiero →</a></div>
+              <div class="combo-strip glass">Llévalos juntos: <b>Combo Presencia (Links Pro + Maps) — $550.000</b> · <b>100% abonable</b> si en 30 días pasas a Arranque o Crecimiento <a href="https://wa.me/573235315015?text=Hola%20FUXIA%2C%20me%20interesa%20el%20Combo%20Presencia%20abonable%20%28web-combo%29" target="_blank" rel="noopener noreferrer">Lo quiero →</a></div>
             </div>
           </section>
 
