@@ -14,22 +14,25 @@ export function initWolf(canvas) {
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
+  renderer.toneMappingExposure = 1.35;
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 60);
   camera.position.set(0, 0.9, 9.2);
   camera.lookAt(0, 0.35, 0);
 
-  scene.add(new THREE.AmbientLight(0x9a9ab0, 1.0));
-  const key = new THREE.DirectionalLight(0xffffff, 3.2);
-  key.position.set(2.5, 4, 4);
+  scene.add(new THREE.AmbientLight(0xdcdcf0, 1.55));
+  const key = new THREE.DirectionalLight(0xffffff, 3.6);
+  key.position.set(2.5, 4, 4.5);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xcc00ff, 2.2);
+  const fill = new THREE.DirectionalLight(0xf2e6ff, 1.5);
+  fill.position.set(-2.5, 1.8, 5);
+  scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xcc00ff, 2.6);
   rim.position.set(-3.5, 2, -3);
   scene.add(rim);
-  const glow = new THREE.PointLight(0xcc00ff, 20, 14);
-  glow.position.set(0, 1.2, 2.6);
+  const glow = new THREE.PointLight(0xcc00ff, 24, 16);
+  glow.position.set(0, 1.2, 2.8);
   scene.add(glow);
 
   function size() {
@@ -103,14 +106,13 @@ export function initWolf(canvas) {
       model.scale.setScalar(0.6);
       model.position.set(0, -2.0, 0);
       model.rotation.y = -0.25;
-      // Marca FUXIA: oscurecer conservando texturas + metalizar
+      // Marca FUXIA: mantener visibilidad nítida sin oscurecer el metal sin envMap
       model.traverse((o) => {
         if (o.isMesh && o.material) {
           const mats = Array.isArray(o.material) ? o.material : [o.material];
           mats.forEach((m) => {
-            if (m.color) m.color.multiplyScalar(0.9);
-            if ("metalness" in m) m.metalness = Math.max(m.metalness || 0, 0.55);
-            if ("roughness" in m) m.roughness = Math.min(m.roughness == null ? 0.5 : m.roughness, 0.55);
+            if ("metalness" in m) m.metalness = Math.min(Math.max(m.metalness || 0, 0.25), 0.42);
+            if ("roughness" in m) m.roughness = Math.min(m.roughness == null ? 0.5 : m.roughness, 0.52);
           });
         }
       });
@@ -140,7 +142,11 @@ export function initWolf(canvas) {
     const dt = Math.min(clock.getDelta(), 0.05);
     const t = clock.elapsedTime;
     if (mixer) mixer.update(dt);
-    if (reduce) { renderer.render(scene, camera); return; }
+    if (reduce) {
+      renderer.render(scene, camera);
+      if (!shown) { shown = true; canvas.style.opacity = "1"; }
+      return;
+    }
 
     // Si no hay mouse (móvil quieto), el robot mira al vacío con vida propia (lento)
     if (performance.now() - lastPointer > 3000) {
