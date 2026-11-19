@@ -26,7 +26,7 @@ Reglas: +20% máx cada 48h · sin leads en 5d/$20k = pausar · frecuencia >3 = r
 ## Contenido y oferta
 
 - Pilares: educación, prueba social, oferta, detrás de cámara y objeciones (diciembre: urgencia de temporada; enero: sistema estable).
-- Oferta (sin IVA por defecto, +19% con factura): diagnóstico gratis + Arranque ($1.5M), Crecimiento ($1.5M + $750k/mes), Escala ($2.5M + $1.2M/mes) + puente Links Pro ($250k) / Maps ($300k) / Combo ($550k).
+- Oferta (sin IVA por defecto, +19% con factura · opción 50/50): diagnóstico gratis + Arranque ($1.5M), Crecimiento (Mes 1 $1.5M solo setup · desde mes 2 $750k/mes), Escala (Mes 1 $2.5M solo setup · desde mes 2 $1.2M/mes) + puente Links Pro ($250k) / Maps ($300k) / Combo ($550k, 100% abonable en 30 días).
 - Pauta aparte: $300k–$600k/mes pagada directo a Meta.
 
 ## Base diaria

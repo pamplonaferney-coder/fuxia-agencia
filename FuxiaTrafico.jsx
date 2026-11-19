@@ -77,15 +77,15 @@ DIAGNÓSTICO — Gratis (15 min)
 - 4 piezas de contenido + guion de 2 reels.
 - Campaña de Meta Ads configurada (pauta aparte).
 
-2) CRECIMIENTO — $2.250.000 primer mes (incluye setup único $1.500.000 + gestión mes 1 $750.000) · desde mes 2: $750.000/mes (recomendado)
-- Setup = pago único inicial donde montamos tu sistema base (landing, WhatsApp, pixel/UTMs, perfiles y campaña).
+2) CRECIMIENTO — Mes 1: $1.500.000 (solo setup, lanzamiento incluido · opción 50/50) · desde mes 2: $750.000/mes (recomendado)
+- Setup = pago único inicial donde montamos tu sistema base (landing, WhatsApp, medición de anuncios, perfiles y campaña).
 - Todo lo de Arranque.
 - 8 piezas/mes + stories + guiones.
 - Gestión de Meta Ads (pauta aparte: $300k-$600k/mes).
 - Respuestas y seguimiento por WhatsApp con plantillas.
 - Reporte mensual: leads, conversaciones, CPL y ventas.
 
-3) ESCALA — $3.700.000 primer mes (incluye setup completo único $2.500.000 + gestión mes 1 $1.200.000) · desde mes 2: $1.200.000/mes
+3) ESCALA — Mes 1: $2.500.000 (solo setup completo, lanzamiento incluido · opción 50/50) · desde mes 2: $1.200.000/mes
 - Setup = pago único inicial para montar sistema base + CRM, automatizaciones n8n, IA y dashboard.
 - Todo lo de Crecimiento.
 - 12 piezas/mes + 4 reels.
@@ -93,8 +93,8 @@ DIAGNÓSTICO — Gratis (15 min)
 - Dashboard de métricas y reunión quincenal.
 - Onboarding del equipo de ventas.
 
-PRODUCTOS DE ENTRADA (puente para tiendas pequeñas)
-- Links Pro: $250.000 · Google Maps: $300.000 · Combo: $550.000.
+PRODUCTOS DE ENTRADA (puente sin fricción)
+- Links Pro: $250.000 · Google Maps: $300.000 · Combo Presencia: $550.000 (100% abonable si en 30 días pasa a Arranque o Crecimiento).
 - Piloto fundador (1-2 cupos por DM/llamada): descuento por caso documentado + testimonio.
 
 PAUTA
@@ -573,9 +573,11 @@ const CANALES = ["DM IG", "Reel / Orgánico", "Meta Ads Retargeting", "Meta Ads 
 const PLANES_VAL = [
   { label: "Diagnóstico ($0)", val: 0 },
   { label: "Arranque ($1.5M)", val: 1500000 },
-  { label: "Crecimiento ($1.5M + $750k/m)", val: 2250000 },
-  { label: "Escala ($2.5M + $1.2M/m)", val: 3700000 },
-  { label: "Combo Entrada ($550k)", val: 550000 },
+  { label: "Crecimiento (Mes 1 $1.5M · luego $750k/m)", val: 1500000 },
+  { label: "Escala (Mes 1 $2.5M · luego $1.2M/m)", val: 2500000 },
+  { label: "Combo Abonable ($550k)", val: 550000 },
+  { label: "Google Maps ($300k)", val: 300000 },
+  { label: "Links Pro ($250k)", val: 250000 },
   { label: "Piloto ($750k)", val: 750000 }
 ];
 const ETAPA_COLOR = {
