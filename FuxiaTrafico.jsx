@@ -891,18 +891,27 @@ export default function FuxiaTrafico() {
               })}
 
               <div style={{ marginTop: 16, padding: "14px 15px", background: S2, border: "1px solid rgba(224,64,251,0.3)", borderRadius: 10 }}>
-                <div className="fx-label" style={{ color: F, marginBottom: 10 }}>📢 Qué publicar hoy — red por red</div>
+                <div className="fx-label" style={{ color: F, marginBottom: 10 }}>📢 Qué publicar hoy — red por red (toca para ver texto / pregunta exacta)</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {pubsHoy.map((pub) => {
                     const pieza = pub.refId ? FUXIA_MULTIRRED.find((m) => m.id === pub.refId) : null;
+                    const textoExacto = pub.copy || (pieza ? pieza.copy : "");
                     return (
-                      <div key={pub.red + "-" + day.i} style={{ display: "flex", alignItems: "flex-start", gap: 10, flexWrap: "wrap", padding: "8px 10px", background: S1, borderRadius: 8, border: "1px solid " + B2 }}>
-                        <span className="fx-badge" style={{ color: RED_COLOR[pub.red] || T1, borderColor: RED_COLOR[pub.red] || B2, minWidth: 84, textAlign: "center" }}>{pub.red}</span>
-                        <div style={{ flex: 1, minWidth: 180, fontSize: 13.5, lineHeight: 1.55, color: T1 }}>{pub.accion}</div>
-                        {pieza ? (
-                          <button type="button" className="fx-copybtn" onClick={() => copy("pub-" + day.i + "-" + pub.red, pieza.copy)}>
-                            {copied === "pub-" + day.i + "-" + pub.red ? "✓ copy copiado" : "copiar copy"}
-                          </button>
+                      <div key={pub.red + "-" + day.i} style={{ padding: "9px 11px", background: S1, borderRadius: 8, border: "1px solid " + B2 }}>
+                        <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flexWrap: "wrap" }}>
+                          <span className="fx-badge" style={{ color: RED_COLOR[pub.red] || T1, borderColor: RED_COLOR[pub.red] || B2, minWidth: 84, textAlign: "center" }}>{pub.red}</span>
+                          <div style={{ flex: 1, minWidth: 180, fontSize: 13.5, lineHeight: 1.55, color: T1 }}>{pub.accion}</div>
+                          {textoExacto ? (
+                            <button type="button" className="fx-copybtn" onClick={() => copy("pub-" + day.i + "-" + pub.red, textoExacto)}>
+                              {copied === "pub-" + day.i + "-" + pub.red ? "✓ copy copiado" : "copiar copy"}
+                            </button>
+                          ) : null}
+                        </div>
+                        {textoExacto ? (
+                          <details className="fx-doc" style={{ marginTop: 8, background: S2 }}>
+                            <summary>Ver texto / preguntas / stickers exactos para {pub.red}</summary>
+                            <pre style={{ fontSize: 12.5 }}>{textoExacto}</pre>
+                          </details>
                         ) : null}
                       </div>
                     );
@@ -1138,16 +1147,24 @@ export default function FuxiaTrafico() {
               })}
 
               <div style={{ marginTop: 16, padding: "14px 15px", background: S2, border: "1px solid rgba(56,189,248,0.35)", borderRadius: 10 }}>
-                <div className="fx-label" style={{ color: "#38BDF8", marginBottom: 10 }}>📢 Qué publicar hoy — red por red (@ferneypamplona)</div>
+                <div className="fx-label" style={{ color: "#38BDF8", marginBottom: 10 }}>📢 Qué publicar hoy — red por red (@ferneypamplona · toca para ver texto exacto)</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {fpPubsHoy.map((pub) => (
-                    <div key={pub.red + "-" + fpDay.id} style={{ display: "flex", alignItems: "flex-start", gap: 10, flexWrap: "wrap", padding: "9px 11px", background: S1, borderRadius: 8, border: "1px solid " + B2, opacity: pub.activa ? 1 : 0.62 }}>
-                      <span className="fx-badge" style={{ color: pub.activa ? (RED_COLOR[pub.red] || T1) : T3, borderColor: pub.activa ? (RED_COLOR[pub.red] || B2) : B2, minWidth: 84, textAlign: "center" }}>{pub.red}</span>
-                      <div style={{ flex: 1, minWidth: 180, fontSize: 13.5, lineHeight: 1.55, color: pub.activa ? T1 : T3 }}>{pub.accion}</div>
+                    <div key={pub.red + "-" + fpDay.id} style={{ padding: "9px 11px", background: S1, borderRadius: 8, border: "1px solid " + B2, opacity: pub.activa ? 1 : 0.62 }}>
+                      <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flexWrap: "wrap" }}>
+                        <span className="fx-badge" style={{ color: pub.activa ? (RED_COLOR[pub.red] || T1) : T3, borderColor: pub.activa ? (RED_COLOR[pub.red] || B2) : B2, minWidth: 84, textAlign: "center" }}>{pub.red}</span>
+                        <div style={{ flex: 1, minWidth: 180, fontSize: 13.5, lineHeight: 1.55, color: pub.activa ? T1 : T3 }}>{pub.accion}</div>
+                        {pub.activa && pub.copy ? (
+                          <button type="button" className="fx-copybtn" onClick={() => copy("fppub-" + fpDay.id + "-" + pub.red, pub.copy)}>
+                            {copied === "fppub-" + fpDay.id + "-" + pub.red ? "✓ copy copiado" : "copiar copy"}
+                          </button>
+                        ) : null}
+                      </div>
                       {pub.activa && pub.copy ? (
-                        <button type="button" className="fx-copybtn" onClick={() => copy("fppub-" + fpDay.id + "-" + pub.red, pub.copy)}>
-                          {copied === "fppub-" + fpDay.id + "-" + pub.red ? "✓ copy copiado" : "copiar copy"}
-                        </button>
+                        <details className="fx-doc" style={{ marginTop: 8, background: S2 }}>
+                          <summary>Ver texto / preguntas / guion exacto para {pub.red}</summary>
+                          <pre style={{ fontSize: 12.5 }}>{pub.copy}</pre>
+                        </details>
                       ) : null}
                     </div>
                   ))}
