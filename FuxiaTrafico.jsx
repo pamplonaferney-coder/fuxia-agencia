@@ -5,7 +5,11 @@ import {
   FUXIA_MULTIRRED,
   FERNEY_BIOS,
   FERNEY_PILARES,
-  FERNEY_CALENDARIO
+  FERNEY_CALENDARIO,
+  DM_SALIENTES,
+  DM_ENTRANTES,
+  getPublicacionesDia,
+  getDmGuiaDia
 } from "./FuxiaRedesData.jsx";
 
 // ═══════════════════════════════════════════════════════════════════
@@ -352,24 +356,27 @@ propuesta: { t: "Propuesta de 1 página (plantilla)", txt:
 
 Firma: Ferney Pamplona · FUXIA · WhatsApp +57 323 531 5015` },
 
-dm: { t: "Guion de prospección por DM", txt:
-`DM 1 (sin vender):
-"Hola [nombre], vi que venden [producto] por Instagram. Estoy haciendo un estudio de tiendas de tecnología en Medellín. ¿Puedo hacerte una pregunta rápida?"
+dm: { t: "Guion de prospección por DM (Salientes vs. Entrantes)", txt:
+`📤 DMs QUE TÚ ENVÍAS (PROSPECCIÓN SALIENTE — 5 NUEVOS/DÍA)
+1) Primer DM (sin vender):
+"Hola [Nombre], vi tu perfil de [Negocio] en Medellín y me gustó lo que ofrecen. Vi un detalle rápido en cómo reciben mensajes desde Instagram que suele hacer perder ventas por WhatsApp. ¿Te molesta si te hago 1 pregunta corta?"
 
-DM 2 (diagnóstico):
-"¿Cuántos mensajes te llegan al día por WhatsApp y quién los responde?"
+2) Cuando te respondan:
+"Genial. ¿Más o menos cuántos mensajes les llegan al día por WhatsApp/IG y quién los responde hoy? Te pregunto porque el 80% de los negocios locales pierde 3–4 ventas por semana por responder tarde o no hacer seguimiento al que pidió precio."
 
-DM 3 (dolor):
-"El 80% de las tiendas que veo pierde ventas por responder tarde o no hacer seguimiento. ¿Te está pasando?"
+3) Invitar al diagnóstico gratis (15 min):
+"En FUXIA abrimos 5 diagnósticos gratis de 15 min esta semana para negocios en Medellín: revisamos tu Instagram, WhatsApp y anuncios, y te llevás 3 mejoras concretas (sin compromiso). ¿Te sirve mañana AM o PM?"
 
-DM 4 (oferta):
-"Estoy abriendo 5 diagnósticos gratis de 15 min para tiendas de tecnología. Te muestro 3 mejoras concretas, sin compromiso. ¿Te sirve esta semana?"
+📥 DMs / WHATSAPP QUE TE LLEGAN (ENTRANTES — RESPONDER <1 HORA)
+Nunca responder "hola ¿en qué te ayudo?". Usar siempre el filtro de 3 preguntas:
+1) ¿Qué vendes o qué servicio ofreces?
+2) ¿Cuántos mensajes te llegan al día por WhatsApp/IG?
+3) ¿Tu prioridad hoy es: más chats, ordenar WhatsApp o el Combo Presencia ($550k abonable)?
 
-Reglas:
-- No mandar audio sin permiso.
-- No enviar precio en el primer mensaje.
-- Personalizar con el nombre y un detalle real del negocio.
-- Máximo 5 DMs nuevos por día + seguimiento.` },
+REGLAS:
+- No mandar audio sin permiso (excepto si comentaron AUDITORÍA).
+- Personalizar siempre con el nombre real del negocio.
+- Máximo 5 DMs nuevos salientes al día + seguimiento a 48h.` },
 
 reporte: { t: "Reporte mensual (plantilla)", txt:
 `REPORTE FUXIA — [CLIENTE] — [MES]
@@ -467,20 +474,20 @@ const PLAN = [
 { i: 5, fase: "Setup", titulo: "Lead magnet + contenido base", tareas: ["Crear PDF '5 puntos que frenan tus ventas por WhatsApp'", "Diseñar calendario de contenido de 30 días", "Escribir 3 guiones de reels", "Preparar banco de 5 piezas"], kpi: "Magnet + calendario listos", tip: "1 problema, 1 promesa, 2 páginas.", docs: ["contenido30", "banco5"] },
 { i: 6, fase: "Setup", titulo: "Grabar creativos + campaña en borrador", tareas: ["Grabar reels A, B y C con guiones", "Subtítulos quemados + música sin copyright", "Business Manager + método de pago activo", "Dejar campaña de retargeting en borrador"], kpi: "Creativos listos + C1 en borrador", tip: "Nada se publica hoy.", docs: ["reel1", "creativoA", "creativoB", "creativoC", "checklist16"] },
 
-{ i: 7, fase: "F1 · Base", titulo: "Día 1 — Reel de lanzamiento", tareas: ["Publicar reel día 1 (12:00-14:00) + historias", "Enviar 5 DMs con el guion de prospección", "Responder TODO en menos de 1 hora"], kpi: "Reel vivo + 5 DMs", tip: "Tu WhatsApp es el mostrador.", docs: ["reel1", "dm"] },
-{ i: 8, fase: "F1 · Base", titulo: "Día 2 — Carrusel de señales", tareas: ["Publicar carrusel B + caption día 2", "5 DMs nuevos", "Historias anunciando el carrusel"], kpi: "Carrusel vivo", docs: ["creativoB"] },
-{ i: 9, fase: "F1 · Base", titulo: "Día 3 — Detrás de cámara", tareas: ["Stories de proceso + encuesta", "5 DMs nuevos", "Comentar 5 cuentas de tiendas aliadas"], kpi: "Alcance orgánico" },
-{ i: 10, fase: "F1 · Base", titulo: "Día 4 — Reel educativo", tareas: ["Publicar reel '3 tareas que podés automatizar'", "5 DMs", "Registrar leads en el tablero"], kpi: "Pipeline al día" },
-{ i: 11, fase: "F1 · Base", titulo: "Día 5 — Encuesta + seguimiento", tareas: ["Historia encuesta: ¿cuántos mensajes te llegan al día?", "5 DMs", "Follow-up a los leads del día 1"], kpi: "Follow-ups hechos" },
-{ i: 12, fase: "F1 · Base", titulo: "Día 6 — Banco de contenido", tareas: ["Grabar 2 reels crudos", "4 DMs", "Editar 1 para mañana"], kpi: "Banco +2" },
-{ i: 13, fase: "F1 · Base", titulo: "Día 7 — Revisión S1", tareas: ["Contar leads / conversaciones / llamadas", "Anotar qué pieza generó conversaciones", "Planear la semana 2"], kpi: "Informe S1" },
-{ i: 14, fase: "F1 · Base", titulo: "Día 8 — Reel de objeciones", tareas: ["Publicar reel 'es caro vs cuánto te cuesta no vender'", "5 DMs", "Historias con caja de preguntas"], kpi: "Reel vivo" },
-{ i: 15, fase: "F1 · Base", titulo: "Día 9 — Caso real", tareas: ["Publicar carrusel de caso (KATOBO / DB Digital)", "5 DMs", "Calificar leads con las 3 preguntas"], kpi: "Leads calificados", docs: ["creativoA"] },
-{ i: 16, fase: "F1 · Base", titulo: "Día 10 — Historias + DMs", tareas: ["Historias cotidianas + link a WhatsApp", "5 DMs", "Agendar llamadas que salgan"], kpi: "Calls en agenda" },
-{ i: 17, fase: "F1 · Base", titulo: "Día 11 — Reel + follow-ups", tareas: ["Publicar reel del banco", "5 DMs", "Follow-up a los leads de días 2-4"], kpi: "Segunda vuelta lista" },
-{ i: 18, fase: "F1 · Base", titulo: "Día 12 — Historias Q&A", tareas: ["Historias + caja de preguntas", "5 DMs", "Responder todo en menos de 1 hora"], kpi: "Engagement" },
-{ i: 19, fase: "F1 · Base", titulo: "Día 13 — Banco + magnet", tareas: ["Grabar 2 reels crudos", "4 DMs", "Revisar descargas del lead magnet"], kpi: "Banco +2" },
-{ i: 20, fase: "F1 · Base", titulo: "Día 14 — Revisión 2 semanas", tareas: ["Totales 14 días vs meta F1 (20/10/2)", "Ajustar hooks flojos", "Descanso"], kpi: "Informe 14d" },
+{ i: 7, fase: "F1 · Base", titulo: "Día 1 — Reel lanzamiento (WhatsApp Diciembre)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia1_Lunes_Reel_WhatsApp_Diciembre.mp4) + Threads (opinión)", "📢 IG/FB Stories: reshare + 1 story tuya a cámara real (15s) + link WA", "📤 ENVIAR tú: 5 DMs nuevos en frío a negocios locales de Medellín (Guion #1)", "📥 RESPONDER <1h los DMs/comentarios que te lleguen (Guion A)"], kpi: "4 redes activas + 5 DMs enviados", tip: "Tu WhatsApp es el mostrador. Revisa abajo qué subir en cada red y el texto exacto del DM.", docs: ["reel1", "dm"] },
+{ i: 8, fase: "F1 · Base", titulo: "Día 2 — Carrusel 3 Señales (futuro Anuncio 1B)", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia2_Martes_Carrusel_3_Senales) + Threads (mini-hilo 3 señales)", "📢 IG/FB Stories anunciando el carrusel + responder comentarios en TikTok del Día 1", "📤 ENVIAR tú: 5 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h todo mensaje entrante y registrar en Tablero"], kpi: "Carrusel vivo + 5 DMs enviados", docs: ["creativoB"] },
+{ i: 9, fase: "F1 · Base", titulo: "Día 3 — Stories Encuesta + Interacción", tareas: ["📢 PUBLICAR 3 Stories IG/FB (Dia3_Miercoles_Stories con encuesta <15 min vs >1h) + Threads pregunta abierta", "📤 ENVIAR tú: DM personalizado a TODOS los que voten 'Más de 1 hora' (Guion #4 — lead más caliente)", "📤 ENVIAR tú: completar 5 DMs nuevos en frío + comentar en 5 cuentas locales de Medellín", "📥 RESPONDER <1h todos los DMs/WA entrantes"], kpi: "Encuesta + DMs a votantes" },
+{ i: 10, fase: "F1 · Base", titulo: "Día 4 — Reel Auditoría 3 Fugas (CTA Audio 60s)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia4_Jueves_Reel_Auditoria_3_Fugas.mp4) + Threads tip 3 preguntas", "📤 ENVIAR tú: 5 DMs nuevos en frío + DM con oferta de audio 60s a quien comente AUDITORÍA", "📥 RESPONDER <1h mensajes entrantes y actualizar Tablero de leads"], kpi: "Comentarios AUDITORÍA + Tablero al día" },
+{ i: 11, fase: "F1 · Base", titulo: "Día 5 — Carrusel Oferta 4 Pasos + Combo $550k", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia5_Viernes_Carrusel_Sistema_Oferta) + Threads oferta transparente", "📤 ENVIAR tú: seguimiento 48h a los DMs/leads de lunes y martes que dejaron en visto (Guion #5)", "📤 ENVIAR tú: 5 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h preguntas de precio con Guion C (Combo $550k + $1.5M)"], kpi: "Follow-ups hechos + oferta publicada" },
+{ i: 12, fase: "F1 · Base", titulo: "Día 6 — Reel Objeción 'Es caro' + Stories Q&A", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia6_Sabado_Reel_ROI_Es_Caro.mp4) + 2 Stories Q&A + Threads cálculo ROI", "📤 ENVIAR tú: 4 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h caja de preguntas, DMs y WhatsApp entrantes"], kpi: "Reel ROI + Q&A activos" },
+{ i: 13, fase: "F1 · Base", titulo: "Día 7 — Revisión Semana 1 (sin prospección fría)", tareas: ["📊 Abrir Tablero y contar totales S1 vs meta (20 leads / 10 conv. / 2 llamadas)", "📢 Anotar qué pieza en IG/TikTok/Threads/FB generó más DMs o guardados (ganadores para Meta Ads)", "📥 RESPONDER <1h solo mensajes entrantes y exportar respaldo CSV"], kpi: "Informe S1 + CSV guardado" },
+{ i: 14, fase: "F1 · Base", titulo: "Día 8 — Reel Responder Rápido (5 respuestas + 3 etiquetas)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia8_Lunes_Reel_Responder_Rapido.mp4) + Threads táctica + 2 grupos FB Medellín", "📤 ENVIAR tú: 5 DMs nuevos en frío a negocios locales (Guion #1)", "📥 RESPONDER <1h todos los mensajes/comentarios entrantes"], kpi: "4 redes S2 activas + 5 DMs enviados" },
+{ i: 15, fase: "F1 · Base", titulo: "Día 9 — Carrusel Antes y Después", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia9_Martes_Carrusel_Antes_Despues) + Threads contraste 1 vs 9 ventas", "📤 ENVIAR tú: 5 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h y calificar chats entrantes con filtro de 3 preguntas (Guion A)"], kpi: "Carrusel vivo + leads calificados", docs: ["creativoA"] },
+{ i: 16, fase: "F1 · Base", titulo: "Día 10 — Stories Encuesta Dolor + Agendamiento", tareas: ["📢 PUBLICAR 3 Stories IG/FB (Dia10_Miercoles_Stories: 'Pocos chats' vs 'Chats que no cierran') + Threads", "📤 ENVIAR tú: DM personalizado a TODOS los votantes según su voto (Guion #4) + 5 DMs nuevos", "📥 RESPONDER <1h y agendar llamadas de diagnóstico de 15 min"], kpi: "Calls en agenda" },
+{ i: 17, fase: "F1 · Base", titulo: "Día 11 — Reel 3 Tareas para Automatizar", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia11_Jueves_Reel_3_Tareas_Automatizar.mp4) + Threads qué sí/no automatizar", "📤 ENVIAR tú: seguimiento a TODOS los leads de Semana 1 que no respondieron (Guion #5) + 5 DMs nuevos", "📥 RESPONDER <1h mensajes entrantes y registrar en Tablero"], kpi: "Segunda vuelta follow-ups lista" },
+{ i: 18, fase: "F1 · Base", titulo: "Día 12 — Carrusel Google Maps + Combo $550k (Reserva #3)", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia12_Viernes_Carrusel_GoogleMaps_Combo) + Threads + TikTok clip Maps", "📤 ENVIAR tú: 5 DMs a negocios locales con ficha incompleta en Google Maps (Guion #1)", "📥 RESPONDER <1h los mensajes de 'COMBO' con Guion D (cierre rápido $550k abonable)"], kpi: "Oferta Combo $550k en 4 redes" },
+{ i: 19, fase: "F1 · Base", titulo: "Día 13 — Reel Caso Real (Anuncio 1A: KATOBO + DB Digital)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia13_Sabado_Reel_Caso_Real_Sistema.mp4) + 2 Stories Q&A + Threads", "📤 ENVIAR tú: 4 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h comentarios SISTEMA y Q&A entrantes"], kpi: "Prueba social viva (Anuncio 1A)" },
+{ i: 20, fase: "F1 · Base", titulo: "Día 14 — Revisión 14 días + Pre-pauta Día 16", tareas: ["📊 Revisar totales 14 días en Tablero vs meta F1 (20/10/2) y exportar CSV", "🎯 Verificar público 'IG @fuxia_oficial | Interacción 30d' (ideal 500+; si <500 agrupar IG 90d + VV 50% + FB + web)", "💬 Configurar mensaje precargado 3 opciones en los anuncios de WhatsApp + cargar 1A, 1B y reserva #3 (Día 12)"], kpi: "Pre-pauta verificada" },
 { i: 21, fase: "F1 · Base", titulo: "Día 15 — Pre-lanzamiento C1", tareas: ["Pasar checklist de lanzamiento completo", "Verificar públicos nativos Meta (IG + video 50%) ≥100 personas", "Subir 2 creativos ganadores en C1 borrador (3º en reserva)", "Anunciar en historias: 'mañana arranca pauta'"], kpi: "C1 lista para publicar", tip: "Priorizá públicos de IG/video: el Pixel web solo dispara si aceptan cookies.", docs: ["checklist16", "plantillas"] },
 
 { i: 22, fase: "F2 · Tracción", titulo: "Día 16 — PUBLICAR C1 + reel proceso", tareas: ["Pasar Árbol NO vende Capa 1 (pixel + WA + UTMs)", "Publicar Campaña 1 de retargeting nativo Meta", "Publicar reel proceso C + caption día 16", "Responder <1h todo (ángulo temporada diciembre)"], kpi: "C1 activa", tip: "Desde hoy: NO TOCAR 6 días.", docs: ["arbol", "camp1", "creativoC"] },
@@ -831,7 +838,7 @@ export default function FuxiaTrafico() {
               ["personal", "Marca Personal"],
               ["tab", "Tablero (" + totalLeads + ")"],
               ["camp", "Campañas"],
-              ["wa", "WhatsApp"],
+              ["wa", "Mensajes & DMs"],
               ["kpi", "KPIs"]
             ].map(([id, l]) => (
               <button key={id} className={"fx-tab" + (tab === id ? " on" : "")} onClick={() => setTab(id)}>{l}</button>
@@ -841,7 +848,12 @@ export default function FuxiaTrafico() {
       </div>
 
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "24px 20px 70px" }}>
-        {tab === "cal" && (
+        {tab === "cal" && (() => {
+          const pubsHoy = getPublicacionesDia(day.i, day.titulo);
+          const dmHoy = getDmGuiaDia(day.i);
+          const dmSalRec = DM_SALIENTES.find((x) => x.id === dmHoy.salienteId) || DM_SALIENTES[0];
+          const dmEntRec = DM_ENTRANTES.find((x) => x.id === dmHoy.entranteId) || DM_ENTRANTES[0];
+          return (
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <div className="scrollx" style={{ display: "flex", gap: 6 }}>
               {fases.map((f) => (
@@ -858,7 +870,7 @@ export default function FuxiaTrafico() {
               <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 4, flexWrap: "wrap" }}>
                 <span className="fx-label">{fecha(day.i)} · {day.fase}</span>
                 <span className="fx-pill" style={{ marginLeft: "auto", color: gastoDia(day.i) ? GASTO : OK, background: "rgba(255,255,255,0.04)", flexShrink: 0 }}>
-                  {gastoDia(day.i) ? money(gastoDia(day.i)) + " pauta" : (day.i < 7 ? "setup" : "orgánico")}
+                  {gastoDia(day.i) ? money(gastoDia(day.i)) + " pauta" : (day.i < 7 ? "preparación" : "orgánico")}
                 </span>
               </div>
               <div className="fx-h2" style={{ margin: "8px 0 10px" }}>{day.i < 7 ? "Setup D" + (day.i - 7) + " — " + day.titulo : day.titulo}</div>
@@ -872,6 +884,83 @@ export default function FuxiaTrafico() {
                   </div>
                 );
               })}
+
+              <div style={{ marginTop: 16, padding: "14px 15px", background: S2, border: "1px solid rgba(224,64,251,0.3)", borderRadius: 10 }}>
+                <div className="fx-label" style={{ color: F, marginBottom: 10 }}>📢 Qué publicar hoy — red por red</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {pubsHoy.map((pub) => {
+                    const pieza = pub.refId ? FUXIA_MULTIRRED.find((m) => m.id === pub.refId) : null;
+                    return (
+                      <div key={pub.red + "-" + day.i} style={{ display: "flex", alignItems: "flex-start", gap: 10, flexWrap: "wrap", padding: "8px 10px", background: S1, borderRadius: 8, border: "1px solid " + B2 }}>
+                        <span className="fx-badge" style={{ color: RED_COLOR[pub.red] || T1, borderColor: RED_COLOR[pub.red] || B2, minWidth: 84, textAlign: "center" }}>{pub.red}</span>
+                        <div style={{ flex: 1, minWidth: 180, fontSize: 13.5, lineHeight: 1.55, color: T1 }}>{pub.accion}</div>
+                        {pieza ? (
+                          <button type="button" className="fx-copybtn" onClick={() => copy("pub-" + day.i + "-" + pub.red, pieza.copy)}>
+                            {copied === "pub-" + day.i + "-" + pub.red ? "✓ copy copiado" : "copiar copy"}
+                          </button>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10 }}>
+                <div style={{ padding: "13px 14px", background: S2, border: "1px solid rgba(245,200,66,0.38)", borderRadius: 10 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                    <span className="fx-label" style={{ color: WARN }}>📤 DMs QUE TÚ ENVÍAS</span>
+                    <button type="button" className="fx-copybtn" onClick={() => copy("dm-out-" + day.i, dmSalRec.txt)}>
+                      {copied === "dm-out-" + day.i ? "✓ copiado" : "copiar guion"}
+                    </button>
+                  </div>
+                  <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{dmHoy.enviar}</div>
+                  <div style={{ fontSize: 11.5, color: WARN, fontWeight: 700, marginBottom: 4 }}>Mensaje exacto sugerido ({dmSalRec.etiqueta}):</div>
+                  <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{dmSalRec.txt}</pre>
+                  <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
+                    <summary>Ver los 5 guiones de DMs salientes</summary>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
+                      {DM_SALIENTES.map((g) => (
+                        <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                            <span style={{ fontSize: 12, fontWeight: 700, color: WARN }}>{g.etiqueta}</span>
+                            <button type="button" className="fx-copybtn" onClick={() => copy("all-out-" + g.id, g.txt)}>{copied === "all-out-" + g.id ? "✓" : "copiar"}</button>
+                          </div>
+                          <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
+                          <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                </div>
+
+                <div style={{ padding: "13px 14px", background: S2, border: "1px solid rgba(138,232,160,0.38)", borderRadius: 10 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                    <span className="fx-label" style={{ color: OK }}>📥 DMs / WA QUE TE LLEGAN</span>
+                    <button type="button" className="fx-copybtn" onClick={() => copy("dm-in-" + day.i, dmEntRec.txt)}>
+                      {copied === "dm-in-" + day.i ? "✓ copiado" : "copiar respuesta"}
+                    </button>
+                  </div>
+                  <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{dmHoy.recibir}</div>
+                  <div style={{ fontSize: 11.5, color: OK, fontWeight: 700, marginBottom: 4 }}>Respuesta exacta sugerida ({dmEntRec.etiqueta}):</div>
+                  <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{dmEntRec.txt}</pre>
+                  <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
+                    <summary>Ver las 4 respuestas entrantes (&lt;1h)</summary>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
+                      {DM_ENTRANTES.map((g) => (
+                        <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                            <span style={{ fontSize: 12, fontWeight: 700, color: OK }}>{g.etiqueta}</span>
+                            <button type="button" className="fx-copybtn" onClick={() => copy("all-in-" + g.id, g.txt)}>{copied === "all-in-" + g.id ? "✓" : "copiar"}</button>
+                          </div>
+                          <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
+                          <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                </div>
+              </div>
+
               {day.tip ? <div style={{ marginTop: 12, padding: "10px 14px", background: S2, borderLeft: "2px solid " + F, borderRadius: 4, fontSize: 13, color: T1 }}><span className="fx-label" style={{ color: F, marginRight: 8 }}>TIP</span>{day.tip}</div> : null}
               {(day.docs || []).map((dk) => (
                 <details key={dk} className="fx-doc">
@@ -882,7 +971,8 @@ export default function FuxiaTrafico() {
               <div className="fx-mono" style={{ fontSize: 11, color: WARN, marginTop: 12 }}>▸ KPI del día: {day.kpi}</div>
             </div>
           </div>
-        )}
+          );
+        })()}
 
         {tab === "redes" && (
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -1142,13 +1232,37 @@ export default function FuxiaTrafico() {
         )}
 
         {tab === "wa" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <div className="fx-label">Plantillas WhatsApp — tocar copiar</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <div className="fx-label" style={{ color: WARN }}>📤 1. DMs QUE TÚ ENVÍAS (Prospección saliente — tocar copiar)</div>
+            {DM_SALIENTES.map((g) => (
+              <div key={g.id} className="fx-card" style={{ borderColor: "rgba(245,200,66,0.32)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <span className="fx-h2" style={{ fontSize: 15.5 }}>{g.etiqueta}</span>
+                  <button type="button" className="fx-copybtn" onClick={() => copy("tab-" + g.id, g.txt)}>{copied === "tab-" + g.id ? "✓ copiado" : "copiar"}</button>
+                </div>
+                <div className="fx-mono" style={{ fontSize: 11.5, color: T3, marginBottom: 8 }}>{g.cuando}</div>
+                <div className="fx-body" style={{ whiteSpace: "pre-wrap" }}>{g.txt}</div>
+              </div>
+            ))}
+
+            <div className="fx-label" style={{ color: OK, marginTop: 8 }}>📥 2. DMs / WHATSAPP QUE TE LLEGAN (Entrantes · responder &lt;1h)</div>
+            {DM_ENTRANTES.map((g) => (
+              <div key={g.id} className="fx-card" style={{ borderColor: "rgba(138,232,160,0.32)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <span className="fx-h2" style={{ fontSize: 15.5 }}>{g.etiqueta}</span>
+                  <button type="button" className="fx-copybtn" onClick={() => copy("tab-" + g.id, g.txt)}>{copied === "tab-" + g.id ? "✓ copiado" : "copiar"}</button>
+                </div>
+                <div className="fx-mono" style={{ fontSize: 11.5, color: T3, marginBottom: 8 }}>{g.cuando}</div>
+                <div className="fx-body" style={{ whiteSpace: "pre-wrap" }}>{g.txt}</div>
+              </div>
+            ))}
+
+            <div className="fx-label" style={{ color: F, marginTop: 8 }}>💬 3. Plantillas WhatsApp (Agendamiento y seguimiento)</div>
             {WA_T.map((w) => (
               <div key={w.t} className="fx-card">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                   <span className="fx-h2">{w.t}</span>
-                  <button className="fx-copybtn" onClick={() => copy(w.t, w.txt)}>{copied === w.t ? "✓ copiado" : "copiar"}</button>
+                  <button type="button" className="fx-copybtn" onClick={() => copy(w.t, w.txt)}>{copied === w.t ? "✓ copiado" : "copiar"}</button>
                 </div>
                 <div className="fx-body" style={{ whiteSpace: "pre-wrap" }}>{w.txt}</div>
               </div>

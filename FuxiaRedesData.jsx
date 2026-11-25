@@ -458,6 +458,283 @@ Agenda tu diagnóstico gratis de 15 min por WhatsApp: +57 323 531 5015 · https:
 ];
 
 // ═══════════════════════════════════════════════════════════════════
+// GUIONES CLAROS DE DMs: 📤 LO QUE TÚ ENVÍAS vs. 📥 LO QUE TE LLEGA
+// ═══════════════════════════════════════════════════════════════════
+
+export const DM_SALIENTES = [
+  {
+    id: "out-frio",
+    etiqueta: "1. Primer DM en frío (tú inicias)",
+    cuando: "Envía 5 diarios por IG a negocios de Medellín (productos, celulares, servicios o alimentos) que respondan lento o sin link a WhatsApp.",
+    txt: `Hola [Nombre], vi tu perfil de [Negocio] en Medellín y me gustó lo que ofrecen. Vi un detalle rápido en cómo reciben mensajes desde Instagram que suele hacer perder ventas por WhatsApp. ¿Te molesta si te hago 1 pregunta corta?`
+  },
+  {
+    id: "out-p2",
+    etiqueta: "2. Cuando te respondan 'sí, dime'",
+    cuando: "Envíalo apenas contesten tu primer mensaje (sin mandar precio ni PDF todavía).",
+    txt: `Genial. ¿Más o menos cuántos mensajes les llegan al día por WhatsApp/IG y quién los responde hoy? Te pregunto porque el 80% de los negocios locales pierde 3–4 ventas por semana por responder tarde o no hacer seguimiento al que pidió precio.`
+  },
+  {
+    id: "out-diag",
+    etiqueta: "3. Invitar al diagnóstico gratis (15 min)",
+    cuando: "Cuando confirmen que sí pierden chats o quieren más clientes.",
+    txt: `Totalmente, pasa muchísimo. En FUXIA abrimos 5 diagnósticos gratis de 15 min esta semana para negocios en Medellín: revisamos tu Instagram, WhatsApp y anuncios, y te llevás 3 mejoras concretas (sin presión ni compromiso). ¿Te sirve mañana AM o PM?`
+  },
+  {
+    id: "out-encuesta",
+    etiqueta: "4. A quien votó en tu encuesta de Stories",
+    cuando: "Día 3 (votó 'Más de 1 hora') o Día 10 (votó 'Pocos chats' / 'Chats que no cierran'). Es tu lead MÁS caliente.",
+    txt: `Hola [Nombre], gracias por votar en mi historia 🙌 Vi que marcaste "[opción que votó]". Justo eso es lo que más frena ventas hoy. Si querés, te mando gratis un audio de 60 segundos revisando tu perfil y tu WhatsApp con 2 ajustes rápidos. ¿Te lo paso por acá?`
+  },
+  {
+    id: "out-followup",
+    etiqueta: "5. Seguimiento 48h (si te dejó en visto)",
+    cuando: "Envíalo 2 días después a los DMs que abriste o leads que pidieron info y no volvieron a responder.",
+    txt: `Hola [Nombre], te escribo cortico para saber si pudiste ver mi mensaje anterior sobre el diagnóstico gratis de 15 min para [Negocio]. Si esta semana estás full, cero lío, me avisás y lo vemos después.`
+  }
+];
+
+export const DM_ENTRANTES = [
+  {
+    id: "in-filtro",
+    etiqueta: "A. Alguien te escribe 'SISTEMA' o llega por anuncio",
+    cuando: "Responder en MENOS DE 1 HORA. Nunca responder 'hola ¿en qué te ayudo?'.",
+    txt: `¡Hola! Qué gusto saludarte, soy Ferney de FUXIA 👋 Para no hacerte perder tiempo y darte una respuesta real, cuéntame 3 cosas rápidas:
+1) ¿Qué vendes o qué servicio ofreces en tu negocio?
+2) ¿Más o menos cuántos mensajes te llegan al día por WhatsApp/IG?
+3) ¿Hoy tu prioridad es: traer más chats, ordenar/cerrar WhatsApp, o empezar con el Combo Presencia ($550k abonable)?`
+  },
+  {
+    id: "in-auditoria",
+    etiqueta: "B. Alguien comenta 'AUDITORÍA' en un Reel/TikTok",
+    cuando: "Le respondes el comentario ('¡Listo, te escribí al DM!') y le mandas este mensaje privado.",
+    txt: `¡Hola [Nombre]! Vi tu comentario de AUDITORÍA 🙌 Pásame por acá el @ de tu negocio (o tu link de WhatsApp) y hoy mismo te grabo un audio gratis de 60 segundos con las 3 fugas más rápidas que puedes arreglar esta semana.`
+  },
+  {
+    id: "in-precio",
+    etiqueta: "C. Te preguntan '¿cuánto vale?' de una vez",
+    cuando: "Nunca tires el precio seco; da el rango claro + puente sin riesgo + pregunta de cierre.",
+    txt: `Te cuento súper claro y sin contratos largos:
+• Para empezar sin riesgo: Combo Presencia $550.000 (Links Pro + Google Maps optimizado), 100% abonable si en 30 días pasas al plan completo.
+• Sistema completo (Arranque / Crecimiento): montaje inicial $1.500.000 (opción 50% inicio / 50% entrega).
+
+Si quieres, en 15 min gratis revisamos tu negocio y te digo con honestidad cuál te conviene más (o qué puedes arreglar tú solo hoy). ¿Te sirve mañana AM o PM?`
+  },
+  {
+    id: "in-combo",
+    etiqueta: "D. Alguien te escribe 'COMBO' ($550k abonable)",
+    cuando: "Lead listo para cierre rápido por WhatsApp.",
+    txt: `¡Excelente elección! El Combo Presencia ($550.000 COP) incluye tu página Links Pro conectada directo a WhatsApp + optimización completa de tu ficha de Google Maps en Medellín — y es 100% abonable si en 30 días pasas a Arranque o Crecimiento.
+
+¿Tu negocio ya tiene ficha en Google Maps o la creamos desde cero? Con eso te digo en cuántos días te lo entregamos.`
+  }
+];
+
+// Mapa exacto día por día (d = 1..14) de QUÉ publicar en CADA RED + referencia a FUXIA_MULTIRRED
+export const CAL_DIA_REDES = {
+  1: [
+    { red: "Instagram", accion: "Reel Dia1_Lunes_Reel_WhatsApp_Diciembre.mp4 (12:00–14:00) + Story tuya a cámara 15s + link WA", refId: "fx-ig-1" },
+    { red: "TikTok", accion: "Mismo video MP4 limpio + texto 'SI RESPONDÉS EN 2 HORAS YA PERDISTE ❌' + CTA comentar SISTEMA", refId: "fx-tt-1" },
+    { red: "Threads", accion: "Publicar opinión: 'El 80% no tiene problema de tráfico, sino de responder en 3 horas'", refId: "fx-th-1" },
+    { red: "Facebook", accion: "Subir mismo Reel en Página FUXIA con botón Enviar mensaje de WhatsApp (+57 323 531 5015)", refId: "fx-fb-1" }
+  ],
+  2: [
+    { red: "Instagram", accion: "Carrusel 6 slides Dia2_Martes_Carrusel_3_Senales (12:00–14:00) + Stories anunciándolo", refId: "fx-ig-1" },
+    { red: "Facebook", accion: "Subir las 6 imágenes como álbum nativo con link directo wa.me/573235315015", refId: "fx-fb-2" },
+    { red: "Threads", accion: "Publicar mini-hilo: '3 señales de que estás botando plata en pauta'", refId: "fx-th-2" },
+    { red: "TikTok", accion: "Responder comentarios del Día 1 (si hay preguntas, responder en video de 15s)", refId: "fx-tt-1" }
+  ],
+  3: [
+    { red: "Instagram", accion: "3 Stories Dia3_Miercoles_Stories (11:00 / 15:00 / 19:00): proceso + ENCUESTA (<15 min vs >1h) + link WA", refId: "fx-ig-1" },
+    { red: "Threads", accion: "Publicar encuesta abierta: '¿Qué te cuesta más: pocos chats o chats que dejan en visto?'", refId: "fx-th-3" },
+    { red: "Facebook", accion: "Compartir las 3 Stories en Facebook Stories con enlace a WhatsApp", refId: "fx-fb-1" },
+    { red: "TikTok", accion: "Opcional: clip crudo de 20s grabando pantalla de cómo ordenas un WhatsApp", refId: "fx-tt-1" }
+  ],
+  4: [
+    { red: "Instagram", accion: "Reel Dia4_Jueves_Reel_Auditoria_3_Fugas.mp4 (12:00–14:00) · CTA: comentar AUDITORÍA (audio 60s gratis)", refId: "fx-ig-1" },
+    { red: "TikTok", accion: "Mismo video MP4 limpio + texto 'NO PAGUÉS ANUNCIOS SIN ARREGLAR ESTAS 3 FUGAS 🛑'", refId: "fx-tt-2" },
+    { red: "Threads", accion: "Publicar tip: 'Deja de responder hola ¿en qué te ayudo? — usa 3 preguntas filtro'", refId: "fx-th-4" },
+    { red: "Facebook", accion: "Subir mismo Reel en Página FUXIA con CTA comentar AUDITORÍA o escribir a WA", refId: "fx-fb-1" }
+  ],
+  5: [
+    { red: "Instagram", accion: "Carrusel oferta Dia5_Viernes_Carrusel_Sistema_Oferta (4 pasos + Combo $550k abonable)", refId: "fx-ig-1" },
+    { red: "Facebook", accion: "Subir las 6 láminas como álbum nativo enfocado en proceso sin contratos + Combo $550k", refId: "fx-fb-3" },
+    { red: "Threads", accion: "Publicar posicionamiento: 'Por qué no vendemos paquetes de 12 posts por cumplir'", refId: "fx-th-5" },
+    { red: "TikTok", accion: "Responder comentarios de AUDITORÍA del Día 4 y llevar al DM/WhatsApp", refId: "fx-tt-2" }
+  ],
+  6: [
+    { red: "Instagram", accion: "Reel Dia6_Sabado_Reel_ROI_Es_Caro.mp4 (11:00–13:00) + 2 Stories Q&A (Dia6_Sabado_Stories_QA)", refId: "fx-ig-1" },
+    { red: "TikTok", accion: "Mismo video MP4 limpio + texto '¿$2.400.000 PERDIDOS EN TU PROPIO WHATSAPP? 💸'", refId: "fx-tt-3" },
+    { red: "Facebook", accion: "Subir mismo Reel + compartir Stories Q&A en Página FUXIA", refId: "fx-fb-3" },
+    { red: "Threads", accion: "Compartir el cálculo rápido: ticket $200k × 3 ventas perdidas/sem = $2.4M/mes", refId: "fx-th-5" }
+  ],
+  7: [
+    { red: "Instagram", accion: "Descanso de feed · Solo revisar métricas S1 y responder DMs pendientes en <1h", refId: "fx-ig-1" },
+    { red: "TikTok", accion: "Revisar cuál de los 3 videos tuvo mayor retención y comentarios", refId: "fx-tt-3" },
+    { red: "Threads", accion: "Opcional: compartir 1 aprendizaje honesto de la semana", refId: "fx-th-1" },
+    { red: "Facebook", accion: "Exportar respaldo CSV del Tablero y anotar los 2 creativos ganadores S1", refId: "fx-fb-1" }
+  ],
+  8: [
+    { red: "Instagram", accion: "Reel Dia8_Lunes_Reel_Responder_Rapido.mp4 (12:00–14:00: 5 respuestas rápidas + 3 etiquetas)", refId: "fx-ig-2" },
+    { red: "TikTok", accion: "Mismo video MP4 limpio + texto '2 TRUCOS EN WHATSAPP BUSINESS QUE TE AHORRAN HORAS ⚡'", refId: "fx-tt-4" },
+    { red: "Threads", accion: "Publicar táctica: 'No necesitas un CRM de $500 USD — usa 5 respuestas rápidas + 3 etiquetas'", refId: "fx-th-6" },
+    { red: "Facebook", accion: "Subir mismo Reel en Página FUXIA + compartir versión texto de valor en 2 grupos de Medellín", refId: "fx-fb-4" }
+  ],
+  9: [
+    { red: "Instagram", accion: "Carrusel Dia9_Martes_Carrusel_Antes_Despues (6 slides · sin sistema vs. con FUXIA)", refId: "fx-ig-2" },
+    { red: "Facebook", accion: "Subir las 6 láminas como álbum nativo con CTA a diagnóstico gratis WA", refId: "fx-fb-4" },
+    { red: "Threads", accion: "Publicar contraste: 'Mismo producto y presupuesto: Negocio A 1 venta vs Negocio B 9 ventas'", refId: "fx-th-7" },
+    { red: "TikTok", accion: "Responder dudas del video del Día 8 sobre etiquetas de WhatsApp Business", refId: "fx-tt-4" }
+  ],
+  10: [
+    { red: "Instagram", accion: "3 Stories Dia10_Miercoles_Stories (11:00/15:00/19:00): proceso + ENCUESTA ('Pocos chats' vs 'Chats que no cierran') + link WA", refId: "fx-ig-2" },
+    { red: "Facebook", accion: "Compartir las 3 Stories en Facebook Stories con enlace directo a WhatsApp", refId: "fx-fb-4" },
+    { red: "Threads", accion: "Pregunta directa sobre automatización y seguimiento de clientes en WhatsApp", refId: "fx-th-7" },
+    { red: "TikTok", accion: "Opcional: video rápido 20s mostrando el Tablero de leads en pantalla real", refId: "fx-tt-4" }
+  ],
+  11: [
+    { red: "Instagram", accion: "Reel Dia11_Jueves_Reel_3_Tareas_Automatizar.mp4 (aclarando sin software caro ni código)", refId: "fx-ig-2" },
+    { red: "TikTok", accion: "Mismo video MP4 limpio + texto '3 COSAS QUE TU WHATSAPP DEBERÍA HACER SOLO 🤖'", refId: "fx-tt-5" },
+    { red: "Threads", accion: "Publicar criterio: 'Qué SÍ automatizar y qué NO en WhatsApp'", refId: "fx-th-8" },
+    { red: "Facebook", accion: "Subir mismo Reel en Página FUXIA con botón Enviar mensaje de WhatsApp", refId: "fx-fb-4" }
+  ],
+  12: [
+    { red: "Instagram", accion: "Carrusel Dia12_Viernes_Carrusel_GoogleMaps_Combo ($550k abonable · Creativo reserva #3 Meta Ads)", refId: "fx-ig-2" },
+    { red: "Facebook", accion: "Subir las 6 láminas como álbum nativo con enlace directo Combo Presencia WA", refId: "fx-fb-5" },
+    { red: "Threads", accion: "Publicar gancho local: 'El cliente más caliente no está en Reels, está en Google Maps'", refId: "fx-th-9" },
+    { red: "TikTok", accion: "Clip corto 20s mostrando cómo buscar un negocio en Google Maps y detectar si pierde clientes", refId: "fx-tt-5" }
+  ],
+  13: [
+    { red: "Instagram", accion: "Reel Dia13_Sabado_Reel_Caso_Real_Sistema.mp4 (Anuncio 1A: KATOBO + DB Digital) + 2 Stories Q&A", refId: "fx-ig-2" },
+    { red: "TikTok", accion: "Mismo video MP4 limpio + texto 'DOS NEGOCIOS REALES EN MEDELLÍN CON SISTEMA 📈'", refId: "fx-tt-6" },
+    { red: "Facebook", accion: "Subir mismo Reel en Página FUXIA con botón WhatsApp y garantía 20 días", refId: "fx-fb-6" },
+    { red: "Threads", accion: "Publicar prueba social: 'Resultados reales > promesas mágicas (KATOBO + DB Digital)'", refId: "fx-th-10" }
+  ],
+  14: [
+    { red: "Instagram", accion: "Revisión 14 días (meta 20/10/2) + verificar público IG 30d (meta 500+ o agrupar IG 90d + VV 50% + FB + web)", refId: "fx-ig-2" },
+    { red: "Facebook", accion: "Confirmar borrador Campaña 1 Retargeting + mensaje precargado 3 opciones en Meta Ads", refId: "fx-fb-6" },
+    { red: "TikTok", accion: "Anotar los 2 hooks más fuertes de S1–S2 para repetir en S3", refId: "fx-tt-6" },
+    { red: "Threads", accion: "Descanso / responder comentarios pendientes", refId: "fx-th-10" }
+  ]
+};
+
+export function getPublicacionesDia(idx, titulo) {
+  const d = idx - 6; // Setup = -6..0, Día 1 = 1..60
+  if (d <= 0) {
+    return [
+      { red: "Instagram", accion: "Fase de preparación: todavía NO se publica en feed (dejar bio, highlights y creativos listos)." },
+      { red: "TikTok", accion: "Crear/optimizar perfil @fuxia_oficial con bio de 'Redes FUXIA'." },
+      { red: "Threads", accion: "Vincular cuenta desde Instagram @fuxia_oficial y copiar bio optimizada." },
+      { red: "Facebook", accion: "Verificar Página FUXIA vinculada al WhatsApp oficial +57 323 531 5015 y Meta Ads." }
+    ];
+  }
+  if (CAL_DIA_REDES[d]) return CAL_DIA_REDES[d];
+  // Días 15..60: asignación clara por día de semana (d=1 es lunes -> (d-1)%7: 0=Lun..6=Dom)
+  const dow = (d - 1) % 7;
+  const tema = titulo.replace(/^Día\s+\d+\s*[—-]\s*/i, "");
+  if (dow === 0) return [
+    { red: "Instagram", accion: `Reel semanal (${tema}) + Stories con enlace a WhatsApp` },
+    { red: "TikTok", accion: `Mismo Reel exportado limpio + texto grande en pantalla + CTA comentario SISTEMA` },
+    { red: "Facebook", accion: `Subir mismo Reel en Página FUXIA con botón Enviar mensaje de WhatsApp` },
+    { red: "Threads", accion: `Post corto de opinión directa (4–5 líneas) sobre ${tema}` }
+  ];
+  if (dow === 1) return [
+    { red: "Instagram", accion: `Carrusel educativo/caso (${tema}) + Stories anunciándolo` },
+    { red: "Facebook", accion: `Mismo carrusel en formato álbum nativo + link directo wa.me/573235315015` },
+    { red: "Threads", accion: `Mini-hilo de 3 puntos sacado del carrusel de hoy` },
+    { red: "TikTok", accion: `Responder comentarios del lunes (si hay buena pregunta, responder en video 15s)` }
+  ];
+  if (dow === 2) return [
+    { red: "Instagram", accion: `3 Stories (detrás de cámara + encuesta de dolor + link diagnóstico WA)` },
+    { red: "Facebook", accion: `Replicar Stories + 1 aporte de valor en grupo local de comerciantes Medellín` },
+    { red: "Threads", accion: `Pregunta abierta sobre ventas por WhatsApp / pauta para generar debate` },
+    { red: "TikTok", accion: `Clip rápido crudo (20–30s) mostrando pantalla real / proceso (${tema})` }
+  ];
+  if (dow === 3) return [
+    { red: "Instagram", accion: `Reel de autoridad / prueba (${tema}) · CTA comentar AUDITORÍA o DM` },
+    { red: "TikTok", accion: `Mismo Reel limpio con hook en los primeros 1.5s + CTA por comentario` },
+    { red: "Facebook", accion: `Subir mismo Reel en Página FUXIA con CTA directo a WhatsApp` },
+    { red: "Threads", accion: `Tip accionable en 1 minuto relacionado con ${tema}` }
+  ];
+  if (dow === 4) return [
+    { red: "Instagram", accion: `Carrusel / Post de oferta (Combo Presencia $550k abonable o Sistema 4 pasos)` },
+    { red: "Facebook", accion: `Mismo post de oferta con botón directo Enviar mensaje de WhatsApp` },
+    { red: "Threads", accion: `Post de oferta transparente (sin contratos de 12 meses + garantía 20 días)` },
+    { red: "TikTok", accion: `Responder comentarios del jueves y llevar prospectos a WhatsApp/DM` }
+  ];
+  if (dow === 5) return [
+    { red: "Instagram", accion: `Reel de objeción o caso real (${tema}) + Stories caja de preguntas Q&A` },
+    { red: "TikTok", accion: `Mismo Reel limpio enfocado en resultados reales y retorno en caja` },
+    { red: "Facebook", accion: `Subir mismo Reel + compartir Q&A en Facebook Stories` },
+    { red: "Threads", accion: `Caso real corto o cifra concreta de pérdida por no hacer seguimiento` }
+  ];
+  return [
+    { red: "Instagram", accion: `Revisión semanal (${tema}) + responder mensajes pendientes en <1h` },
+    { red: "Facebook", accion: `Revisar métricas de Meta Ads y actualizar Tablero de leads + respaldo CSV` },
+    { red: "TikTok", accion: `Anotar qué hook tuvo más retención/comentarios para la semana siguiente` },
+    { red: "Threads", accion: `Opcional: reflexión corta de domingo o descanso` }
+  ];
+}
+
+export function getDmGuiaDia(idx) {
+  const d = idx - 6;
+  if (d <= 0) {
+    return {
+      enviar: "Fase de preparación: arma tu lista de 20 negocios locales en Medellín (productos, celulares, servicios, alimentos) que reciban mensajes por IG/WA. Todavía no envías DMs masivos hasta el Día 1.",
+      recibir: "Deja configurada la respuesta de bienvenida en WhatsApp Business (+57 323 531 5015) y prueba tu link wa.me.",
+      salienteId: "out-frio",
+      entranteId: "in-filtro"
+    };
+  }
+  if (d === 3 || d === 10) {
+    return {
+      enviar: "📤 TÚ ENVÍAS HOY: 1) Escribe DM personalizado a TODOS los que votaron en tu encuesta de Stories (lead más caliente) + 2) Envía 5 DMs nuevos en frío a negocios locales de Medellín.",
+      recibir: "📥 SI TE LLEGAN: Responde en <1h usando el filtro de 3 preguntas o enviando audio gratis de 60s.",
+      salienteId: "out-encuesta",
+      entranteId: "in-filtro"
+    };
+  }
+  if (d === 5 || d === 11 || d === 20 || d === 25 || d === 33 || d === 38 || d === 44 || d === 51 || d === 56) {
+    return {
+      enviar: "📤 TÚ ENVÍAS HOY: 1) Envía seguimiento (48–72h) a todos los prospectos/DMs de días anteriores que te dejaron en visto + 2) Envía 5 DMs nuevos en frío.",
+      recibir: "📥 SI TE LLEGAN: Si preguntan precio de una vez, usa el guion C (Combo $550k abonable + sistema $1.5M + cita 15 min).",
+      salienteId: "out-followup",
+      entranteId: "in-precio"
+    };
+  }
+  if (d === 4) {
+    return {
+      enviar: "📤 TÚ ENVÍAS HOY: Envía 5 DMs nuevos en frío a negocios locales de Medellín + revisa quién comentó AUDITORÍA para mandarle el DM del audio de 60s.",
+      recibir: "📥 SI TE LLEGAN: Si comentan AUDITORÍA o te escriben por DM/WA, pide su @ y manda el audio de 60s en <1h.",
+      salienteId: "out-frio",
+      entranteId: "in-auditoria"
+    };
+  }
+  if (d === 12) {
+    return {
+      enviar: "📤 TÚ ENVÍAS HOY: Envía 5 DMs nuevos a negocios locales en Medellín con ficha incompleta en Google Maps ofreciendo revisión rápida.",
+      recibir: "📥 SI TE LLEGAN: Si escriben COMBO ($550k abonable), usa el guion D para cerrar rápido por WhatsApp.",
+      salienteId: "out-frio",
+      entranteId: "in-combo"
+    };
+  }
+  if (d % 7 === 0) {
+    return {
+      enviar: "📤 TÚ ENVÍAS HOY: Domingo de revisión (sin prospección fría nueva). Solo deja lista tu lista de 25 negocios para los DMs de lunes a viernes.",
+      recibir: "📥 SI TE LLEGAN: Responde cualquier mensaje entrante de IG/TikTok/Facebook/WhatsApp en <1h.",
+      salienteId: "out-followup",
+      entranteId: "in-filtro"
+    };
+  }
+  return {
+    enviar: "📤 TÚ ENVÍAS HOY: Envía tú mismo 5 DMs nuevos en frío por Instagram a negocios locales de Medellín (productos, servicios o alimentos) usando el Guion #1 abajo (sin vender en el primer mensaje).",
+    recibir: "📥 SI TE LLEGAN: Todo comentario (SISTEMA/AUDITORÍA/COMBO), DM o WhatsApp entrante se responde en <1h con el filtro de 3 preguntas (Guion A).",
+    salienteId: "out-frio",
+    entranteId: "in-filtro"
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // MARCA PERSONAL — FERNEY PAMPLONA (@ferneypamplona)
 // Redes: Instagram · Facebook · Threads · LinkedIn
 // ═══════════════════════════════════════════════════════════════════
