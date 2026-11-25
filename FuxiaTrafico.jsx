@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
+import {
+  FUXIA_BIOS,
+  FUXIA_SISTEMA_1A4,
+  FUXIA_MULTIRRED,
+  FERNEY_BIOS,
+  FERNEY_PILARES,
+  FERNEY_CALENDARIO
+} from "./FuxiaRedesData.jsx";
 
 // ═══════════════════════════════════════════════════════════════════
-// FUXIA MARKETING × FERNEY — SISTEMA 60 DÍAS + SETUP
+// FUXIA MARKETING × FERNEY — SISTEMA UNIFICADO (MÓVIL + PC)
 // Setup: lun 23 – dom 29 nov 2026 · Día 1: lun 30 nov · Día 60: jue 28 ene 2027
-// Nicho: tiendas de tecnología y accesorios en Medellín
-// Pauta: retargeting d16-30 + frío d31-45 ($10k/d) + sostener F4
-// Base $450k · Techo $500k
+// Mercado: negocios locales en Medellín que venden por WhatsApp
+// Redes FUXIA: IG · TikTok · Threads · Facebook
+// Marca Personal @ferneypamplona: IG · Facebook · Threads · LinkedIn
 // ═══════════════════════════════════════════════════════════════════
 
 const F = "#E040FB";
@@ -36,11 +44,11 @@ function gastoDia(idx) {
 
 // ─── DOCUMENTOS COMPLETOS (guiones, campañas, plantillas, reglas) ───
 const DOCS = {
-nicho: { t: "Nicho y cliente ideal (ICP)", txt:
-`NICHO INICIAL — TIENDAS DE TECNOLOGÍA EN MEDELLÍN
+nicho: { t: "Mercado y cliente ideal (ICP)", txt:
+`MERCADO OBJETIVO — NEGOCIOS LOCALES EN MEDELLÍN QUE VENDEN POR WHATSAPP
 
 Quién es el cliente:
-- Tienda de celulares, accesorios, computadores o electrodomésticos.
+- Negocios de productos, tiendas de celulares y accesorios, servicios locales (salud, estética, técnico, remodelación) y alimentos/repostería.
 - 1 a 3 sedes en Medellín o área metropolitana.
 - Dueño o administrador que atiende WhatsApp e Instagram.
 - Entre 5 y 50 mensajes diarios.
@@ -53,8 +61,8 @@ Dolores que le quitamos:
 - Pauta sin medición: no sabe qué anuncio trae ventas.
 
 Señales de buen prospecto:
-- Vende por WhatsApp o Instagram.
-- Tiene catálogo o página web desactualizada.
+- Vende o agenda por WhatsApp o Instagram.
+- Tiene catálogo, Google Maps o página web desactualizada.
 - Publica contenido, pero no tiene estrategia.
 - Ya invirtió en pauta, aunque sea poco.
 
@@ -62,7 +70,7 @@ Promesa FUXIA:
 "Te montamos un sistema de captación y seguimiento por WhatsApp en 30 días. No solo posts: clientes."
 
 Frase de ascensor:
-"Soy Ferney, de FUXIA. Ayudo a tiendas de tecnología en Medellín a vender más por WhatsApp con contenido, anuncios y seguimiento."` },
+"Soy Ferney, de FUXIA. Ayudo a negocios locales en Medellín a vender más por WhatsApp con contenido, anuncios medidos y seguimiento."` },
 
 precios: { t: "Packs, precios y add-ons", txt:
 `PACKS FUXIA MARKETING (COP, sin IVA · +19% si requiere factura con IVA)
@@ -562,14 +570,43 @@ const CSS = `
 .fx-fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
 .fx-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding: 12px 0; border-bottom: 0.5px solid ${B2}; }
 .fx-row:last-child { border-bottom: none; }
-.scrollx { overflow-x: auto; scrollbar-width: none; }
+.scrollx { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .scrollx::-webkit-scrollbar { display: none; }
+.fx-sticky-prog { position: sticky; top: 0; z-index: 20; background: rgba(7,7,7,0.94); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(224,64,251,0.28); padding: 8px 20px; }
+.fx-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 14px; border: 1px solid ${B2}; color: ${T1}; background: rgba(255,255,255,0.05); }
+@media (max-width: 640px) {
+  .fx-h1 { font-size: 22px; }
+  .fx-card { padding: 14px 14px; }
+  .fx-tab { font-size: 12px; padding: 10px 11px; letter-spacing: 0.06em; }
+  .fx-day { min-width: 38px; height: 38px; }
+}
 `;
 
 const PIPE_KEY = "fuxia_marketing_pipeline_v1";
+const FP_CHECKS_KEY = "ferney_personal_checks_v1";
 const ETAPAS = ["Lead", "Conversación", "Llamada", "Propuesta", "Cierre", "Perdido"];
 const ETAPA_IDX = { "Lead": 1, "Conversación": 2, "Llamada": 3, "Propuesta": 4, "Cierre": 5, "Perdido": 0 };
-const CANALES = ["DM IG", "Reel / Orgánico", "Meta Ads Retargeting", "Meta Ads Frío", "Landing / Web", "WhatsApp Directo", "Referido"];
+const CANALES = [
+  "DM IG",
+  "TikTok",
+  "Threads",
+  "Facebook",
+  "LinkedIn",
+  "Marca Personal @ferneypamplona",
+  "Reel / Orgánico",
+  "Meta Ads Retargeting",
+  "Meta Ads Frío",
+  "Landing / Web",
+  "WhatsApp Directo",
+  "Referido"
+];
+const RED_COLOR = {
+  "Instagram": "#E040FB",
+  "TikTok": "#69C9D0",
+  "Threads": "#F8F8F4",
+  "Facebook": "#60A5FA",
+  "LinkedIn": "#38BDF8"
+};
 const PLANES_VAL = [
   { label: "Diagnóstico ($0)", val: 0 },
   { label: "Arranque ($1.5M)", val: 1500000 },
@@ -593,13 +630,31 @@ function money(n) { return "$" + (Number(n) || 0).toLocaleString("es-CO"); }
 function todayIso() { return new Date().toISOString().slice(0, 10); }
 function csvCell(v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }
 
-export { PLAN, DOCS, WA_T };
+export { PLAN, DOCS, WA_T, FUXIA_MULTIRRED, FERNEY_CALENDARIO };
+
+function initialTabFromHash() {
+  try {
+    const h = (window.location.hash || "").toLowerCase();
+    if (h.includes("tablero")) return "tab";
+    if (h.includes("redes")) return "redes";
+    if (h.includes("personal") || h.includes("ferney")) return "personal";
+    if (h.includes("camp") || h.includes("guion")) return "camp";
+    if (h.includes("whatsapp") || h.includes("wa")) return "wa";
+    if (h.includes("kpi") || h.includes("meta")) return "kpi";
+  } catch (e) {}
+  return "cal";
+}
 
 export default function FuxiaTrafico() {
-  const [tab, setTab] = useState("cal");
+  const [tab, setTab] = useState(initialTabFromHash);
   const [idx, setIdx] = useState(0);
   const [fase, setFase] = useState("Setup");
   const [checks, setChecks] = useState({});
+  const [fpChecks, setFpChecks] = useState({});
+  const [redFuxia, setRedFuxia] = useState("Todas");
+  const [semFuxia, setSemFuxia] = useState("Todas");
+  const [fpSem, setFpSem] = useState("S1");
+  const [fpRed, setFpRed] = useState("Todas");
   const [copied, setCopied] = useState("");
   const [pipe, setPipe] = useState({ pautaReal: 0, leads: [] });
   const [filtro, setFiltro] = useState("Todos");
@@ -623,6 +678,10 @@ export default function FuxiaTrafico() {
     try {
       const s = JSON.parse(localStorage.getItem("fuxia_marketing_checks_v1") || "{}");
       setChecks(s);
+    } catch (e) {}
+    try {
+      const fp = JSON.parse(localStorage.getItem(FP_CHECKS_KEY) || "{}");
+      setFpChecks(fp);
     } catch (e) {}
     try {
       const p = JSON.parse(localStorage.getItem(PIPE_KEY) || "null");
@@ -685,6 +744,13 @@ export default function FuxiaTrafico() {
       return n;
     });
   }
+  function toggleFp(k) {
+    setFpChecks((prev) => {
+      const n = Object.assign({}, prev, { [k]: !prev[k] });
+      try { localStorage.setItem(FP_CHECKS_KEY, JSON.stringify(n)); } catch (e) {}
+      return n;
+    });
+  }
   function copy(t, txt) {
     try { navigator.clipboard.writeText(txt); } catch (e) {}
     setCopied(t);
@@ -692,6 +758,22 @@ export default function FuxiaTrafico() {
   }
 
   const day = PLAN[idx];
+  const totalTasksFuxia = PLAN.reduce((a, p) => a + p.tareas.length, 0);
+  const doneTasksFuxia = PLAN.reduce((a, p) => a + p.tareas.filter((_, ti) => !!checks[p.i + "-" + ti]).length, 0);
+  const pctFuxia = totalTasksFuxia ? Math.round((doneTasksFuxia / totalTasksFuxia) * 100) : 0;
+
+  const totalTasksFp = FERNEY_CALENDARIO.reduce((a, d) => a + d.tareas.length, 0);
+  const doneTasksFp = FERNEY_CALENDARIO.reduce((a, d) => a + d.tareas.filter((_, ti) => !!fpChecks[d.id + "-" + ti]).length, 0);
+  const pctFp = totalTasksFp ? Math.round((doneTasksFp / totalTasksFp) * 100) : 0;
+
+  const multirredFiltrado = FUXIA_MULTIRRED.filter((item) =>
+    (redFuxia === "Todas" || item.red === redFuxia) &&
+    (semFuxia === "Todas" || item.sem === semFuxia)
+  );
+  const fpFiltrado = FERNEY_CALENDARIO.filter((item) =>
+    (fpSem === "Todas" || item.sem === fpSem) &&
+    (fpRed === "Todas" || item.redes.includes(fpRed))
+  );
   const gastado = PLAN.filter((p) => p.i <= day.i).reduce((a, p) => a + gastoDia(p.i), 0);
   const baseTotal = PLAN.reduce((a, p) => a + gastoDia(p.i), 0);
   const pct = Math.min(100, Math.round((gastado / TECHO) * 100));
@@ -720,16 +802,38 @@ export default function FuxiaTrafico() {
 
   return (
     <div className="fx">
+      <div className="fx-sticky-prog">
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, fontSize: 12 }}>
+            <span className="fx-mono" style={{ color: T1 }}>
+              <b style={{ color: F }}>{pctFuxia}%</b> FUXIA ({doneTasksFuxia}/{totalTasksFuxia}) · <b style={{ color: "#38BDF8" }}>{pctFp}%</b> @ferneypamplona ({doneTasksFp}/{totalTasksFp})
+            </span>
+            <span className="fx-mono" style={{ fontSize: 10.5, color: T3 }}>APP UNIFICADA</span>
+          </div>
+          <div className="fx-bar" style={{ marginTop: 6, height: 5 }}>
+            <div style={{ width: (tab === "personal" ? pctFp : pctFuxia) + "%", background: tab === "personal" ? "#38BDF8" : F }} />
+          </div>
+        </div>
+      </div>
+
       <div style={{ borderBottom: "0.5px solid " + B2, background: S1 }}>
-        <div style={{ maxWidth: 860, margin: "0 auto", padding: "20px 20px 0" }}>
+        <div style={{ maxWidth: 860, margin: "0 auto", padding: "18px 20px 0" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 6, flexWrap: "wrap" }}>
             <span className="fx-h1" style={{ color: F }}>FUXIA MARKETING</span>
-            <span className="fx-mono" style={{ fontSize: 11, color: T2 }}>60 días + setup</span>
+            <span className="fx-mono" style={{ fontSize: 11, color: T2 }}>60d + Multi-Red + Marca Personal</span>
             <span className="fx-mono" style={{ fontSize: 10, color: T3, marginLeft: "auto" }}>PAUTA $500K</span>
           </div>
-          <div className="fx-mono" style={{ fontSize: 10, color: T2, marginBottom: 10 }}>Marketing digital para tiendas de tecnología · Medellín</div>
+          <div className="fx-mono" style={{ fontSize: 10.5, color: T2, marginBottom: 10 }}>Marketing digital y ventas por WhatsApp · Medellín · @fuxia_oficial + @ferneypamplona</div>
           <div className="scrollx" style={{ display: "flex" }}>
-            {[["cal", "Calendario"], ["tab", "Tablero (" + totalLeads + ")"], ["camp", "Campañas"], ["wa", "WhatsApp"], ["kpi", "KPIs"]].map(([id, l]) => (
+            {[
+              ["cal", "Calendario"],
+              ["redes", "Redes FUXIA"],
+              ["personal", "Marca Personal"],
+              ["tab", "Tablero (" + totalLeads + ")"],
+              ["camp", "Campañas"],
+              ["wa", "WhatsApp"],
+              ["kpi", "KPIs"]
+            ].map(([id, l]) => (
               <button key={id} className={"fx-tab" + (tab === id ? " on" : "")} onClick={() => setTab(id)}>{l}</button>
             ))}
           </div>
@@ -777,6 +881,140 @@ export default function FuxiaTrafico() {
               ))}
               <div className="fx-mono" style={{ fontSize: 11, color: WARN, marginTop: 12 }}>▸ KPI del día: {day.kpi}</div>
             </div>
+          </div>
+        )}
+
+        {tab === "redes" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div className="fx-card" style={{ borderColor: "rgba(224,64,251,0.35)" }}>
+              <div className="fx-label" style={{ color: F, marginBottom: 8 }}>Sistema 1→4 · FUXIA (@fuxia_oficial) en Instagram, TikTok, Threads y Facebook</div>
+              <div className="fx-fgrid">
+                {FUXIA_SISTEMA_1A4.map((s) => (
+                  <div key={s.red} style={{ background: S2, border: "1px solid " + B2, borderRadius: 10, padding: "12px 13px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                      <span className="fx-badge" style={{ color: RED_COLOR[s.red] || T1, borderColor: RED_COLOR[s.red] || B2 }}>{s.red}</span>
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: T1, marginBottom: 4 }}>{s.ritmo}</div>
+                    <div style={{ fontSize: 12.5, color: T2, lineHeight: 1.5, marginBottom: 6 }}>{s.objetivo}</div>
+                    <div className="fx-mono" style={{ fontSize: 11, color: WARN, lineHeight: 1.45 }}>▸ {s.regla}</div>
+                  </div>
+                ))}
+              </div>
+              <details className="fx-doc" style={{ marginTop: 12 }}>
+                <summary>Bios optimizadas de FUXIA para las 4 redes (tocar copiar)</summary>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingBottom: 14 }}>
+                  {FUXIA_BIOS.map((b) => (
+                    <div key={b.red} style={{ background: S1, border: "1px solid " + B2, borderRadius: 8, padding: "12px 14px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                        <span className="fx-mono" style={{ fontSize: 12, fontWeight: 700, color: RED_COLOR[b.red] || F }}>{b.red} · {b.handle}</span>
+                        <button type="button" className="fx-copybtn" onClick={() => copy("bio-fx-" + b.red, b.txt)}>{copied === "bio-fx-" + b.red ? "✓ copiado" : "copiar"}</button>
+                      </div>
+                      <pre style={{ paddingBottom: 0 }}>{b.txt}</pre>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            </div>
+
+            <div className="scrollx" style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+              {["Todas", "Instagram", "TikTok", "Threads", "Facebook"].map((r) => (
+                <button key={r} type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + (redFuxia === r ? (RED_COLOR[r] || F) : B2), color: redFuxia === r ? (RED_COLOR[r] || F) : T2, background: redFuxia === r ? "rgba(224,64,251,0.12)" : "transparent", padding: "6px 13px" }} onClick={() => setRedFuxia(r)}>{r}</button>
+              ))}
+              {["Todas", "S1", "S2"].map((s) => (
+                <button key={s} type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + (semFuxia === s ? WARN : B2), color: semFuxia === s ? WARN : T2, background: semFuxia === s ? "rgba(245,200,66,0.1)" : "transparent", padding: "6px 12px" }} onClick={() => setSemFuxia(s)}>{s === "Todas" ? "S1+S2" : s}</button>
+              ))}
+            </div>
+
+            {multirredFiltrado.map((p) => (
+              <div key={p.id} className="fx-card">
+                <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 8 }}>
+                  <span className="fx-badge" style={{ color: RED_COLOR[p.red] || F, borderColor: RED_COLOR[p.red] || F }}>{p.red}</span>
+                  <span className="fx-mono" style={{ fontSize: 11, color: WARN }}>{p.sem} · {p.dia}</span>
+                  <button type="button" className="fx-copybtn" style={{ marginLeft: "auto" }} onClick={() => copy(p.id, p.copy)}>{copied === p.id ? "✓ copiado" : "copiar copy"}</button>
+                </div>
+                <div className="fx-h2" style={{ marginBottom: 4 }}>{p.titulo}</div>
+                <div className="fx-mono" style={{ fontSize: 11.5, color: T3, marginBottom: 8 }}>{p.formato}</div>
+                <div style={{ padding: "8px 12px", background: S2, borderLeft: "2px solid " + (RED_COLOR[p.red] || F), borderRadius: 4, fontSize: 13, color: T1, marginBottom: 10 }}>{p.hook}</div>
+                <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, lineHeight: 1.7, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>{p.copy}</pre>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {tab === "personal" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div className="fx-card" style={{ borderColor: "rgba(56,189,248,0.4)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>
+                <div>
+                  <div className="fx-label" style={{ color: "#38BDF8" }}>Marca Personal · Ferney Pamplona (@ferneypamplona)</div>
+                  <div className="fx-h2" style={{ marginTop: 4 }}>Calendario 28 días · Instagram, Facebook, Threads y LinkedIn</div>
+                </div>
+                <span className="fx-pill" style={{ color: "#38BDF8", border: "1px solid rgba(56,189,248,0.5)", background: "rgba(56,189,248,0.1)" }}>{pctFp}% completado ({doneTasksFp}/{totalTasksFp})</span>
+              </div>
+              <div className="fx-fgrid" style={{ marginTop: 10 }}>
+                {FERNEY_PILARES.map((pl) => (
+                  <div key={pl.pilar} style={{ background: S2, border: "1px solid " + B2, borderRadius: 10, padding: "11px 13px" }}>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: "#38BDF8", marginBottom: 4 }}>{pl.pilar}</div>
+                    <div style={{ fontSize: 12.5, color: T2, lineHeight: 1.5 }}>{pl.desc}</div>
+                  </div>
+                ))}
+              </div>
+              <details className="fx-doc" style={{ marginTop: 12 }}>
+                <summary>Bios optimizadas de @ferneypamplona (IG · LinkedIn · Threads · Facebook)</summary>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingBottom: 14 }}>
+                  {FERNEY_BIOS.map((b) => (
+                    <div key={b.red} style={{ background: S1, border: "1px solid " + B2, borderRadius: 8, padding: "12px 14px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                        <span className="fx-mono" style={{ fontSize: 12, fontWeight: 700, color: RED_COLOR[b.red] || "#38BDF8" }}>{b.red} · {b.handle}</span>
+                        <button type="button" className="fx-copybtn" onClick={() => copy("bio-fp-" + b.red, b.txt)}>{copied === "bio-fp-" + b.red ? "✓ copiado" : "copiar"}</button>
+                      </div>
+                      <pre style={{ paddingBottom: 0 }}>{b.txt}</pre>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            </div>
+
+            <div className="scrollx" style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+              {[["S1", "Semana 1 (30 nov–6 dic)"], ["S2", "Semana 2 (7–13 dic)"], ["S3", "Semana 3 (14–20 dic)"], ["S4", "Semana 4 (21–27 dic)"], ["Todas", "28 días"]].map(([id, lbl]) => (
+                <button key={id} type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + (fpSem === id ? "#38BDF8" : B2), color: fpSem === id ? "#38BDF8" : T2, background: fpSem === id ? "rgba(56,189,248,0.12)" : "transparent", padding: "6px 13px", whiteSpace: "nowrap" }} onClick={() => setFpSem(id)}>{lbl}</button>
+              ))}
+            </div>
+            <div className="scrollx" style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+              {["Todas", "Instagram", "Facebook", "Threads", "LinkedIn"].map((r) => (
+                <button key={r} type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + (fpRed === r ? (RED_COLOR[r] || "#38BDF8") : B2), color: fpRed === r ? (RED_COLOR[r] || "#38BDF8") : T2, background: fpRed === r ? "rgba(255,255,255,0.08)" : "transparent", padding: "5px 12px" }} onClick={() => setFpRed(r)}>{r}</button>
+              ))}
+            </div>
+
+            {fpFiltrado.map((d) => (
+              <div key={d.id} className="fx-card" style={{ borderColor: "rgba(56,189,248,0.24)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", marginBottom: 8 }}>
+                  <span className="fx-mono" style={{ fontSize: 11.5, fontWeight: 700, color: WARN }}>{d.sem} · {d.dia}</span>
+                  {d.redes.map((r) => (
+                    <span key={r} className="fx-badge" style={{ color: RED_COLOR[r] || T1, borderColor: RED_COLOR[r] || B2 }}>{r}</span>
+                  ))}
+                  <span className="fx-mono" style={{ fontSize: 10.5, color: T3, marginLeft: "auto" }}>{d.pilar}</span>
+                </div>
+                <div className="fx-h2" style={{ marginBottom: 8 }}>{d.titulo}</div>
+                {d.tareas.map((t, ti) => {
+                  const k = d.id + "-" + ti;
+                  const on = !!fpChecks[k];
+                  return (
+                    <div key={k} className="fx-task" onClick={() => toggleFp(k)}>
+                      <div className={"fx-cb" + (on ? " on" : "")} style={on ? { background: "#38BDF8", borderColor: "#38BDF8" } : undefined}>{on ? "✓" : ""}</div>
+                      <div className={"fx-txt" + (on ? " on" : "")}>{t}</div>
+                    </div>
+                  );
+                })}
+                <details className="fx-doc" style={{ marginTop: 10 }}>
+                  <summary>Ver guion / copy listo para publicar</summary>
+                  <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
+                    <button type="button" className="fx-copybtn" onClick={() => copy(d.id, d.copy)}>{copied === d.id ? "✓ copiado" : "copiar todo"}</button>
+                  </div>
+                  <pre>{d.copy}</pre>
+                </details>
+              </div>
+            ))}
           </div>
         )}
 

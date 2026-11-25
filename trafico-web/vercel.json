@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/FuxiaTrafico_Movil.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/FuxiaTrafico_preview.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
