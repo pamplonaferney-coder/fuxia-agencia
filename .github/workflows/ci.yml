@@ -8,7 +8,7 @@ on:
 
 jobs:
   lint:
-    name: ESLint
+    name: ESLint y Pruebas
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,8 +16,9 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      - run: npm ci --ignore-scripts
       - run: npm run lint
+      - run: npm test
 
   secrets:
     name: Escaneo de secretos (gitleaks)
@@ -40,6 +41,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Generar cobertura LCOV
+        run: mkdir -p coverage && npm run test:cov
       - name: Análisis SonarCloud
         if: ${{ env.SONAR_TOKEN != '' }}
         uses: SonarSource/sonarqube-scan-action@v4

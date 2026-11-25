@@ -28,6 +28,7 @@ portfolio-raw/
 
 # ── Herramientas y sistema ──
 node_modules/
+coverage/
 .vercel/
 .claude/
 *.log

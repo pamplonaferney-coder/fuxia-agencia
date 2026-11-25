@@ -6,10 +6,12 @@
   "description": "FUXIA — Agencia de Marketing Digital y Automatización. Pipeline de calidad: ESLint + escaneo de secretos + SonarCloud.",
   "scripts": {
     "build:trafico": "node scripts/build-trafico.mjs",
+    "test": "node --test tests/lead.test.mjs",
+    "test:cov": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info tests/lead.test.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "secrets": "node scripts/secrets-scan.mjs",
-    "check": "npm run lint && npm run secrets"
+    "check": "npm run lint && npm run secrets && npm test"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

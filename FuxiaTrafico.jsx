@@ -563,7 +563,7 @@ const CSS = `
 .fx-doc summary:before { content: "+ "; font-weight: 700; }
 .fx-doc[open] summary:before { content: "– "; }
 .fx-doc pre { font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.75; color: ${T1}; white-space: pre-wrap; word-break: break-word; padding-bottom: 14px; }
-.fx-task { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid ${B2}; cursor: pointer; }
+.fx-task { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border: none; border-bottom: 1px solid ${B2}; background: transparent; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer; }
 .fx-task:last-child { border-bottom: none; }
 .fx-cb { width: 20px; height: 20px; border: 1.5px solid ${T3}; border-radius: 4px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #000; font-weight: 700; }
 .fx-cb.on { background: ${F}; border-color: ${F}; }
@@ -669,6 +669,51 @@ function getTodayFpIdx() {
   const start = new Date(2026, 10, 30); // 30 nov 2026 = fpIdx 0
   const diff = Math.floor((todayMidnight - start) / 86400000);
   return Math.max(0, Math.min(FERNEY_CALENDARIO.length - 1, diff));
+}
+
+function DmGuiaGrid({ keyPrefix, enviarTexto, recibirTexto, outTitle, inTitle, outRec, inRec, outAll, inAll, outSummary, inSummary, copied, onCopy }) {
+  const boxes = [
+    { kind: "out", title: outTitle, border: "rgba(245,200,66,0.38)", color: WARN, copyBtn: "copiar guion", desc: enviarTexto, subLbl: "Mensaje exacto sugerido", rec: outRec, all: outAll, summary: outSummary },
+    { kind: "in", title: inTitle, border: "rgba(138,232,160,0.38)", color: OK, copyBtn: "copiar respuesta", desc: recibirTexto, subLbl: "Respuesta exacta sugerida", rec: inRec, all: inAll, summary: inSummary }
+  ];
+  return (
+    <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10 }}>
+      {boxes.map((b) => {
+        const recKey = keyPrefix + "-" + b.kind;
+        return (
+          <div key={b.kind} style={{ padding: "13px 14px", background: S2, border: "1px solid " + b.border, borderRadius: 10 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
+              <span className="fx-label" style={{ color: b.color }}>{b.title}</span>
+              <button type="button" className="fx-copybtn" onClick={() => onCopy(recKey, b.rec.txt)}>
+                {copied === recKey ? "✓ copiado" : b.copyBtn}
+              </button>
+            </div>
+            <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{b.desc}</div>
+            <div style={{ fontSize: 11.5, color: b.color, fontWeight: 700, marginBottom: 4 }}>{b.subLbl} ({b.rec.etiqueta}):</div>
+            <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{b.rec.txt}</pre>
+            <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
+              <summary>{b.summary}</summary>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
+                {b.all.map((g) => {
+                  const gKey = keyPrefix + "-all-" + b.kind + "-" + g.id;
+                  return (
+                    <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: b.color }}>{g.etiqueta}</span>
+                        <button type="button" className="fx-copybtn" onClick={() => onCopy(gKey, g.txt)}>{copied === gKey ? "✓" : "copiar"}</button>
+                      </div>
+                      <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
+                      <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
+                    </div>
+                  );
+                })}
+              </div>
+            </details>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 export default function FuxiaTrafico() {
@@ -1048,10 +1093,10 @@ export default function FuxiaTrafico() {
                 const k = day.i + "-" + ti;
                 const on = !!checks[k];
                 return (
-                  <div key={k} className="fx-task" onClick={() => toggle(k)}>
-                    <div className={"fx-cb" + (on ? " on" : "")}>{on ? "✓" : ""}</div>
-                    <div className={"fx-txt" + (on ? " on" : "")}>{t}</div>
-                  </div>
+                  <button key={k} type="button" className="fx-task" role="checkbox" aria-checked={on} onClick={() => toggle(k)}>
+                    <span className={"fx-cb" + (on ? " on" : "")} aria-hidden="true">{on ? "✓" : ""}</span>
+                    <span className={"fx-txt" + (on ? " on" : "")}>{t}</span>
+                  </button>
                 );
               })}
 
@@ -1084,61 +1129,21 @@ export default function FuxiaTrafico() {
                 </div>
               </div>
 
-              <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10 }}>
-                <div style={{ padding: "13px 14px", background: S2, border: "1px solid rgba(245,200,66,0.38)", borderRadius: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                    <span className="fx-label" style={{ color: WARN }}>📤 DMs QUE TÚ ENVÍAS</span>
-                    <button type="button" className="fx-copybtn" onClick={() => copy("dm-out-" + day.i, dmSalRec.txt)}>
-                      {copied === "dm-out-" + day.i ? "✓ copiado" : "copiar guion"}
-                    </button>
-                  </div>
-                  <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{dmHoy.enviar}</div>
-                  <div style={{ fontSize: 11.5, color: WARN, fontWeight: 700, marginBottom: 4 }}>Mensaje exacto sugerido ({dmSalRec.etiqueta}):</div>
-                  <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{dmSalRec.txt}</pre>
-                  <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
-                    <summary>Ver los 5 guiones de DMs salientes</summary>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
-                      {DM_SALIENTES.map((g) => (
-                        <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                            <span style={{ fontSize: 12, fontWeight: 700, color: WARN }}>{g.etiqueta}</span>
-                            <button type="button" className="fx-copybtn" onClick={() => copy("all-out-" + g.id, g.txt)}>{copied === "all-out-" + g.id ? "✓" : "copiar"}</button>
-                          </div>
-                          <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
-                          <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
-                        </div>
-                      ))}
-                    </div>
-                  </details>
-                </div>
-
-                <div style={{ padding: "13px 14px", background: S2, border: "1px solid rgba(138,232,160,0.38)", borderRadius: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                    <span className="fx-label" style={{ color: OK }}>📥 DMs / WA QUE TE LLEGAN</span>
-                    <button type="button" className="fx-copybtn" onClick={() => copy("dm-in-" + day.i, dmEntRec.txt)}>
-                      {copied === "dm-in-" + day.i ? "✓ copiado" : "copiar respuesta"}
-                    </button>
-                  </div>
-                  <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{dmHoy.recibir}</div>
-                  <div style={{ fontSize: 11.5, color: OK, fontWeight: 700, marginBottom: 4 }}>Respuesta exacta sugerida ({dmEntRec.etiqueta}):</div>
-                  <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{dmEntRec.txt}</pre>
-                  <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
-                    <summary>Ver las 4 respuestas entrantes (&lt;1h)</summary>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
-                      {DM_ENTRANTES.map((g) => (
-                        <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                            <span style={{ fontSize: 12, fontWeight: 700, color: OK }}>{g.etiqueta}</span>
-                            <button type="button" className="fx-copybtn" onClick={() => copy("all-in-" + g.id, g.txt)}>{copied === "all-in-" + g.id ? "✓" : "copiar"}</button>
-                          </div>
-                          <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
-                          <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
-                        </div>
-                      ))}
-                    </div>
-                  </details>
-                </div>
-              </div>
+              <DmGuiaGrid
+                keyPrefix={"dm-" + day.i}
+                enviarTexto={dmHoy.enviar}
+                recibirTexto={dmHoy.recibir}
+                outTitle="📤 DMs QUE TÚ ENVÍAS"
+                inTitle="📥 DMs / WA QUE TE LLEGAN"
+                outRec={dmSalRec}
+                inRec={dmEntRec}
+                outAll={DM_SALIENTES}
+                inAll={DM_ENTRANTES}
+                outSummary="Ver los 5 guiones de DMs salientes"
+                inSummary="Ver las 4 respuestas entrantes (<1h)"
+                copied={copied}
+                onCopy={copy}
+              />
 
               {day.tip ? <div style={{ marginTop: 12, padding: "10px 14px", background: S2, borderLeft: "2px solid " + F, borderRadius: 4, fontSize: 13, color: T1 }}><span className="fx-label" style={{ color: F, marginRight: 8 }}>TIP</span>{day.tip}</div> : null}
               {(day.docs || []).map((dk) => (
@@ -1307,10 +1312,10 @@ export default function FuxiaTrafico() {
                 const k = fpDay.id + "-" + ti;
                 const on = !!fpChecks[k];
                 return (
-                  <div key={k} className="fx-task" onClick={() => toggleFp(k)}>
-                    <div className={"fx-cb" + (on ? " on" : "")} style={on ? { background: "#38BDF8", borderColor: "#38BDF8" } : undefined}>{on ? "✓" : ""}</div>
-                    <div className={"fx-txt" + (on ? " on" : "")}>{t}</div>
-                  </div>
+                  <button key={k} type="button" className="fx-task" role="checkbox" aria-checked={on} onClick={() => toggleFp(k)}>
+                    <span className={"fx-cb" + (on ? " on" : "")} style={on ? { background: "#38BDF8", borderColor: "#38BDF8" } : undefined} aria-hidden="true">{on ? "✓" : ""}</span>
+                    <span className={"fx-txt" + (on ? " on" : "")}>{t}</span>
+                  </button>
                 );
               })}
 
@@ -1339,61 +1344,21 @@ export default function FuxiaTrafico() {
                 </div>
               </div>
 
-              <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10 }}>
-                <div style={{ padding: "13px 14px", background: S2, border: "1px solid rgba(245,200,66,0.38)", borderRadius: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                    <span className="fx-label" style={{ color: WARN }}>📤 DMs / NETWORKING QUE TÚ ENVÍAS</span>
-                    <button type="button" className="fx-copybtn" onClick={() => copy("fpdm-out-" + fpDay.id, fpSalRec.txt)}>
-                      {copied === "fpdm-out-" + fpDay.id ? "✓ copiado" : "copiar guion"}
-                    </button>
-                  </div>
-                  <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{fpDmHoy.enviar}</div>
-                  <div style={{ fontSize: 11.5, color: WARN, fontWeight: 700, marginBottom: 4 }}>Mensaje exacto sugerido ({fpSalRec.etiqueta}):</div>
-                  <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{fpSalRec.txt}</pre>
-                  <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
-                    <summary>Ver los 4 guiones salientes de Marca Personal</summary>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
-                      {FP_DM_SALIENTES.map((g) => (
-                        <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                            <span style={{ fontSize: 12, fontWeight: 700, color: WARN }}>{g.etiqueta}</span>
-                            <button type="button" className="fx-copybtn" onClick={() => copy("fpall-out-" + g.id, g.txt)}>{copied === "fpall-out-" + g.id ? "✓" : "copiar"}</button>
-                          </div>
-                          <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
-                          <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
-                        </div>
-                      ))}
-                    </div>
-                  </details>
-                </div>
-
-                <div style={{ padding: "13px 14px", background: S2, border: "1px solid rgba(138,232,160,0.38)", borderRadius: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                    <span className="fx-label" style={{ color: OK }}>📥 DMs / COMENTARIOS QUE TE LLEGAN</span>
-                    <button type="button" className="fx-copybtn" onClick={() => copy("fpdm-in-" + fpDay.id, fpEntRec.txt)}>
-                      {copied === "fpdm-in-" + fpDay.id ? "✓ copiado" : "copiar respuesta"}
-                    </button>
-                  </div>
-                  <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{fpDmHoy.recibir}</div>
-                  <div style={{ fontSize: 11.5, color: OK, fontWeight: 700, marginBottom: 4 }}>Respuesta exacta sugerida ({fpEntRec.etiqueta}):</div>
-                  <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{fpEntRec.txt}</pre>
-                  <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
-                    <summary>Ver las 3 respuestas entrantes (&lt;1h)</summary>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
-                      {FP_DM_ENTRANTES.map((g) => (
-                        <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                            <span style={{ fontSize: 12, fontWeight: 700, color: OK }}>{g.etiqueta}</span>
-                            <button type="button" className="fx-copybtn" onClick={() => copy("fpall-in-" + g.id, g.txt)}>{copied === "fpall-in-" + g.id ? "✓" : "copiar"}</button>
-                          </div>
-                          <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
-                          <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
-                        </div>
-                      ))}
-                    </div>
-                  </details>
-                </div>
-              </div>
+              <DmGuiaGrid
+                keyPrefix={"fpdm-" + fpDay.id}
+                enviarTexto={fpDmHoy.enviar}
+                recibirTexto={fpDmHoy.recibir}
+                outTitle="📤 DMs / NETWORKING QUE TÚ ENVÍAS"
+                inTitle="📥 DMs / COMENTARIOS QUE TE LLEGAN"
+                outRec={fpSalRec}
+                inRec={fpEntRec}
+                outAll={FP_DM_SALIENTES}
+                inAll={FP_DM_ENTRANTES}
+                outSummary="Ver los 4 guiones salientes de Marca Personal"
+                inSummary="Ver las 3 respuestas entrantes (<1h)"
+                copied={copied}
+                onCopy={copy}
+              />
 
               <details className="fx-doc" style={{ marginTop: 12 }}>
                 <summary>Ver texto completo del día (todas las redes juntas)</summary>

@@ -5,6 +5,7 @@ export default [
   {
     ignores: [
       'node_modules/**',
+      'coverage/**',
       'fuxia-pdfs/**',
       '*.jsx',
       'desde-Documents-FUXIA/**',
@@ -36,7 +37,7 @@ export default [
     }
   },
   {
-    files: ['scripts/**/*.mjs', 'eslint.config.js'],
+    files: ['scripts/**/*.mjs', 'tests/**/*.mjs', 'eslint.config.js'],
     languageOptions: {
       ecmaVersion: 2024,
       sourceType: 'module',
