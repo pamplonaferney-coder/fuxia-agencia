@@ -37,9 +37,32 @@ function esc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+function isAllowedOrigin(req) {
+  const origin = req.headers && req.headers.origin;
+  if (!origin) return true; // peticiones same-origin o sin Origin
+  try {
+    const u = new URL(origin);
+    const host = u.hostname.toLowerCase();
+    return (
+      host === 'fuxia-landing.vercel.app' ||
+      host.endsWith('.vercel.app') && host.startsWith('fuxia-landing') ||
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host === 'fuxia.co' ||
+      host.endsWith('.fuxia.co')
+    );
+  } catch {
+    return false;
+  }
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, error: 'method' });
+    return;
+  }
+  if (!isAllowedOrigin(req)) {
+    res.status(403).json({ ok: false, error: 'origin' });
     return;
   }
   const rl = checkRateLimit(getClientIp(req), Date.now());
@@ -62,8 +85,10 @@ module.exports = async function handler(req, res) {
   }
   const nombre = String(body.nombre || '').trim().slice(0, 60);
   const negocio = String(body.negocio || '').trim().slice(0, 80);
+  const whatsapp = String(body.whatsapp || '').trim().slice(0, 20);
+  const waDigits = whatsapp.replace(/\D/g, '');
   const servicio = String(body.servicio || '').trim().slice(0, 80);
-  if (nombre.length < 2 || negocio.length < 2 || !servicio) {
+  if (nombre.length < 2 || negocio.length < 2 || waDigits.length < 7 || !servicio) {
     res.status(400).json({ ok: false, error: 'validation' });
     return;
   }
@@ -76,6 +101,7 @@ module.exports = async function handler(req, res) {
   const text =
     '<b>Nuevo lead FUXIA (web)</b>\n' +
     'Nombre: ' + esc(nombre) + '\n' +
+    'WhatsApp: ' + esc(whatsapp) + '\n' +
     'Negocio: ' + esc(negocio) + '\n' +
     'Interés: ' + esc(servicio);
   try {

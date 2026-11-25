@@ -1009,7 +1009,7 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
 
   <!-- LOADER -->
   <div id="loader">
-    <img src="logo.png" alt="FUXIA — marketing con actitud" width="160" height="160" fetchpriority="high" style="height:160px;width:auto;border-radius:32px;animation:pulse-glow 2s ease-in-out infinite;" />
+    <img src="logo.webp" alt="FUXIA — marketing con actitud" width="160" height="160" fetchpriority="high" decoding="async" style="height:160px;width:auto;border-radius:32px;animation:pulse-glow 2s ease-in-out infinite;" />
     <div class="loader-sub">marketing con actitud</div>
     <div class="loader-bar"><div class="loader-bar-fill"></div></div>
   </div>
@@ -1039,7 +1039,7 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
   <!-- NAV TOP -->
   <div class="nav-top">
     <div class="nav-logo">
-      <img src="logo.png" alt="FUXIA — logo" width="40" height="36" />
+      <img src="logo.webp" alt="FUXIA — logo" width="40" height="36" decoding="async" />
       <span>FUXIA</span>
     </div>
     <nav class="nav-links" aria-label="Secciones">
@@ -1414,7 +1414,7 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
 
       <section class="vertical-section" id="contacto">
       <div class="v-label">// hablemos de tu negocio</div>
-      <h2 class="v-title" data-hw>¿Qué querés <span>mejorar?</span></h2>
+      <h2 class="v-title" data-hw>¿Qué quieres <span>mejorar?</span></h2>
       <p style="margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--gris);">También puedes escribirnos por <a href="https://instagram.com/fuxia_oficial" target="_blank" rel="noopener noreferrer" style="color:var(--fuxia);text-decoration:none;">@fuxia_oficial</a> en Instagram</p>
       <div class="form-section">
           <form id="contact-form">
@@ -1426,6 +1426,10 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
               <div class="form-field">
                 <label for="f-negocio">Tu negocio</label>
                 <input type="text" id="f-negocio" placeholder="¿Qué vendes?" required minlength="2" maxlength="80" autocomplete="organization" />
+              </div>
+              <div class="form-field full">
+                <label for="f-whatsapp">Tu WhatsApp (obligatorio para darte seguimiento)</label>
+                <input type="tel" id="f-whatsapp" placeholder="Ej. 300 123 4567" required minlength="7" maxlength="20" inputmode="numeric" autocomplete="tel" />
               </div>
               <input type="text" id="f-empresa2" name="empresa" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
               <div class="form-field full">
@@ -1449,7 +1453,7 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
               <input type="checkbox" id="f-consent" required style="margin-top:2px;accent-color:var(--fuxia);flex-shrink:0;" />
               <span>Autorizo el tratamiento de mis datos personales conforme a la <a href="politica-datos.html" target="_blank" rel="noopener noreferrer" style="color:var(--fuxia);text-decoration:underline;">Política de Tratamiento de Datos</a> (Ley 1581 de 2012).</span>
             </label>
-            <button type="submit" class="btn-form">Enviar por WhatsApp →</button>
+            <button type="submit" id="f-submit" class="btn-form">Enviar por WhatsApp →</button>
             <p style="margin-top:0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--gris);line-height:1.6;">Al enviar se abrirá WhatsApp con tu mensaje. Tus datos también se guardan como lead para darte seguimiento.</p>
           </form>
         </div>
@@ -1491,7 +1495,7 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
 
       <footer class="footer-legal">
         <div class="footer-legal-top">
-          <img src="logo.png" alt="FUXIA — logo" width="36" height="36" loading="lazy" style="height:36px;width:auto;border-radius:9px;opacity:0.85;" />
+          <img src="logo.webp" alt="FUXIA — logo" width="36" height="36" loading="lazy" decoding="async" style="height:36px;width:auto;border-radius:9px;opacity:0.85;" />
           <div class="footer-copy">© 2026 FUXIA · Medellín, Colombia · marketing con actitud</div>
           <a href="https://instagram.com/fuxia_oficial" target="_blank" rel="noopener noreferrer" class="footer-ig" aria-label="Instagram">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
@@ -1579,32 +1583,50 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
       });
     });
 
-    // ── FORMULARIO (con failsafe anti-pérdida de lead) ──
+    // ── FORMULARIO (con failsafe anti-pérdida de lead + anti doble clic) ──
+    let __formSubmitting = false;
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
+      if (__formSubmitting) return false;
       if (document.getElementById('f-empresa2').value) return false;
       const nombre   = document.getElementById('f-nombre').value.trim().slice(0, 60);
       const negocio  = document.getElementById('f-negocio').value.trim().slice(0, 80);
+      const whatsapp = document.getElementById('f-whatsapp').value.trim().slice(0, 20);
+      const digits   = whatsapp.replace(/\D/g, '');
       const servicio = document.getElementById('f-servicio').value;
       const errBox   = document.getElementById('form-error');
+      const submitBtn = document.getElementById('f-submit');
       function formError(t) { if (errBox) { errBox.textContent = t; errBox.hidden = false; } return false; }
       if (errBox) errBox.hidden = true;
-      if (nombre.length < 2) return formError('Escribí tu nombre (mínimo 2 letras).');
-      if (negocio.length < 2) return formError('Contanos tu negocio en 2+ letras.');
-      if (!servicio) return formError('Elegí un paquete o pedí asesoría.');
+      if (nombre.length < 2) return formError('Escribe tu nombre (mínimo 2 letras).');
+      if (negocio.length < 2) return formError('Cuéntanos tu negocio en 2 o más letras.');
+      if (digits.length < 7) return formError('Escribe un número de WhatsApp válido (mínimo 7 dígitos).');
+      if (!servicio) return formError('Elige un paquete o pide asesoría.');
+      __formSubmitting = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+      }
+      setTimeout(function () {
+        __formSubmitting = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar por WhatsApp →';
+        }
+      }, 4000);
       try { if (window.fbq && localStorage.getItem('fuxia_cookie_consent') === 'accepted') { fbq('track', 'Lead'); } } catch (e) {}
-      const msg = `Hola FUXIA! Soy ${nombre}, tengo un negocio de ${negocio} y me interesa: ${servicio}. (web-contacto)`;
+      const msg = `Hola FUXIA! Soy ${nombre} (WA: ${whatsapp}), tengo un negocio de ${negocio} y me interesa: ${servicio}. (web-contacto)`;
       const waUrl = 'https://wa.me/573235315015?text=' + encodeURIComponent(msg);
       // Guardar el lead para que gracias.html pueda reabrir WhatsApp con el mensaje exacto
       try {
-        localStorage.setItem('fuxia_lead', JSON.stringify({ nombre, negocio, servicio, msg, ts: Date.now() }));
+        localStorage.setItem('fuxia_lead', JSON.stringify({ nombre, negocio, whatsapp, servicio, msg, ts: Date.now() }));
       } catch (err) {}
-      // Captura server-side: notifica el lead aunque el usuario no abra WhatsApp
+      // Captura server-side: notifica el lead con su WhatsApp aunque el usuario no abra la app
       try {
         fetch('/api/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nombre, negocio, servicio }),
+          body: JSON.stringify({ nombre, negocio, whatsapp, servicio }),
           keepalive: true
         }).catch(function () {});
       } catch (err) {}
@@ -1910,11 +1932,11 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
     // ── CARRUSEL CIRCULAR PORTAFOLIO (3 visibles, autoplay, teclado, dots) ──
     (function initPfCarousel() {
       var DATA = [
-        { tag: "SaaS · IA", name: "IMPULSA", quote: "Plataforma de validación de negocios con 4 agentes de IA en paralelo.", href: "https://impulsa-six.vercel.app", img: "/portfolio/impulsa.png", alt: "Impulsa — Validación de negocios con IA multiagente" },
-        { tag: "Plataforma · Premium", name: "CÓDIGO ALFA", quote: "Entrenamiento con IA, podcast premium y analizador de mensajes reales.", href: "https://codigoalfa.app/", img: "/portfolio/codigo-alfa.png", alt: "Código Alfa — Plataforma de entrenamiento con IA" },
-        { tag: "Landing · Gastronomía", name: "KATOBO", quote: "Landing page para pastelería artesanal y café de especialidad.", href: "https://katobo-bakery.vercel.app/", img: "/portfolio/katobo.png", alt: "KATOBO — Landing para pastelería artesanal y café de especialidad" },
-        { tag: "App · Educación", name: "BUTTERFLY HOUSE", quote: "App de registro científico para mariposario escolar real.", href: "https://mariposario-bh.vercel.app/", img: "/portfolio/butterflyhouse.png", alt: "Butterfly House — App de registro científico para mariposario escolar" },
-        { tag: "Landing · E-commerce", name: "DB DIGITAL", quote: "Catálogo comercial con cotización por WhatsApp para celulares en Envigado.", href: "https://db-digital.lovable.app", img: "/portfolio/db-digital.png", alt: "DB Digital — Catálogo de celulares en Envigado" }
+        { tag: "SaaS · IA", name: "IMPULSA", quote: "Plataforma de validación de negocios con 4 agentes de IA en paralelo.", href: "https://impulsa-six.vercel.app", img: "/portfolio/impulsa.webp", alt: "Impulsa — Validación de negocios con IA multiagente" },
+        { tag: "Plataforma · Premium", name: "CÓDIGO ALFA", quote: "Entrenamiento con IA, podcast premium y analizador de mensajes reales.", href: "https://codigoalfa.app/", img: "/portfolio/codigo-alfa.webp", alt: "Código Alfa — Plataforma de entrenamiento con IA" },
+        { tag: "Landing · Gastronomía", name: "KATOBO", quote: "Landing page para pastelería artesanal y café de especialidad.", href: "https://katobo-bakery.vercel.app/", img: "/portfolio/katobo.webp", alt: "KATOBO — Landing para pastelería artesanal y café de especialidad" },
+        { tag: "App · Educación", name: "BUTTERFLY HOUSE", quote: "App de registro científico para mariposario escolar real.", href: "https://mariposario-bh.vercel.app/", img: "/portfolio/butterflyhouse.webp", alt: "Butterfly House — App de registro científico para mariposario escolar" },
+        { tag: "Landing · E-commerce", name: "DB DIGITAL", quote: "Catálogo comercial con cotización por WhatsApp para celulares en Envigado.", href: "https://db-digital.lovable.app", img: "/portfolio/db-digital.webp", alt: "DB Digital — Catálogo de celulares en Envigado" }
       ];
       var stage = document.getElementById("pf-stage");
       if (!stage) return;
@@ -2169,9 +2191,23 @@ src="https://www.facebook.com/tr?id=1632121441954497&ev=PageView&noscript=1"
           if (bg2) bg2.style.display = "none";
         });
       }
-      // Arranque inmediato (el módulo ya corre con el DOM listo; el preload trae three).
-      // Antes esperaba al load + 800ms y el load lo frenaban las imágenes.
-      start();
+      var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (conn && (conn.saveData || conn.effectiveType === "2g" || conn.effectiveType === "slow-2g")) {
+        var bgSlow = document.querySelector(".spline-bg");
+        if (bgSlow) bgSlow.style.display = "none";
+        return;
+      }
+      // En móvil diferimos la carga 3D para que el hero (texto + CTA) pinte inmediato en 4G
+      var isMobileHero = window.innerWidth < 768;
+      if (isMobileHero) {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(start, { timeout: 1400 });
+        } else {
+          setTimeout(start, 900);
+        }
+      } else {
+        start();
+      }
       setTimeout(function () {
         if (!window.__splineOk && window.console) console.warn("[fuxia] robot: aún sin modelo");
       }, 6000);

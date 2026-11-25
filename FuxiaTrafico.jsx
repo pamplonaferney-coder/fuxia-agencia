@@ -236,7 +236,7 @@ RETARGETING (priorizar nativos Meta por consentimiento de cookies): Medellín +2
 FRÍO: igual geo/edad. O: dueños de pequeños negocios, emprendimiento, WhatsApp Business, marketing digital, tiendas de telefonía. Excluir retargeting + seguidores.
 
 COPIES (texto/titular/descripción/botón — usar 2 activos por conjunto con $10k/día):
-1A "En temporada tu WhatsApp te está costando ventas…" / Diagnóstico gratis / Marketing para tiendas de tecnología / Enviar mensaje
+1A "En temporada tu WhatsApp te está costando ventas…" / Diagnóstico gratis / Marketing y ventas por WhatsApp en Medellín / Enviar mensaje
 1B "3 señales de que perdés ventas…" / ¿Te pasa? / Auditoría gratis en 15 min / Enviar mensaje
 1C "Diagnóstico, estrategia, implementación…" / Sistema en 30 días / Marketing + automatización / Enviar mensaje
 2A "Pasó diciembre y bajaron los chats: 3 errores…" / Vendé más por WhatsApp / Diagnóstico gratis · Medellín / Enviar mensaje
@@ -425,12 +425,12 @@ onboarding: { t: "Onboarding de cliente (checklist)", txt:
 [ ] Responsable de responder leads y horario.` },
 
 banco5: { t: "Banco de 5 piezas base (listo para grabar/diseñar)", txt:
-`BANCO DE 5 PIEZAS — TIENDAS DE TECNOLOGÍA MEDELLÍN (DIC 2026)
+`BANCO DE 5 PIEZAS — NEGOCIOS LOCALES QUE VENDEN POR WHATSAPP EN MEDELLÍN (DIC 2026)
 Paleta carruseles: #0A0A0C / #F2EFE9 / #E040FB · CTA: DM "SISTEMA" o wa.me/${WA_NUM}
 
 1) REEL (35-40s · Día 1 · Dolor/Temporada):
 - Hook: "En diciembre tu WhatsApp te está costando ventas."
-- Desarrollo: El cliente con prima cotiza en 3 tiendas; si tardás +2h o no hacés seguimiento compra en otro lado. 3 errores: sin oferta, botón promocionar sin medir, chats en visto.
+- Desarrollo: El cliente con prima cotiza en 3 negocios; si tardás +2h o no hacés seguimiento compra en otro lado. 3 errores: sin oferta, botón promocionar sin medir, chats en visto.
 - CTA: "5 diagnósticos gratis de 15 min. Escribime SISTEMA por DM."
 
 2) CARRUSEL 6 slides (1080x1350 · Día 2 · Educación / Anuncio 1B):
@@ -442,21 +442,21 @@ Paleta carruseles: #0A0A0C / #F2EFE9 / #E040FB · CTA: DM "SISTEMA" o wa.me/${WA
 - S6: "Diagnóstico gratis 15 min · DM SISTEMA."
 
 3) REEL pantalla real (30-35s · Día 4 · Auditoría express):
-- Hook: "3 cosas que reviso en 60s para saber por qué una tienda de celulares no vende más."
-- Puntos: 1) Bio + link wa.me precargado 2) Calificación 3 preguntas (equipo, pago, entrega) 3) Etiquetas + follow-up 24h.
-- CTA: "Comentá AUDITORIA y reviso tu tienda 15 min gratis."
+- Hook: "3 cosas que reviso en 60s para saber por qué un negocio local no vende más por WhatsApp."
+- Puntos: 1) Bio + link wa.me precargado 2) Calificación 3 preguntas 3) Etiquetas + follow-up 24h.
+- CTA: "Comentá AUDITORIA y te mando audio gratis de 60s."
 
-4) REEL objeción precio (30-35s · Día 8 · ROI + Credibilidad):
-- Hook: "'El marketing es caro' — hagamos la cuenta con celulares."
-- Desarrollo: 3 chats enfriados/sem a $250k-$300k margen = $3M-$4M perdidos/mes. Experiencia real en Claro, Oppo, Tigo, Realme y Xiaomi.
-- CTA: "Escribime DIAGNOSTICO y hacemos la cuenta con tus números."
+4) REEL objeción precio (30-35s · Día 6 · ROI + Credibilidad):
+- Hook: "'El marketing es caro' — hagamos la cuenta con tu WhatsApp."
+- Desarrollo: 3 chats enfriados/sem a $200k promedio = $2.4M perdidos/mes. Experiencia comercial real en Claro, Oppo, Tigo, Realme y Xiaomi.
+- CTA: "Escribime SISTEMA y hacemos la cuenta con tus números."
 
-5) CARRUSEL 6 slides (1080x1350 · Día 9/16 · Oferta + Proceso 4 pasos):
+5) CARRUSEL 6 slides (1080x1350 · Día 5 · Oferta + Proceso 4 pasos):
 - S1: "Así montamos tu sistema de ventas por WhatsApp en 30 días."
 - S2: "01/ Diagnóstico gratis 15 min." · S3: "02/ Plan 1 página en 48h."
-- S4: "03/ Arranque (7-10 días): landing + WA + pixel + 4 piezas + Meta Ads."
-- S5: "04/ Tracción y Escala: gestión mensual + CRM/n8n/IA."
-- S6: "5 cupos tiendas de tecnología Medellín · DM SISTEMA."` }
+- S4: "03/ Montaje inicial (7-15 días, 50/50) o Combo Presencia $550k abonable."
+- S5: "04/ Crecimiento y Escala: gestión mensual + CRM/n8n/IA."
+- S6: "Negocios locales en Medellín · DM SISTEMA."` }
 };
 
 const WA_T = [
@@ -470,10 +470,10 @@ const WA_T = [
 // ─── PLAN: setup idx 0-6 (23-29 nov) + días 1-60 (30 nov - 28 ene) ───
 // d: -7..-1 setup · 1..60 · tareas: máx 5 · docs: claves de DOCS
 const PLAN = [
-{ i: 0, fase: "Setup", titulo: "Nicho, oferta y precios", tareas: ["Definir nicho: tiendas de tecnología y accesorios en Medellín", "Elegir 2-3 dolores: respuesta lenta, seguimiento manual, pauta sin medición", "Fijar oferta: diagnóstico gratis + Arranque/Crecimiento/Escala", "Escribir promesa en 1 frase + 3 pruebas reales"], kpi: "Oferta clara en 1 página", tip: "Si no lo explicás en 15 segundos, no está listo.", docs: ["nicho", "precios"] },
-{ i: 1, fase: "Setup", titulo: "Auditoría + 20 prospectos", tareas: ["Auditar 10 tiendas de tecnología en Instagram/WhatsApp", "Listar 20 prospectos con nombre, negocio y canal", "Anotar 3 dolores por prospecto", "Elegir los 10 primeros para DM"], kpi: "20 prospectos calificados", tip: "La lista vale más que el logo." },
-{ i: 2, fase: "Setup", titulo: "Perfiles y WhatsApp Business", tareas: ["Bio IG/FB: qué hacés, para quién y CTA a WhatsApp", "Highlights: casos, precios, proceso y diagnóstico", "WhatsApp Business: perfil, catálogo con 3 packs, bienvenida y ausencia", "Probar wa.me/" + WA_NUM + " con mensaje precargado"], kpi: "Perfiles y WA listos", tip: "3 segundos: qué, para quién, cómo contactar." },
-{ i: 3, fase: "Setup", titulo: "Landing de marketing", tareas: ["Actualizar hero: promesa para tiendas de tecnología", "Sección de casos y prueba social", "Oferta con packs y CTA a WhatsApp", "SEO local: Medellín + marketing digital + WhatsApp"], kpi: "Landing publicada", tip: "Una landing, una promesa, un CTA." },
+{ i: 0, fase: "Setup", titulo: "Mercado, oferta y precios", tareas: ["Definir mercado: negocios locales en Medellín que venden por WhatsApp (productos, celulares, servicios y alimentos)", "Elegir 2-3 dolores: respuesta lenta, seguimiento manual, pauta sin medición", "Fijar oferta: diagnóstico gratis + Combo $550k abonable + Arranque/Crecimiento/Escala", "Escribir promesa en 1 frase + 3 pruebas reales"], kpi: "Oferta clara en 1 página", tip: "Si no lo explicás en 15 segundos, no está listo.", docs: ["nicho", "precios"] },
+{ i: 1, fase: "Setup", titulo: "Auditoría + 20 prospectos", tareas: ["Auditar 10 negocios locales de Medellín en Instagram/WhatsApp", "Listar 20 prospectos con nombre, negocio y canal", "Anotar 3 dolores por prospecto", "Elegir los 10 primeros para DM"], kpi: "20 prospectos calificados", tip: "La lista vale más que el logo." },
+{ i: 2, fase: "Setup", titulo: "Perfiles y WhatsApp Business", tareas: ["Bio IG/FB/TikTok/Threads: qué hacés, para quién y CTA a WhatsApp", "Highlights: casos, precios, proceso y diagnóstico", "WhatsApp Business: perfil, catálogo con packs, bienvenida y ausencia", "Probar wa.me/" + WA_NUM + " con mensaje precargado"], kpi: "Perfiles y WA listos", tip: "3 segundos: qué, para quién, cómo contactar." },
+{ i: 3, fase: "Setup", titulo: "Landing de marketing", tareas: ["Actualizar hero: promesa para negocios locales que venden por WhatsApp", "Sección de casos y prueba social", "Oferta con packs, Combo $550k abonable y CTA a WhatsApp", "SEO local: Medellín + marketing digital + WhatsApp"], kpi: "Landing publicada", tip: "Una landing, una promesa, un CTA." },
 { i: 4, fase: "Setup", titulo: "Medición y seguimiento", tareas: ["Pixel + eventos Lead/Contact en la landing", "UTMs por CTA (hero, packs, popup)", "Formulario/WhatsApp conectado a aviso interno", "Tablero simple: leads, conversaciones, llamadas, cierres"], kpi: "Medición funcionando", tip: "Sin medición, la pauta es adivinanza." },
 { i: 5, fase: "Setup", titulo: "Lead magnet + contenido base", tareas: ["Crear PDF '5 puntos que frenan tus ventas por WhatsApp'", "Diseñar calendario de contenido de 30 días", "Escribir 3 guiones de reels", "Preparar banco de 5 piezas"], kpi: "Magnet + calendario listos", tip: "1 problema, 1 promesa, 2 páginas.", docs: ["contenido30", "banco5"] },
 { i: 6, fase: "Setup", titulo: "Grabar creativos + campaña en borrador", tareas: ["Grabar reels A, B y C con guiones", "Subtítulos quemados + música sin copyright", "Business Manager + método de pago activo", "Dejar campaña de retargeting en borrador"], kpi: "Creativos listos + C1 en borrador", tip: "Nada se publica hoy.", docs: ["reel1", "creativoA", "creativoB", "creativoC", "checklist16"] },
@@ -656,20 +656,41 @@ function initialTabFromHash() {
   return "cal";
 }
 
+function getTodayFuxiaIdx() {
+  const now = new Date();
+  const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const start = new Date(2026, 10, 23); // 23 nov 2026 = idx 0
+  const diff = Math.floor((todayMidnight - start) / 86400000);
+  return Math.max(0, Math.min(PLAN.length - 1, diff));
+}
+function getTodayFpIdx() {
+  const now = new Date();
+  const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const start = new Date(2026, 10, 30); // 30 nov 2026 = fpIdx 0
+  const diff = Math.floor((todayMidnight - start) / 86400000);
+  return Math.max(0, Math.min(FERNEY_CALENDARIO.length - 1, diff));
+}
+
 export default function FuxiaTrafico() {
+  const initFuxia = getTodayFuxiaIdx();
+  const initFp = getTodayFpIdx();
   const [tab, setTab] = useState(initialTabFromHash);
-  const [idx, setIdx] = useState(0);
-  const [fase, setFase] = useState("Setup");
+  const [idx, setIdx] = useState(initFuxia);
+  const [fase, setFase] = useState((PLAN[initFuxia] && PLAN[initFuxia].fase) || "Setup");
   const [checks, setChecks] = useState({});
   const [fpChecks, setFpChecks] = useState({});
   const [redFuxia, setRedFuxia] = useState("Todas");
   const [semFuxia, setSemFuxia] = useState("Todas");
-  const [fpSem, setFpSem] = useState("S1");
-  const [fpIdx, setFpIdx] = useState(0);
+  const [fpSem, setFpSem] = useState((FERNEY_CALENDARIO[initFp] && FERNEY_CALENDARIO[initFp].sem) || "S1");
+  const [fpIdx, setFpIdx] = useState(initFp);
   const [fpRed, setFpRed] = useState("Todas");
   const [copied, setCopied] = useState("");
+  const [syncMsg, setSyncMsg] = useState("");
   const [pipe, setPipe] = useState({ pautaReal: 0, leads: [] });
   const [filtro, setFiltro] = useState("Todos");
+  const [busqueda, setBusqueda] = useState("");
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState(null);
   const [form, setForm] = useState({
     tienda: "",
     contacto: "",
@@ -677,6 +698,7 @@ export default function FuxiaTrafico() {
     etapa: "Lead",
     plan: "Arranque ($1.5M)",
     valor: 1500000,
+    seguimiento: "",
     nota: ""
   });
 
@@ -706,6 +728,26 @@ export default function FuxiaTrafico() {
     setPipe(next);
     try { localStorage.setItem(PIPE_KEY, JSON.stringify(next)); } catch (e) {}
   }
+  function goToTodayFuxia() {
+    const ti = getTodayFuxiaIdx();
+    setIdx(ti);
+    if (PLAN[ti]) setFase(PLAN[ti].fase);
+  }
+  function goStepFuxia(delta) {
+    const nextIdx = Math.max(0, Math.min(PLAN.length - 1, idx + delta));
+    setIdx(nextIdx);
+    if (PLAN[nextIdx]) setFase(PLAN[nextIdx].fase);
+  }
+  function goToTodayFp() {
+    const ti = getTodayFpIdx();
+    setFpIdx(ti);
+    if (FERNEY_CALENDARIO[ti]) setFpSem(FERNEY_CALENDARIO[ti].sem);
+  }
+  function goStepFp(delta) {
+    const nextIdx = Math.max(0, Math.min(FERNEY_CALENDARIO.length - 1, fpIdx + delta));
+    setFpIdx(nextIdx);
+    if (FERNEY_CALENDARIO[nextIdx]) setFpSem(FERNEY_CALENDARIO[nextIdx].sem);
+  }
   function addLead(e) {
     e.preventDefault();
     const tienda = form.tienda.trim();
@@ -719,10 +761,42 @@ export default function FuxiaTrafico() {
       etapa: form.etapa,
       plan: form.plan,
       valor: Number(form.valor) || 0,
+      seguimiento: form.seguimiento || "",
       nota: form.nota.trim()
     };
     savePipe({ pautaReal: pipe.pautaReal, leads: [item, ...pipe.leads] });
-    setForm((prev) => Object.assign({}, prev, { tienda: "", contacto: "", nota: "" }));
+    setForm((prev) => Object.assign({}, prev, { tienda: "", contacto: "", seguimiento: "", nota: "" }));
+  }
+  function startEditLead(l) {
+    setEditingId(l.id);
+    setEditForm({
+      tienda: l.tienda || "",
+      contacto: l.contacto || "",
+      canal: l.canal || "DM IG",
+      etapa: l.etapa || "Lead",
+      plan: l.plan || "Arranque ($1.5M)",
+      valor: Number(l.valor) || 0,
+      seguimiento: l.seguimiento || "",
+      nota: l.nota || ""
+    });
+  }
+  function saveEditLead(id) {
+    if (!editForm || !editForm.tienda.trim()) return;
+    savePipe({
+      pautaReal: pipe.pautaReal,
+      leads: pipe.leads.map((l) => (l.id === id ? Object.assign({}, l, {
+        tienda: editForm.tienda.trim(),
+        contacto: editForm.contacto.trim(),
+        canal: editForm.canal,
+        etapa: editForm.etapa,
+        plan: editForm.plan,
+        valor: Number(editForm.valor) || 0,
+        seguimiento: editForm.seguimiento || "",
+        nota: editForm.nota.trim()
+      }) : l))
+    });
+    setEditingId(null);
+    setEditForm(null);
   }
   function updateEtapa(id, nuevaEtapa) {
     savePipe({
@@ -731,11 +805,12 @@ export default function FuxiaTrafico() {
     });
   }
   function removeLead(id) {
+    if (editingId === id) { setEditingId(null); setEditForm(null); }
     savePipe({ pautaReal: pipe.pautaReal, leads: pipe.leads.filter((l) => l.id !== id) });
   }
   function exportCsv() {
-    const header = ["Fecha", "Tienda", "Contacto", "Canal", "Etapa", "Plan", "Valor_COP", "Nota"];
-    const rows = pipe.leads.map((l) => [l.fecha, l.tienda, l.contacto, l.canal, l.etapa, l.plan, l.valor, l.nota]);
+    const header = ["Fecha", "Negocio", "Contacto", "Canal", "Etapa", "Plan", "Valor_COP", "Proximo_Seguimiento", "Nota"];
+    const rows = pipe.leads.map((l) => [l.fecha, l.tienda, l.contacto, l.canal, l.etapa, l.plan, l.valor, l.seguimiento || "", l.nota]);
     const csv = "\uFEFF" + [header, ...rows].map((r) => r.map(csvCell).join(",")).join("\r\n");
     try {
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
@@ -748,6 +823,62 @@ export default function FuxiaTrafico() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (e) {}
+  }
+  function exportBackupJson() {
+    const payload = {
+      version: 1,
+      app: "FUXIA_TRAFICO",
+      exportedAt: new Date().toISOString(),
+      pipe,
+      checks,
+      fpChecks
+    };
+    try {
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "fuxia_respaldo_completo_" + todayIso() + ".json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      setSyncMsg("✓ Respaldo JSON descargado (" + pipe.leads.length + " leads + checklists).");
+      setTimeout(() => setSyncMsg(""), 4000);
+    } catch (e) {
+      setSyncMsg("No se pudo descargar el respaldo JSON.");
+    }
+  }
+  function importBackupJson(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      try {
+        const data = JSON.parse(String(reader.result || "{}"));
+        if (!data || typeof data !== "object") throw new Error("invalid");
+        let importedLeads = 0;
+        if (data.pipe && Array.isArray(data.pipe.leads)) {
+          const nextPipe = { pautaReal: Number(data.pipe.pautaReal) || 0, leads: data.pipe.leads };
+          savePipe(nextPipe);
+          importedLeads = nextPipe.leads.length;
+        }
+        if (data.checks && typeof data.checks === "object") {
+          setChecks(data.checks);
+          try { localStorage.setItem("fuxia_marketing_checks_v1", JSON.stringify(data.checks)); } catch (err) {}
+        }
+        if (data.fpChecks && typeof data.fpChecks === "object") {
+          setFpChecks(data.fpChecks);
+          try { localStorage.setItem(FP_CHECKS_KEY, JSON.stringify(data.fpChecks)); } catch (err) {}
+        }
+        setSyncMsg("✓ Respaldo restaurado: " + importedLeads + " leads + progreso sincronizados.");
+      } catch (err) {
+        setSyncMsg("⚠ Archivo JSON no válido. Usa un respaldo exportado desde FUXIA.");
+      }
+      setTimeout(() => setSyncMsg(""), 5000);
+    };
+    reader.readAsText(file, "utf-8");
+    e.target.value = "";
   }
   function toggle(k) {
     setChecks((prev) => {
@@ -764,9 +895,29 @@ export default function FuxiaTrafico() {
     });
   }
   function copy(t, txt) {
-    try { navigator.clipboard.writeText(txt); } catch (e) {}
-    setCopied(t);
-    setTimeout(() => setCopied(""), 1500);
+    const done = () => {
+      setCopied(t);
+      setTimeout(() => setCopied(""), 1500);
+    };
+    const fallback = () => {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = txt;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        if (ok) done();
+      } catch (e) {}
+    };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(txt).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
   }
 
   const day = PLAN[idx];
@@ -810,7 +961,18 @@ export default function FuxiaTrafico() {
   const cacReal = totalCierres > 0 && pipe.pautaReal > 0 ? Math.round(pipe.pautaReal / totalCierres) : 0;
   const tasaConv = totalLeads > 0 ? Math.round((totalConv / totalLeads) * 100) : 0;
   const tasaCierre = totalLlam > 0 ? Math.round((totalCierres / totalLlam) * 100) : 0;
-  const filteredLeads = filtro === "Todos" ? pipe.leads : pipe.leads.filter((l) => l.etapa === filtro);
+  const todayStr = todayIso();
+  const dueFollowups = pipe.leads.filter((l) => l.seguimiento && l.etapa !== "Cierre" && l.etapa !== "Perdido" && l.seguimiento <= todayStr).length;
+  const qNorm = busqueda.trim().toLowerCase();
+  const filteredLeads = pipe.leads.filter((l) => {
+    if (filtro === "Seguimiento hoy") {
+      if (!(l.seguimiento && l.etapa !== "Cierre" && l.etapa !== "Perdido" && l.seguimiento <= todayStr)) return false;
+    } else if (filtro !== "Todos" && l.etapa !== filtro) {
+      return false;
+    }
+    if (!qNorm) return true;
+    return [l.tienda, l.contacto, l.canal, l.plan, l.nota].some((v) => String(v || "").toLowerCase().includes(qNorm));
+  });
 
   return (
     <div className="fx">
@@ -860,7 +1022,10 @@ export default function FuxiaTrafico() {
           const dmEntRec = DM_ENTRANTES.find((x) => x.id === dmHoy.entranteId) || DM_ENTRANTES[0];
           return (
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <div className="scrollx" style={{ display: "flex", gap: 6 }}>
+            <div className="scrollx" style={{ display: "flex", gap: 6, alignItems: "center" }}>
+              <button type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + F, color: "#000", background: F, padding: "6px 13px", whiteSpace: "nowrap", fontWeight: 800 }} onClick={goToTodayFuxia}>📍 Ir a Hoy</button>
+              <button type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + B2, color: T1, background: "transparent", padding: "6px 10px" }} onClick={() => goStepFuxia(-1)} title="Día anterior">←</button>
+              <button type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + B2, color: T1, background: "transparent", padding: "6px 10px" }} onClick={() => goStepFuxia(1)} title="Día siguiente">→</button>
               {fases.map((f) => (
                 <button key={f} className="fx-pill" style={{ cursor: "pointer", border: "0.5px solid " + (fase === f ? F : B2), color: fase === f ? F : T2, background: fase === f ? "rgba(224,64,251,0.08)" : "transparent", padding: "6px 14px", whiteSpace: "nowrap" }} onClick={() => { setFase(f); const fd = PLAN.find((p) => p.fase === f); if (fd) setIdx(PLAN.indexOf(fd)); }}>{f.replace(" · ", " ")}</button>
               ))}
@@ -1086,7 +1251,10 @@ export default function FuxiaTrafico() {
               </details>
             </div>
 
-            <div className="scrollx" style={{ display: "flex", gap: 6 }}>
+            <div className="scrollx" style={{ display: "flex", gap: 6, alignItems: "center" }}>
+              <button type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid #38BDF8", color: "#000", background: "#38BDF8", padding: "6px 13px", whiteSpace: "nowrap", fontWeight: 800 }} onClick={goToTodayFp}>📍 Ir a Hoy</button>
+              <button type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + B2, color: T1, background: "transparent", padding: "6px 10px" }} onClick={() => goStepFp(-1)} title="Día anterior">←</button>
+              <button type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + B2, color: T1, background: "transparent", padding: "6px 10px" }} onClick={() => goStepFp(1)} title="Día siguiente">→</button>
               {[["S1", "Semana 1 (30 nov–6 dic)"], ["S2", "Semana 2 (7–13 dic)"], ["S3", "Semana 3 (14–20 dic)"], ["S4", "Semana 4 (21–27 dic)"]].map(([id, lbl]) => (
                 <button
                   key={id}
@@ -1258,30 +1426,43 @@ export default function FuxiaTrafico() {
               ))}
             </div>
 
-            <div className="fx-card" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" }}>
-              <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-                <span className="fx-label" style={{ color: T2 }}>Pauta real invertida (COP)</span>
-                <input
-                  type="number"
-                  min="0"
-                  step="10000"
-                  className="fx-in"
-                  style={{ width: 150 }}
-                  value={pipe.pautaReal || ""}
-                  placeholder="Ej. 150000"
-                  onChange={(e) => savePipe({ pautaReal: Math.max(0, Number(e.target.value) || 0), leads: pipe.leads })}
-                />
-                <span className="fx-mono" style={{ fontSize: 11, color: cplReal > 15000 ? GASTO : (cplReal > 0 && cplReal <= 10000 ? OK : T2) }}>
-                  {cplReal ? "CPL " + money(cplReal) : "CPL —"} · {cacReal ? "CAC " + money(cacReal) : "CAC —"}
-                </span>
+            <div className="fx-card" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                  <span className="fx-label" style={{ color: T2 }}>Pauta real invertida (COP)</span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="10000"
+                    className="fx-in"
+                    style={{ width: 150 }}
+                    value={pipe.pautaReal || ""}
+                    placeholder="Ej. 150000"
+                    onChange={(e) => savePipe({ pautaReal: Math.max(0, Number(e.target.value) || 0), leads: pipe.leads })}
+                  />
+                  <span className="fx-mono" style={{ fontSize: 11, color: cplReal > 15000 ? GASTO : (cplReal > 0 && cplReal <= 10000 ? OK : T2) }}>
+                    {cplReal ? "CPL " + money(cplReal) : "CPL —"} · {cacReal ? "CAC " + money(cacReal) : "CAC —"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                  <button type="button" className="fx-copybtn" onClick={exportCsv}>⬇ CSV (Excel)</button>
+                  <button type="button" className="fx-copybtn" style={{ borderColor: "rgba(224,64,251,0.55)", color: "#F072FF" }} onClick={exportBackupJson}>💾 Exportar respaldo JSON</button>
+                  <label className="fx-copybtn" style={{ cursor: "pointer", borderColor: "rgba(138,232,160,0.55)", color: OK }}>
+                    📂 Importar respaldo JSON
+                    <input type="file" accept="application/json,.json" onChange={importBackupJson} style={{ display: "none" }} />
+                  </label>
+                </div>
               </div>
-              <button type="button" className="fx-copybtn" onClick={exportCsv}>⬇ Exportar CSV (Excel)</button>
+              {syncMsg ? <div className="fx-mono" style={{ fontSize: 12, color: OK, background: S2, padding: "8px 12px", borderRadius: 6, borderLeft: "2px solid " + OK }}>{syncMsg}</div> : null}
+              <div className="fx-mono" style={{ fontSize: 11, color: T3 }}>
+                Sincronización PC ↔ Celular: exporta tu respaldo JSON aquí e impórtalo en tu otro dispositivo (incluye todos los leads + checklists FUXIA y Marca Personal).
+              </div>
             </div>
 
             <form className="fx-card" onSubmit={addLead} style={{ borderColor: "rgba(224,64,251,0.3)", display: "flex", flexDirection: "column", gap: 10 }}>
-              <div className="fx-label" style={{ color: F }}>+ Registrar lead / tienda</div>
+              <div className="fx-label" style={{ color: F }}>+ Registrar lead / negocio</div>
               <div className="fx-fgrid">
-                <input className="fx-in" required placeholder="Tienda / Negocio *" value={form.tienda} onChange={(e) => setForm(Object.assign({}, form, { tienda: e.target.value }))} />
+                <input className="fx-in" required placeholder="Negocio / Cliente *" value={form.tienda} onChange={(e) => setForm(Object.assign({}, form, { tienda: e.target.value }))} />
                 <input className="fx-in" placeholder="IG o WhatsApp" value={form.contacto} onChange={(e) => setForm(Object.assign({}, form, { contacto: e.target.value }))} />
                 <select className="fx-in" value={form.canal} onChange={(e) => setForm(Object.assign({}, form, { canal: e.target.value }))}>
                   {CANALES.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -1300,52 +1481,103 @@ export default function FuxiaTrafico() {
                   {PLANES_VAL.map((p) => <option key={p.label} value={p.label}>{p.label}</option>)}
                 </select>
                 <input className="fx-in" type="number" min="0" step="50000" placeholder="Valor COP" value={form.valor} onChange={(e) => setForm(Object.assign({}, form, { valor: Number(e.target.value) || 0 }))} />
+                <input className="fx-in" type="date" title="Fecha próximo seguimiento" value={form.seguimiento} onChange={(e) => setForm(Object.assign({}, form, { seguimiento: e.target.value }))} />
               </div>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                <input className="fx-in" style={{ flex: 1, minWidth: 200 }} placeholder="Nota rápida o próximo seguimiento (ej: enviar diagnóstico jueves 3pm)" value={form.nota} onChange={(e) => setForm(Object.assign({}, form, { nota: e.target.value }))} />
+                <input className="fx-in" style={{ flex: 1, minWidth: 200 }} placeholder="Nota rápida (ej: enviar propuesta 1 pág jueves 3pm)" value={form.nota} onChange={(e) => setForm(Object.assign({}, form, { nota: e.target.value }))} />
                 <button type="submit" className="fx-btn">+ Agregar</button>
               </div>
             </form>
 
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+              <input className="fx-in" style={{ flex: 1, minWidth: 200 }} placeholder="🔍 Buscar negocio, contacto, canal o nota..." value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+              {dueFollowups > 0 ? (
+                <button type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + GASTO, color: GASTO, background: "rgba(255,138,101,0.12)", padding: "7px 13px", fontWeight: 700 }} onClick={() => setFiltro("Seguimiento hoy")}>
+                  ⏰ {dueFollowups} seguimiento{dueFollowups === 1 ? "" : "s"} hoy/vencido
+                </button>
+              ) : null}
+            </div>
+
             <div className="scrollx" style={{ display: "flex", gap: 6 }}>
-              {["Todos", ...ETAPAS].map((et) => (
+              {["Todos", "Seguimiento hoy", ...ETAPAS].map((et) => {
+                const count = et === "Todos" ? totalLeads : (et === "Seguimiento hoy" ? dueFollowups : pipe.leads.filter((l) => l.etapa === et).length);
+                return (
                 <button
                   key={et}
                   type="button"
                   className="fx-pill"
-                  style={{ cursor: "pointer", border: "0.5px solid " + (filtro === et ? F : B2), color: filtro === et ? F : T2, background: filtro === et ? "rgba(224,64,251,0.08)" : "transparent", padding: "6px 12px", whiteSpace: "nowrap" }}
+                  style={{ cursor: "pointer", border: "0.5px solid " + (filtro === et ? (et === "Seguimiento hoy" ? GASTO : F) : B2), color: filtro === et ? (et === "Seguimiento hoy" ? GASTO : F) : T2, background: filtro === et ? "rgba(224,64,251,0.08)" : "transparent", padding: "6px 12px", whiteSpace: "nowrap" }}
                   onClick={() => setFiltro(et)}
                 >
-                  {et} ({et === "Todos" ? totalLeads : pipe.leads.filter((l) => l.etapa === et).length})
+                  {et} ({count})
                 </button>
-              ))}
+                );
+              })}
             </div>
 
             <div className="fx-card">
               <div className="fx-label" style={{ marginBottom: 6 }}>Pipeline activo ({filteredLeads.length})</div>
               {filteredLeads.length === 0 ? (
                 <div className="fx-body" style={{ padding: "12px 0" }}>Aún no hay registros en esta vista. Agrega tu primer prospecto arriba y se guarda automático en este dispositivo.</div>
-              ) : filteredLeads.map((l) => (
-                <div key={l.id} className="fx-row">
-                  <div style={{ flex: 1, minWidth: 200 }}>
-                    <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-                      <span className="fx-h2" style={{ fontSize: 15 }}>{l.tienda}</span>
-                      <span className="fx-pill" style={{ color: ETAPA_COLOR[l.etapa] || T2, border: "0.5px solid " + (ETAPA_COLOR[l.etapa] || B2) }}>{l.etapa}</span>
-                      <span className="fx-mono" style={{ fontSize: 10, color: T2 }}>{l.canal} · {l.fecha}</span>
+              ) : filteredLeads.map((l) => {
+                const isEditing = editingId === l.id && editForm;
+                const isDue = l.seguimiento && l.etapa !== "Cierre" && l.etapa !== "Perdido" && l.seguimiento <= todayStr;
+                return (
+                <div key={l.id} className="fx-row" style={isEditing ? { flexDirection: "column", alignItems: "stretch" } : undefined}>
+                  {isEditing ? (
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8, width: "100%", background: S2, padding: "12px", borderRadius: 8, border: "1px solid " + F }}>
+                      <div className="fx-label" style={{ color: F }}>Editando lead</div>
+                      <div className="fx-fgrid">
+                        <input className="fx-in" value={editForm.tienda} onChange={(e) => setEditForm(Object.assign({}, editForm, { tienda: e.target.value }))} placeholder="Negocio *" />
+                        <input className="fx-in" value={editForm.contacto} onChange={(e) => setEditForm(Object.assign({}, editForm, { contacto: e.target.value }))} placeholder="IG o WhatsApp" />
+                        <select className="fx-in" value={editForm.canal} onChange={(e) => setEditForm(Object.assign({}, editForm, { canal: e.target.value }))}>
+                          {CANALES.map((c) => <option key={c} value={c}>{c}</option>)}
+                        </select>
+                        <select className="fx-in" value={editForm.etapa} onChange={(e) => setEditForm(Object.assign({}, editForm, { etapa: e.target.value }))}>
+                          {ETAPAS.map((et) => <option key={et} value={et}>{et}</option>)}
+                        </select>
+                        <select className="fx-in" value={editForm.plan} onChange={(e) => { const p = PLANES_VAL.find((x) => x.label === e.target.value); setEditForm(Object.assign({}, editForm, { plan: e.target.value, valor: p ? p.val : editForm.valor })); }}>
+                          {PLANES_VAL.map((p) => <option key={p.label} value={p.label}>{p.label}</option>)}
+                        </select>
+                        <input className="fx-in" type="number" min="0" step="50000" value={editForm.valor} onChange={(e) => setEditForm(Object.assign({}, editForm, { valor: Number(e.target.value) || 0 }))} placeholder="Valor COP" />
+                        <input className="fx-in" type="date" title="Próximo seguimiento" value={editForm.seguimiento} onChange={(e) => setEditForm(Object.assign({}, editForm, { seguimiento: e.target.value }))} />
+                      </div>
+                      <input className="fx-in" value={editForm.nota} onChange={(e) => setEditForm(Object.assign({}, editForm, { nota: e.target.value }))} placeholder="Nota / acuerdo" />
+                      <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
+                        <button type="button" className="fx-copybtn" onClick={() => { setEditingId(null); setEditForm(null); }}>Cancelar</button>
+                        <button type="button" className="fx-btn" onClick={() => saveEditLead(l.id)}>Guardar cambios</button>
+                      </div>
                     </div>
-                    <div className="fx-mono" style={{ fontSize: 11, color: T2, marginTop: 4 }}>
-                      {l.contacto ? l.contacto + " · " : ""}{l.plan}{l.valor ? " (" + money(l.valor) + ")" : ""}
-                    </div>
-                    {l.nota ? <div className="fx-body" style={{ fontSize: 12, marginTop: 2 }}>{l.nota}</div> : null}
-                  </div>
-                  <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                    <select className="fx-in" style={{ width: 135, padding: "6px 8px" }} value={l.etapa} onChange={(e) => updateEtapa(l.id, e.target.value)}>
-                      {ETAPAS.map((et) => <option key={et} value={et}>{et}</option>)}
-                    </select>
-                    <button type="button" className="fx-copybtn" onClick={() => removeLead(l.id)} title="Eliminar">✕</button>
-                  </div>
+                  ) : (
+                    <>
+                      <div style={{ flex: 1, minWidth: 200 }}>
+                        <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                          <span className="fx-h2" style={{ fontSize: 15 }}>{l.tienda}</span>
+                          <span className="fx-pill" style={{ color: ETAPA_COLOR[l.etapa] || T2, border: "0.5px solid " + (ETAPA_COLOR[l.etapa] || B2) }}>{l.etapa}</span>
+                          {l.seguimiento ? (
+                            <span className="fx-pill" style={{ color: isDue ? GASTO : "#38BDF8", border: "0.5px solid " + (isDue ? GASTO : "rgba(56,189,248,0.45)"), background: isDue ? "rgba(255,138,101,0.12)" : "transparent" }}>
+                              {isDue ? "⏰ Seg. HOY/VENCIDO: " : "📅 Seg: "}{l.seguimiento}
+                            </span>
+                          ) : null}
+                          <span className="fx-mono" style={{ fontSize: 10, color: T2 }}>{l.canal} · {l.fecha}</span>
+                        </div>
+                        <div className="fx-mono" style={{ fontSize: 11, color: T2, marginTop: 4 }}>
+                          {l.contacto ? l.contacto + " · " : ""}{l.plan}{l.valor ? " (" + money(l.valor) + ")" : ""}
+                        </div>
+                        {l.nota ? <div className="fx-body" style={{ fontSize: 12, marginTop: 2 }}>{l.nota}</div> : null}
+                      </div>
+                      <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+                        <select className="fx-in" style={{ width: 130, padding: "6px 8px" }} value={l.etapa} onChange={(e) => updateEtapa(l.id, e.target.value)}>
+                          {ETAPAS.map((et) => <option key={et} value={et}>{et}</option>)}
+                        </select>
+                        <button type="button" className="fx-copybtn" onClick={() => startEditLead(l)} title="Editar lead">Editar</button>
+                        <button type="button" className="fx-copybtn" onClick={() => removeLead(l.id)} title="Eliminar">✕</button>
+                      </div>
+                    </>
+                  )}
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
