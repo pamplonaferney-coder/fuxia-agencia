@@ -795,6 +795,131 @@ export const FERNEY_PILARES = [
   }
 ];
 
+export const FP_DM_SALIENTES = [
+  {
+    id: "fp-out-li",
+    etiqueta: "1. Conexión LinkedIn sin spam (tú inicias)",
+    cuando: "Envíalo a 5–10 dueños de negocios/gerentes en Medellín por semana (servicios, retail, salud, tecnología).",
+    txt: `Hola [Nombre], veo que lideras [Empresa] en Medellín. Comparto contenido práctico sobre sistemas de captación y cierre por WhatsApp para negocios locales (vengo del mundo comercial en Claro/Oppo/Tigo/Xiaomi y hoy fundo FUXIA). Un gusto conectar por acá, sin spam.`
+  },
+  {
+    id: "fp-out-ig",
+    etiqueta: "2. DM de relación en IG / Threads / FB (tú inicias)",
+    cuando: "Envía 3–5 diarios a emprendedores de Medellín después de comentar con valor en uno de sus posts.",
+    txt: `Hola [Nombre], qué buen trabajo con [Negocio] en Medellín 🙌 Te dejé un comentario en tu último post. Una pregunta rápida de colega a colega: ¿hoy la mayoría de tus ventas te entran por WhatsApp o por tienda física?`
+  },
+  {
+    id: "fp-out-voto",
+    etiqueta: "3. A quien comentó o votó en tu historia personal",
+    cuando: "Apenas alguien vote en tu encuesta o comente tu post en IG/LinkedIn/Threads.",
+    txt: `¡Gracias por participar, [Nombre]! Vi tu respuesta sobre [tema]. Si quieres, te mando un audio rápido de 60 segundos con 2 ideas puntuales que aplicaría hoy en tu negocio (gratis y sin compromiso). ¿Te lo paso por acá?`
+  },
+  {
+    id: "fp-out-puente",
+    etiqueta: "4. Puente suave a FUXIA (solo tras conversación)",
+    cuando: "Cuando ya te contaron su dolor y te preguntan cómo lo resuelven.",
+    txt: `Justo eso es lo que montamos en @fuxia_oficial. Si te sirve, revisamos tu negocio 15 min gratis esta semana y sales con el paso a paso claro (y si luego quieres que lo montemos, puedes empezar desde el Combo Presencia $550k abonable o el plan completo). ¿Te sirve mañana AM o PM?`
+  }
+];
+
+export const FP_DM_ENTRANTES = [
+  {
+    id: "fp-in-consejo",
+    etiqueta: "A. Alguien te escribe pidiendo un consejo o 'AUDITORÍA'",
+    cuando: "Responder en <1 hora con tono cercano y humano (eres Ferney, no un bot).",
+    txt: `¡Hola [Nombre]! Claro que sí, con gusto le echo un ojo 🙌 Pásame por acá el @ de tu negocio (o tu link de WhatsApp) y dime en 1 línea qué vendes y cuál sientes que es tu mayor cuello de botella hoy.`
+  },
+  {
+    id: "fp-in-fuxia",
+    etiqueta: "B. Te preguntan '¿qué haces en FUXIA / cómo trabajas?'",
+    cuando: "Cuando alguien llega desde LinkedIn, Reels o Threads interesado en contratarte.",
+    txt: `¡Hola [Nombre]! En FUXIA ayudamos a negocios locales en Medellín a vender más por WhatsApp montando un sistema completo: contenido orientado a oferta + Meta Ads medidos + orden y seguimiento en WhatsApp (sin contratos de 12 meses). ¿Qué tipo de negocio tienes y cuántos chats reciben al día?`
+  },
+  {
+    id: "fp-in-precio",
+    etiqueta: "C. Te preguntan precios por mensaje personal",
+    cuando: "Responde transparente y lleva a los 15 minutos de diagnóstico.",
+    txt: `Súper claro, [Nombre]:
+• Puente sin riesgo: Combo Presencia $550.000 (Links Pro + Google Maps optimizado), 100% abonable si en 30 días pasas al sistema completo.
+• Montaje del sistema completo (Arranque / Crecimiento): $1.500.000 (opción 50% al iniciar / 50% al entregar).
+
+Si quieres, en 15 min gratis miramos tu caso real y te digo qué te conviene primero. ¿Te sirve mañana AM o PM?`
+  }
+];
+
+function extractNetworkCopy(rawCopy, red) {
+  if (!rawCopy) return "";
+  const blocks = rawCopy.split(/\n(?=\[[A-ZÁÉÍÓÚÑ0-9 /—-]+\])/).map((b) => b.trim()).filter(Boolean);
+  const keyMap = {
+    "Instagram": ["IG", "REEL", "CARRUSEL", "TODAS"],
+    "Facebook": ["FB", "FACEBOOK", "REEL", "CARRUSEL", "TODAS"],
+    "Threads": ["THREADS", "TODAS"],
+    "LinkedIn": ["LINKEDIN", "TODAS"]
+  };
+  const keys = keyMap[red] || [];
+  const match = blocks.find((b) => {
+    const firstLine = b.split("\n")[0].toUpperCase();
+    return keys.some((k) => firstLine.includes(k));
+  });
+  return match || rawCopy;
+}
+
+export function getFpPublicacionesDia(dayObj) {
+  const allNets = ["Instagram", "Facebook", "Threads", "LinkedIn"];
+  const active = new Set(dayObj.redes || []);
+  return allNets.map((red) => {
+    if (!active.has(red)) {
+      return {
+        red,
+        activa: false,
+        accion: "Sin publicación nueva hoy en esta red (solo responder comentarios y DMs si llegan).",
+        copy: ""
+      };
+    }
+    const matchingTasks = (dayObj.tareas || []).filter((t) => {
+      const up = t.toUpperCase();
+      if (red === "Instagram") return up.includes("IG") || up.includes("REEL") || up.includes("CARRUSEL") || up.includes("STORIES");
+      if (red === "Facebook") return up.includes("FB") || up.includes("FACEBOOK");
+      if (red === "Threads") return up.includes("THREADS");
+      if (red === "LinkedIn") return up.includes("LINKEDIN");
+      return false;
+    });
+    return {
+      red,
+      activa: true,
+      accion: matchingTasks.length ? matchingTasks.join(" · ") : `Publicar pieza de hoy (${dayObj.titulo}) adaptada a ${red}.`,
+      copy: extractNetworkCopy(dayObj.copy, red)
+    };
+  });
+}
+
+export function getFpDmGuiaDia(dayObj) {
+  const hasLi = (dayObj.redes || []).includes("LinkedIn");
+  const isSun = (dayObj.dia || "").startsWith("Dom");
+  if (isSun) {
+    return {
+      enviar: "📤 TÚ ENVÍAS HOY: Domingo ligero (sin prospección fría). Solo responde comentarios pendientes y deja lista tu lista de 10 contactos para LinkedIn/IG de la próxima semana.",
+      recibir: "📥 SI TE LLEGAN: Responde en <1h cualquier DM o comentario de emprendedores con tono cercano (Guion A).",
+      salienteId: "fp-out-voto",
+      entranteId: "fp-in-consejo"
+    };
+  }
+  if (hasLi) {
+    return {
+      enviar: "📤 TÚ ENVÍAS HOY: 1) Envía 3–5 solicitudes personalizadas en LinkedIn a dueños de negocio en Medellín (Guion #1 sin spam) + 2) Comenta con criterio en 5 posts de empresarios en LinkedIn.",
+      recibir: "📥 SI TE LLEGAN: Si alguien comenta AUDITORÍA/ENERO o te escribe por interno, usa el Guion A o B en <1h (puente natural a diagnóstico 15 min).",
+      salienteId: "fp-out-li",
+      entranteId: "fp-in-fuxia"
+    };
+  }
+  return {
+    enviar: "📤 TÚ ENVÍAS HOY: 1) Escribe DM cercano a TODOS los que comentaron/votaron tu historia (Guion #3) + 2) Envía 3 DMs de relación a emprendedores locales en IG/Threads/FB (Guion #2).",
+    recibir: "📥 SI TE LLEGAN: Responde dudas con tono personal de Ferney (Guion A) y si piden precios usa el Guion C ($550k abonable + $1.5M).",
+    salienteId: "fp-out-ig",
+    entranteId: "fp-in-consejo"
+  };
+}
+
 export const FERNEY_CALENDARIO = [
   // ─── SEMANA 1: IDENTIDAD + CREDIBILIDAD COMERCIAL (30 NOV – 6 DIC) ───
   {

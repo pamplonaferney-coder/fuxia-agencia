@@ -9,7 +9,11 @@ import {
   DM_SALIENTES,
   DM_ENTRANTES,
   getPublicacionesDia,
-  getDmGuiaDia
+  getDmGuiaDia,
+  FP_DM_SALIENTES,
+  FP_DM_ENTRANTES,
+  getFpPublicacionesDia,
+  getFpDmGuiaDia
 } from "./FuxiaRedesData.jsx";
 
 // ═══════════════════════════════════════════════════════════════════
@@ -661,6 +665,7 @@ export default function FuxiaTrafico() {
   const [redFuxia, setRedFuxia] = useState("Todas");
   const [semFuxia, setSemFuxia] = useState("Todas");
   const [fpSem, setFpSem] = useState("S1");
+  const [fpIdx, setFpIdx] = useState(0);
   const [fpRed, setFpRed] = useState("Todas");
   const [copied, setCopied] = useState("");
   const [pipe, setPipe] = useState({ pautaReal: 0, leads: [] });
@@ -1031,26 +1036,33 @@ export default function FuxiaTrafico() {
           </div>
         )}
 
-        {tab === "personal" && (
+        {tab === "personal" && (() => {
+          const fpWeekDays = FERNEY_CALENDARIO.filter((item) => item.sem === fpSem);
+          const fpDay = FERNEY_CALENDARIO[fpIdx] || fpWeekDays[0] || FERNEY_CALENDARIO[0];
+          const fpPubsHoy = getFpPublicacionesDia(fpDay).filter((p) => fpRed === "Todas" || p.red === fpRed);
+          const fpDmHoy = getFpDmGuiaDia(fpDay);
+          const fpSalRec = FP_DM_SALIENTES.find((x) => x.id === fpDmHoy.salienteId) || FP_DM_SALIENTES[0];
+          const fpEntRec = FP_DM_ENTRANTES.find((x) => x.id === fpDmHoy.entranteId) || FP_DM_ENTRANTES[0];
+          return (
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <div className="fx-card" style={{ borderColor: "rgba(56,189,248,0.4)" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
                 <div>
                   <div className="fx-label" style={{ color: "#38BDF8" }}>Marca Personal · Ferney Pamplona (@ferneypamplona)</div>
-                  <div className="fx-h2" style={{ marginTop: 4 }}>Calendario 28 días · Instagram, Facebook, Threads y LinkedIn</div>
+                  <div className="fx-h2" style={{ marginTop: 4 }}>Calendario ordenado día por día · IG, Facebook, Threads y LinkedIn</div>
                 </div>
                 <span className="fx-pill" style={{ color: "#38BDF8", border: "1px solid rgba(56,189,248,0.5)", background: "rgba(56,189,248,0.1)" }}>{pctFp}% completado ({doneTasksFp}/{totalTasksFp})</span>
               </div>
-              <div className="fx-fgrid" style={{ marginTop: 10 }}>
-                {FERNEY_PILARES.map((pl) => (
-                  <div key={pl.pilar} style={{ background: S2, border: "1px solid " + B2, borderRadius: 10, padding: "11px 13px" }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: "#38BDF8", marginBottom: 4 }}>{pl.pilar}</div>
-                    <div style={{ fontSize: 12.5, color: T2, lineHeight: 1.5 }}>{pl.desc}</div>
-                  </div>
-                ))}
-              </div>
-              <details className="fx-doc" style={{ marginTop: 12 }}>
-                <summary>Bios optimizadas de @ferneypamplona (IG · LinkedIn · Threads · Facebook)</summary>
+              <details className="fx-doc" style={{ marginTop: 10 }}>
+                <summary>4 Pilares + Bios optimizadas de @ferneypamplona (IG · LinkedIn · Threads · Facebook)</summary>
+                <div className="fx-fgrid" style={{ marginBottom: 12 }}>
+                  {FERNEY_PILARES.map((pl) => (
+                    <div key={pl.pilar} style={{ background: S1, border: "1px solid " + B2, borderRadius: 10, padding: "10px 12px" }}>
+                      <div style={{ fontSize: 12.5, fontWeight: 700, color: "#38BDF8", marginBottom: 4 }}>{pl.pilar}</div>
+                      <div style={{ fontSize: 12, color: T2, lineHeight: 1.5 }}>{pl.desc}</div>
+                    </div>
+                  ))}
+                </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingBottom: 14 }}>
                   {FERNEY_BIOS.map((b) => (
                     <div key={b.red} style={{ background: S1, border: "1px solid " + B2, borderRadius: 8, padding: "12px 14px" }}>
@@ -1065,48 +1077,150 @@ export default function FuxiaTrafico() {
               </details>
             </div>
 
-            <div className="scrollx" style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-              {[["S1", "Semana 1 (30 nov–6 dic)"], ["S2", "Semana 2 (7–13 dic)"], ["S3", "Semana 3 (14–20 dic)"], ["S4", "Semana 4 (21–27 dic)"], ["Todas", "28 días"]].map(([id, lbl]) => (
-                <button key={id} type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + (fpSem === id ? "#38BDF8" : B2), color: fpSem === id ? "#38BDF8" : T2, background: fpSem === id ? "rgba(56,189,248,0.12)" : "transparent", padding: "6px 13px", whiteSpace: "nowrap" }} onClick={() => setFpSem(id)}>{lbl}</button>
-              ))}
-            </div>
-            <div className="scrollx" style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-              {["Todas", "Instagram", "Facebook", "Threads", "LinkedIn"].map((r) => (
-                <button key={r} type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + (fpRed === r ? (RED_COLOR[r] || "#38BDF8") : B2), color: fpRed === r ? (RED_COLOR[r] || "#38BDF8") : T2, background: fpRed === r ? "rgba(255,255,255,0.08)" : "transparent", padding: "5px 12px" }} onClick={() => setFpRed(r)}>{r}</button>
+            <div className="scrollx" style={{ display: "flex", gap: 6 }}>
+              {[["S1", "Semana 1 (30 nov–6 dic)"], ["S2", "Semana 2 (7–13 dic)"], ["S3", "Semana 3 (14–20 dic)"], ["S4", "Semana 4 (21–27 dic)"]].map(([id, lbl]) => (
+                <button
+                  key={id}
+                  type="button"
+                  className="fx-pill"
+                  style={{ cursor: "pointer", border: "1px solid " + (fpSem === id ? "#38BDF8" : B2), color: fpSem === id ? "#38BDF8" : T2, background: fpSem === id ? "rgba(56,189,248,0.12)" : "transparent", padding: "6px 13px", whiteSpace: "nowrap" }}
+                  onClick={() => {
+                    setFpSem(id);
+                    const first = FERNEY_CALENDARIO.findIndex((x) => x.sem === id);
+                    if (first >= 0) setFpIdx(first);
+                  }}
+                >
+                  {lbl}
+                </button>
               ))}
             </div>
 
-            {fpFiltrado.map((d) => (
-              <div key={d.id} className="fx-card" style={{ borderColor: "rgba(56,189,248,0.24)" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", marginBottom: 8 }}>
-                  <span className="fx-mono" style={{ fontSize: 11.5, fontWeight: 700, color: WARN }}>{d.sem} · {d.dia}</span>
-                  {d.redes.map((r) => (
-                    <span key={r} className="fx-badge" style={{ color: RED_COLOR[r] || T1, borderColor: RED_COLOR[r] || B2 }}>{r}</span>
-                  ))}
-                  <span className="fx-mono" style={{ fontSize: 10.5, color: T3, marginLeft: "auto" }}>{d.pilar}</span>
-                </div>
-                <div className="fx-h2" style={{ marginBottom: 8 }}>{d.titulo}</div>
-                {d.tareas.map((t, ti) => {
-                  const k = d.id + "-" + ti;
-                  const on = !!fpChecks[k];
-                  return (
-                    <div key={k} className="fx-task" onClick={() => toggleFp(k)}>
-                      <div className={"fx-cb" + (on ? " on" : "")} style={on ? { background: "#38BDF8", borderColor: "#38BDF8" } : undefined}>{on ? "✓" : ""}</div>
-                      <div className={"fx-txt" + (on ? " on" : "")}>{t}</div>
-                    </div>
-                  );
-                })}
-                <details className="fx-doc" style={{ marginTop: 10 }}>
-                  <summary>Ver guion / copy listo para publicar</summary>
-                  <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
-                    <button type="button" className="fx-copybtn" onClick={() => copy(d.id, d.copy)}>{copied === d.id ? "✓ copiado" : "copiar todo"}</button>
-                  </div>
-                  <pre>{d.copy}</pre>
-                </details>
+            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" }}>
+              {fpWeekDays.map((d) => {
+                const realIdx = FERNEY_CALENDARIO.indexOf(d);
+                const shortDia = d.dia.split("·")[0].trim();
+                const on = fpIdx === realIdx;
+                return (
+                  <button
+                    key={d.id}
+                    type="button"
+                    className={"fx-day" + (on ? " on" : "")}
+                    style={on ? { borderColor: "#38BDF8", color: "#38BDF8", background: "rgba(56,189,248,0.14)" } : undefined}
+                    onClick={() => setFpIdx(realIdx)}
+                  >
+                    {shortDia}
+                  </button>
+                );
+              })}
+              <div style={{ marginLeft: "auto", display: "flex", gap: 5, flexWrap: "wrap" }}>
+                {["Todas", "Instagram", "Facebook", "Threads", "LinkedIn"].map((r) => (
+                  <button key={r} type="button" className="fx-pill" style={{ cursor: "pointer", border: "1px solid " + (fpRed === r ? (RED_COLOR[r] || "#38BDF8") : B2), color: fpRed === r ? (RED_COLOR[r] || "#38BDF8") : T2, background: fpRed === r ? "rgba(255,255,255,0.08)" : "transparent", padding: "4px 10px", fontSize: 11 }} onClick={() => setFpRed(r)}>{r}</button>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <div className="fx-card" style={{ borderColor: "rgba(56,189,248,0.35)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 6 }}>
+                <span className="fx-label" style={{ color: WARN }}>{fpDay.sem} · {fpDay.dia}</span>
+                <span className="fx-pill" style={{ marginLeft: "auto", color: "#38BDF8", border: "1px solid rgba(56,189,248,0.4)", background: "rgba(56,189,248,0.08)" }}>{fpDay.pilar}</span>
+              </div>
+              <div className="fx-h2" style={{ margin: "6px 0 10px" }}>{fpDay.titulo}</div>
+
+              {fpDay.tareas.map((t, ti) => {
+                const k = fpDay.id + "-" + ti;
+                const on = !!fpChecks[k];
+                return (
+                  <div key={k} className="fx-task" onClick={() => toggleFp(k)}>
+                    <div className={"fx-cb" + (on ? " on" : "")} style={on ? { background: "#38BDF8", borderColor: "#38BDF8" } : undefined}>{on ? "✓" : ""}</div>
+                    <div className={"fx-txt" + (on ? " on" : "")}>{t}</div>
+                  </div>
+                );
+              })}
+
+              <div style={{ marginTop: 16, padding: "14px 15px", background: S2, border: "1px solid rgba(56,189,248,0.35)", borderRadius: 10 }}>
+                <div className="fx-label" style={{ color: "#38BDF8", marginBottom: 10 }}>📢 Qué publicar hoy — red por red (@ferneypamplona)</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {fpPubsHoy.map((pub) => (
+                    <div key={pub.red + "-" + fpDay.id} style={{ display: "flex", alignItems: "flex-start", gap: 10, flexWrap: "wrap", padding: "9px 11px", background: S1, borderRadius: 8, border: "1px solid " + B2, opacity: pub.activa ? 1 : 0.62 }}>
+                      <span className="fx-badge" style={{ color: pub.activa ? (RED_COLOR[pub.red] || T1) : T3, borderColor: pub.activa ? (RED_COLOR[pub.red] || B2) : B2, minWidth: 84, textAlign: "center" }}>{pub.red}</span>
+                      <div style={{ flex: 1, minWidth: 180, fontSize: 13.5, lineHeight: 1.55, color: pub.activa ? T1 : T3 }}>{pub.accion}</div>
+                      {pub.activa && pub.copy ? (
+                        <button type="button" className="fx-copybtn" onClick={() => copy("fppub-" + fpDay.id + "-" + pub.red, pub.copy)}>
+                          {copied === "fppub-" + fpDay.id + "-" + pub.red ? "✓ copy copiado" : "copiar copy"}
+                        </button>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10 }}>
+                <div style={{ padding: "13px 14px", background: S2, border: "1px solid rgba(245,200,66,0.38)", borderRadius: 10 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                    <span className="fx-label" style={{ color: WARN }}>📤 DMs / NETWORKING QUE TÚ ENVÍAS</span>
+                    <button type="button" className="fx-copybtn" onClick={() => copy("fpdm-out-" + fpDay.id, fpSalRec.txt)}>
+                      {copied === "fpdm-out-" + fpDay.id ? "✓ copiado" : "copiar guion"}
+                    </button>
+                  </div>
+                  <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{fpDmHoy.enviar}</div>
+                  <div style={{ fontSize: 11.5, color: WARN, fontWeight: 700, marginBottom: 4 }}>Mensaje exacto sugerido ({fpSalRec.etiqueta}):</div>
+                  <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{fpSalRec.txt}</pre>
+                  <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
+                    <summary>Ver los 4 guiones salientes de Marca Personal</summary>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
+                      {FP_DM_SALIENTES.map((g) => (
+                        <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                            <span style={{ fontSize: 12, fontWeight: 700, color: WARN }}>{g.etiqueta}</span>
+                            <button type="button" className="fx-copybtn" onClick={() => copy("fpall-out-" + g.id, g.txt)}>{copied === "fpall-out-" + g.id ? "✓" : "copiar"}</button>
+                          </div>
+                          <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
+                          <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                </div>
+
+                <div style={{ padding: "13px 14px", background: S2, border: "1px solid rgba(138,232,160,0.38)", borderRadius: 10 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                    <span className="fx-label" style={{ color: OK }}>📥 DMs / COMENTARIOS QUE TE LLEGAN</span>
+                    <button type="button" className="fx-copybtn" onClick={() => copy("fpdm-in-" + fpDay.id, fpEntRec.txt)}>
+                      {copied === "fpdm-in-" + fpDay.id ? "✓ copiado" : "copiar respuesta"}
+                    </button>
+                  </div>
+                  <div style={{ fontSize: 13, lineHeight: 1.55, color: T1, marginBottom: 8 }}>{fpDmHoy.recibir}</div>
+                  <div style={{ fontSize: 11.5, color: OK, fontWeight: 700, marginBottom: 4 }}>Respuesta exacta sugerida ({fpEntRec.etiqueta}):</div>
+                  <pre style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12.5, lineHeight: 1.6, color: T2, whiteSpace: "pre-wrap", wordBreak: "break-word", background: S1, padding: "9px 10px", borderRadius: 6, border: "1px solid " + B2 }}>{fpEntRec.txt}</pre>
+                  <details className="fx-doc" style={{ marginTop: 8, background: S1 }}>
+                    <summary>Ver las 3 respuestas entrantes (&lt;1h)</summary>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 10 }}>
+                      {FP_DM_ENTRANTES.map((g) => (
+                        <div key={g.id} style={{ padding: "8px 10px", background: S2, borderRadius: 6, border: "1px solid " + B2 }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                            <span style={{ fontSize: 12, fontWeight: 700, color: OK }}>{g.etiqueta}</span>
+                            <button type="button" className="fx-copybtn" onClick={() => copy("fpall-in-" + g.id, g.txt)}>{copied === "fpall-in-" + g.id ? "✓" : "copiar"}</button>
+                          </div>
+                          <div style={{ fontSize: 11.5, color: T3, marginBottom: 4 }}>{g.cuando}</div>
+                          <pre style={{ paddingBottom: 0, fontSize: 12 }}>{g.txt}</pre>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+              <details className="fx-doc" style={{ marginTop: 12 }}>
+                <summary>Ver texto completo del día (todas las redes juntas)</summary>
+                <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
+                  <button type="button" className="fx-copybtn" onClick={() => copy(fpDay.id, fpDay.copy)}>{copied === fpDay.id ? "✓ copiado" : "copiar todo"}</button>
+                </div>
+                <pre>{fpDay.copy}</pre>
+              </details>
+            </div>
           </div>
-        )}
+          );
+        })()}
 
         {tab === "tab" && (
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
