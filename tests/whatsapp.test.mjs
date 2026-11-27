@@ -228,7 +228,6 @@ test('falls back to Pollinations Free AI (zero API key) and then deterministic f
   process.env.TELEGRAM_CHAT_ID = '99999';
 
   try {
-    // Case A: Groq fails (429) -> Pollinations Free AI succeeds (200)
     globalThis.fetch = async (url) => {
       if (String(url).includes('api.groq.com')) return { ok: false, status: 429 };
       if (String(url).includes('text.pollinations.ai')) {
@@ -255,7 +254,6 @@ test('falls back to Pollinations Free AI (zero API key) and then deterministic f
     assert.equal(resPoll.out.body.aiProvider, 'pollinations-free');
     assert.equal(resPoll.out.body.replied, true);
 
-    // Case B: Both Groq and Pollinations fail -> deterministic fallback
     globalThis.fetch = async () => ({ ok: false, status: 503 });
     const resFb = createRes();
     await handler(
@@ -271,7 +269,6 @@ test('falls back to Pollinations Free AI (zero API key) and then deterministic f
     assert.equal(resFb.out.body.replied, false);
     assert.equal(resFb.out.body.notified, false);
 
-    // Check deterministic fallback branches directly
     const { buildFallbackReply } = handler._internals;
     assert.ok(buildFallbackReply('¿cuánto vale?', 'Juan').includes('$550.000'));
     assert.ok(buildFallbackReply('quiero el combo maps', 'Ana').includes('Combo Presencia'));
@@ -284,5 +281,106 @@ test('falls back to Pollinations Free AI (zero API key) and then deterministic f
       if (v === undefined) delete process.env[k];
       else process.env[k] = v;
     }
+  }
+});
+
+test('handles web-chat channel live on public landing with origin check, history, and rate limit', async () => {
+  const prevGroq = process.env.GROQ_API_KEY;
+  const prevTg = process.env.TELEGRAM_BOT_TOKEN;
+  const prevChat = process.env.TELEGRAM_CHAT_ID;
+  const prevFetch = globalThis.fetch;
+  process.env.GROQ_API_KEY = 'gsk_web_test';
+  process.env.TELEGRAM_BOT_TOKEN = 'tg-tok';
+  process.env.TELEGRAM_CHAT_ID = '111';
+
+  try {
+    // 1. Disallowed origin -> 403
+    const badOrig = createRes();
+    await handler(
+      {
+        method: 'POST',
+        headers: { origin: 'https://evil.example', 'x-forwarded-for': '20.0.0.1' },
+        body: { source: 'web-chat', message: 'Hola' }
+      },
+      badOrig
+    );
+    assert.equal(badOrig.out.statusCode, 403);
+
+    // 2. Empty/short message -> 400
+    const badMsg = createRes();
+    await handler(
+      {
+        method: 'POST',
+        headers: { origin: 'https://fuxia-landing.vercel.app', 'x-forwarded-for': '20.0.0.2' },
+        body: { source: 'web-chat', message: 'a' }
+      },
+      badMsg
+    );
+    assert.equal(badMsg.out.statusCode, 400);
+
+    // 3. Valid multi-turn web-chat -> 200 with AI reply
+    globalThis.fetch = async (url) => {
+      if (String(url).includes('api.groq.com')) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            choices: [{ message: { content: '¡Claro! El Combo Presencia vale $550.000 abonables.' } }]
+          })
+        };
+      }
+      return { ok: true, status: 200, json: async () => ({}) };
+    };
+    const okRes = createRes();
+    await handler(
+      {
+        method: 'POST',
+        headers: { origin: 'https://fuxia-landing.vercel.app', 'x-forwarded-for': '20.0.0.3' },
+        body: {
+          source: 'web-chat',
+          name: 'Pedro',
+          message: '¿Qué incluye el Combo Presencia?',
+          history: [{ role: 'assistant', content: '¡Hola! ¿En qué te ayudo?' }]
+        }
+      },
+      okRes
+    );
+    assert.equal(okRes.out.statusCode, 200);
+    assert.equal(okRes.out.body.ok, true);
+    assert.equal(okRes.out.body.aiProvider, 'groq-free');
+    assert.ok(okRes.out.body.reply.includes('$550.000'));
+
+    // 4. Rate limit after 15 requests from same IP -> 429
+    const rlIp = '20.0.0.99';
+    for (let i = 0; i < 15; i++) {
+      const r = createRes();
+      await handler(
+        {
+          method: 'POST',
+          headers: { origin: 'https://fuxia-landing.vercel.app', 'x-forwarded-for': rlIp },
+          body: { source: 'web-chat', message: 'pregunta ' + i }
+        },
+        r
+      );
+      assert.equal(r.out.statusCode, 200);
+    }
+    const blocked = createRes();
+    await handler(
+      {
+        method: 'POST',
+        headers: { origin: 'https://fuxia-landing.vercel.app', 'x-forwarded-for': rlIp },
+        body: { source: 'web-chat', message: 'extra' }
+      },
+      blocked
+    );
+    assert.equal(blocked.out.statusCode, 429);
+  } finally {
+    globalThis.fetch = prevFetch;
+    if (prevGroq === undefined) delete process.env.GROQ_API_KEY;
+    else process.env.GROQ_API_KEY = prevGroq;
+    if (prevTg === undefined) delete process.env.TELEGRAM_BOT_TOKEN;
+    else process.env.TELEGRAM_BOT_TOKEN = prevTg;
+    if (prevChat === undefined) delete process.env.TELEGRAM_CHAT_ID;
+    else process.env.TELEGRAM_CHAT_ID = prevChat;
   }
 });

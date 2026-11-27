@@ -1,17 +1,13 @@
-// GET & POST /api/whatsapp — Bot oficial WhatsApp Cloud API para FUXIA (+57 324 396 4088)
-// Sin n8n · 100% código serverless 24/7 en Vercel · IA 100% GRATUITA ($0, sin tarjeta):
+// GET & POST /api/whatsapp — Bot oficial FUXIA Marketing Digital (IA 100% GRATUITA: $0, sin tarjeta)
+// Soporta 2 canales simultáneos sin n8n:
+//   A) Widget de Chat IA en vivo en la web pública (POST { source: 'web-chat', message, name, history })
+//      conviviendo en https://fuxia-landing.vercel.app junto al WhatsApp Business (+57 323 531 5015).
+//   B) Webhook oficial Meta WhatsApp Cloud API (+57 324 396 4088 · Phone Number ID: 1063543846848888).
+//
+// Cadena de IA 100% GRATUITA:
 //   1) Groq Cloud Free Tier (GROQ_API_KEY · modelo default: openai/gpt-oss-120b)
 //   2) Pollinations Free OpenAI API (https://text.pollinations.ai/openai · $0 sin API key)
-//   3) Fallback determinístico comercial FUXIA (si las APIs externas tardan o fallan)
-//
-// Env vars en Vercel:
-//   WHATSAPP_PHONE_NUMBER_ID (default: 1063543846848888 · línea +57 324 396 4088)
-//   WHATSAPP_VERIFY_TOKEN    (token de verificación para el webhook de Meta)
-//   WHATSAPP_ACCESS_TOKEN    (token permanente de Usuario del Sistema en Meta)
-//   GROQ_API_KEY             (gratis sin tarjeta en console.groq.com; si falta usa Pollinations gratis)
-//   GROQ_MODEL               (opcional, default: openai/gpt-oss-120b)
-//   META_APP_SECRET          (opcional: valida firma X-Hub-Signature-256)
-//   TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (alerta instantánea de leads a Ferney)
+//   3) Fallback determinístico comercial FUXIA
 
 const crypto = require('node:crypto');
 
@@ -19,20 +15,24 @@ const DEFAULT_PHONE_NUMBER_ID = '1063543846848888';
 const DEFAULT_GROQ_MODEL = 'openai/gpt-oss-120b';
 const GRAPH_API_VERSION = 'v21.0';
 const MAX_SEEN_IDS = 500;
+const WEB_RATE_WINDOW_MS = 10 * 60 * 1000;
+const WEB_RATE_MAX_REQ = 15;
 const seenMessageIds = new Set();
+const webRateBuckets = new Map();
 
 const SYSTEM_PROMPT = [
-  'Eres el asistente comercial oficial de FUXIA Marketing Digital en Medellín (WhatsApp +57 324 396 4088).',
+  'Eres el asistente comercial oficial de FUXIA Marketing Digital en Medellín.',
   'Enfoque estricto: marketing digital y campañas bien estructuradas en Meta Ads (Ads Manager), contenido estratégico, landing pages y posicionamiento en Google Maps. NO vendas bots ni automatizaciones con n8n como producto principal.',
+  'Canal humano directo: WhatsApp Business oficial +57 323 531 5015 (con Ferney Pamplona).',
   'Reglas de tono: español de Colombia cercano, claro, directo, sin humo ni tecnicismos. Nunca digas "setup", "UTMs" ni "tiendas de tecnología"; usa "montaje inicial", "medición exacta de anuncios" y "negocios locales".',
   'Planes oficiales (COP, sin IVA · sin contratos de 12 meses · garantía 20 días):',
   '- Diagnóstico gratis (15 min): revisamos Instagram, oferta y campañas actuales + 3 mejoras concretas.',
   '- Combo Presencia ($550.000 pago único): Links Pro + Google Maps optimizado, 100% abonable si en 30 días pasa a Arranque o Crecimiento.',
-  '- Arranque ($1.500.000 pago único, opción 50/50): landing, medición exacta, perfiles optimizados, 4 piezas + 2 guiones y campaña Meta Ads estructurada.',
-  '- Crecimiento (Mes 1 $1.500.000 montaje inicial, opción 50/50 · desde Mes 2 $750.000/mes): todo Arranque + 8 piezas/mes + gestión Meta Ads + reporte mensual.',
+  '- Arranque ($1.500.000 pago único, opción 50/50): landing, medición exacta de CPL, perfiles optimizados, 4 piezas + 2 guiones y campaña Meta Ads estructurada.',
+  '- Crecimiento (Mes 1 $1.500.000 montaje inicial, opción 50/50 · desde Mes 2 $750.000/mes): todo Arranque + 8 piezas/mes + gestión Meta Ads + reporte mensual de leads y CPL.',
   '- Escala (Mes 1 $2.500.000 montaje inicial · desde Mes 2 $1.200.000/mes): 12 piezas/mes + 4 reels + embudo multi-campaña (frío + retargeting) + tablero de métricas + reunión quincenal.',
-  '- La pauta se paga directo a Meta ($300k–$600k/mes recomendado).',
-  'Objetivo: responde en máximo 5 líneas cortas, resuelve la duda y haz 1 pregunta concreta para calificar (qué vende o si ya pauta en Meta Ads) o invitar al diagnóstico gratis de 15 min.'
+  '- La pauta se paga directo a Meta ($300k–$600k/mes recomendado para empezar).',
+  'Objetivo: responde en máximo 4–5 líneas cortas, resuelve la duda y haz 1 pregunta concreta para calificar (qué vende o si ya pauta en Meta Ads) o invitar a hablar por WhatsApp Business (+57 323 531 5015) para agendar el diagnóstico gratis de 15 min.'
 ].join('\n');
 
 function escHtml(s) {
@@ -44,6 +44,52 @@ function cleanAiText(raw) {
     .replace(/<think>[\s\S]*?<\/think>/gi, '')
     .trim()
     .slice(0, 1200);
+}
+
+function getClientIp(req) {
+  const fwd = req.headers && (req.headers['x-forwarded-for'] || req.headers['x-real-ip']);
+  if (typeof fwd === 'string' && fwd.trim()) {
+    return fwd.split(',')[0].trim().slice(0, 64);
+  }
+  return (req.socket && req.socket.remoteAddress) ? String(req.socket.remoteAddress).slice(0, 64) : 'unknown';
+}
+
+function isAllowedWebOrigin(req) {
+  const origin = req.headers && req.headers.origin;
+  if (!origin) return true;
+  try {
+    const u = new URL(origin);
+    const host = u.hostname.toLowerCase();
+    return (
+      host === 'fuxia-landing.vercel.app' ||
+      (host.endsWith('.vercel.app') && host.startsWith('fuxia-landing')) ||
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host === 'fuxia.co' ||
+      host.endsWith('.fuxia.co')
+    );
+  } catch {
+    return false;
+  }
+}
+
+function checkWebRateLimit(ip, now) {
+  if (webRateBuckets.size > 500) {
+    for (const [k, tsList] of webRateBuckets.entries()) {
+      const fresh = tsList.filter((t) => now - t < WEB_RATE_WINDOW_MS);
+      if (fresh.length) webRateBuckets.set(k, fresh);
+      else webRateBuckets.delete(k);
+    }
+  }
+  const prev = webRateBuckets.get(ip) || [];
+  const recent = prev.filter((t) => now - t < WEB_RATE_WINDOW_MS);
+  if (recent.length >= WEB_RATE_MAX_REQ) {
+    webRateBuckets.set(ip, recent);
+    return { allowed: false, retryAfterSec: Math.max(1, Math.ceil((WEB_RATE_WINDOW_MS - (now - recent[0])) / 1000)) };
+  }
+  recent.push(now);
+  webRateBuckets.set(ip, recent);
+  return { allowed: true, retryAfterSec: 0 };
 }
 
 function getQueryParam(req, name) {
@@ -212,26 +258,31 @@ async function callPollinationsFreeAi(messages) {
   }
 }
 
-async function generateFreeAiReply(userText, name) {
+async function generateFreeAiReply(userText, name, rawHistory) {
+  const history = Array.isArray(rawHistory)
+    ? rawHistory
+      .slice(-4)
+      .filter((m) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+      .map((m) => ({ role: m.role, content: m.content.trim().slice(0, 400) }))
+    : [];
+
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: `Nombre del contacto: ${name}\nMensaje: ${userText}` }
+    ...history,
+    { role: 'user', content: name && name !== 'Cliente' ? `Nombre: ${name}\nMensaje: ${userText}` : userText }
   ];
 
-  // 1) Groq Cloud Free Tier (sin tarjeta · ultra-rápida)
   const groqKey = process.env.GROQ_API_KEY || '';
   if (groqKey) {
     const groqReply = await callGroqFreeAi(messages, groqKey);
     if (groqReply) return { text: groqReply, provider: 'groq-free' };
   }
 
-  // 2) Pollinations Free AI ($0 · sin API key ni registro)
   if (process.env.DISABLE_POLLINATIONS_FALLBACK !== '1') {
     const pollReply = await callPollinationsFreeAi(messages);
     if (pollReply) return { text: pollReply, provider: 'pollinations-free' };
   }
 
-  // 3) Respuesta comercial determinística instantánea
   return { text: buildFallbackReply(userText, name), provider: 'fallback' };
 }
 
@@ -266,17 +317,11 @@ async function sendWhatsAppText(to, bodyText) {
   }
 }
 
-async function notifyTelegram(incoming, replyText, provider, waStatus) {
+async function notifyTelegram(title, detailLines) {
   const token = process.env.TELEGRAM_BOT_TOKEN || process.env.BOT_TOKEN || '';
   const chatId = process.env.TELEGRAM_CHAT_ID || process.env.CHAT_ID || '';
   if (!token || !chatId) return false;
-  const text =
-    '<b>Nuevo mensaje Bot WhatsApp (+57 324 396 4088)</b>\n' +
-    'Nombre: ' + escHtml(incoming.name) + '\n' +
-    'Número: +' + escHtml(incoming.from) + '\n' +
-    'Mensaje: ' + escHtml(incoming.text) + '\n' +
-    'IA (' + escHtml(provider) + ' · ' + (waStatus.sent ? 'enviada' : escHtml(waStatus.reason || 'pendiente')) + '): ' +
-    escHtml(replyText.slice(0, 300));
+  const text = `<b>${escHtml(title)}</b>\n` + detailLines.join('\n');
   try {
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), 6000);
@@ -291,6 +336,32 @@ async function notifyTelegram(incoming, replyText, provider, waStatus) {
   } catch {
     return false;
   }
+}
+
+async function handleWebChat(req, res, body) {
+  if (!isAllowedWebOrigin(req)) {
+    res.status(403).json({ ok: false, error: 'origin' });
+    return;
+  }
+  const rl = checkWebRateLimit(getClientIp(req), Date.now());
+  if (!rl.allowed) {
+    if (typeof res.setHeader === 'function') res.setHeader('Retry-After', String(rl.retryAfterSec));
+    res.status(429).json({ ok: false, error: 'rate_limit', retryAfter: rl.retryAfterSec });
+    return;
+  }
+  const message = String(body.message || '').trim().slice(0, 500);
+  const name = String(body.name || 'Visitante Web').trim().slice(0, 50) || 'Visitante Web';
+  if (message.length < 2) {
+    res.status(400).json({ ok: false, error: 'validation' });
+    return;
+  }
+  const ai = await generateFreeAiReply(message, name, body.history);
+  const notified = await notifyTelegram('Consulta Bot IA en Web Pública', [
+    'Visitante: ' + escHtml(name),
+    'Mensaje: ' + escHtml(message),
+    'Respuesta (' + escHtml(ai.provider) + '): ' + escHtml(ai.text.slice(0, 280))
+  ]);
+  res.status(200).json({ ok: true, reply: ai.text, aiProvider: ai.provider, notified });
 }
 
 module.exports = async function handler(req, res) {
@@ -317,17 +388,24 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {});
-  if (!verifySignature(req, rawBody)) {
-    res.status(401).json({ ok: false, error: 'invalid_signature' });
-    return;
-  }
-
   let body = req.body;
+  const rawBody = typeof body === 'string' ? body : JSON.stringify(body || {});
   if (typeof body === 'string') {
     try { body = JSON.parse(body); } catch { body = {}; }
   }
   body = body && typeof body === 'object' ? body : {};
+
+  // Canal A: Widget de Chat IA en vivo en https://fuxia-landing.vercel.app
+  if (body.source === 'web-chat') {
+    await handleWebChat(req, res, body);
+    return;
+  }
+
+  // Canal B: Webhook oficial Meta WhatsApp Cloud API (+57 324 396 4088)
+  if (!verifySignature(req, rawBody)) {
+    res.status(401).json({ ok: false, error: 'invalid_signature' });
+    return;
+  }
 
   const incoming = extractIncomingMessage(body);
   if (!incoming) {
@@ -341,7 +419,12 @@ module.exports = async function handler(req, res) {
 
   const ai = await generateFreeAiReply(incoming.text, incoming.name);
   const waStatus = await sendWhatsAppText(incoming.from, ai.text);
-  const notified = await notifyTelegram(incoming, ai.text, ai.provider, waStatus);
+  const notified = await notifyTelegram('Nuevo mensaje Bot WhatsApp (+57 324 396 4088)', [
+    'Nombre: ' + escHtml(incoming.name),
+    'Número: +' + escHtml(incoming.from),
+    'Mensaje: ' + escHtml(incoming.text),
+    'IA (' + escHtml(ai.provider) + ' · ' + (waStatus.sent ? 'enviada' : escHtml(waStatus.reason || 'pendiente')) + '): ' + escHtml(ai.text.slice(0, 280))
+  ]);
 
   res.status(200).json({
     ok: true,
@@ -356,5 +439,6 @@ module.exports._internals = {
   buildFallbackReply,
   cleanAiText,
   extractIncomingMessage,
-  seenMessageIds
+  seenMessageIds,
+  webRateBuckets
 };
