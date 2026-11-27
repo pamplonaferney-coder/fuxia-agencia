@@ -121,6 +121,16 @@ if (day3Btn) day3Btn.click();
 await new Promise((r) => setTimeout(r, 40));
 const day3Text = root.textContent;
 
+const day8Btn = [...root.querySelectorAll('button.fx-day')].find((b) => b.textContent.trim() === '8');
+if (day8Btn) day8Btn.click();
+await new Promise((r) => setTimeout(r, 40));
+const day8Text = root.textContent;
+
+const day11Btn = [...root.querySelectorAll('button.fx-day')].find((b) => b.textContent.trim() === '11');
+if (day11Btn) day11Btn.click();
+await new Promise((r) => setTimeout(r, 40));
+const day11Text = root.textContent;
+
 const redesText = await clickTab('Redes FUXIA');
 const personalText = await clickTab('Marca Personal');
 const tabText = await clickTab('Tablero');
@@ -135,16 +145,21 @@ if (firstTask) firstTask.click();
 await new Promise((r) => setTimeout(r, 30));
 const afterCheck = root.textContent;
 
-// Verify zero residual "tiendas de tecnología" in source JSX
+// Verify zero residual "tiendas de tecnología" in source JSX & no automation pitch in landing Escala
 const jsxSrc = fs.readFileSync(JSX_PATH, 'utf8');
+const landingHtml = fs.readFileSync(path.join(ROOT, 'landing', 'index.html'), 'utf8');
 const noLegacyNiche = !/tiendas de tecnolog/i.test(jsxSrc);
+const landingMarketingFocused = !landingHtml.includes('CRM + automatización + IA');
 
 const checks = {
   errors: errors.length,
   noLegacyNiche,
+  landingMarketingFocused,
   hasHoyButton: calText.includes('Ir a Hoy') && personalText.includes('Ir a Hoy'),
   hasDay1PerNetwork: day1Text.includes('Qué publicar hoy — red por red') && day1Text.includes('Instagram') && day1Text.includes('TikTok') && day1Text.includes('Threads') && day1Text.includes('Facebook'),
   hasDay3ExactPoll: day3Text.includes('¿Cuánto te demorás hoy en responder un WhatsApp nuevo?') && day3Text.includes('Menos de 15 min') && day3Text.includes('Más de 1 hora'),
+  hasDay8MetaAds: day8Text.includes('Meta Ads') && day8Text.includes('2 anuncios'),
+  hasDay11CreativeNotBot: day11Text.includes('Anatomía de un anuncio') && !/automatizar/i.test(day11Text),
   hasDay1DmsClear: day1Text.includes('DMs QUE TÚ ENVÍAS') && day1Text.includes('DMs / WA QUE TE LLEGAN'),
   hasRedes4: redesText.includes('TikTok') && redesText.includes('Threads') && redesText.includes('Facebook') && redesText.includes('Instagram'),
   hasPersonal4: personalText.includes('@ferneypamplona') && personalText.includes('LinkedIn') && personalText.includes('Ver texto / preguntas / guion exacto'),

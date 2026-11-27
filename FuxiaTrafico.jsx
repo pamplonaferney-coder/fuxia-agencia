@@ -19,7 +19,7 @@ import {
 // ═══════════════════════════════════════════════════════════════════
 // FUXIA MARKETING × FERNEY — SISTEMA UNIFICADO (MÓVIL + PC)
 // Setup: lun 23 – dom 29 nov 2026 · Día 1: lun 30 nov · Día 60: jue 28 ene 2027
-// Mercado: negocios locales en Medellín que venden por WhatsApp
+// Mercado: negocios locales en Medellín · Marketing Digital y Campañas Estructuradas
 // Redes FUXIA: IG · TikTok · Threads · Facebook
 // Marca Personal @ferneypamplona: IG · Facebook · Threads · LinkedIn
 // ═══════════════════════════════════════════════════════════════════
@@ -53,61 +53,60 @@ function gastoDia(idx) {
 // ─── DOCUMENTOS COMPLETOS (guiones, campañas, plantillas, reglas) ───
 const DOCS = {
 nicho: { t: "Mercado y cliente ideal (ICP)", txt:
-`MERCADO OBJETIVO — NEGOCIOS LOCALES EN MEDELLÍN QUE VENDEN POR WHATSAPP
+`MERCADO OBJETIVO — NEGOCIOS LOCALES EN MEDELLÍN QUE QUIEREN CAMPAÑAS BIEN ESTRUCTURADAS
 
 Quién es el cliente:
 - Negocios de productos, tiendas de celulares y accesorios, servicios locales (salud, estética, técnico, remodelación) y alimentos/repostería.
 - 1 a 3 sedes en Medellín o área metropolitana.
-- Dueño o administrador que atiende WhatsApp e Instagram.
-- Entre 5 y 50 mensajes diarios.
-- Sin CRM, sin seguimiento sistematizado y con pauta irregular.
+- Dueño o administrador que quiere atraer clientes reales con marketing digital medible (no likes vacíos).
+- Ha publicado en redes o probado el botón "Promocionar publicación" sin estructura ni retorno claro.
+- Quiere campañas bien estructuradas en Meta Ads, contenido con oferta clara, landing y presencia en Google Maps.
 
 Dolores que le quitamos:
-- Responde tarde y el cliente compra en otro lado.
-- Anota leads en cuaderno o los pierde en el chat.
-- Publica todos los días, pero no tiene oferta clara.
-- Pauta sin medición: no sabe qué anuncio trae ventas.
+- Quema presupuesto en el botón "Promocionar publicación" sin saber qué anuncio trae clientes.
+- Publica todos los días, pero sin estrategia ni oferta clara.
+- Depende 100% del voz a voz o de meses buenos y meses muertos.
+- Contrató agencias o freelancers que entregaban "12 posts bonitos" sin leads ni medición real.
 
 Señales de buen prospecto:
-- Vende o agenda por WhatsApp o Instagram.
-- Tiene catálogo, Google Maps o página web desactualizada.
-- Publica contenido, pero no tiene estrategia.
-- Ya invirtió en pauta, aunque sea poco.
+- Tiene buen producto o servicio en Medellín y margen para invertir en pauta ($300k–$600k/mes).
+- Tiene Instagram activo, Google Maps incompleto o página web que no convierte.
+- Ya probó pautar sin estructura y quiere un método serio y medible.
 
 Promesa FUXIA:
-"Te montamos un sistema de captación y seguimiento por WhatsApp en 30 días. No solo posts: clientes."
+"Te montamos campañas de marketing digital bien estructuradas en 30 días: oferta clara, creativos que convierten, Meta Ads medidos y reporte real. No solo posts: clientes."
 
 Frase de ascensor:
-"Soy Ferney, de FUXIA. Ayudo a negocios locales en Medellín a vender más por WhatsApp con contenido, anuncios medidos y seguimiento."` },
+"Soy Ferney, de FUXIA. Ayudo a negocios locales en Medellín a conseguir clientes todos los meses con campañas bien estructuradas en Meta Ads, contenido estratégico y medición real."` },
 
 precios: { t: "Packs, precios y add-ons", txt:
 `PACKS FUXIA MARKETING (COP, sin IVA · +19% si requiere factura con IVA)
 
 DIAGNÓSTICO — Gratis (15 min)
-- Auditoría express de Instagram, WhatsApp y pauta actual.
-- 3 oportunidades concretas. Sin compromiso.
+- Auditoría express de tu Instagram, oferta, Google Maps y campañas actuales.
+- 3 oportunidades concretas para mejorar resultados. Sin compromiso.
 
-1) ARRANQUE — $1.500.000 (pago único)
-- Landing de conversión + WhatsApp + pixel + UTMs.
-- Perfiles optimizados (IG/FB) + highlights.
-- 4 piezas de contenido + guion de 2 reels.
-- Campaña de Meta Ads configurada (pauta aparte).
+1) ARRANQUE — $1.500.000 (pago único · opción 50/50)
+- Landing de conversión + medición exacta de qué anuncio trae clientes (Pixel + eventos).
+- Perfiles optimizados (IG/FB) + highlights + canal de contacto listo.
+- 4 piezas estratégicas de contenido + guion de 2 reels.
+- Primera campaña de Meta Ads estructurada en Ads Manager (pauta aparte).
 
-2) CRECIMIENTO — Mes 1: $1.500.000 (solo setup, lanzamiento incluido · opción 50/50) · desde mes 2: $750.000/mes (recomendado)
-- Setup = pago único inicial donde montamos tu sistema base (landing, WhatsApp, medición de anuncios, perfiles y campaña).
+2) CRECIMIENTO — Mes 1: $1.500.000 (montaje inicial, lanzamiento incluido · opción 50/50) · desde mes 2: $750.000/mes (recomendado)
+- Montaje inicial = pago único donde construimos todo tu sistema base (landing, medición exacta de anuncios, perfiles, oferta y campaña inicial).
 - Todo lo de Arranque.
-- 8 piezas/mes + stories + guiones.
-- Gestión de Meta Ads (pauta aparte: $300k-$600k/mes).
-- Respuestas y seguimiento por WhatsApp con plantillas.
-- Reporte mensual: leads, conversaciones, CPL y ventas.
+- 8 piezas estratégicas/mes + stories + guiones.
+- Gestión y optimización continua de Meta Ads (pauta aparte: $300k-$600k/mes).
+- Pruebas creativas y optimización semanal de CPL/CPA.
+- Reporte mensual claro: leads, conversaciones, CPL y resultados reales.
 
-3) ESCALA — Mes 1: $2.500.000 (solo setup completo, lanzamiento incluido · opción 50/50) · desde mes 2: $1.200.000/mes
-- Setup = pago único inicial para montar sistema base + CRM, automatizaciones n8n, IA y dashboard.
+3) ESCALA — Mes 1: $2.500.000 (montaje inicial completo, lanzamiento incluido · opción 50/50) · desde mes 2: $1.200.000/mes
+- Montaje inicial completo = sistema base + arquitectura multi-campaña (público frío + retargeting) + tablero de métricas.
 - Todo lo de Crecimiento.
-- 12 piezas/mes + 4 reels.
-- CRM simple + automatización con n8n + IA de respuesta.
-- Dashboard de métricas y reunión quincenal.
-- Onboarding del equipo de ventas.
+- 12 piezas/mes + 4 reels estratégicos orientados a conversión.
+- Embudo multi-campaña (captación fría + retargeting + tests creativos A/B).
+- Tablero de métricas en tiempo real (CPL, CPA, retorno) y reunión estratégica quincenal.
+- Acompañamiento comercial para mejorar el cierre de leads entrantes.
 
 PRODUCTOS DE ENTRADA (puente sin fricción)
 - Links Pro: $250.000 · Google Maps: $300.000 · Combo Presencia: $550.000 (100% abonable si en 30 días pasa a Arranque o Crecimiento).
@@ -122,10 +121,10 @@ ADD-ONS
 - Sesión de fotos: $350.000.
 - Reel extra: $250.000.
 - Email marketing: $450.000/mes.
-- Auditoría de embudo: $300.000.
+- Auditoría de embudo y campañas: $300.000.
 
 REGLA
-No vender horas. Vender sistema, entregables y resultados.` },
+No vender horas ni "posts sueltos". Vender estrategia, campañas estructuradas, entregables y resultados medibles.` },
 
 reel1: { t: "Guion reel Día 1 — Ferney", txt:
 `IG @ferneypamplona · 35-40s · 9:16 · Publicar día 1, 12:00-14:00
@@ -151,22 +150,22 @@ STORIES (30 min después):
 2) Sticker de link a WhatsApp.
 3) Caja de preguntas: "¿Cuántos mensajes te llegan al día en temporada?"` },
 
-creativoA: { t: "Creativo A — Reel caso real (25-30s)", txt:
-`9:16 · Orgánico día 18 + anuncio en todas las campañas.
+creativoA: { t: "Creativo A — Reel caso real + método (25-30s)", txt:
+`9:16 · Orgánico día 13 y 18 + anuncio en campañas (Anuncio 1A).
 
-[0-3s] Texto: "Una tienda, dos problemas: WhatsApp y seguimiento."
-[3-8s] Dueño con celular: "Respondía a las 11 PM y perdía ventas."
-[8-18s] Pantalla real: respuesta automática, calificación y agenda (sin datos sensibles).
-[18-24s] Texto: "KATOBO: 8 horas/semana recuperadas. DB Digital: 3 leads calificados el primer mes."
-[24-30s] CTA: "Diagnóstico gratis. DM o comentá SISTEMA."
+[0-3s] Texto: "Por qué unas campañas traen clientes y otras solo likes."
+[3-8s] Pantalla real: diferencia entre botón Promocionar sin foco vs. campaña estructurada con oferta + landing + medición.
+[8-18s] Método FUXIA: diagnóstico 15 min → oferta clara → creativos enfocados en dolor → Meta Ads medidos con reporte real.
+[18-24s] Texto: "DB Digital: 3 clientes calificados mes 1. KATOBO: +8 horas/semana recuperadas."
+[24-30s] CTA: "Diagnóstico gratis de tus campañas. DM o comentá SISTEMA."
 
 Reglas:
 - No inventar resultados.
-- Mostrar pantalla real, sin cortes.
+- Mostrar estructura real, sin cortes innecesarios.
 - Subtítulos quemados y música sin copyright al 20%.
 
 CAPTION:
-No es magia, es sistema. Dos casos reales de Medellín: automatización y captación.
+No es suerte ni "hack del algoritmo", es campaña bien estructurada. Dos proyectos reales en Medellín: DB Digital y KATOBO.
 Comentá SISTEMA o escribime por DM. 📍 Medellín · @fuxia_oficial` },
 
 creativoB: { t: "Creativo B — Carrusel 6 slides (1080x1350)", txt:
@@ -201,47 +200,47 @@ CAPTION DÍA 16:
 Sin contratos de 12 meses. Sin letra chica. DM. 📍 Medellín · @fuxia_oficial` },
 
 camp1: { t: "Campaña 1 — Retargeting nativo Meta (d16-30, $150k)", txt:
-`Ads Manager → Crear → Objetivo Interacción → "FUXIA | Retargeting | D16-30 | WhatsApp". Sin Advantage+ presupuesto, sin A/B.
+`Ads Manager → Crear → Objetivo Interacción → "FUXIA | Retargeting | D16-30 | Mensajes". Sin Advantage+ presupuesto, sin A/B.
 
-CONJUNTO "Caliente | WhatsApp": Conversión Mensajes → WhatsApp. $10.000/día. Medellín +25 km, 25-50, todos.
+CONJUNTO "Caliente | Campañas": Conversión Mensajes → WhatsApp (canal de contacto directo). $10.000/día. Medellín +25 km, 25-50, todos.
 PÚBLICOS NATIVOS META (base principal, no dependen del banner de cookies/Pixel):
 - Interactuaron IG @fuxia_oficial 30d + interactuaron IG @ferneypamplona 30d + vieron 50%+ reels 30d.
 - Complemento: visitantes web 30d (solo quienes aceptaron cookies).
 Ubicaciones Advantage+. ARRANCAR CON 2 ANUNCIOS GANADORES DEL ORGÁNICO (no diluir $10k/día en 3; rotar el 3º si hay volumen):
-1A Reel caso/auditoría tech (A): "En temporada tu WhatsApp te está costando ventas. Mirá el sistema." Titular: Diagnóstico gratis.
-1B Carrusel señales (B): "3 señales de que perdés ventas por WhatsApp." Titular: ¿Te pasa?
-1C (reserva) Reel proceso (C): "Diagnóstico, estrategia, implementación y reporte." Titular: Sistema en 30 días.
+1A Reel caso real + método (A · Día 13): "Por qué unas campañas traen clientes y otras solo likes. Casos reales en Medellín (DB Digital y KATOBO)." Titular: Diagnóstico gratis.
+1B Carrusel Antes/Después o 3 Señales (B): "Botón Promocionar vs. Campaña bien estructurada en Meta Ads. Dejá de quemar presupuesto." Titular: ¿Tu pauta trae ventas?
+1C (reserva) Carrusel Google Maps + Combo $550k (Día 12): "Aparecé primero en Google Maps + Links Pro ($550k abonable)." Titular: Combo Presencia $550k.
 Botón: Enviar mensaje. URL: https://wa.me/${WA_NUM}?text=Hola,%20quiero%20el%20diagnostico
 
 D16-21 NO TOCAR (responder <1h, anotar). D21: comparar costo/conversación, ganador +30%, pausar el perdedor.` },
 
 camp2: { t: "Campaña 2 — Frío controlado enero (d31-45, $150k)", txt:
-`Misma estructura. "FUXIA | Frío | D31-45 | WhatsApp". $10.000/día.
-Ángulo enero: "Pasó diciembre: arrancá el año con un sistema que traiga clientes por WhatsApp todas las semanas."
+`Misma estructura. "FUXIA | Frío | D31-45 | Mensajes". $10.000/día.
+Ángulo enero: "Arrancá el año con campañas de marketing digital bien estructuradas que traigan clientes todas las semanas."
 
-PÚBLICO: Medellín +25 km, 25-50. Intereses (O): dueños de pequeños negocios, emprendimiento, WhatsApp Business, marketing digital, tiendas de telefonía.
+PÚBLICO: Medellín +25 km, 25-50. Intereses (O): dueños de pequeños negocios, emprendimiento, publicidad en redes sociales, marketing digital, comercio electrónico.
 EXCLUIR: retargeting (IG/video/web) + seguidores.
 
-ARRANCAR CON 2 ANUNCIOS (1 dolor + 1 prueba; reservar el 3º para rotar):
-2A "Pasó diciembre y bajaron los chats: 3 errores que frenan tus ventas por WhatsApp." Titular: Vendé más por WhatsApp.
-2B "Caso real: sistema de captación y seguimiento." Titular: Casos reales.
-2C (reserva) "5 cupos fundador: diagnóstico + estrategia." Titular: 5 cupos.
+ARRANCAR CON 2 ANUNCIOS (1 dolor de pauta + 1 prueba real; reservar el 3º para rotar):
+2A "Pasó diciembre y bajaron las ventas: 3 errores que te hacen quemar presupuesto en Meta Ads." Titular: Campañas que sí venden.
+2B "Caso real + método FUXIA: estrategia, creativos y Meta Ads medidos en Medellín." Titular: Casos reales.
+2C (reserva) "Combo Presencia $550k abonable o 5 cupos de diagnóstico gratis." Titular: Diagnóstico 15 min.
 
 D31-36 NO TOCAR. D37: pausar el peor; ganador +30% SOLO si CPA < $10.000; si todo > $15.000, pausar C2 y reforzar C1.
 D45 DECISIÓN: ¿escalar ganadora +20%? ¿cambiar creativos? ¿pausar y esperar mes 2?` },
 
 plantillas: { t: "Plantillas copy-paste Ads Manager", txt:
-`CAMPAÑA: Interacción · FUXIA Marketing | [Retargeting/Frío] | WhatsApp · $10.000/día · Mensajes → WhatsApp.
+`CAMPAÑA: Interacción · FUXIA Marketing | [Retargeting/Frío] | Mensajes · $10.000/día · Destino contacto: WhatsApp.
 RETARGETING (priorizar nativos Meta por consentimiento de cookies): Medellín +25 km, 25-50, todos. O: IG Fuxia 30d + IG Ferney 30d + video 50% 30d (+ web 30d como extra).
-FRÍO: igual geo/edad. O: dueños de pequeños negocios, emprendimiento, WhatsApp Business, marketing digital, tiendas de telefonía. Excluir retargeting + seguidores.
+FRÍO: igual geo/edad. O: dueños de pequeños negocios, emprendimiento, marketing digital, publicidad en redes sociales, comercio electrónico. Excluir retargeting + seguidores.
 
 COPIES (texto/titular/descripción/botón — usar 2 activos por conjunto con $10k/día):
-1A "En temporada tu WhatsApp te está costando ventas…" / Diagnóstico gratis / Marketing y ventas por WhatsApp en Medellín / Enviar mensaje
-1B "3 señales de que perdés ventas…" / ¿Te pasa? / Auditoría gratis en 15 min / Enviar mensaje
-1C "Diagnóstico, estrategia, implementación…" / Sistema en 30 días / Marketing + automatización / Enviar mensaje
-2A "Pasó diciembre y bajaron los chats: 3 errores…" / Vendé más por WhatsApp / Diagnóstico gratis · Medellín / Enviar mensaje
-2B "Caso real: captación y seguimiento…" / Casos reales / Estrategia + contenido + pauta / Enviar mensaje
-2C "5 cupos fundador…" / 5 cupos · Precio fundador / Diagnóstico sin costo / Enviar mensaje
+1A "Por qué unas campañas traen clientes y otras solo likes…" / Diagnóstico gratis / Marketing digital y Meta Ads en Medellín / Enviar mensaje
+1B "Botón Promocionar vs. campaña bien estructurada…" / ¿Tu pauta trae ventas? / Auditoría gratis en 15 min / Enviar mensaje
+1C "Aparecé en Google Maps + Links Pro ($550k abonable)…" / Combo Presencia $550k / 100% abonable en 30 días / Enviar mensaje
+2A "Pasó diciembre y bajaron las ventas: 3 errores en Meta Ads…" / Campañas que sí venden / Diagnóstico gratis · Medellín / Enviar mensaje
+2B "Caso real: estrategia, creativos y anuncios medidos…" / Casos reales / Sin contratos de 12 meses / Enviar mensaje
+2C "5 cupos de diagnóstico gratis para tus campañas…" / Diagnóstico 15 min / Sin compromiso · Medellín / Enviar mensaje
 URL base: https://wa.me/${WA_NUM}` },
 
 checklist16: { t: "Checklist lanzamiento (día 16)", txt:
@@ -291,42 +290,42 @@ DECISIÓN:
 - Todo >$15k → mata frío, orgánico + retargeting hasta mes 2.
 - D45: escalar ganadora +20%? cambiar creativos? pausar? Con dato, no gusto.` },
 
-contenido30: { t: "Calendario de contenido 30 días", txt:
-`SEMANA 1 — CONFIANZA
-Lun: Reel "3 errores que te cuestan ventas".
-Mar: Carrusel "3 señales de que perdés ventas por WhatsApp".
-Mié: Stories detrás de cámara + encuesta.
-Jue: Reel caso real (KATOBO / DB Digital).
-Vie: Post de oferta + diagnóstico gratis.
-Sáb: Stories Q&A.
-Dom: Descanso / grabar banco.
+contenido30: { t: "Calendario de contenido 30 días (Enfoque Marketing Digital desde Día 5)", txt:
+`SEMANA 1 — CONFIANZA (D1–D4 originales · desde D5 enfoque Campañas)
+Lun (D1): Reel lanzamiento temporada (original).
+Mar (D2): Carrusel 3 señales (original).
+Mié (D3): Stories detrás de cámara + encuesta (original).
+Jue (D4): Reel auditoría 3 fugas (original).
+Vie (D5): Carrusel Oferta 4 pasos — Cómo estructuramos tus campañas + Combo $550k.
+Sáb (D6): Reel Objeción "Pautar es caro vs. quemar plata en Promocionar" + Stories Q&A Meta Ads.
+Dom (D7): Revisión Semana 1 + respaldo JSON/CSV.
 
-SEMANA 2 — AUTORIDAD
-Lun: Reel "Cómo responder rápido sin estar pegado al celular".
-Mar: Carrusel "Antes/después de un sistema de captación".
-Mié: Stories de proceso + caja de preguntas.
-Jue: Reel "3 tareas que podés automatizar esta semana".
-Vie: Testimonio o caso de cliente.
-Sáb: Stories de resultados.
-Dom: Descanso / editar.
+SEMANA 2 — AUTORIDAD EN CAMPAÑAS Y META ADS
+Lun (D8): Reel "Cómo estructurar Meta Ads con $10k–$20k/día sin quemar presupuesto".
+Mar (D9): Carrusel "Antes y Después: Botón Promocionar vs. Campaña estructurada".
+Mié (D10): Stories encuesta Meta Ads ("Miedo a perder plata" vs. "No sé estructurarlos").
+Jue (D11): Reel "Anatomía de un anuncio que sí trae clientes (4 piezas)".
+Vie (D12): Carrusel Google Maps + Combo Presencia $550k abonable (Reserva #3).
+Sáb (D13): Reel Caso Real + Método FUXIA (Anuncio 1A: DB Digital + KATOBO).
+Dom (D14): Revisión 14 días + verificación pre-pauta Día 16.
 
-SEMANA 3 — OFERTA
-Lun: Reel "Qué incluye el diagnóstico gratis".
-Mar: Carrusel "Arranque vs Crecimiento vs Escala".
-Mié: Stories de objeciones ("es caro", "no tengo tiempo").
-Jue: Reel caso de éxito + CTA.
-Vie: Post de escasez real (5 cupos).
-Sáb: Stories de cierre de cupos.
-Dom: Descanso.
+SEMANA 3 — OFERTA Y PAUTA EN VIVO
+Lun (D15): Reel "Qué revisamos en el diagnóstico gratis de campañas (15 min)".
+Mar (D16): Carrusel "Arranque vs Crecimiento vs Escala" + Encendido C1.
+Mié (D17): Stories de objeciones sobre Meta Ads y presupuesto.
+Jue (D18): Reel caso real + lectura de métricas (CPL/CPA).
+Vie (D19): Post de escasez real (5 cupos de diagnóstico).
+Sáb (D20): Stories de cierre de cupos + detrás de cámara Ads Manager.
+Dom (D21): Optimización C1 (6 días intacta).
 
-SEMANA 4 — PRUEBA
-Lun: Reel "Esto aprendí en 30 días".
-Mar: Carrusel resultados del mes.
-Mié: Stories de agradecimiento.
-Jue: Reel "El error que yo cometía".
-Vie: Post balance + próximo ciclo.
-Sáb: Stories de behind the scenes.
-Dom: Descanso.
+SEMANA 4 — PRUEBA Y RESULTADOS
+Lun (D22): Reel "Qué funcionó en nuestros primeros 6 días de Meta Ads (números reales)".
+Mar (D23): Carrusel resultados y aprendizajes del mes.
+Mié (D24): Stories de agradecimiento + encuesta de metas 2027.
+Jue (D25): Reel "El error #1 al cambiar campañas antes de tiempo".
+Vie (D26): Post balance + preparación campaña fría enero.
+Sáb (D27): Stories behind the scenes + Q&A campañas.
+Dom (D28): Descanso / preparación C2.
 
 RITMO: 3 reels/semana · 2 carruseles/semana · stories diarias · 5 DMs/día.` },
 
@@ -334,18 +333,18 @@ propuesta: { t: "Propuesta de 1 página (plantilla)", txt:
 `PROPUESTA FUXIA MARKETING — [NOMBRE DEL NEGOCIO]
 
 1. Diagnóstico
-- Qué venden, cómo llegan los clientes y dónde se pierden.
-- 3 hallazgos concretos de Instagram/WhatsApp/pauta.
+- Qué venden, cómo atraen clientes hoy y dónde se fuga el presupuesto o la conversión.
+- 3 hallazgos concretos de Instagram, oferta, Google Maps y campañas actuales.
 
 2. Objetivo
-- [Ej: 30 leads calificados/mes y 10 conversaciones por WhatsApp].
+- [Ej: 30 leads calificados/mes con CPL controlado y proceso medible].
 - Plazo: 60 días.
 
 3. Qué hacemos
-- Contenido: X piezas/mes + stories + reels.
-- Anuncios: campaña de mensajes + retargeting.
-- WhatsApp: plantillas, calificación y seguimiento.
-- Reporte: leads, conversaciones, CPL y ventas.
+- Estrategia y oferta: propuesta de valor clara + ángulo ganador.
+- Contenido: X piezas/mes + reels + stories orientados a conversión.
+- Campañas Meta Ads: estructura en Ads Manager (frío + retargeting) + pruebas creativas.
+- Conversión y reporte: landing / perfil optimizado + reporte mensual de leads, CPL y resultados.
 
 4. Inversión
 - Pack [Arranque/Crecimiento/Escala]: $[valor].
@@ -363,19 +362,19 @@ Firma: Ferney Pamplona · FUXIA · WhatsApp +57 323 531 5015` },
 dm: { t: "Guion de prospección por DM (Salientes vs. Entrantes)", txt:
 `📤 DMs QUE TÚ ENVÍAS (PROSPECCIÓN SALIENTE — 5 NUEVOS/DÍA)
 1) Primer DM (sin vender):
-"Hola [Nombre], vi tu perfil de [Negocio] en Medellín y me gustó lo que ofrecen. Vi un detalle rápido en cómo reciben mensajes desde Instagram que suele hacer perder ventas por WhatsApp. ¿Te molesta si te hago 1 pregunta corta?"
+"Hola [Nombre], vi el perfil de [Negocio] en Medellín y me gustó mucho lo que ofrecen. Noté un detalle rápido en su estructura de oferta/captación desde Instagram que suele frenar clientes nuevos. ¿Te molesta si te hago 1 pregunta corta?"
 
 2) Cuando te respondan:
-"Genial. ¿Más o menos cuántos mensajes les llegan al día por WhatsApp/IG y quién los responde hoy? Te pregunto porque el 80% de los negocios locales pierde 3–4 ventas por semana por responder tarde o no hacer seguimiento al que pidió precio."
+"Genial. ¿Hoy están trayendo clientes solo con publicaciones orgánicas o ya corren campañas en Meta Ads? Te pregunto porque 8 de cada 10 negocios locales queman presupuesto en 'Promocionar publicación' o publican sin embudo claro."
 
 3) Invitar al diagnóstico gratis (15 min):
-"En FUXIA abrimos 5 diagnósticos gratis de 15 min esta semana para negocios en Medellín: revisamos tu Instagram, WhatsApp y anuncios, y te llevás 3 mejoras concretas (sin compromiso). ¿Te sirve mañana AM o PM?"
+"En FUXIA abrimos 5 diagnósticos gratis de 15 min esta semana para negocios en Medellín: revisamos tu Instagram, tu oferta, Google Maps y tus campañas, y te llevás 3 mejoras concretas (sin compromiso). ¿Te sirve mañana AM o PM?"
 
 📥 DMs / WHATSAPP QUE TE LLEGAN (ENTRANTES — RESPONDER <1 HORA)
 Nunca responder "hola ¿en qué te ayudo?". Usar siempre el filtro de 3 preguntas:
 1) ¿Qué vendes o qué servicio ofreces?
-2) ¿Cuántos mensajes te llegan al día por WhatsApp/IG?
-3) ¿Tu prioridad hoy es: más chats, ordenar WhatsApp o el Combo Presencia ($550k abonable)?
+2) ¿Ya estás invirtiendo en Meta Ads / redes o arrancas desde cero?
+3) ¿Tu prioridad hoy es: lanzar campañas bien estructuradas, mejorar tu contenido/oferta o el Combo Presencia ($550k abonable)?
 
 REGLAS:
 - No mandar audio sin permiso (excepto si comentaron AUDITORÍA).
@@ -446,25 +445,25 @@ Paleta carruseles: #0A0A0C / #F2EFE9 / #E040FB · CTA: DM "SISTEMA" o wa.me/${WA
 - Puntos: 1) Bio + link wa.me precargado 2) Calificación 3 preguntas 3) Etiquetas + follow-up 24h.
 - CTA: "Comentá AUDITORIA y te mando audio gratis de 60s."
 
-4) REEL objeción precio (30-35s · Día 6 · ROI + Credibilidad):
-- Hook: "'El marketing es caro' — hagamos la cuenta con tu WhatsApp."
-- Desarrollo: 3 chats enfriados/sem a $200k promedio = $2.4M perdidos/mes. Experiencia comercial real en Claro, Oppo, Tigo, Realme y Xiaomi.
-- CTA: "Escribime SISTEMA y hacemos la cuenta con tus números."
+4) REEL objeción precio (30-35s · Día 6 · ROI de campañas):
+- Hook: "'Invertir en marketing es caro' — caro es quemar plata en el botón Promocionar sin medir nada."
+- Desarrollo: $400k–$600k/mes botados en anuncios mal estructurados o sin oferta clara vs. campaña medida en Ads Manager con objetivo de clientes reales. Experiencia comercial en Claro, Oppo, Tigo, Realme y Xiaomi.
+- CTA: "Escribime SISTEMA y revisamos tus números y campañas en 15 min gratis."
 
 5) CARRUSEL 6 slides (1080x1350 · Día 5 · Oferta + Proceso 4 pasos):
-- S1: "Así montamos tu sistema de ventas por WhatsApp en 30 días."
-- S2: "01/ Diagnóstico gratis 15 min." · S3: "02/ Plan 1 página en 48h."
+- S1: "Así estructuramos tus campañas de marketing digital en 30 días."
+- S2: "01/ Diagnóstico gratis 15 min (oferta, redes y pauta)." · S3: "02/ Plan de 1 página en 48h."
 - S4: "03/ Montaje inicial (7-15 días, 50/50) o Combo Presencia $550k abonable."
-- S5: "04/ Crecimiento y Escala: gestión mensual + CRM/n8n/IA."
+- S5: "04/ Crecimiento y Escala: gestión de Meta Ads, creativos y reporte mensual de CPL."
 - S6: "Negocios locales en Medellín · DM SISTEMA."` }
 };
 
 const WA_T = [
-{ t: "Bienvenida automática", txt: `Hola, gracias por escribir a FUXIA Marketing. Contame en 2 líneas qué vendés y por dónde te llegan los clientes hoy. Te respondo en menos de 1 hora. — Ferney` },
-{ t: "Calificación (3 preguntas)", txt: `Perfecto. Para no hacerte perder tiempo, 3 cortas: 1) ¿Qué vendés exactamente? 2) ¿Cuántos mensajes te llegan al día por WhatsApp/Instagram? 3) ¿Quién los responde y en qué horario?` },
-{ t: "Agendamiento", txt: `Con eso ya veo por dónde va. Te propongo un diagnóstico gratis de 15 min. Salís con 3 oportunidades concretas, sin compromiso. ¿Te sirve mañana AM o PM?` },
-{ t: "Seguimiento 48h", txt: `Hola [nombre], te escribí por el diagnóstico gratis de FUXIA. ¿Lo pudiste ver? Si no es el momento, todo bien, me decís y lo dejamos para después.` },
-{ t: "Reactivación leads fríos", txt: `Hola [nombre], soy Ferney de FUXIA (Medellín). Hace un tiempo hablamos de mejorar las ventas por WhatsApp de [negocio]. Abrí 5 diagnósticos gratis esta semana. ¿Te sirve uno de 15 min?` }
+{ t: "Bienvenida contacto directo", txt: `Hola, gracias por escribir a FUXIA Marketing. Contame en 2 líneas qué vendés y cómo estás atrayendo clientes hoy (redes, anuncios o voz a voz). Te respondo en menos de 1 hora. — Ferney` },
+{ t: "Calificación (3 preguntas)", txt: `Perfecto. Para darte una recomendación real, 3 preguntas cortas: 1) ¿Qué vendés exactamente en tu negocio? 2) ¿Ya estás invirtiendo en Meta Ads o arrancás desde cero? 3) ¿Cuál es tu meta principal este mes (más clientes, ordenar tus campañas o Google Maps + Links Pro)?` },
+{ t: "Agendamiento", txt: `Con eso ya veo clarísimo por dónde ir. Te propongo un diagnóstico gratis de 15 min donde revisamos tu perfil, oferta y campañas actuales, y salís con 3 acciones concretas sin compromiso. ¿Te sirve mañana AM o PM?` },
+{ t: "Seguimiento 48h", txt: `Hola [nombre], te escribí por el diagnóstico gratis de campañas de FUXIA. ¿Lo pudiste ver? Si esta semana estás full, cero lío, me decís y lo dejamos para después.` },
+{ t: "Reactivación leads fríos", txt: `Hola [nombre], soy Ferney de FUXIA (Medellín). Hace un tiempo hablamos de estructurar las campañas de marketing digital de [negocio]. Abrí 5 diagnósticos gratis esta semana. ¿Te sirve uno de 15 min?` }
 ];
 
 // ─── PLAN: setup idx 0-6 (23-29 nov) + días 1-60 (30 nov - 28 ene) ───
@@ -482,16 +481,16 @@ const PLAN = [
 { i: 8, fase: "F1 · Base", titulo: "Día 2 — Carrusel 3 Señales (futuro Anuncio 1B)", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia2_Martes_Carrusel_3_Senales) + Threads (mini-hilo 3 señales)", "📢 IG/FB Stories anunciando el carrusel + responder comentarios en TikTok del Día 1", "📤 ENVIAR tú: 5 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h todo mensaje entrante y registrar en Tablero"], kpi: "Carrusel vivo + 5 DMs enviados", docs: ["creativoB"] },
 { i: 9, fase: "F1 · Base", titulo: "Día 3 — Stories Encuesta + Interacción", tareas: ["📢 PUBLICAR 3 Stories IG/FB (Dia3_Miercoles_Stories con encuesta <15 min vs >1h) + Threads pregunta abierta", "📤 ENVIAR tú: DM personalizado a TODOS los que voten 'Más de 1 hora' (Guion #4 — lead más caliente)", "📤 ENVIAR tú: completar 5 DMs nuevos en frío + comentar en 5 cuentas locales de Medellín", "📥 RESPONDER <1h todos los DMs/WA entrantes"], kpi: "Encuesta + DMs a votantes" },
 { i: 10, fase: "F1 · Base", titulo: "Día 4 — Reel Auditoría 3 Fugas (CTA Audio 60s)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia4_Jueves_Reel_Auditoria_3_Fugas.mp4) + Threads tip 3 preguntas", "📤 ENVIAR tú: 5 DMs nuevos en frío + DM con oferta de audio 60s a quien comente AUDITORÍA", "📥 RESPONDER <1h mensajes entrantes y actualizar Tablero de leads"], kpi: "Comentarios AUDITORÍA + Tablero al día" },
-{ i: 11, fase: "F1 · Base", titulo: "Día 5 — Carrusel Oferta 4 Pasos + Combo $550k", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia5_Viernes_Carrusel_Sistema_Oferta) + Threads oferta transparente", "📤 ENVIAR tú: seguimiento 48h a los DMs/leads de lunes y martes que dejaron en visto (Guion #5)", "📤 ENVIAR tú: 5 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h preguntas de precio con Guion C (Combo $550k + $1.5M)"], kpi: "Follow-ups hechos + oferta publicada" },
-{ i: 12, fase: "F1 · Base", titulo: "Día 6 — Reel Objeción 'Es caro' + Stories Q&A", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia6_Sabado_Reel_ROI_Es_Caro.mp4) + 2 Stories Q&A + Threads cálculo ROI", "📤 ENVIAR tú: 4 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h caja de preguntas, DMs y WhatsApp entrantes"], kpi: "Reel ROI + Q&A activos" },
-{ i: 13, fase: "F1 · Base", titulo: "Día 7 — Revisión Semana 1 (sin prospección fría)", tareas: ["📊 Abrir Tablero y contar totales S1 vs meta (20 leads / 10 conv. / 2 llamadas)", "📢 Anotar qué pieza en IG/TikTok/Threads/FB generó más DMs o guardados (ganadores para Meta Ads)", "📥 RESPONDER <1h solo mensajes entrantes y exportar respaldo CSV"], kpi: "Informe S1 + CSV guardado" },
-{ i: 14, fase: "F1 · Base", titulo: "Día 8 — Reel Responder Rápido (5 respuestas + 3 etiquetas)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia8_Lunes_Reel_Responder_Rapido.mp4) + Threads táctica + 2 grupos FB Medellín", "📤 ENVIAR tú: 5 DMs nuevos en frío a negocios locales (Guion #1)", "📥 RESPONDER <1h todos los mensajes/comentarios entrantes"], kpi: "4 redes S2 activas + 5 DMs enviados" },
-{ i: 15, fase: "F1 · Base", titulo: "Día 9 — Carrusel Antes y Después", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia9_Martes_Carrusel_Antes_Despues) + Threads contraste 1 vs 9 ventas", "📤 ENVIAR tú: 5 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h y calificar chats entrantes con filtro de 3 preguntas (Guion A)"], kpi: "Carrusel vivo + leads calificados", docs: ["creativoA"] },
-{ i: 16, fase: "F1 · Base", titulo: "Día 10 — Stories Encuesta Dolor + Agendamiento", tareas: ["📢 PUBLICAR 3 Stories IG/FB (Dia10_Miercoles_Stories: 'Pocos chats' vs 'Chats que no cierran') + Threads", "📤 ENVIAR tú: DM personalizado a TODOS los votantes según su voto (Guion #4) + 5 DMs nuevos", "📥 RESPONDER <1h y agendar llamadas de diagnóstico de 15 min"], kpi: "Calls en agenda" },
-{ i: 17, fase: "F1 · Base", titulo: "Día 11 — Reel 3 Tareas para Automatizar", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia11_Jueves_Reel_3_Tareas_Automatizar.mp4) + Threads qué sí/no automatizar", "📤 ENVIAR tú: seguimiento a TODOS los leads de Semana 1 que no respondieron (Guion #5) + 5 DMs nuevos", "📥 RESPONDER <1h mensajes entrantes y registrar en Tablero"], kpi: "Segunda vuelta follow-ups lista" },
+{ i: 11, fase: "F1 · Base", titulo: "Día 5 — Carrusel Oferta 4 Pasos (Campañas + Combo $550k)", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia5_Viernes_Carrusel_Sistema_Oferta — enfoque campañas bien estructuradas) + Threads oferta transparente", "📤 ENVIAR tú: seguimiento 48h a los DMs/leads de lunes y martes que dejaron en visto (Guion #5)", "📤 ENVIAR tú: 5 DMs nuevos en frío a negocios locales de Medellín (Guion #1)", "📥 RESPONDER <1h preguntas de precio con Guion C (Combo $550k + $1.5M)"], kpi: "Follow-ups hechos + oferta campañas publicada" },
+{ i: 12, fase: "F1 · Base", titulo: "Día 6 — Reel Objeción 'Pautar es caro' vs. Promocionar + Stories Q&A", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia6_Sabado_Reel_ROI_Es_Caro.mp4 — caption ROI campañas) + 2 Stories Q&A Meta Ads + Threads", "📤 ENVIAR tú: 4 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h caja de preguntas sobre Meta Ads, DMs y WhatsApp entrantes"], kpi: "Reel ROI campañas + Q&A Meta Ads activos" },
+{ i: 13, fase: "F1 · Base", titulo: "Día 7 — Revisión Semana 1 (sin prospección fría)", tareas: ["📊 Abrir Tablero y contar totales S1 vs meta (20 leads / 10 conv. / 2 llamadas)", "📢 Anotar qué pieza en IG/TikTok/Threads/FB generó más DMs o guardados (ganadores para Meta Ads)", "📥 RESPONDER <1h solo mensajes entrantes y exportar respaldo JSON/CSV"], kpi: "Informe S1 + respaldo guardado" },
+{ i: 14, fase: "F1 · Base", titulo: "Día 8 — Reel Meta Ads con $10k–$20k/día (Estructura 2 anuncios + 6 días)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Reel estructura Meta Ads con presupuesto pyme) + Threads regla 2 anuncios + 2 grupos FB Medellín", "📤 ENVIAR tú: 5 DMs nuevos en frío a negocios locales (Guion #1)", "📥 RESPONDER <1h todos los mensajes/comentarios entrantes"], kpi: "4 redes S2 activas + 5 DMs enviados" },
+{ i: 15, fase: "F1 · Base", titulo: "Día 9 — Carrusel Antes y Después (Botón Promocionar vs. Campaña Estructurada)", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia9_Martes_Carrusel_Antes_Despues — contraste pauta improvisada vs. Ads Manager) + Threads", "📤 ENVIAR tú: 5 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h y calificar prospectos con filtro de 3 preguntas (Guion A)"], kpi: "Carrusel Antes/Después vivo + leads calificados", docs: ["creativoA"] },
+{ i: 16, fase: "F1 · Base", titulo: "Día 10 — Stories Encuesta Meta Ads + Agendamiento", tareas: ["📢 PUBLICAR 3 Stories IG/FB (Encuesta: 'Miedo a perder plata 💸' vs 'No sé estructurarlos 🧩') + Threads pregunta Meta Ads", "📤 ENVIAR tú: DM personalizado a TODOS los votantes según su voto (Guion #4) + 5 DMs nuevos", "📥 RESPONDER <1h y agendar llamadas de diagnóstico de 15 min"], kpi: "Encuesta Meta Ads + calls en agenda" },
+{ i: 17, fase: "F1 · Base", titulo: "Día 11 — Reel Anatomía de un Anuncio que Sí Trae Clientes (4 piezas)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Reel 4 piezas: Hook, Problema, Prueba, CTA) + Threads checklist creativo", "📤 ENVIAR tú: seguimiento a TODOS los leads de Semana 1 que no respondieron (Guion #5) + 5 DMs nuevos", "📥 RESPONDER <1h mensajes entrantes y registrar en Tablero"], kpi: "Reel creativos publicado + follow-ups S1" },
 { i: 18, fase: "F1 · Base", titulo: "Día 12 — Carrusel Google Maps + Combo $550k (Reserva #3)", tareas: ["📢 PUBLICAR en IG + Facebook álbum (Dia12_Viernes_Carrusel_GoogleMaps_Combo) + Threads + TikTok clip Maps", "📤 ENVIAR tú: 5 DMs a negocios locales con ficha incompleta en Google Maps (Guion #1)", "📥 RESPONDER <1h los mensajes de 'COMBO' con Guion D (cierre rápido $550k abonable)"], kpi: "Oferta Combo $550k en 4 redes" },
-{ i: 19, fase: "F1 · Base", titulo: "Día 13 — Reel Caso Real (Anuncio 1A: KATOBO + DB Digital)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia13_Sabado_Reel_Caso_Real_Sistema.mp4) + 2 Stories Q&A + Threads", "📤 ENVIAR tú: 4 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h comentarios SISTEMA y Q&A entrantes"], kpi: "Prueba social viva (Anuncio 1A)" },
-{ i: 20, fase: "F1 · Base", titulo: "Día 14 — Revisión 14 días + Pre-pauta Día 16", tareas: ["📊 Revisar totales 14 días en Tablero vs meta F1 (20/10/2) y exportar CSV", "🎯 Verificar público 'IG @fuxia_oficial | Interacción 30d' (ideal 500+; si <500 agrupar IG 90d + VV 50% + FB + web)", "💬 Configurar mensaje precargado 3 opciones en los anuncios de WhatsApp + cargar 1A, 1B y reserva #3 (Día 12)"], kpi: "Pre-pauta verificada" },
+{ i: 19, fase: "F1 · Base", titulo: "Día 13 — Reel Caso Real + Método FUXIA (Anuncio 1A: DB Digital + KATOBO)", tareas: ["📢 PUBLICAR en IG + TikTok + Facebook (Dia13_Sabado_Reel_Caso_Real_Sistema.mp4 — enfoque método y campañas) + 2 Stories Q&A + Threads", "📤 ENVIAR tú: 4 DMs nuevos en frío (Guion #1)", "📥 RESPONDER <1h comentarios SISTEMA y Q&A entrantes"], kpi: "Prueba social viva (Anuncio 1A)" },
+{ i: 20, fase: "F1 · Base", titulo: "Día 14 — Revisión 14 días + Pre-pauta Día 16", tareas: ["📊 Revisar totales 14 días en Tablero vs meta F1 (20/10/2) y exportar respaldo JSON/CSV", "🎯 Verificar público 'IG @fuxia_oficial | Interacción 30d' (ideal 500+; si <500 agrupar IG 90d + VV 50% + FB + web)", "🎯 Dejar borrador C1 en Ads Manager con 2 anuncios ganadores (1A + 1B) + reserva #3 (Día 12) y mensaje precargado 3 opciones"], kpi: "Pre-pauta verificada" },
 { i: 21, fase: "F1 · Base", titulo: "Día 15 — Pre-lanzamiento C1", tareas: ["Pasar checklist de lanzamiento completo", "Verificar públicos nativos Meta (IG + video 50%) ≥100 personas", "Subir 2 creativos ganadores en C1 borrador (3º en reserva)", "Anunciar en historias: 'mañana arranca pauta'"], kpi: "C1 lista para publicar", tip: "Priorizá públicos de IG/video: el Pixel web solo dispara si aceptan cookies.", docs: ["checklist16", "plantillas"] },
 
 { i: 22, fase: "F2 · Tracción", titulo: "Día 16 — PUBLICAR C1 + reel proceso", tareas: ["Pasar Árbol NO vende Capa 1 (pixel + WA + UTMs)", "Publicar Campaña 1 de retargeting nativo Meta", "Publicar reel proceso C + caption día 16", "Responder <1h todo (ángulo temporada diciembre)"], kpi: "C1 activa", tip: "Desde hoy: NO TOCAR 6 días.", docs: ["arbol", "camp1", "creativoC"] },
@@ -1042,7 +1041,7 @@ export default function FuxiaTrafico() {
             <span className="fx-mono" style={{ fontSize: 11, color: T2 }}>60d + Multi-Red + Marca Personal</span>
             <span className="fx-mono" style={{ fontSize: 10, color: T3, marginLeft: "auto" }}>PAUTA $500K</span>
           </div>
-          <div className="fx-mono" style={{ fontSize: 10.5, color: T2, marginBottom: 10 }}>Marketing digital y ventas por WhatsApp · Medellín · @fuxia_oficial + @ferneypamplona</div>
+          <div className="fx-mono" style={{ fontSize: 10.5, color: T2, marginBottom: 10 }}>Marketing digital y campañas bien estructuradas · Medellín · @fuxia_oficial + @ferneypamplona</div>
           <div className="scrollx" style={{ display: "flex" }}>
             {[
               ["cal", "Calendario"],
