@@ -117,10 +117,12 @@ test('validates X-Hub-Signature-256 when META_APP_SECRET is set', async () => {
 
 test('ignores status-only webhooks and deduplicates repeated message IDs', async () => {
   const prevTok = process.env.WHATSAPP_ACCESS_TOKEN;
-  const prevGem = process.env.GEMINI_API_KEY;
+  const prevGroq = process.env.GROQ_API_KEY;
+  const prevDis = process.env.DISABLE_POLLINATIONS_FALLBACK;
   const prevTg = process.env.TELEGRAM_BOT_TOKEN;
   delete process.env.WHATSAPP_ACCESS_TOKEN;
-  delete process.env.GEMINI_API_KEY;
+  delete process.env.GROQ_API_KEY;
+  process.env.DISABLE_POLLINATIONS_FALLBACK = '1';
   delete process.env.TELEGRAM_BOT_TOKEN;
   try {
     const statusRes = createRes();
@@ -136,6 +138,7 @@ test('ignores status-only webhooks and deduplicates repeated message IDs', async
     await handler({ method: 'POST', headers: {}, body: makeWebhookBody({ id: fixedId }) }, firstRes);
     assert.equal(firstRes.out.statusCode, 200);
     assert.equal(firstRes.out.body.replied, false);
+    assert.equal(firstRes.out.body.aiProvider, 'fallback');
 
     const dupRes = createRes();
     await handler({ method: 'POST', headers: {}, body: makeWebhookBody({ id: fixedId }) }, dupRes);
@@ -143,16 +146,19 @@ test('ignores status-only webhooks and deduplicates repeated message IDs', async
     assert.equal(dupRes.out.body.duplicate, true);
   } finally {
     if (prevTok !== undefined) process.env.WHATSAPP_ACCESS_TOKEN = prevTok;
-    if (prevGem !== undefined) process.env.GEMINI_API_KEY = prevGem;
+    if (prevGroq !== undefined) process.env.GROQ_API_KEY = prevGroq;
+    if (prevDis === undefined) delete process.env.DISABLE_POLLINATIONS_FALLBACK;
+    else process.env.DISABLE_POLLINATIONS_FALLBACK = prevDis;
     if (prevTg !== undefined) process.env.TELEGRAM_BOT_TOKEN = prevTg;
   }
 });
 
-test('replies via Gemini + Graph API and notifies Telegram on incoming message', async () => {
+test('replies via Groq Free AI + Graph API and notifies Telegram on incoming message', async () => {
   const saved = {
     WHATSAPP_ACCESS_TOKEN: process.env.WHATSAPP_ACCESS_TOKEN,
     WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID,
-    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+    GROQ_API_KEY: process.env.GROQ_API_KEY,
+    GROQ_MODEL: process.env.GROQ_MODEL,
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID
   };
@@ -160,19 +166,20 @@ test('replies via Gemini + Graph API and notifies Telegram on incoming message',
   const calls = [];
   process.env.WHATSAPP_ACCESS_TOKEN = 'wa-test-token';
   process.env.WHATSAPP_PHONE_NUMBER_ID = '1063543846848888';
-  process.env.GEMINI_API_KEY = 'gem-test-key';
+  process.env.GROQ_API_KEY = 'gsk_test_free_key';
+  process.env.GROQ_MODEL = 'openai/gpt-oss-120b';
   process.env.TELEGRAM_BOT_TOKEN = 'tg-test-token';
   process.env.TELEGRAM_CHAT_ID = '99999';
 
   try {
     globalThis.fetch = async (url, opts) => {
       calls.push({ url: String(url), method: opts && opts.method });
-      if (String(url).includes('generativelanguage.googleapis.com')) {
+      if (String(url).includes('api.groq.com')) {
         return {
           ok: true,
           status: 200,
           json: async () => ({
-            candidates: [{ content: { parts: [{ text: 'Hola Camila, revisemos tus campañas en 15 min gratis.' }] } }]
+            choices: [{ message: { content: '<think>interno</think>Hola Camila, agendemos 15 min gratis.' } }]
           })
         };
       }
@@ -190,8 +197,10 @@ test('replies via Gemini + Graph API and notifies Telegram on incoming message',
     );
     assert.equal(res.out.statusCode, 200);
     assert.equal(res.out.body.replied, true);
+    assert.equal(res.out.body.aiProvider, 'groq-free');
     assert.equal(res.out.body.notified, true);
     assert.equal(res.out.body.phoneNumberId, '1063543846848888');
+    assert.ok(calls.some((c) => c.url.includes('api.groq.com')));
     assert.ok(calls.some((c) => c.url.includes('1063543846848888/messages')));
     assert.ok(calls.some((c) => c.url.includes('api.telegram.org')));
   } finally {
@@ -203,38 +212,64 @@ test('replies via Gemini + Graph API and notifies Telegram on incoming message',
   }
 });
 
-test('handles Gemini/Graph API failures gracefully with deterministic fallback', async () => {
+test('falls back to Pollinations Free AI (zero API key) and then deterministic fallback on errors', async () => {
   const saved = {
     WHATSAPP_ACCESS_TOKEN: process.env.WHATSAPP_ACCESS_TOKEN,
-    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+    GROQ_API_KEY: process.env.GROQ_API_KEY,
+    DISABLE_POLLINATIONS_FALLBACK: process.env.DISABLE_POLLINATIONS_FALLBACK,
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID
   };
   const prevFetch = globalThis.fetch;
   process.env.WHATSAPP_ACCESS_TOKEN = 'wa-test-token';
-  process.env.GEMINI_API_KEY = 'gem-test-key';
+  process.env.GROQ_API_KEY = 'gsk_rate_limited';
+  delete process.env.DISABLE_POLLINATIONS_FALLBACK;
   process.env.TELEGRAM_BOT_TOKEN = 'tg-test-token';
   process.env.TELEGRAM_CHAT_ID = '99999';
 
   try {
+    // Case A: Groq fails (429) -> Pollinations Free AI succeeds (200)
     globalThis.fetch = async (url) => {
-      if (String(url).includes('generativelanguage.googleapis.com')) {
-        return { ok: false, status: 503 };
+      if (String(url).includes('api.groq.com')) return { ok: false, status: 429 };
+      if (String(url).includes('text.pollinations.ai')) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            choices: [{ message: { content: 'Respuesta IA gratis Pollinations para tu negocio.' } }]
+          })
+        };
       }
-      return { ok: false, status: 401 };
+      return { ok: true, status: 200, json: async () => ({}) };
     };
-    const res = createRes();
+    const resPoll = createRes();
     await handler(
       {
         method: 'POST',
         headers: {},
         body: makeWebhookBody({ type: 'button', button: { text: 'Combo Presencia Google Maps' } })
       },
-      res
+      resPoll
     );
-    assert.equal(res.out.statusCode, 200);
-    assert.equal(res.out.body.replied, false);
-    assert.equal(res.out.body.notified, false);
+    assert.equal(resPoll.out.statusCode, 200);
+    assert.equal(resPoll.out.body.aiProvider, 'pollinations-free');
+    assert.equal(resPoll.out.body.replied, true);
+
+    // Case B: Both Groq and Pollinations fail -> deterministic fallback
+    globalThis.fetch = async () => ({ ok: false, status: 503 });
+    const resFb = createRes();
+    await handler(
+      {
+        method: 'POST',
+        headers: {},
+        body: makeWebhookBody({ text: { body: 'cuánto vale el plan arranque?' } })
+      },
+      resFb
+    );
+    assert.equal(resFb.out.statusCode, 200);
+    assert.equal(resFb.out.body.aiProvider, 'fallback');
+    assert.equal(resFb.out.body.replied, false);
+    assert.equal(resFb.out.body.notified, false);
 
     // Check deterministic fallback branches directly
     const { buildFallbackReply } = handler._internals;

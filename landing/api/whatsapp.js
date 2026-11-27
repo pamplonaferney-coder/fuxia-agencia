@@ -1,16 +1,22 @@
 // GET & POST /api/whatsapp — Bot oficial WhatsApp Cloud API para FUXIA (+57 324 396 4088)
-// Sin n8n, 100% código serverless 24/7 en Vercel.
+// Sin n8n · 100% código serverless 24/7 en Vercel · IA 100% GRATUITA ($0, sin tarjeta):
+//   1) Groq Cloud Free Tier (GROQ_API_KEY · modelo default: openai/gpt-oss-120b)
+//   2) Pollinations Free OpenAI API (https://text.pollinations.ai/openai · $0 sin API key)
+//   3) Fallback determinístico comercial FUXIA (si las APIs externas tardan o fallan)
+//
 // Env vars en Vercel:
 //   WHATSAPP_PHONE_NUMBER_ID (default: 1063543846848888 · línea +57 324 396 4088)
 //   WHATSAPP_VERIFY_TOKEN    (token de verificación para el webhook de Meta)
 //   WHATSAPP_ACCESS_TOKEN    (token permanente de Usuario del Sistema en Meta)
+//   GROQ_API_KEY             (gratis sin tarjeta en console.groq.com; si falta usa Pollinations gratis)
+//   GROQ_MODEL               (opcional, default: openai/gpt-oss-120b)
 //   META_APP_SECRET          (opcional: valida firma X-Hub-Signature-256)
-//   GEMINI_API_KEY           (opcional: respuestas con Gemini 2.5 Flash; si falla usa fallback)
 //   TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (alerta instantánea de leads a Ferney)
 
 const crypto = require('node:crypto');
 
 const DEFAULT_PHONE_NUMBER_ID = '1063543846848888';
+const DEFAULT_GROQ_MODEL = 'openai/gpt-oss-120b';
 const GRAPH_API_VERSION = 'v21.0';
 const MAX_SEEN_IDS = 500;
 const seenMessageIds = new Set();
@@ -31,6 +37,13 @@ const SYSTEM_PROMPT = [
 
 function escHtml(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function cleanAiText(raw) {
+  return String(raw || '')
+    .replace(/<think>[\s\S]*?<\/think>/gi, '')
+    .trim()
+    .slice(0, 1200);
 }
 
 function getQueryParam(req, name) {
@@ -140,33 +153,86 @@ function buildFallbackReply(userText, name) {
   );
 }
 
-async function generateAiReply(userText, name) {
-  const apiKey = process.env.GEMINI_API_KEY || '';
-  if (!apiKey) return buildFallbackReply(userText, name);
+async function callGroqFreeAi(messages, groqKey) {
+  const model = process.env.GROQ_MODEL || DEFAULT_GROQ_MODEL;
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 6500);
   try {
-    const ctl = new AbortController();
-    const timer = setTimeout(() => ctl.abort(), 7000);
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
-    const r = await fetch(url, {
+    const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        Authorization: `Bearer ${groqKey}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-        contents: [{ role: 'user', parts: [{ text: `Nombre del contacto: ${name}\nMensaje: ${userText}` }] }],
-        generationConfig: { temperature: 0.4, maxOutputTokens: 280 }
+        model,
+        messages,
+        temperature: 0.35,
+        max_tokens: 320
       }),
       signal: ctl.signal
     });
     clearTimeout(timer);
-    if (!r.ok) return buildFallbackReply(userText, name);
+    if (!r.ok) return '';
     const data = await r.json();
-    const candidate = data && Array.isArray(data.candidates) ? data.candidates[0] : null;
-    const parts = candidate && candidate.content && Array.isArray(candidate.content.parts) ? candidate.content.parts : [];
-    const reply = parts.map((p) => p.text || '').join('').trim();
-    return reply ? reply.slice(0, 1200) : buildFallbackReply(userText, name);
+    const content = data && Array.isArray(data.choices) && data.choices[0] && data.choices[0].message
+      ? data.choices[0].message.content
+      : '';
+    return cleanAiText(content);
   } catch {
-    return buildFallbackReply(userText, name);
+    clearTimeout(timer);
+    return '';
   }
+}
+
+async function callPollinationsFreeAi(messages) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 6500);
+  try {
+    const r = await fetch('https://text.pollinations.ai/openai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'openai',
+        messages,
+        temperature: 0.35
+      }),
+      signal: ctl.signal
+    });
+    clearTimeout(timer);
+    if (!r.ok) return '';
+    const data = await r.json();
+    const content = data && Array.isArray(data.choices) && data.choices[0] && data.choices[0].message
+      ? data.choices[0].message.content
+      : '';
+    return cleanAiText(content);
+  } catch {
+    clearTimeout(timer);
+    return '';
+  }
+}
+
+async function generateFreeAiReply(userText, name) {
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: `Nombre del contacto: ${name}\nMensaje: ${userText}` }
+  ];
+
+  // 1) Groq Cloud Free Tier (sin tarjeta · ultra-rápida)
+  const groqKey = process.env.GROQ_API_KEY || '';
+  if (groqKey) {
+    const groqReply = await callGroqFreeAi(messages, groqKey);
+    if (groqReply) return { text: groqReply, provider: 'groq-free' };
+  }
+
+  // 2) Pollinations Free AI ($0 · sin API key ni registro)
+  if (process.env.DISABLE_POLLINATIONS_FALLBACK !== '1') {
+    const pollReply = await callPollinationsFreeAi(messages);
+    if (pollReply) return { text: pollReply, provider: 'pollinations-free' };
+  }
+
+  // 3) Respuesta comercial determinística instantánea
+  return { text: buildFallbackReply(userText, name), provider: 'fallback' };
 }
 
 async function sendWhatsAppText(to, bodyText) {
@@ -200,7 +266,7 @@ async function sendWhatsAppText(to, bodyText) {
   }
 }
 
-async function notifyTelegram(incoming, replyText, waStatus) {
+async function notifyTelegram(incoming, replyText, provider, waStatus) {
   const token = process.env.TELEGRAM_BOT_TOKEN || process.env.BOT_TOKEN || '';
   const chatId = process.env.TELEGRAM_CHAT_ID || process.env.CHAT_ID || '';
   if (!token || !chatId) return false;
@@ -209,7 +275,7 @@ async function notifyTelegram(incoming, replyText, waStatus) {
     'Nombre: ' + escHtml(incoming.name) + '\n' +
     'Número: +' + escHtml(incoming.from) + '\n' +
     'Mensaje: ' + escHtml(incoming.text) + '\n' +
-    'Respuesta bot (' + (waStatus.sent ? 'enviada' : escHtml(waStatus.reason || 'pendiente')) + '): ' +
+    'IA (' + escHtml(provider) + ' · ' + (waStatus.sent ? 'enviada' : escHtml(waStatus.reason || 'pendiente')) + '): ' +
     escHtml(replyText.slice(0, 300));
   try {
     const ctl = new AbortController();
@@ -273,13 +339,14 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const replyText = await generateAiReply(incoming.text, incoming.name);
-  const waStatus = await sendWhatsAppText(incoming.from, replyText);
-  const notified = await notifyTelegram(incoming, replyText, waStatus);
+  const ai = await generateFreeAiReply(incoming.text, incoming.name);
+  const waStatus = await sendWhatsAppText(incoming.from, ai.text);
+  const notified = await notifyTelegram(incoming, ai.text, ai.provider, waStatus);
 
   res.status(200).json({
     ok: true,
     replied: waStatus.sent,
+    aiProvider: ai.provider,
     notified,
     phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID || DEFAULT_PHONE_NUMBER_ID
   });
@@ -287,6 +354,7 @@ module.exports = async function handler(req, res) {
 
 module.exports._internals = {
   buildFallbackReply,
+  cleanAiText,
   extractIncomingMessage,
   seenMessageIds
 };
