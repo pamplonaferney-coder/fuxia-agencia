@@ -113,7 +113,7 @@ Comentá SISTEMA y revisamos tu marketing y campañas en 15 min gratis.
     sem: "S2",
     dia: "Lun · Día 8",
     red: "TikTok",
-    formato: "Video 36s (Estructura Meta Ads con $10k–$20k/día)",
+    formato: "Video 36s (Dia8_Lunes_Reel_MetaAds_Estructura.mp4)",
     titulo: "Cómo estructurar Meta Ads con $10k–$20k/día sin quemar plata",
     hook: "Texto en pantalla 0–1.5s: 'ASÍ SE ESTRUCTURA META ADS CON PRESUPUESTO PYME 🎯'",
     copy: `Si invertís $300k–$600k al mes en Meta Ads, NO lances 8 anuncios al tiempo ni uses el botón Promocionar:
@@ -129,7 +129,7 @@ Guardalo o comentá SISTEMA si querés que estructuremos tus campañas.
     sem: "S2",
     dia: "Jue · Día 11",
     red: "TikTok",
-    formato: "Video 36s (Anatomía de un anuncio que sí trae clientes)",
+    formato: "Video 36s (Dia11_Jueves_Reel_Anatomia_Anuncio.mp4)",
     titulo: "Anatomía de un anuncio ganador en Meta Ads (4 piezas)",
     hook: "Texto en pantalla 0–1.5s: '4 PIEZAS DE UN ANUNCIO QUE SÍ TRAE CLIENTES 📈'",
     copy: `Un anuncio en Instagram o Facebook no necesita cámara de cine, necesita estructura:
@@ -451,10 +451,10 @@ Agenda tu diagnóstico gratis de 15 min: +57 323 531 5015 · https://fuxia-landi
     titulo: "Checklist de publicación Semana 2 (100% Marketing Digital & Meta Ads)",
     hook: "Enfocado a estructura de campañas + pre-pauta Día 16",
     copy: `SEMANA 2 (@fuxia_oficial):
-• Lun D8: Reel "Cómo estructurar Meta Ads con $10k–$20k/día" (2 anuncios + 6 días sin tocar).
-• Mar D9: Carrusel "Antes y Después: Botón Promocionar vs. Campaña estructurada" (6 slides).
-• Mié D10: 3 Stories encuesta Meta Ads -> DM personalizado según voto ("Miedo a perder plata 💸" vs "No sé estructurarlos 🧩").
-• Jue D11: Reel "Anatomía de un anuncio que sí trae clientes (4 piezas: Hook, Problema, Prueba, CTA)".
+• Lun D8: Dia8_Lunes_Reel_MetaAds_Estructura.mp4 (2 anuncios + 6 días sin tocar).
+• Mar D9: Dia9_Martes_Carrusel_Antes_Despues (Botón Promocionar vs. Campaña estructurada · 6 slides).
+• Mié D10: Dia10_Miercoles_Stories encuesta Meta Ads -> DM personalizado según voto ("Miedo a perder plata 💸" vs "No sé estructurarlos 🧩").
+• Jue D11: Dia11_Jueves_Reel_Anatomia_Anuncio.mp4 (4 piezas: Hook, Problema, Prueba, CTA).
 • Vie D12: Carrusel Google Maps + Combo Presencia $550k (Creativo de reserva #3 Meta Ads).
 • Sáb D13: Reel Caso Real + Método FUXIA (Anuncio 1A: DB Digital + KATOBO) + 2 Stories Q&A.
 • Dom D14: Verificar público Retargeting (meta 500+ o agrupar IG 90d + VV 50% + FB + web).`
